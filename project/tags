@@ -1,0 +1,516 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BBMask	DEX.h	/^	u4* BBMask;$/;"	m	struct:CodeItem
+BBMask_count	DEX.h	/^	int BBMask_count;$/;"	m	struct:CodeItem
+CodeItem	DEX.h	/^typedef struct CodeItem {$/;"	s
+CodeItem	DEX.h	/^} CodeItem;$/;"	t	typeref:struct:CodeItem
+CodeList	DEX.h	/^typedef struct CodeList {$/;"	s
+CodeList	DEX.h	/^} CodeList;$/;"	t	typeref:struct:CodeList
+DecodedInstruction	DEX.h	/^typedef struct DecodedInstruction {$/;"	s
+DecodedInstruction	DEX.h	/^} DecodedInstruction;$/;"	t	typeref:struct:DecodedInstruction
+DexClassData	DEX.h	/^typedef struct DexClassData {$/;"	s
+DexClassData	DEX.h	/^} DexClassData;$/;"	t	typeref:struct:DexClassData
+DexClassDataHeader	DEX.h	/^typedef struct DexClassDataHeader {$/;"	s
+DexClassDataHeader	DEX.h	/^} DexClassDataHeader;$/;"	t	typeref:struct:DexClassDataHeader
+DexClassDef	DEX.h	/^typedef struct DexClassDef {$/;"	s
+DexClassDef	DEX.h	/^} DexClassDef;$/;"	t	typeref:struct:DexClassDef
+DexClassLookup	DEX.h	/^typedef struct DexClassLookup {  \/\/以类名为索引，生成hash表$/;"	s
+DexClassLookup	DEX.h	/^} DexClassLookup;$/;"	t	typeref:struct:DexClassLookup
+DexCode	DEX.h	/^typedef struct DexCode {   \/\/是对一个方法(Method)各个属性的描述$/;"	s
+DexCode	DEX.h	/^} DexCode;$/;"	t	typeref:struct:DexCode
+DexField	DEX.h	/^typedef struct DexField {$/;"	s
+DexField	DEX.h	/^} DexField;$/;"	t	typeref:struct:DexField
+DexFieldId	DEX.h	/^typedef struct DexFieldId {$/;"	s
+DexFieldId	DEX.h	/^} DexFieldId;$/;"	t	typeref:struct:DexFieldId
+DexFile	DEX.h	/^typedef struct DexFile {$/;"	s
+DexFile	DEX.h	/^} DexFile;$/;"	t	typeref:struct:DexFile
+DexHeader	DEX.h	/^typedef struct DexHeader {$/;"	s
+DexHeader	DEX.h	/^} DexHeader;$/;"	t	typeref:struct:DexHeader
+DexLink	DEX.h	/^typedef struct DexLink {$/;"	s
+DexLink	DEX.h	/^} DexLink;$/;"	t	typeref:struct:DexLink
+DexMethod	DEX.h	/^typedef struct DexMethod {$/;"	s
+DexMethod	DEX.h	/^} DexMethod;$/;"	t	typeref:struct:DexMethod
+DexMethodId	DEX.h	/^typedef struct DexMethodId {$/;"	s
+DexMethodId	DEX.h	/^} DexMethodId;$/;"	t	typeref:struct:DexMethodId
+DexOptHeader	DEX.h	/^typedef struct DexOptHeader {$/;"	s
+DexOptHeader	DEX.h	/^} DexOptHeader;$/;"	t	typeref:struct:DexOptHeader
+DexProtoId	DEX.h	/^typedef struct DexProtoId {$/;"	s
+DexProtoId	DEX.h	/^} DexProtoId;$/;"	t	typeref:struct:DexProtoId
+DexStringId	DEX.h	/^typedef struct DexStringId {$/;"	s
+DexStringId	DEX.h	/^} DexStringId;$/;"	t	typeref:struct:DexStringId
+DexTypeId	DEX.h	/^typedef struct DexTypeId {$/;"	s
+DexTypeId	DEX.h	/^} DexTypeId;$/;"	t	typeref:struct:DexTypeId
+FETCH	toOpt.c	8;"	d	file:
+INST_A	toOpt.c	10;"	d	file:
+INST_AA	toOpt.c	12;"	d	file:
+INST_B	toOpt.c	11;"	d	file:
+INST_INST	toOpt.c	9;"	d	file:
+InstructionFormat	DEX.h	/^enum InstructionFormat {$/;"	g
+LastInstrPos	DEX.h	/^typedef struct LastInstrPos{$/;"	s
+LastInstrPos	DEX.h	/^} LastInstrPos;$/;"	t	typeref:struct:LastInstrPos
+LastInstrPosHead	DEX.h	/^typedef struct LastInstrPosHead{$/;"	s
+LastInstrPosHead	DEX.h	/^} LastInstrPosHead;$/;"	t	typeref:struct:LastInstrPosHead
+MARKBB	toOpt.h	/^typedef int (*MARKBB)(DexCode * pDexCode, int insnIdx, int insnWidth, DecodedInstruction * pDecInsn,u4* BBMask);$/;"	t
+OP_ADD_DOUBLE	DEX.h	/^    OP_ADD_DOUBLE                   = 0xab,$/;"	e	enum:OpCode
+OP_ADD_DOUBLE_2ADDR	DEX.h	/^    OP_ADD_DOUBLE_2ADDR             = 0xcb,$/;"	e	enum:OpCode
+OP_ADD_FLOAT	DEX.h	/^    OP_ADD_FLOAT                    = 0xa6,$/;"	e	enum:OpCode
+OP_ADD_FLOAT_2ADDR	DEX.h	/^    OP_ADD_FLOAT_2ADDR              = 0xc6,$/;"	e	enum:OpCode
+OP_ADD_INT	DEX.h	/^    OP_ADD_INT                      = 0x90,$/;"	e	enum:OpCode
+OP_ADD_INT_2ADDR	DEX.h	/^    OP_ADD_INT_2ADDR                = 0xb0,$/;"	e	enum:OpCode
+OP_ADD_INT_LIT16	DEX.h	/^    OP_ADD_INT_LIT16                = 0xd0,$/;"	e	enum:OpCode
+OP_ADD_INT_LIT8	DEX.h	/^    OP_ADD_INT_LIT8                 = 0xd8,$/;"	e	enum:OpCode
+OP_ADD_LONG	DEX.h	/^    OP_ADD_LONG                     = 0x9b,$/;"	e	enum:OpCode
+OP_ADD_LONG_2ADDR	DEX.h	/^    OP_ADD_LONG_2ADDR               = 0xbb,$/;"	e	enum:OpCode
+OP_AGET	DEX.h	/^    OP_AGET                         = 0x44,  \/\/ok$/;"	e	enum:OpCode
+OP_AGET_BOOLEAN	DEX.h	/^    OP_AGET_BOOLEAN                 = 0x47,$/;"	e	enum:OpCode
+OP_AGET_BYTE	DEX.h	/^    OP_AGET_BYTE                    = 0x48,$/;"	e	enum:OpCode
+OP_AGET_CHAR	DEX.h	/^    OP_AGET_CHAR                    = 0x49,\/\/ok$/;"	e	enum:OpCode
+OP_AGET_OBJECT	DEX.h	/^    OP_AGET_OBJECT                  = 0x46, \/\/ok$/;"	e	enum:OpCode
+OP_AGET_SHORT	DEX.h	/^    OP_AGET_SHORT                   = 0x4a,$/;"	e	enum:OpCode
+OP_AGET_WIDE	DEX.h	/^    OP_AGET_WIDE                    = 0x45, \/\/ok$/;"	e	enum:OpCode
+OP_AND_INT	DEX.h	/^    OP_AND_INT                      = 0x95,$/;"	e	enum:OpCode
+OP_AND_INT_2ADDR	DEX.h	/^    OP_AND_INT_2ADDR                = 0xb5,$/;"	e	enum:OpCode
+OP_AND_INT_LIT16	DEX.h	/^    OP_AND_INT_LIT16                = 0xd5,$/;"	e	enum:OpCode
+OP_AND_INT_LIT8	DEX.h	/^    OP_AND_INT_LIT8                 = 0xdd,$/;"	e	enum:OpCode
+OP_AND_LONG	DEX.h	/^    OP_AND_LONG                     = 0xa0,$/;"	e	enum:OpCode
+OP_AND_LONG_2ADDR	DEX.h	/^    OP_AND_LONG_2ADDR               = 0xc0,$/;"	e	enum:OpCode
+OP_APUT	DEX.h	/^    OP_APUT                         = 0x4b,$/;"	e	enum:OpCode
+OP_APUT_BOOLEAN	DEX.h	/^    OP_APUT_BOOLEAN                 = 0x4e,$/;"	e	enum:OpCode
+OP_APUT_BYTE	DEX.h	/^    OP_APUT_BYTE                    = 0x4f,$/;"	e	enum:OpCode
+OP_APUT_CHAR	DEX.h	/^    OP_APUT_CHAR                    = 0x50,$/;"	e	enum:OpCode
+OP_APUT_OBJECT	DEX.h	/^    OP_APUT_OBJECT                  = 0x4d,\/\/ok$/;"	e	enum:OpCode
+OP_APUT_SHORT	DEX.h	/^    OP_APUT_SHORT                   = 0x51,$/;"	e	enum:OpCode
+OP_APUT_WIDE	DEX.h	/^    OP_APUT_WIDE                    = 0x4c,$/;"	e	enum:OpCode
+OP_ARRAY_LENGTH	DEX.h	/^    OP_ARRAY_LENGTH                 = 0x21,  \/\/ok$/;"	e	enum:OpCode
+OP_BREAKPOINT	DEX.h	/^    OP_BREAKPOINT                   = 0xec,$/;"	e	enum:OpCode
+OP_CHECK_CAST	DEX.h	/^    OP_CHECK_CAST                   = 0x1f, \/\/ok$/;"	e	enum:OpCode
+OP_CMPG_DOUBLE	DEX.h	/^    OP_CMPG_DOUBLE                  = 0x30,$/;"	e	enum:OpCode
+OP_CMPG_FLOAT	DEX.h	/^    OP_CMPG_FLOAT                   = 0x2e,$/;"	e	enum:OpCode
+OP_CMPL_DOUBLE	DEX.h	/^    OP_CMPL_DOUBLE                  = 0x2f,$/;"	e	enum:OpCode
+OP_CMPL_FLOAT	DEX.h	/^    OP_CMPL_FLOAT                   = 0x2d,  \/\/no found$/;"	e	enum:OpCode
+OP_CMP_LONG	DEX.h	/^    OP_CMP_LONG                     = 0x31,$/;"	e	enum:OpCode
+OP_CONST	DEX.h	/^    OP_CONST                        = 0x14,  \/\/ok$/;"	e	enum:OpCode
+OP_CONST_16	DEX.h	/^    OP_CONST_16                     = 0x13,  \/\/ok$/;"	e	enum:OpCode
+OP_CONST_4	DEX.h	/^    OP_CONST_4                      = 0x12,  \/\/ok$/;"	e	enum:OpCode
+OP_CONST_CLASS	DEX.h	/^    OP_CONST_CLASS                  = 0x1c,   \/\/ok$/;"	e	enum:OpCode
+OP_CONST_HIGH16	DEX.h	/^    OP_CONST_HIGH16                 = 0x15,  \/\/$/;"	e	enum:OpCode
+OP_CONST_STRING	DEX.h	/^    OP_CONST_STRING                 = 0x1a,   \/\/ok$/;"	e	enum:OpCode
+OP_CONST_STRING_JUMBO	DEX.h	/^    OP_CONST_STRING_JUMBO           = 0x1b,  \/\/no found$/;"	e	enum:OpCode
+OP_CONST_WIDE	DEX.h	/^    OP_CONST_WIDE                   = 0x18,$/;"	e	enum:OpCode
+OP_CONST_WIDE_16	DEX.h	/^    OP_CONST_WIDE_16                = 0x16, \/\/ok$/;"	e	enum:OpCode
+OP_CONST_WIDE_32	DEX.h	/^    OP_CONST_WIDE_32                = 0x17,$/;"	e	enum:OpCode
+OP_CONST_WIDE_HIGH16	DEX.h	/^    OP_CONST_WIDE_HIGH16            = 0x19,$/;"	e	enum:OpCode
+OP_DIV_DOUBLE	DEX.h	/^    OP_DIV_DOUBLE                   = 0xae,$/;"	e	enum:OpCode
+OP_DIV_DOUBLE_2ADDR	DEX.h	/^    OP_DIV_DOUBLE_2ADDR             = 0xce,$/;"	e	enum:OpCode
+OP_DIV_FLOAT	DEX.h	/^    OP_DIV_FLOAT                    = 0xa9,$/;"	e	enum:OpCode
+OP_DIV_FLOAT_2ADDR	DEX.h	/^    OP_DIV_FLOAT_2ADDR              = 0xc9,$/;"	e	enum:OpCode
+OP_DIV_INT	DEX.h	/^    OP_DIV_INT                      = 0x93,$/;"	e	enum:OpCode
+OP_DIV_INT_2ADDR	DEX.h	/^    OP_DIV_INT_2ADDR                = 0xb3,$/;"	e	enum:OpCode
+OP_DIV_INT_LIT16	DEX.h	/^    OP_DIV_INT_LIT16                = 0xd3,$/;"	e	enum:OpCode
+OP_DIV_INT_LIT8	DEX.h	/^    OP_DIV_INT_LIT8                 = 0xdb,$/;"	e	enum:OpCode
+OP_DIV_LONG	DEX.h	/^    OP_DIV_LONG                     = 0x9e,$/;"	e	enum:OpCode
+OP_DIV_LONG_2ADDR	DEX.h	/^    OP_DIV_LONG_2ADDR               = 0xbe,$/;"	e	enum:OpCode
+OP_DOUBLE_TO_FLOAT	DEX.h	/^    OP_DOUBLE_TO_FLOAT              = 0x8c,$/;"	e	enum:OpCode
+OP_DOUBLE_TO_INT	DEX.h	/^    OP_DOUBLE_TO_INT                = 0x8a,$/;"	e	enum:OpCode
+OP_DOUBLE_TO_LONG	DEX.h	/^    OP_DOUBLE_TO_LONG               = 0x8b,$/;"	e	enum:OpCode
+OP_EXECUTE_INLINE	DEX.h	/^    OP_EXECUTE_INLINE               = 0xee,$/;"	e	enum:OpCode
+OP_EXECUTE_INLINE_RANGE	DEX.h	/^    OP_EXECUTE_INLINE_RANGE         = 0xef,$/;"	e	enum:OpCode
+OP_FILLED_NEW_ARRAY	DEX.h	/^    OP_FILLED_NEW_ARRAY             = 0x24,     \/\/以下3个没有发现$/;"	e	enum:OpCode
+OP_FILLED_NEW_ARRAY_RANGE	DEX.h	/^    OP_FILLED_NEW_ARRAY_RANGE       = 0x25,$/;"	e	enum:OpCode
+OP_FILL_ARRAY_DATA	DEX.h	/^    OP_FILL_ARRAY_DATA              = 0x26,$/;"	e	enum:OpCode
+OP_FLOAT_TO_DOUBLE	DEX.h	/^    OP_FLOAT_TO_DOUBLE              = 0x89,$/;"	e	enum:OpCode
+OP_FLOAT_TO_INT	DEX.h	/^    OP_FLOAT_TO_INT                 = 0x87,$/;"	e	enum:OpCode
+OP_FLOAT_TO_LONG	DEX.h	/^    OP_FLOAT_TO_LONG                = 0x88,$/;"	e	enum:OpCode
+OP_GOTO	DEX.h	/^    OP_GOTO                         = 0x28,  \/\/ok$/;"	e	enum:OpCode
+OP_GOTO_16	DEX.h	/^    OP_GOTO_16                      = 0x29,  \/\/ok$/;"	e	enum:OpCode
+OP_GOTO_32	DEX.h	/^    OP_GOTO_32                      = 0x2a,  \/\/no found$/;"	e	enum:OpCode
+OP_IF_EQ	DEX.h	/^    OP_IF_EQ                        = 0x32,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_EQZ	DEX.h	/^    OP_IF_EQZ                       = 0x38, \/\/ok$/;"	e	enum:OpCode
+OP_IF_GE	DEX.h	/^    OP_IF_GE                        = 0x35,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_GEZ	DEX.h	/^    OP_IF_GEZ                       = 0x3b,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_GT	DEX.h	/^    OP_IF_GT                        = 0x36,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_GTZ	DEX.h	/^    OP_IF_GTZ                       = 0x3c,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_LE	DEX.h	/^    OP_IF_LE                        = 0x37,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_LEZ	DEX.h	/^    OP_IF_LEZ                       = 0x3d, \/\/ok$/;"	e	enum:OpCode
+OP_IF_LT	DEX.h	/^    OP_IF_LT                        = 0x34,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_LTZ	DEX.h	/^    OP_IF_LTZ                       = 0x3a,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_NE	DEX.h	/^    OP_IF_NE                        = 0x33,  \/\/ok$/;"	e	enum:OpCode
+OP_IF_NEZ	DEX.h	/^    OP_IF_NEZ                       = 0x39,  \/\/ok$/;"	e	enum:OpCode
+OP_IGET	DEX.h	/^    OP_IGET                         = 0x52,$/;"	e	enum:OpCode
+OP_IGET_BOOLEAN	DEX.h	/^    OP_IGET_BOOLEAN                 = 0x55,$/;"	e	enum:OpCode
+OP_IGET_BYTE	DEX.h	/^    OP_IGET_BYTE                    = 0x56,$/;"	e	enum:OpCode
+OP_IGET_CHAR	DEX.h	/^    OP_IGET_CHAR                    = 0x57,$/;"	e	enum:OpCode
+OP_IGET_OBJECT	DEX.h	/^    OP_IGET_OBJECT                  = 0x54,$/;"	e	enum:OpCode
+OP_IGET_OBJECT_QUICK	DEX.h	/^    OP_IGET_OBJECT_QUICK            = 0xf4,$/;"	e	enum:OpCode
+OP_IGET_OBJECT_VOLATILE	DEX.h	/^    OP_IGET_OBJECT_VOLATILE         = 0xe7,$/;"	e	enum:OpCode
+OP_IGET_QUICK	DEX.h	/^    OP_IGET_QUICK                   = 0xf2,$/;"	e	enum:OpCode
+OP_IGET_SHORT	DEX.h	/^    OP_IGET_SHORT                   = 0x58,$/;"	e	enum:OpCode
+OP_IGET_VOLATILE	DEX.h	/^    OP_IGET_VOLATILE                = 0xe3, \/\/22c 21c$/;"	e	enum:OpCode
+OP_IGET_WIDE	DEX.h	/^    OP_IGET_WIDE                    = 0x53,$/;"	e	enum:OpCode
+OP_IGET_WIDE_QUICK	DEX.h	/^    OP_IGET_WIDE_QUICK              = 0xf3,$/;"	e	enum:OpCode
+OP_IGET_WIDE_VOLATILE	DEX.h	/^    OP_IGET_WIDE_VOLATILE           = 0xe8,$/;"	e	enum:OpCode
+OP_INSTANCE_OF	DEX.h	/^    OP_INSTANCE_OF                  = 0x20, \/\/ok$/;"	e	enum:OpCode
+OP_INT_TO_BYTE	DEX.h	/^    OP_INT_TO_BYTE                  = 0x8d,$/;"	e	enum:OpCode
+OP_INT_TO_CHAR	DEX.h	/^    OP_INT_TO_CHAR                  = 0x8e,$/;"	e	enum:OpCode
+OP_INT_TO_DOUBLE	DEX.h	/^    OP_INT_TO_DOUBLE                = 0x83,$/;"	e	enum:OpCode
+OP_INT_TO_FLOAT	DEX.h	/^    OP_INT_TO_FLOAT                 = 0x82,$/;"	e	enum:OpCode
+OP_INT_TO_LONG	DEX.h	/^    OP_INT_TO_LONG                  = 0x81,$/;"	e	enum:OpCode
+OP_INT_TO_SHORT	DEX.h	/^    OP_INT_TO_SHORT                 = 0x8f,$/;"	e	enum:OpCode
+OP_INVOKE_DIRECT	DEX.h	/^    OP_INVOKE_DIRECT                = 0x70,$/;"	e	enum:OpCode
+OP_INVOKE_DIRECT_EMPTY	DEX.h	/^    OP_INVOKE_DIRECT_EMPTY          = 0xf0,$/;"	e	enum:OpCode
+OP_INVOKE_DIRECT_RANGE	DEX.h	/^    OP_INVOKE_DIRECT_RANGE          = 0x76,$/;"	e	enum:OpCode
+OP_INVOKE_INTERFACE	DEX.h	/^    OP_INVOKE_INTERFACE             = 0x72,$/;"	e	enum:OpCode
+OP_INVOKE_INTERFACE_RANGE	DEX.h	/^    OP_INVOKE_INTERFACE_RANGE       = 0x78,$/;"	e	enum:OpCode
+OP_INVOKE_STATIC	DEX.h	/^    OP_INVOKE_STATIC                = 0x71,$/;"	e	enum:OpCode
+OP_INVOKE_STATIC_RANGE	DEX.h	/^    OP_INVOKE_STATIC_RANGE          = 0x77,$/;"	e	enum:OpCode
+OP_INVOKE_SUPER	DEX.h	/^    OP_INVOKE_SUPER                 = 0x6f,$/;"	e	enum:OpCode
+OP_INVOKE_SUPER_QUICK	DEX.h	/^    OP_INVOKE_SUPER_QUICK           = 0xfa,$/;"	e	enum:OpCode
+OP_INVOKE_SUPER_QUICK_RANGE	DEX.h	/^    OP_INVOKE_SUPER_QUICK_RANGE     = 0xfb,$/;"	e	enum:OpCode
+OP_INVOKE_SUPER_RANGE	DEX.h	/^    OP_INVOKE_SUPER_RANGE           = 0x75,$/;"	e	enum:OpCode
+OP_INVOKE_VIRTUAL	DEX.h	/^    OP_INVOKE_VIRTUAL               = 0x6e,$/;"	e	enum:OpCode
+OP_INVOKE_VIRTUAL_QUICK	DEX.h	/^    OP_INVOKE_VIRTUAL_QUICK         = 0xf8,$/;"	e	enum:OpCode
+OP_INVOKE_VIRTUAL_QUICK_RANGE	DEX.h	/^    OP_INVOKE_VIRTUAL_QUICK_RANGE   = 0xf9,$/;"	e	enum:OpCode
+OP_INVOKE_VIRTUAL_RANGE	DEX.h	/^    OP_INVOKE_VIRTUAL_RANGE         = 0x74,$/;"	e	enum:OpCode
+OP_IPUT	DEX.h	/^    OP_IPUT                         = 0x59,$/;"	e	enum:OpCode
+OP_IPUT_BOOLEAN	DEX.h	/^    OP_IPUT_BOOLEAN                 = 0x5c,$/;"	e	enum:OpCode
+OP_IPUT_BYTE	DEX.h	/^    OP_IPUT_BYTE                    = 0x5d,$/;"	e	enum:OpCode
+OP_IPUT_CHAR	DEX.h	/^    OP_IPUT_CHAR                    = 0x5e,$/;"	e	enum:OpCode
+OP_IPUT_OBJECT	DEX.h	/^    OP_IPUT_OBJECT                  = 0x5b,$/;"	e	enum:OpCode
+OP_IPUT_OBJECT_QUICK	DEX.h	/^    OP_IPUT_OBJECT_QUICK            = 0xf7,$/;"	e	enum:OpCode
+OP_IPUT_OBJECT_VOLATILE	DEX.h	/^    OP_IPUT_OBJECT_VOLATILE         = 0xfc,$/;"	e	enum:OpCode
+OP_IPUT_QUICK	DEX.h	/^    OP_IPUT_QUICK                   = 0xf5,$/;"	e	enum:OpCode
+OP_IPUT_SHORT	DEX.h	/^    OP_IPUT_SHORT                   = 0x5f,$/;"	e	enum:OpCode
+OP_IPUT_VOLATILE	DEX.h	/^    OP_IPUT_VOLATILE                = 0xe4,$/;"	e	enum:OpCode
+OP_IPUT_WIDE	DEX.h	/^    OP_IPUT_WIDE                    = 0x5a,$/;"	e	enum:OpCode
+OP_IPUT_WIDE_QUICK	DEX.h	/^    OP_IPUT_WIDE_QUICK              = 0xf6,$/;"	e	enum:OpCode
+OP_IPUT_WIDE_VOLATILE	DEX.h	/^    OP_IPUT_WIDE_VOLATILE           = 0xe9,$/;"	e	enum:OpCode
+OP_LONG_TO_DOUBLE	DEX.h	/^    OP_LONG_TO_DOUBLE               = 0x86,$/;"	e	enum:OpCode
+OP_LONG_TO_FLOAT	DEX.h	/^    OP_LONG_TO_FLOAT                = 0x85,$/;"	e	enum:OpCode
+OP_LONG_TO_INT	DEX.h	/^    OP_LONG_TO_INT                  = 0x84,$/;"	e	enum:OpCode
+OP_MONITOR_ENTER	DEX.h	/^    OP_MONITOR_ENTER                = 0x1d, \/\/ok$/;"	e	enum:OpCode
+OP_MONITOR_EXIT	DEX.h	/^    OP_MONITOR_EXIT                 = 0x1e,  \/\/ok$/;"	e	enum:OpCode
+OP_MOVE	DEX.h	/^    OP_MOVE                         = 0x01,   \/\/ok$/;"	e	enum:OpCode
+OP_MOVE_16	DEX.h	/^    OP_MOVE_16                      = 0x03,$/;"	e	enum:OpCode
+OP_MOVE_EXCEPTION	DEX.h	/^    OP_MOVE_EXCEPTION               = 0x0d,$/;"	e	enum:OpCode
+OP_MOVE_FROM16	DEX.h	/^    OP_MOVE_FROM16                  = 0x02,  \/\/ok$/;"	e	enum:OpCode
+OP_MOVE_OBJECT	DEX.h	/^    OP_MOVE_OBJECT                  = 0x07,  \/\/ok$/;"	e	enum:OpCode
+OP_MOVE_OBJECT_16	DEX.h	/^    OP_MOVE_OBJECT_16               = 0x09,$/;"	e	enum:OpCode
+OP_MOVE_OBJECT_FROM16	DEX.h	/^    OP_MOVE_OBJECT_FROM16           = 0x08,  \/\/ok$/;"	e	enum:OpCode
+OP_MOVE_RESULT	DEX.h	/^    OP_MOVE_RESULT                  = 0x0a,   \/\/以下四个没有$/;"	e	enum:OpCode
+OP_MOVE_RESULT_OBJECT	DEX.h	/^    OP_MOVE_RESULT_OBJECT           = 0x0c,$/;"	e	enum:OpCode
+OP_MOVE_RESULT_WIDE	DEX.h	/^    OP_MOVE_RESULT_WIDE             = 0x0b,$/;"	e	enum:OpCode
+OP_MOVE_WIDE	DEX.h	/^    OP_MOVE_WIDE                    = 0x04,  \/\/ok$/;"	e	enum:OpCode
+OP_MOVE_WIDE_16	DEX.h	/^    OP_MOVE_WIDE_16                 = 0x06,$/;"	e	enum:OpCode
+OP_MOVE_WIDE_FROM16	DEX.h	/^    OP_MOVE_WIDE_FROM16             = 0x05,$/;"	e	enum:OpCode
+OP_MUL_DOUBLE	DEX.h	/^    OP_MUL_DOUBLE                   = 0xad,$/;"	e	enum:OpCode
+OP_MUL_DOUBLE_2ADDR	DEX.h	/^    OP_MUL_DOUBLE_2ADDR             = 0xcd,$/;"	e	enum:OpCode
+OP_MUL_FLOAT	DEX.h	/^    OP_MUL_FLOAT                    = 0xa8,$/;"	e	enum:OpCode
+OP_MUL_FLOAT_2ADDR	DEX.h	/^    OP_MUL_FLOAT_2ADDR              = 0xc8,$/;"	e	enum:OpCode
+OP_MUL_INT	DEX.h	/^    OP_MUL_INT                      = 0x92,$/;"	e	enum:OpCode
+OP_MUL_INT_2ADDR	DEX.h	/^    OP_MUL_INT_2ADDR                = 0xb2,$/;"	e	enum:OpCode
+OP_MUL_INT_LIT16	DEX.h	/^    OP_MUL_INT_LIT16                = 0xd2,$/;"	e	enum:OpCode
+OP_MUL_INT_LIT8	DEX.h	/^    OP_MUL_INT_LIT8                 = 0xda,$/;"	e	enum:OpCode
+OP_MUL_LONG	DEX.h	/^    OP_MUL_LONG                     = 0x9d,$/;"	e	enum:OpCode
+OP_MUL_LONG_2ADDR	DEX.h	/^    OP_MUL_LONG_2ADDR               = 0xbd,$/;"	e	enum:OpCode
+OP_NEG_DOUBLE	DEX.h	/^    OP_NEG_DOUBLE                   = 0x80,$/;"	e	enum:OpCode
+OP_NEG_FLOAT	DEX.h	/^    OP_NEG_FLOAT                    = 0x7f,$/;"	e	enum:OpCode
+OP_NEG_INT	DEX.h	/^    OP_NEG_INT                      = 0x7b,$/;"	e	enum:OpCode
+OP_NEG_LONG	DEX.h	/^    OP_NEG_LONG                     = 0x7d,$/;"	e	enum:OpCode
+OP_NEW_ARRAY	DEX.h	/^    OP_NEW_ARRAY                    = 0x23, \/\/ok$/;"	e	enum:OpCode
+OP_NEW_INSTANCE	DEX.h	/^    OP_NEW_INSTANCE                 = 0x22,  \/\/ok$/;"	e	enum:OpCode
+OP_NOP	DEX.h	/^    OP_NOP                          = 0x00, $/;"	e	enum:OpCode
+OP_NOT_INT	DEX.h	/^    OP_NOT_INT                      = 0x7c,$/;"	e	enum:OpCode
+OP_NOT_LONG	DEX.h	/^    OP_NOT_LONG                     = 0x7e,$/;"	e	enum:OpCode
+OP_OR_INT	DEX.h	/^    OP_OR_INT                       = 0x96,$/;"	e	enum:OpCode
+OP_OR_INT_2ADDR	DEX.h	/^    OP_OR_INT_2ADDR                 = 0xb6,$/;"	e	enum:OpCode
+OP_OR_INT_LIT16	DEX.h	/^    OP_OR_INT_LIT16                 = 0xd6,$/;"	e	enum:OpCode
+OP_OR_INT_LIT8	DEX.h	/^    OP_OR_INT_LIT8                  = 0xde,$/;"	e	enum:OpCode
+OP_OR_LONG	DEX.h	/^    OP_OR_LONG                      = 0xa1,$/;"	e	enum:OpCode
+OP_OR_LONG_2ADDR	DEX.h	/^    OP_OR_LONG_2ADDR                = 0xc1,$/;"	e	enum:OpCode
+OP_PACKED_SWITCH	DEX.h	/^    OP_PACKED_SWITCH                = 0x2b,  \/\/no found$/;"	e	enum:OpCode
+OP_REM_DOUBLE	DEX.h	/^    OP_REM_DOUBLE                   = 0xaf,$/;"	e	enum:OpCode
+OP_REM_DOUBLE_2ADDR	DEX.h	/^    OP_REM_DOUBLE_2ADDR             = 0xcf,$/;"	e	enum:OpCode
+OP_REM_FLOAT	DEX.h	/^    OP_REM_FLOAT                    = 0xaa,$/;"	e	enum:OpCode
+OP_REM_FLOAT_2ADDR	DEX.h	/^    OP_REM_FLOAT_2ADDR              = 0xca,$/;"	e	enum:OpCode
+OP_REM_INT	DEX.h	/^    OP_REM_INT                      = 0x94,$/;"	e	enum:OpCode
+OP_REM_INT_2ADDR	DEX.h	/^    OP_REM_INT_2ADDR                = 0xb4,$/;"	e	enum:OpCode
+OP_REM_INT_LIT16	DEX.h	/^    OP_REM_INT_LIT16                = 0xd4,$/;"	e	enum:OpCode
+OP_REM_INT_LIT8	DEX.h	/^    OP_REM_INT_LIT8                 = 0xdc,$/;"	e	enum:OpCode
+OP_REM_LONG	DEX.h	/^    OP_REM_LONG                     = 0x9f,$/;"	e	enum:OpCode
+OP_REM_LONG_2ADDR	DEX.h	/^    OP_REM_LONG_2ADDR               = 0xbf,$/;"	e	enum:OpCode
+OP_RETURN	DEX.h	/^    OP_RETURN                       = 0x0f,   \/\/ok$/;"	e	enum:OpCode
+OP_RETURN_OBJECT	DEX.h	/^    OP_RETURN_OBJECT                = 0x11,  \/\/ok$/;"	e	enum:OpCode
+OP_RETURN_VOID	DEX.h	/^    OP_RETURN_VOID                  = 0x0e,  \/\/ok$/;"	e	enum:OpCode
+OP_RETURN_WIDE	DEX.h	/^    OP_RETURN_WIDE                  = 0x10,$/;"	e	enum:OpCode
+OP_RSUB_INT	DEX.h	/^    OP_RSUB_INT                     = 0xd1, \/* no _LIT16 suffix for this *\/$/;"	e	enum:OpCode
+OP_RSUB_INT_LIT8	DEX.h	/^    OP_RSUB_INT_LIT8                = 0xd9,$/;"	e	enum:OpCode
+OP_SGET	DEX.h	/^    OP_SGET                         = 0x60,$/;"	e	enum:OpCode
+OP_SGET_BOOLEAN	DEX.h	/^    OP_SGET_BOOLEAN                 = 0x63,$/;"	e	enum:OpCode
+OP_SGET_BYTE	DEX.h	/^    OP_SGET_BYTE                    = 0x64,$/;"	e	enum:OpCode
+OP_SGET_CHAR	DEX.h	/^    OP_SGET_CHAR                    = 0x65,$/;"	e	enum:OpCode
+OP_SGET_OBJECT	DEX.h	/^    OP_SGET_OBJECT                  = 0x62,$/;"	e	enum:OpCode
+OP_SGET_OBJECT_VOLATILE	DEX.h	/^    OP_SGET_OBJECT_VOLATILE         = 0xfd,$/;"	e	enum:OpCode
+OP_SGET_SHORT	DEX.h	/^    OP_SGET_SHORT                   = 0x66,$/;"	e	enum:OpCode
+OP_SGET_VOLATILE	DEX.h	/^    OP_SGET_VOLATILE                = 0xe5,$/;"	e	enum:OpCode
+OP_SGET_WIDE	DEX.h	/^    OP_SGET_WIDE                    = 0x61,$/;"	e	enum:OpCode
+OP_SGET_WIDE_VOLATILE	DEX.h	/^    OP_SGET_WIDE_VOLATILE           = 0xea,$/;"	e	enum:OpCode
+OP_SHL_INT	DEX.h	/^    OP_SHL_INT                      = 0x98,$/;"	e	enum:OpCode
+OP_SHL_INT_2ADDR	DEX.h	/^    OP_SHL_INT_2ADDR                = 0xb8,$/;"	e	enum:OpCode
+OP_SHL_INT_LIT8	DEX.h	/^    OP_SHL_INT_LIT8                 = 0xe0,$/;"	e	enum:OpCode
+OP_SHL_LONG	DEX.h	/^    OP_SHL_LONG                     = 0xa3,$/;"	e	enum:OpCode
+OP_SHL_LONG_2ADDR	DEX.h	/^    OP_SHL_LONG_2ADDR               = 0xc3,$/;"	e	enum:OpCode
+OP_SHR_INT	DEX.h	/^    OP_SHR_INT                      = 0x99,$/;"	e	enum:OpCode
+OP_SHR_INT_2ADDR	DEX.h	/^    OP_SHR_INT_2ADDR                = 0xb9,$/;"	e	enum:OpCode
+OP_SHR_INT_LIT8	DEX.h	/^    OP_SHR_INT_LIT8                 = 0xe1,$/;"	e	enum:OpCode
+OP_SHR_LONG	DEX.h	/^    OP_SHR_LONG                     = 0xa4,$/;"	e	enum:OpCode
+OP_SHR_LONG_2ADDR	DEX.h	/^    OP_SHR_LONG_2ADDR               = 0xc4,$/;"	e	enum:OpCode
+OP_SPARSE_SWITCH	DEX.h	/^    OP_SPARSE_SWITCH                = 0x2c,  \/\/no found$/;"	e	enum:OpCode
+OP_SPUT	DEX.h	/^    OP_SPUT                         = 0x67,$/;"	e	enum:OpCode
+OP_SPUT_BOOLEAN	DEX.h	/^    OP_SPUT_BOOLEAN                 = 0x6a,$/;"	e	enum:OpCode
+OP_SPUT_BYTE	DEX.h	/^    OP_SPUT_BYTE                    = 0x6b,$/;"	e	enum:OpCode
+OP_SPUT_CHAR	DEX.h	/^    OP_SPUT_CHAR                    = 0x6c,$/;"	e	enum:OpCode
+OP_SPUT_OBJECT	DEX.h	/^    OP_SPUT_OBJECT                  = 0x69,$/;"	e	enum:OpCode
+OP_SPUT_OBJECT_VOLATILE	DEX.h	/^    OP_SPUT_OBJECT_VOLATILE         = 0xfe,$/;"	e	enum:OpCode
+OP_SPUT_SHORT	DEX.h	/^    OP_SPUT_SHORT                   = 0x6d,$/;"	e	enum:OpCode
+OP_SPUT_VOLATILE	DEX.h	/^    OP_SPUT_VOLATILE                = 0xe6,$/;"	e	enum:OpCode
+OP_SPUT_WIDE	DEX.h	/^    OP_SPUT_WIDE                    = 0x68,$/;"	e	enum:OpCode
+OP_SPUT_WIDE_VOLATILE	DEX.h	/^    OP_SPUT_WIDE_VOLATILE           = 0xeb,$/;"	e	enum:OpCode
+OP_SUB_DOUBLE	DEX.h	/^    OP_SUB_DOUBLE                   = 0xac,$/;"	e	enum:OpCode
+OP_SUB_DOUBLE_2ADDR	DEX.h	/^    OP_SUB_DOUBLE_2ADDR             = 0xcc,$/;"	e	enum:OpCode
+OP_SUB_FLOAT	DEX.h	/^    OP_SUB_FLOAT                    = 0xa7,$/;"	e	enum:OpCode
+OP_SUB_FLOAT_2ADDR	DEX.h	/^    OP_SUB_FLOAT_2ADDR              = 0xc7,$/;"	e	enum:OpCode
+OP_SUB_INT	DEX.h	/^    OP_SUB_INT                      = 0x91,$/;"	e	enum:OpCode
+OP_SUB_INT_2ADDR	DEX.h	/^    OP_SUB_INT_2ADDR                = 0xb1,$/;"	e	enum:OpCode
+OP_SUB_LONG	DEX.h	/^    OP_SUB_LONG                     = 0x9c,$/;"	e	enum:OpCode
+OP_SUB_LONG_2ADDR	DEX.h	/^    OP_SUB_LONG_2ADDR               = 0xbc,$/;"	e	enum:OpCode
+OP_THROW	DEX.h	/^    OP_THROW                        = 0x27,   \/\/no found$/;"	e	enum:OpCode
+OP_THROW_VERIFICATION_ERROR	DEX.h	/^    OP_THROW_VERIFICATION_ERROR     = 0xed,  \/\/kFmt20bc$/;"	e	enum:OpCode
+OP_UNUSED_3E	DEX.h	/^    OP_UNUSED_3E                    = 0x3e,$/;"	e	enum:OpCode
+OP_UNUSED_3F	DEX.h	/^    OP_UNUSED_3F                    = 0x3f,$/;"	e	enum:OpCode
+OP_UNUSED_40	DEX.h	/^    OP_UNUSED_40                    = 0x40,$/;"	e	enum:OpCode
+OP_UNUSED_41	DEX.h	/^    OP_UNUSED_41                    = 0x41,$/;"	e	enum:OpCode
+OP_UNUSED_42	DEX.h	/^    OP_UNUSED_42                    = 0x42,$/;"	e	enum:OpCode
+OP_UNUSED_43	DEX.h	/^    OP_UNUSED_43                    = 0x43,$/;"	e	enum:OpCode
+OP_UNUSED_73	DEX.h	/^    OP_UNUSED_73                    = 0x73,$/;"	e	enum:OpCode
+OP_UNUSED_79	DEX.h	/^    OP_UNUSED_79                    = 0x79,$/;"	e	enum:OpCode
+OP_UNUSED_7A	DEX.h	/^    OP_UNUSED_7A                    = 0x7a,$/;"	e	enum:OpCode
+OP_UNUSED_F1	DEX.h	/^    OP_UNUSED_F1                    = 0xf1, \/* OP_INVOKE_DIRECT_EMPTY_RANGE? *\/$/;"	e	enum:OpCode
+OP_UNUSED_FF	DEX.h	/^    OP_UNUSED_FF                    = 0xff, \/* reserved for code expansion *\/$/;"	e	enum:OpCode
+OP_USHR_INT	DEX.h	/^    OP_USHR_INT                     = 0x9a,$/;"	e	enum:OpCode
+OP_USHR_INT_2ADDR	DEX.h	/^    OP_USHR_INT_2ADDR               = 0xba,$/;"	e	enum:OpCode
+OP_USHR_INT_LIT8	DEX.h	/^    OP_USHR_INT_LIT8                = 0xe2,$/;"	e	enum:OpCode
+OP_USHR_LONG	DEX.h	/^    OP_USHR_LONG                    = 0xa5,$/;"	e	enum:OpCode
+OP_USHR_LONG_2ADDR	DEX.h	/^    OP_USHR_LONG_2ADDR              = 0xc5,$/;"	e	enum:OpCode
+OP_XOR_INT	DEX.h	/^    OP_XOR_INT                      = 0x97,$/;"	e	enum:OpCode
+OP_XOR_INT_2ADDR	DEX.h	/^    OP_XOR_INT_2ADDR                = 0xb7,$/;"	e	enum:OpCode
+OP_XOR_INT_LIT16	DEX.h	/^    OP_XOR_INT_LIT16                = 0xd7,$/;"	e	enum:OpCode
+OP_XOR_INT_LIT8	DEX.h	/^    OP_XOR_INT_LIT8                 = 0xdf,$/;"	e	enum:OpCode
+OP_XOR_LONG	DEX.h	/^    OP_XOR_LONG                     = 0xa2,$/;"	e	enum:OpCode
+OP_XOR_LONG_2ADDR	DEX.h	/^    OP_XOR_LONG_2ADDR               = 0xc2,$/;"	e	enum:OpCode
+OpCode	DEX.h	/^typedef enum OpCode {$/;"	g
+OpCode	DEX.h	/^} OpCode;$/;"	t	typeref:enum:OpCode
+accessFlags	DEX.h	/^    u4  accessFlags;$/;"	m	struct:DexClassDef
+accessFlags	DEX.h	/^    u4 accessFlags;$/;"	m	struct:DexField
+accessFlags	DEX.h	/^    u4 accessFlags;$/;"	m	struct:DexMethod
+annotationsOff	DEX.h	/^    u4  annotationsOff;     \/* file offset to annotations_directory_item *\/$/;"	m	struct:DexClassDef
+arg	DEX.h	/^    u4      arg[5];         \/* vC\/D\/E\/F\/G in invoke or filled-new-array *\/  \/\/D一般存放的是方法所在类的this指针$/;"	m	struct:DecodedInstruction
+array	markBB.h	1;"	d
+baseAddr	DEX.h	/^    const u1*           baseAddr;  \/\/指向映射空间$/;"	m	struct:DexFile
+bleargh	DEX.h	/^    u1  bleargh;$/;"	m	struct:DexLink
+bool	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	t	typeref:enum:__anon1
+checksum	DEX.h	/^    u4  checksum;           \/* adler32 checksum *\/$/;"	m	struct:DexHeader
+checksum	DEX.h	/^    u4  checksum;           \/* adler32 checksum covering deps\/opt *\/$/;"	m	struct:DexOptHeader
+classDataOff	DEX.h	/^    u4  classDataOff;       \/* file offset to class_data_item *\/$/;"	m	struct:DexClassDef
+classDefOffset	DEX.h	/^        int     classDefOffset;         \/\/ in bytes, from start of DEX$/;"	m	struct:DexClassLookup::__anon2
+classDefsOff	DEX.h	/^    u4  classDefsOff;$/;"	m	struct:DexHeader
+classDefsSize	DEX.h	/^    u4  classDefsSize;$/;"	m	struct:DexHeader
+classDescriptorHash	DEX.h	/^        u4      classDescriptorHash;    \/\/ class descriptor hash code$/;"	m	struct:DexClassLookup::__anon2
+classDescriptorOffset	DEX.h	/^        int     classDescriptorOffset;  \/\/ in bytes, from start of DEX$/;"	m	struct:DexClassLookup::__anon2
+classIdx	DEX.h	/^    u2  classIdx;           \/* index into typeIds list for defining class *\/$/;"	m	struct:DexFieldId
+classIdx	DEX.h	/^    u2  classIdx;           \/* index into typeIds list for defining class *\/$/;"	m	struct:DexMethodId
+classIdx	DEX.h	/^    u4  classIdx;           \/* index into typeIds for this class *\/$/;"	m	struct:DexClassDef
+clearBBMask	toMarkBB.h	/^void clearBBMask(u4 targetPos, u4* BBMask){$/;"	f
+codeBaseAddr	DEX.h	/^	u4 codeBaseAddr;$/;"	m	struct:CodeItem
+codeList	dexmain.c	/^CodeList codeList;$/;"	v
+codeOff	DEX.h	/^    u4 codeOff;      \/* file offset to a code_item *\/$/;"	m	struct:DexMethod
+dataOff	DEX.h	/^    u4  dataOff;$/;"	m	struct:DexHeader
+dataSize	DEX.h	/^    u4  dataSize;$/;"	m	struct:DexHeader
+debugInfoOff	DEX.h	/^    u4  debugInfoOff;       \/* file offset to debug info stream *\/$/;"	m	struct:DexCode
+depsLength	DEX.h	/^    u4  depsLength;$/;"	m	struct:DexOptHeader
+depsOffset	DEX.h	/^    u4  depsOffset;         \/* offset of optimized DEX dependency table *\/$/;"	m	struct:DexOptHeader
+descriptorIdx	DEX.h	/^    u4  descriptorIdx;      \/* index into stringIds list for type descriptor *\/$/;"	m	struct:DexTypeId
+dexCreateInstrFormatTable	toParse.c	/^unsigned char * dexCreateInstrFormatTable(void)$/;"	f
+dexCreateInstrWidthTable	toParse.c	/^signed char * dexCreateInstrWidthTable(void)$/;"	f
+dexDecodeInstruction	toOpt.c	/^void dexDecodeInstruction(const unsigned char* fmts, const u2* insns, DecodedInstruction* pDec){$/;"	f
+dexFileSetupBasicPointers	toParse.c	/^void dexFileSetupBasicPointers(DexFile* pDexFile, const u1* data) {$/;"	f
+dexGetClassData	toParse.c	/^ u1* dexGetClassData(DexFile* pDexFile, DexClassDef* pClassDef){$/;"	f
+dexGetClassDef	toParse.c	/^DexClassDef* dexGetClassDef(DexFile* pDexFile, u4 idx){$/;"	f
+dexGetCode	toParse.c	/^DexCode* dexGetCode(DexFile* pDexFile, DexMethod* pDexMethod){$/;"	f
+dexGetInstrFormat	toOpt.c	/^inline unsigned char dexGetInstrFormat(const unsigned char* fmts, OpCode opCode){$/;"	f
+dexGetInstrWidthAbs	toOpt.c	/^size_t  dexGetInstrWidthAbs(const signed char* widths, OpCode opCode){$/;"	f
+dexGetOpcodeName	toOpt.c	/^char* dexGetOpcodeName(OpCode op){$/;"	f
+dexLength	DEX.h	/^    u4  dexLength;$/;"	m	struct:DexOptHeader
+dexOffset	DEX.h	/^    u4  dexOffset;          \/* file offset of DEX header *\/$/;"	m	struct:DexOptHeader
+dexReadAndFormatClassData	toParse.c	/^DexClassData* dexReadAndFormatClassData(u1** pData){$/;"	f
+dexReadAndFormatClassDataField	toParse.c	/^bool dexReadAndFormatClassDataField(u1** pData,  DexField* pField, u4* lastIndex){$/;"	f
+dexReadAndFormatClassDataMethod	toParse.c	/^bool dexReadAndFormatClassDataMethod(u1** pData, DexMethod* pMethod, u4* lastIndex){$/;"	f
+dexReadClassDataHeader	toParse.c	/^void dexReadClassDataHeader(u1** pData, DexClassDataHeader *pHeader){$/;"	f
+directMethods	DEX.h	/^    DexMethod*         directMethods;$/;"	m	struct:DexClassData
+directMethodsSize	DEX.h	/^    u4 directMethodsSize;$/;"	m	struct:DexClassDataHeader
+dumpClass	toParse.c	/^void* dumpClass(DexFile* pDexFile,int idx){$/;"	f
+dumpCode	toParse.c	/^void dumpCode(DexFile* pDexFile, DexMethod* pDexMethod){$/;"	f
+dumpInstruction	toOpt.c	/^void dumpInstruction(DexFile* pDexFile, const DexCode* pCode, int insnIdx,$/;"	f
+endianTag	DEX.h	/^    u4  endianTag;$/;"	m	struct:DexHeader
+false	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	e	enum:__anon1
+fieldIdsOff	DEX.h	/^    u4  fieldIdsOff;$/;"	m	struct:DexHeader
+fieldIdsSize	DEX.h	/^    u4  fieldIdsSize;$/;"	m	struct:DexHeader
+fieldIdx	DEX.h	/^    u4 fieldIdx;    \/* index to a field_id_item *\/$/;"	m	struct:DexField
+fileSize	DEX.h	/^    u4  fileSize;           \/* length of entire file *\/$/;"	m	struct:DexHeader
+flags	DEX.h	/^    u4  flags;              \/* some info flags *\/$/;"	m	struct:DexOptHeader
+gOpNames	toOpt.h	/^static const char* gOpNames[256] = {$/;"	v
+get2LE	DEX.h	/^static inline u2 get2LE(unsigned char const* pSrc)$/;"	f
+getFirstIndexFromBBMask	toMarkBB.h	/^int getFirstIndexFromBBMask(u4* BBMask,int size){$/;"	f
+getInsn	toOpt.c	/^u2 getInsn(u2 * insns, int idx){$/;"	f
+header	DEX.h	/^	CodeItem* header;$/;"	m	struct:CodeList
+header	DEX.h	/^    DexClassDataHeader header;$/;"	m	struct:DexClassData
+headerSize	DEX.h	/^    u4  headerSize;         \/* offset to start of next section *\/$/;"	m	struct:DexHeader
+identifyBB	toOpt.c	/^void identifyBB(DexFile* pDexFile, DexCode* pDexCode, CodeItem* pCodeItem ){$/;"	f
+insSize	DEX.h	/^    u2  insSize;$/;"	m	struct:DexCode
+insnIsData	toOpt.c	/^int insnIsData(u2 * insns, int idx){$/;"	f
+insns	DEX.h	/^    u2  insns[1];   \/\/16位,后面接16位Dex指令码$/;"	m	struct:DexCode
+insnsSize	DEX.h	/^    u4  insnsSize;          \/* size of the insns array, in u2 units *\/$/;"	m	struct:DexCode
+instanceFields	DEX.h	/^    DexField*          instanceFields;$/;"	m	struct:DexClassData
+instanceFieldsSize	DEX.h	/^    u4 instanceFieldsSize;$/;"	m	struct:DexClassDataHeader
+instrFormatTable	dexmain.c	/^unsigned char * instrFormatTable=NULL;$/;"	v
+instrWidthTable	dexmain.c	/^signed char * instrWidthTable=NULL;	$/;"	v
+interfacesOff	DEX.h	/^    u4  interfacesOff;      \/* file offset to DexTypeList *\/$/;"	m	struct:DexClassDef
+item	DEX.h	/^	DexCode* item;$/;"	m	struct:CodeItem
+kArrayDataSignature	DEX.h	618;"	d
+kFmt10t	DEX.h	/^    kFmt10t,        \/\/ op +AA$/;"	e	enum:InstructionFormat
+kFmt10x	DEX.h	/^    kFmt10x,        \/\/ op$/;"	e	enum:InstructionFormat
+kFmt11n	DEX.h	/^    kFmt11n,        \/\/ op vA, #+B$/;"	e	enum:InstructionFormat
+kFmt11x	DEX.h	/^    kFmt11x,        \/\/ op vAA$/;"	e	enum:InstructionFormat
+kFmt12x	DEX.h	/^    kFmt12x,        \/\/ op vA, vB$/;"	e	enum:InstructionFormat
+kFmt20bc	DEX.h	/^    kFmt20bc,       \/\/ op AA, thing@BBBB$/;"	e	enum:InstructionFormat
+kFmt20t	DEX.h	/^    kFmt20t,        \/\/ op +AAAA$/;"	e	enum:InstructionFormat
+kFmt21c	DEX.h	/^    kFmt21c,        \/\/ op vAA, thing@BBBB$/;"	e	enum:InstructionFormat
+kFmt21h	DEX.h	/^    kFmt21h,        \/\/ op vAA, #+BBBB00000[00000000]$/;"	e	enum:InstructionFormat
+kFmt21s	DEX.h	/^    kFmt21s,        \/\/ op vAA, #+BBBB$/;"	e	enum:InstructionFormat
+kFmt21t	DEX.h	/^    kFmt21t,        \/\/ op vAA, +BBBB$/;"	e	enum:InstructionFormat
+kFmt22b	DEX.h	/^    kFmt22b,        \/\/ op vAA, vBB, #+CC$/;"	e	enum:InstructionFormat
+kFmt22c	DEX.h	/^    kFmt22c,        \/\/ op vA, vB, thing@CCCC$/;"	e	enum:InstructionFormat
+kFmt22cs	DEX.h	/^    kFmt22cs,       \/\/ [opt] op vA, vB, field offset CCCC$/;"	e	enum:InstructionFormat
+kFmt22s	DEX.h	/^    kFmt22s,        \/\/ op vA, vB, #+CCCC$/;"	e	enum:InstructionFormat
+kFmt22t	DEX.h	/^    kFmt22t,        \/\/ op vA, vB, +CCCC$/;"	e	enum:InstructionFormat
+kFmt22x	DEX.h	/^    kFmt22x,        \/\/ op vAA, vBBBB$/;"	e	enum:InstructionFormat
+kFmt23x	DEX.h	/^    kFmt23x,        \/\/ op vAA, vBB, vCC$/;"	e	enum:InstructionFormat
+kFmt30t	DEX.h	/^    kFmt30t,        \/\/ op +AAAAAAAA$/;"	e	enum:InstructionFormat
+kFmt31c	DEX.h	/^    kFmt31c,        \/\/ op vAA, thing@BBBBBBBB$/;"	e	enum:InstructionFormat
+kFmt31i	DEX.h	/^    kFmt31i,        \/\/ op vAA, #+BBBBBBBB$/;"	e	enum:InstructionFormat
+kFmt31t	DEX.h	/^    kFmt31t,        \/\/ op vAA, +BBBBBBBB$/;"	e	enum:InstructionFormat
+kFmt32x	DEX.h	/^    kFmt32x,        \/\/ op vAAAA, vBBBB$/;"	e	enum:InstructionFormat
+kFmt35c	DEX.h	/^    kFmt35c,        \/\/ op {vC, vD, vE, vF, vG}, thing@BBBB (B: count, A: vG)$/;"	e	enum:InstructionFormat
+kFmt35fs	DEX.h	/^    kFmt35fs,       \/\/ [opt] invoke-interface$/;"	e	enum:InstructionFormat
+kFmt35ms	DEX.h	/^    kFmt35ms,       \/\/ [opt] invoke-virtual+super$/;"	e	enum:InstructionFormat
+kFmt3inline	DEX.h	/^    kFmt3inline,    \/\/ [opt] inline invoke$/;"	e	enum:InstructionFormat
+kFmt3rc	DEX.h	/^    kFmt3rc,        \/\/ op {vCCCC .. v(CCCC+AA-1)}, meth@BBBB$/;"	e	enum:InstructionFormat
+kFmt3rfs	DEX.h	/^    kFmt3rfs,       \/\/ [opt] invoke-interface\/range$/;"	e	enum:InstructionFormat
+kFmt3rinline	DEX.h	/^    kFmt3rinline,   \/\/ [opt] inline invoke\/range$/;"	e	enum:InstructionFormat
+kFmt3rms	DEX.h	/^    kFmt3rms,       \/\/ [opt] invoke-virtual+super\/range$/;"	e	enum:InstructionFormat
+kFmt51l	DEX.h	/^    kFmt51l,        \/\/ op vAA, #+BBBBBBBBBBBBBBBB$/;"	e	enum:InstructionFormat
+kFmtUnknown	DEX.h	/^    kFmtUnknown = 0,$/;"	e	enum:InstructionFormat
+kNumDalvikInstructions	DEX.h	1;"	d
+kPackedSwitchSignature	DEX.h	616;"	d
+kSparseSwitchSignature	DEX.h	617;"	d
+label	DEX.h	/^	u4 label;$/;"	m	struct:LastInstrPos
+lastInsPos	DEX.h	/^	u4 lastInsPos;$/;"	m	struct:LastInstrPos
+lastInstrPosHead	DEX.h	/^	LastInstrPosHead lastInstrPosHead;$/;"	m	struct:CodeItem
+linkOff	DEX.h	/^    u4  linkOff;$/;"	m	struct:DexHeader
+linkSize	DEX.h	/^    u4  linkSize;$/;"	m	struct:DexHeader
+list_size	DEX.h	/^	int list_size;$/;"	m	struct:LastInstrPosHead
+magic	DEX.h	/^    u1  magic[8];           \/* includes version number *\/$/;"	m	struct:DexHeader
+magic	DEX.h	/^    u1  magic[8];           \/* includes version number *\/$/;"	m	struct:DexOptHeader
+main	dexmain.c	/^int main(int argc , char * argv[]){$/;"	f
+mapOff	DEX.h	/^    u4  mapOff;$/;"	m	struct:DexHeader
+markBB_goto	toMarkBB.h	/^int markBB_goto(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_if	toMarkBB.h	/^int markBB_if(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_ifZ	toMarkBB.h	/^int markBB_ifZ(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_invoke	toMarkBB.h	/^int markBB_invoke(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_invokeRange	toMarkBB.h	/^int markBB_invokeRange(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_packedSwitch	toMarkBB.h	/^int markBB_packedSwitch(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_return	toMarkBB.h	/^int markBB_return(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_sparseSwitch	toMarkBB.h	/^int markBB_sparseSwitch(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_throw	toMarkBB.h	/^int markBB_throw(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+methodIdsOff	DEX.h	/^    u4  methodIdsOff;$/;"	m	struct:DexHeader
+methodIdsSize	DEX.h	/^    u4  methodIdsSize;$/;"	m	struct:DexHeader
+methodIdx	DEX.h	/^    u4 methodIdx;    \/* index to a method_id_item *\/$/;"	m	struct:DexMethod
+nameIdx	DEX.h	/^    u4  nameIdx;            \/* index into stringIds for field name *\/$/;"	m	struct:DexFieldId
+nameIdx	DEX.h	/^    u4  nameIdx;            \/* index into stringIds for method name *\/$/;"	m	struct:DexMethodId
+next	DEX.h	/^	LastInstrPos* next;$/;"	m	struct:LastInstrPosHead
+next	DEX.h	/^	struct CodeItem* next;$/;"	m	struct:CodeItem	typeref:struct:CodeItem::CodeItem
+next	DEX.h	/^	struct LastInstrPos* next;$/;"	m	struct:LastInstrPos	typeref:struct:LastInstrPos::LastInstrPos
+nextInsn	toOpt.c	/^int nextInsn(u2 * insns , int * idx){$/;"	f
+numEntries	DEX.h	/^    int     numEntries;                 \/\/ size of table[]; always power of 2$/;"	m	struct:DexClassLookup
+opCode	DEX.h	/^    OpCode  opCode;$/;"	m	struct:DecodedInstruction
+optLength	DEX.h	/^    u4  optLength;$/;"	m	struct:DexOptHeader
+optOffset	DEX.h	/^    u4  optOffset;          \/* file offset of optimized data tables *\/$/;"	m	struct:DexOptHeader
+outputCode	toOpt.c	/^void outputCode(DexFile* pDexFile, DexCode* pDexCode, CodeItem* pCodeItem ){$/;"	f
+outsSize	DEX.h	/^    u2  outsSize;$/;"	m	struct:DexCode
+overhead	DEX.h	/^    int                 overhead;$/;"	m	struct:DexFile
+pClassDefs	DEX.h	/^    const DexClassDef*  pClassDefs;$/;"	m	struct:DexFile
+pClassLookup	DEX.h	/^    const DexClassLookup* pClassLookup;       \/\/指向由类名建立的hash表组织系统$/;"	m	struct:DexFile
+pFieldIds	DEX.h	/^    const DexFieldId*   pFieldIds;$/;"	m	struct:DexFile
+pHeader	DEX.h	/^    const DexHeader*    pHeader;$/;"	m	struct:DexFile
+pLinkData	DEX.h	/^    const DexLink*      pLinkData;$/;"	m	struct:DexFile
+pMethodIds	DEX.h	/^    const DexMethodId*  pMethodIds;$/;"	m	struct:DexFile
+pOptHeader	DEX.h	/^    const DexOptHeader* pOptHeader;$/;"	m	struct:DexFile
+pProtoIds	DEX.h	/^    const DexProtoId*   pProtoIds;     \/\/r7$/;"	m	struct:DexFile
+pRegisterMapPool	DEX.h	/^    const void*         pRegisterMapPool;       \/\/ RegisterMapClassPool$/;"	m	struct:DexFile
+pStringIds	DEX.h	/^    const DexStringId*  pStringIds;   \/\/r9$/;"	m	struct:DexFile
+pTypeIds	DEX.h	/^    const DexTypeId*    pTypeIds;$/;"	m	struct:DexFile
+parametersOff	DEX.h	/^    u4  parametersOff;      \/* file offset to type_list for parameter types *\/$/;"	m	struct:DexProtoId
+parseDexFile	toParse.c	/^DexFile* parseDexFile(const u1* addr,size_t length){$/;"	f
+processBB	processBB/processBB.c	/^void processBB(DexFile * pDexFile , DexCode * pDexCode , CodeItem * pCodeItem)$/;"	f
+protoIdsOff	DEX.h	/^    u4  protoIdsOff;$/;"	m	struct:DexHeader
+protoIdsSize	DEX.h	/^    u4  protoIdsSize;$/;"	m	struct:DexHeader
+protoIdx	DEX.h	/^    u2  protoIdx;           \/* index into protoIds for method prototype *\/$/;"	m	struct:DexMethodId
+readUnsignedLeb128	toParse.c	/^int readUnsignedLeb128(u1**  pStream){$/;"	f
+registersSize	DEX.h	/^    u2  registersSize;$/;"	m	struct:DexCode
+returnTypeIdx	DEX.h	/^    u4  returnTypeIdx;      \/* index into typeIds list for return type *\/$/;"	m	struct:DexProtoId
+s1	DEX.h	/^typedef signed char s1;$/;"	t
+s2	DEX.h	/^typedef signed short int s2;$/;"	t
+s4	DEX.h	/^typedef signed int s4;$/;"	t
+s8	DEX.h	/^typedef signed long int s8;$/;"	t
+setBBMaskIfNecessary	toMarkBB.h	/^void setBBMaskIfNecessary(u4 targetPos, u4* BBMask){$/;"	f
+shortyIdx	DEX.h	/^    u4  shortyIdx;          \/* index into stringIds for shorty descriptor *\/$/;"	m	struct:DexProtoId
+signature	DEX.h	/^    u1  signature[20]; \/* SHA-1 hash *\/$/;"	m	struct:DexHeader
+size	DEX.h	/^    int     size;                       \/\/ total size, including "size"$/;"	m	struct:DexClassLookup
+sourceFileIdx	DEX.h	/^    u4  sourceFileIdx;      \/* index into stringIds for source file name *\/$/;"	m	struct:DexClassDef
+staticFields	DEX.h	/^    DexField*          staticFields;$/;"	m	struct:DexClassData
+staticFieldsSize	DEX.h	/^    u4 staticFieldsSize;$/;"	m	struct:DexClassDataHeader
+staticValuesOff	DEX.h	/^    u4  staticValuesOff;    \/* file offset to DexEncodedArray *\/$/;"	m	struct:DexClassDef
+stringDataOff	DEX.h	/^    u4  stringDataOff;      \/* file offset to string_data_item *\/$/;"	m	struct:DexStringId
+stringIdsOff	DEX.h	/^    u4  stringIdsOff;$/;"	m	struct:DexHeader
+stringIdsSize	DEX.h	/^    u4  stringIdsSize;$/;"	m	struct:DexHeader
+superclassIdx	DEX.h	/^    u4  superclassIdx;      \/* index into typeIds for superclass *\/$/;"	m	struct:DexClassDef
+table	DEX.h	/^    } table[1];$/;"	m	struct:DexClassLookup	typeref:struct:DexClassLookup::__anon2
+tail	DEX.h	/^	CodeItem* tail;$/;"	m	struct:CodeList
+triesSize	DEX.h	/^    u2  triesSize;$/;"	m	struct:DexCode
+true	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	e	enum:__anon1
+typeIdsOff	DEX.h	/^    u4  typeIdsOff;$/;"	m	struct:DexHeader
+typeIdsSize	DEX.h	/^    u4  typeIdsSize;$/;"	m	struct:DexHeader
+typeIdx	DEX.h	/^    u2  typeIdx;            \/* index into typeIds for field type *\/$/;"	m	struct:DexFieldId
+u1	DEX.h	/^typedef unsigned char u1;$/;"	t
+u2	DEX.h	/^typedef unsigned short int u2;$/;"	t
+u4	DEX.h	/^typedef unsigned  int u4;$/;"	t
+u8	DEX.h	/^typedef unsigned  long int u8;$/;"	t
+vA	DEX.h	/^    u4      vA;$/;"	m	struct:DecodedInstruction
+vB	DEX.h	/^    u4      vB;$/;"	m	struct:DecodedInstruction
+vB_wide	DEX.h	/^    u8      vB_wide;        \/* for kFmt51l *\/$/;"	m	struct:DecodedInstruction
+vC	DEX.h	/^    u4      vC;$/;"	m	struct:DecodedInstruction
+virtualMethods	DEX.h	/^    DexMethod*         virtualMethods;$/;"	m	struct:DexClassData
+virtualMethodsSize	DEX.h	/^    u4 virtualMethodsSize;$/;"	m	struct:DexClassDataHeader
