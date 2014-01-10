@@ -5,9 +5,108 @@
 #include "../DEX.h"
 #include "../toOpt.h"
 #include "htoMarkBB.h"
+#include "../compiler/CompilerIR.h"
+#include "../compiler/CompilerUtility.h"
+
+extern CompilationUnitList cUnitList;
 
 void outputCode(DexFile * pDexFile, DexCode * pDexCode, CodeItem * pCodeItem);
 void outputBBInsns(DexFile * pDexFile, DexCode * pDexCode,int startIdx,int endIdx);
+void parseInsn(const u2 *codePtr,DecodedInstruction *decInsn);
+
+void insertBB2cUnit(DexFile *pDexFile,CodeItem *pCodeItem,int startIdx){
+	CompilationUnit *cUnit = NULL;
+	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
+		if(pCodeItem == cUnit->pCodeItem){
+			break;
+		}
+	}
+	if(NULL == cUnit){
+		printf("error:can't find cUnit matching the codeItem,insertBB2cUnit!\n");
+		return ;
+	}
+	
+	BasicBlock *pBB = dvmCompilerNew(sizeof(BasicBlock),true);
+	if(NULL == pBB){
+		printf("error:malloc BB!\n");
+		return ;
+	}
+
+	pBB->startOffset = (u4)( (u1*)(&pCodeItem->item->insns[startIdx]) - (u1*)pDexFile->baseAddr);
+	pBB->firstMIRInsn = NULL;
+	pBB->lastMIRInsn = NULL;
+	pBB->next = NULL;
+	printf("BB startOffset is : 0x%x",pBB->startOffset);
+
+	if(NULL == cUnit->firstBB){
+		cUnit->firstBB = pBB;	
+		cUnit->lastBB = pBB;
+	}
+	else
+	{
+		cUnit->lastBB->next = pBB;
+		cUnit->lastBB = pBB;
+	}
+	
+	return ;
+
+}
+
+void dvmCompilerAppendMIR(BasicBlock *bb,MIR *mir){
+	if(NULL == bb->firstMIRInsn){
+		bb->lastMIRInsn = bb->firstMIRInsn = mir;
+		mir->prev = mir->next = NULL;
+	}
+	else
+	{
+		bb->lastMIRInsn->next = mir;
+		mir->prev = bb->lastMIRInsn;
+		mir->next = NULL;
+		bb->lastMIRInsn = mir;
+	}
+	
+	return ;
+}
+
+void insertInsns2BB(DexFile * pDexFile, CodeItem * pCodeItem ,int startIdx,int endIdx){
+	int insnIdx = startIdx;
+	DexCode * pDexCode = pCodeItem->item;
+	u2* insns = pDexCode->insns;
+	CompilationUnit *cUnit = NULL;
+	BasicBlock *curBB = NULL;
+		
+        DecodedInstruction decInsn;
+	
+	//to find to BB
+	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
+		if(pCodeItem == cUnit->pCodeItem){
+			break;
+		}
+	}
+	if(NULL == cUnit){
+		printf("error:can't find cUnit matching the codeItem,insertInsns2BB!\n");
+		return ;
+	}
+	curBB = cUnit->lastBB;
+    while (insnIdx < endIdx) {
+	MIR * mir;
+	mir = dvmCompilerNew(sizeof(MIR),true);
+	if( NULL==mir ){
+		printf("error : alloc mem of mir!\n");
+		return ;
+	}
+	mir->offset = insnIdx;
+	mir->prev = NULL;
+	mir->next = NULL;
+	mir->ssaRep = NULL;
+
+	parseInsn(&insns[insnIdx],&mir->dalvikInsn);
+	dvmCompilerAppendMIR(curBB,mir);
+	nextInsn(insns,&insnIdx);
+    }
+}
+		
+
 
 void outputBBMask(u4 *pBBMask,int count){
 	u4 i=0;
@@ -77,9 +176,11 @@ printf("start add mir ,first is %x ; second is %x!\n",startFirstIdx,startSecIdx)
 				printf("count insns of BB is %d \n",insnsCountInBB);
 				printf("========================\n");
 				if(3 <= (curIdx-startFirstIdx)){
-					printf("=::= -----------------------\n");
+					printf("=::== -----------------------\n");
 					outputBBInsns(pDexFile,pDexCode,startFirstIdx,curIdx);
 					printf("=::= -----------------------\n");
+					insertBB2cUnit(pDexFile,pCodeItem,startFirstIdx);
+					insertInsns2BB(pDexFile,pCodeItem,startFirstIdx,curIdx);
 				}
 				break;
 			}	
@@ -91,9 +192,11 @@ printf("start add mir ,first is %x ; second is %x!\n",startFirstIdx,startSecIdx)
 				printf("count insns of BB is %d \n",insnsCountInBB);
 				printf("========================\n");
 				if(3 <= (curIdx-startFirstIdx)){
-					printf("=::= -----------------------\n");
+					printf("=::== -----------------------\n");
 					outputBBInsns(pDexFile,pDexCode,startFirstIdx,curIdx);
 					printf("=::= -----------------------\n");
+					insertBB2cUnit(pDexFile,pCodeItem,startFirstIdx);
+					insertInsns2BB(pDexFile,pCodeItem,startFirstIdx,curIdx);
 				}
 				break;
 			}
@@ -106,9 +209,11 @@ printf("start add mir ,first is %x ; second is %x!\n",startFirstIdx,startSecIdx)
 				printf("count insns of BB is %d \n",insnsCountInBB);
 				printf("========================\n");
 				if(3 <= (curIdx-startFirstIdx)){
-					printf("=::= -----------------------\n");
+					printf("=::== -----------------------\n");
 					outputBBInsns(pDexFile,pDexCode,startFirstIdx,curIdx);
 					printf("=::= -----------------------\n");
+					insertBB2cUnit(pDexFile,pCodeItem,startFirstIdx);
+					insertInsns2BB(pDexFile,pCodeItem,startFirstIdx,curIdx);
 				}
 				startFirst = 0xff;
 				break;
@@ -121,7 +226,7 @@ printf("start add mir ,first is %x ; second is %x!\n",startFirstIdx,startSecIdx)
 				printf("count insns of BB is %d \n",insnsCountInBB);
 				printf("========================\n");
 				if(3 <= (curIdx-startFirstIdx)){
-					printf("=::= -----------------------\n");
+					printf("=::== -----------------------\n");
 					outputBBInsns(pDexFile,pDexCode,startFirstIdx,curIdx);
 					printf("=::= -----------------------\n");
 				}

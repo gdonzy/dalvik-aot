@@ -4,12 +4,21 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+ARENA_DEFAULT_SIZE	compiler/CompilerUtility.h	1;"	d
+ArenaMemBlock	compiler/CompilerUtility.h	/^typedef struct ArenaMemBlock{$/;"	s
+ArenaMemBlock	compiler/CompilerUtility.h	/^} ArenaMemBlock;$/;"	t	typeref:struct:ArenaMemBlock
 BBMask	DEX.h	/^	u4* BBMask;$/;"	m	struct:CodeItem
 BBMask_count	DEX.h	/^	int BBMask_count;$/;"	m	struct:CodeItem
+BasicBlock	compiler/CompilerIR.h	/^typedef struct BasicBlock {$/;"	s
+BasicBlock	compiler/CompilerIR.h	/^} BasicBlock;$/;"	t	typeref:struct:BasicBlock
 CodeItem	DEX.h	/^typedef struct CodeItem {$/;"	s
 CodeItem	DEX.h	/^} CodeItem;$/;"	t	typeref:struct:CodeItem
 CodeList	DEX.h	/^typedef struct CodeList {$/;"	s
 CodeList	DEX.h	/^} CodeList;$/;"	t	typeref:struct:CodeList
+CompilationUnit	compiler/CompilerIR.h	/^typedef struct CompilationUnit {$/;"	s
+CompilationUnit	compiler/CompilerIR.h	/^} CompilationUnit;$/;"	t	typeref:struct:CompilationUnit
+CompilationUnitList	compiler/CompilerIR.h	/^typedef struct CompilationUnitList{$/;"	s
+CompilationUnitList	compiler/CompilerIR.h	/^}CompilationUnitList;$/;"	t	typeref:struct:CompilationUnitList
 DecodedInstruction	DEX.h	/^typedef struct DecodedInstruction {$/;"	s
 DecodedInstruction	DEX.h	/^} DecodedInstruction;$/;"	t	typeref:struct:DecodedInstruction
 DexClassData	DEX.h	/^typedef struct DexClassData {$/;"	s
@@ -55,6 +64,8 @@ LastInstrPos	DEX.h	/^} LastInstrPos;$/;"	t	typeref:struct:LastInstrPos
 LastInstrPosHead	DEX.h	/^typedef struct LastInstrPosHead{$/;"	s
 LastInstrPosHead	DEX.h	/^} LastInstrPosHead;$/;"	t	typeref:struct:LastInstrPosHead
 MARKBB	toOpt.h	/^typedef int (*MARKBB)(DexCode * pDexCode, int insnIdx, int insnWidth, DecodedInstruction * pDecInsn,u4* BBMask);$/;"	t
+MIR	compiler/CompilerIR.h	/^typedef struct MIR {$/;"	s
+MIR	compiler/CompilerIR.h	/^} MIR;$/;"	t	typeref:struct:MIR
 OP_ADD_DOUBLE	DEX.h	/^    OP_ADD_DOUBLE                   = 0xab,$/;"	e	enum:OpCode
 OP_ADD_DOUBLE_2ADDR	DEX.h	/^    OP_ADD_DOUBLE_2ADDR             = 0xcb,$/;"	e	enum:OpCode
 OP_ADD_FLOAT	DEX.h	/^    OP_ADD_FLOAT                    = 0xa6,$/;"	e	enum:OpCode
@@ -313,15 +324,22 @@ OP_XOR_LONG	DEX.h	/^    OP_XOR_LONG                     = 0xa2,$/;"	e	enum:OpCod
 OP_XOR_LONG_2ADDR	DEX.h	/^    OP_XOR_LONG_2ADDR               = 0xc2,$/;"	e	enum:OpCode
 OpCode	DEX.h	/^typedef enum OpCode {$/;"	g
 OpCode	DEX.h	/^} OpCode;$/;"	t	typeref:enum:OpCode
+SSARepresentation	compiler/Dataflow.h	/^typedef struct SSARepresentation {$/;"	s
+SSARepresentation	compiler/Dataflow.h	/^} SSARepresentation;$/;"	t	typeref:struct:SSARepresentation
 accessFlags	DEX.h	/^    u4  accessFlags;$/;"	m	struct:DexClassDef
 accessFlags	DEX.h	/^    u4 accessFlags;$/;"	m	struct:DexField
 accessFlags	DEX.h	/^    u4 accessFlags;$/;"	m	struct:DexMethod
 annotationsOff	DEX.h	/^    u4  annotationsOff;     \/* file offset to annotations_directory_item *\/$/;"	m	struct:DexClassDef
+arenaHead	compiler/Utility.c	/^static ArenaMemBlock *arenaHead = NULL;$/;"	v	file:
 arg	DEX.h	/^    u4      arg[5];         \/* vC\/D\/E\/F\/G in invoke or filled-new-array *\/  \/\/D一般存放的是方法所在类的this指针$/;"	m	struct:DecodedInstruction
 array	markBB.h	1;"	d
 baseAddr	DEX.h	/^    const u1*           baseAddr;  \/\/指向映射空间$/;"	m	struct:DexFile
 bleargh	DEX.h	/^    u1  bleargh;$/;"	m	struct:DexLink
+blockSize	compiler/CompilerUtility.h	/^	int blockSize;$/;"	m	struct:ArenaMemBlock
 bool	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	t	typeref:enum:__anon1
+bytesAllocated	compiler/CompilerUtility.h	/^	int bytesAllocated;$/;"	m	struct:ArenaMemBlock
+cUnitInit	compiler/CompilerIRInit.c	/^void cUnitInit(void){$/;"	f
+cUnitList	dexmain.c	/^CompilationUnitList cUnitList;$/;"	v
 checksum	DEX.h	/^    u4  checksum;           \/* adler32 checksum *\/$/;"	m	struct:DexHeader
 checksum	DEX.h	/^    u4  checksum;           \/* adler32 checksum covering deps\/opt *\/$/;"	m	struct:DexOptHeader
 classDataOff	DEX.h	/^    u4  classDataOff;       \/* file offset to class_data_item *\/$/;"	m	struct:DexClassDef
@@ -337,9 +355,12 @@ clearBBMask	toMarkBB.h	/^void clearBBMask(u4 targetPos, u4* BBMask){$/;"	f
 codeBaseAddr	DEX.h	/^	u4 codeBaseAddr;$/;"	m	struct:CodeItem
 codeList	dexmain.c	/^CodeList codeList;$/;"	v
 codeOff	DEX.h	/^    u4 codeOff;      \/* file offset to a code_item *\/$/;"	m	struct:DexMethod
+currentArena	compiler/Utility.c	/^static ArenaMemBlock *currentArena = NULL;$/;"	v	file:
+dalvikInsn	compiler/CompilerIR.h	/^    DecodedInstruction dalvikInsn;$/;"	m	struct:MIR
 dataOff	DEX.h	/^    u4  dataOff;$/;"	m	struct:DexHeader
 dataSize	DEX.h	/^    u4  dataSize;$/;"	m	struct:DexHeader
 debugInfoOff	DEX.h	/^    u4  debugInfoOff;       \/* file offset to debug info stream *\/$/;"	m	struct:DexCode
+defs	compiler/Dataflow.h	/^    int *defs;$/;"	m	struct:SSARepresentation
 depsLength	DEX.h	/^    u4  depsLength;$/;"	m	struct:DexOptHeader
 depsOffset	DEX.h	/^    u4  depsOffset;         \/* offset of optimized DEX dependency table *\/$/;"	m	struct:DexOptHeader
 descriptorIdx	DEX.h	/^    u4  descriptorIdx;      \/* index into stringIds list for type descriptor *\/$/;"	m	struct:DexTypeId
@@ -364,32 +385,42 @@ directMethodsSize	DEX.h	/^    u4 directMethodsSize;$/;"	m	struct:DexClassDataHea
 dumpClass	toParse.c	/^void* dumpClass(DexFile* pDexFile,int idx){$/;"	f
 dumpCode	toParse.c	/^void dumpCode(DexFile* pDexFile, DexMethod* pDexMethod){$/;"	f
 dumpInstruction	toOpt.c	/^void dumpInstruction(DexFile* pDexFile, const DexCode* pCode, int insnIdx,$/;"	f
+dvmCompilerHeapInit	compiler/Utility.c	/^void dvmCompilerHeapInit(void){$/;"	f
+dvmCompilerNew	compiler/Utility.c	/^void * dvmCompilerNew(int size, bool zero)$/;"	f
 endianTag	DEX.h	/^    u4  endianTag;$/;"	m	struct:DexHeader
 false	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	e	enum:__anon1
 fieldIdsOff	DEX.h	/^    u4  fieldIdsOff;$/;"	m	struct:DexHeader
 fieldIdsSize	DEX.h	/^    u4  fieldIdsSize;$/;"	m	struct:DexHeader
 fieldIdx	DEX.h	/^    u4 fieldIdx;    \/* index to a field_id_item *\/$/;"	m	struct:DexField
 fileSize	DEX.h	/^    u4  fileSize;           \/* length of entire file *\/$/;"	m	struct:DexHeader
+firstBB	compiler/CompilerIR.h	/^    BasicBlock *firstBB; \/\/donzy$/;"	m	struct:CompilationUnit
+firstMIRInsn	compiler/CompilerIR.h	/^    MIR *firstMIRInsn;$/;"	m	struct:BasicBlock
 flags	DEX.h	/^    u4  flags;              \/* some info flags *\/$/;"	m	struct:DexOptHeader
+fpDef	compiler/Dataflow.h	/^    bool *fpDef;$/;"	m	struct:SSARepresentation
+fpUse	compiler/Dataflow.h	/^    bool *fpUse;$/;"	m	struct:SSARepresentation
 gOpNames	toOpt.h	/^static const char* gOpNames[256] = {$/;"	v
 get2LE	DEX.h	/^static inline u2 get2LE(unsigned char const* pSrc)$/;"	f
 getFirstIndexFromBBMask	toMarkBB.h	/^int getFirstIndexFromBBMask(u4* BBMask,int size){$/;"	f
 getInsn	toOpt.c	/^u2 getInsn(u2 * insns, int idx){$/;"	f
 header	DEX.h	/^	CodeItem* header;$/;"	m	struct:CodeList
 header	DEX.h	/^    DexClassDataHeader header;$/;"	m	struct:DexClassData
+header	compiler/CompilerIR.h	/^	CompilationUnit *header;$/;"	m	struct:CompilationUnitList
 headerSize	DEX.h	/^    u4  headerSize;         \/* offset to start of next section *\/$/;"	m	struct:DexHeader
+id_code	compiler/CompilerIR.h	/^    int id_code;$/;"	m	struct:CompilationUnit
 identifyBB	toOpt.c	/^void identifyBB(DexFile* pDexFile, DexCode* pDexCode, CodeItem* pCodeItem ){$/;"	f
 insSize	DEX.h	/^    u2  insSize;$/;"	m	struct:DexCode
+insertBB2cUnit	processBB/processBB.c	/^void insertBB2cUnit(DexFile *pDexFile,CodeItem *pCodeItem){$/;"	f
+insertInsns2BB	processBB/processBB.c	/^void insertInsns2BB(DexFile * pDexFile, CodeItem * pCodeItem ,int startIdx,int endIdx){$/;"	f
 insnIsData	toOpt.c	/^int insnIsData(u2 * insns, int idx){$/;"	f
 insns	DEX.h	/^    u2  insns[1];   \/\/16位,后面接16位Dex指令码$/;"	m	struct:DexCode
 insnsSize	DEX.h	/^    u4  insnsSize;          \/* size of the insns array, in u2 units *\/$/;"	m	struct:DexCode
 instanceFields	DEX.h	/^    DexField*          instanceFields;$/;"	m	struct:DexClassData
 instanceFieldsSize	DEX.h	/^    u4 instanceFieldsSize;$/;"	m	struct:DexClassDataHeader
-instrFormatTable	dexmain.c	/^unsigned char * instrFormatTable=NULL;$/;"	v
-instrWidthTable	dexmain.c	/^signed char * instrWidthTable=NULL;	$/;"	v
+instrFormatTable	dexmain.c	/^unsigned char * instrFormatTable = NULL;$/;"	v
+instrWidthTable	dexmain.c	/^signed char * instrWidthTable = NULL;	$/;"	v
 interfacesOff	DEX.h	/^    u4  interfacesOff;      \/* file offset to DexTypeList *\/$/;"	m	struct:DexClassDef
 item	DEX.h	/^	DexCode* item;$/;"	m	struct:CodeItem
-kArrayDataSignature	DEX.h	618;"	d
+kArrayDataSignature	DEX.h	620;"	d
 kFmt10t	DEX.h	/^    kFmt10t,        \/\/ op +AA$/;"	e	enum:InstructionFormat
 kFmt10x	DEX.h	/^    kFmt10x,        \/\/ op$/;"	e	enum:InstructionFormat
 kFmt11n	DEX.h	/^    kFmt11n,        \/\/ op vA, #+B$/;"	e	enum:InstructionFormat
@@ -424,11 +455,13 @@ kFmt3rms	DEX.h	/^    kFmt3rms,       \/\/ [opt] invoke-virtual+super\/range$/;"	
 kFmt51l	DEX.h	/^    kFmt51l,        \/\/ op vAA, #+BBBBBBBBBBBBBBBB$/;"	e	enum:InstructionFormat
 kFmtUnknown	DEX.h	/^    kFmtUnknown = 0,$/;"	e	enum:InstructionFormat
 kNumDalvikInstructions	DEX.h	1;"	d
-kPackedSwitchSignature	DEX.h	616;"	d
-kSparseSwitchSignature	DEX.h	617;"	d
+kPackedSwitchSignature	DEX.h	618;"	d
+kSparseSwitchSignature	DEX.h	619;"	d
 label	DEX.h	/^	u4 label;$/;"	m	struct:LastInstrPos
+lastBB	compiler/CompilerIR.h	/^    BasicBlock *lastBB;\/\/donzy$/;"	m	struct:CompilationUnit
 lastInsPos	DEX.h	/^	u4 lastInsPos;$/;"	m	struct:LastInstrPos
 lastInstrPosHead	DEX.h	/^	LastInstrPosHead lastInstrPosHead;$/;"	m	struct:CodeItem
+lastMIRInsn	compiler/CompilerIR.h	/^    MIR *lastMIRInsn;$/;"	m	struct:BasicBlock
 linkOff	DEX.h	/^    u4  linkOff;$/;"	m	struct:DexHeader
 linkSize	DEX.h	/^    u4  linkSize;$/;"	m	struct:DexHeader
 list_size	DEX.h	/^	int list_size;$/;"	m	struct:LastInstrPosHead
@@ -453,16 +486,28 @@ nameIdx	DEX.h	/^    u4  nameIdx;            \/* index into stringIds for method 
 next	DEX.h	/^	LastInstrPos* next;$/;"	m	struct:LastInstrPosHead
 next	DEX.h	/^	struct CodeItem* next;$/;"	m	struct:CodeItem	typeref:struct:CodeItem::CodeItem
 next	DEX.h	/^	struct LastInstrPos* next;$/;"	m	struct:LastInstrPos	typeref:struct:LastInstrPos::LastInstrPos
+next	compiler/CompilerIR.h	/^    struct BasicBlock *next;            \/\/ Serial link for book keeping purposes$/;"	m	struct:BasicBlock	typeref:struct:BasicBlock::BasicBlock
+next	compiler/CompilerIR.h	/^    struct CompilationUnit *next;\/\/donzy$/;"	m	struct:CompilationUnit	typeref:struct:CompilationUnit::CompilationUnit
+next	compiler/CompilerIR.h	/^    struct MIR *next;$/;"	m	struct:MIR	typeref:struct:MIR::MIR
+next	compiler/CompilerUtility.h	/^	struct ArenaMemBlock * next;$/;"	m	struct:ArenaMemBlock	typeref:struct:ArenaMemBlock::ArenaMemBlock
 nextInsn	toOpt.c	/^int nextInsn(u2 * insns , int * idx){$/;"	f
+numArenaBlocks	compiler/Utility.c	/^static int numArenaBlocks = 0;$/;"	v	file:
+numBlocks	compiler/CompilerIR.h	/^    int numBlocks;$/;"	m	struct:CompilationUnit
+numDefs	compiler/Dataflow.h	/^    int numDefs;$/;"	m	struct:SSARepresentation
 numEntries	DEX.h	/^    int     numEntries;                 \/\/ size of table[]; always power of 2$/;"	m	struct:DexClassLookup
+numUses	compiler/Dataflow.h	/^    int numUses;$/;"	m	struct:SSARepresentation
+offset	compiler/CompilerIR.h	/^    unsigned int offset;$/;"	m	struct:MIR
 opCode	DEX.h	/^    OpCode  opCode;$/;"	m	struct:DecodedInstruction
 optLength	DEX.h	/^    u4  optLength;$/;"	m	struct:DexOptHeader
 optOffset	DEX.h	/^    u4  optOffset;          \/* file offset of optimized data tables *\/$/;"	m	struct:DexOptHeader
+outputBBInsns	toOpt.c	/^void outputBBInsns(DexFile* pDexFile, DexCode* pDexCode, int startIdx ,int endIdx){$/;"	f
+outputBBMask	processBB/processBB.c	/^void outputBBMask(u4 *pBBMask,int count){$/;"	f
 outputCode	toOpt.c	/^void outputCode(DexFile* pDexFile, DexCode* pDexCode, CodeItem* pCodeItem ){$/;"	f
 outsSize	DEX.h	/^    u2  outsSize;$/;"	m	struct:DexCode
 overhead	DEX.h	/^    int                 overhead;$/;"	m	struct:DexFile
 pClassDefs	DEX.h	/^    const DexClassDef*  pClassDefs;$/;"	m	struct:DexFile
 pClassLookup	DEX.h	/^    const DexClassLookup* pClassLookup;       \/\/指向由类名建立的hash表组织系统$/;"	m	struct:DexFile
+pCodeItem	compiler/CompilerIR.h	/^    CodeItem *pCodeItem;\/\/donzy$/;"	m	struct:CompilationUnit
 pFieldIds	DEX.h	/^    const DexFieldId*   pFieldIds;$/;"	m	struct:DexFile
 pHeader	DEX.h	/^    const DexHeader*    pHeader;$/;"	m	struct:DexFile
 pLinkData	DEX.h	/^    const DexLink*      pLinkData;$/;"	m	struct:DexFile
@@ -474,10 +519,13 @@ pStringIds	DEX.h	/^    const DexStringId*  pStringIds;   \/\/r9$/;"	m	struct:Dex
 pTypeIds	DEX.h	/^    const DexTypeId*    pTypeIds;$/;"	m	struct:DexFile
 parametersOff	DEX.h	/^    u4  parametersOff;      \/* file offset to type_list for parameter types *\/$/;"	m	struct:DexProtoId
 parseDexFile	toParse.c	/^DexFile* parseDexFile(const u1* addr,size_t length){$/;"	f
+parseInsn	toOpt.c	/^void parseInsn(const u2 *codePtr,DecodedInstruction *decInsn){$/;"	f
+prev	compiler/CompilerIR.h	/^    struct MIR *prev;$/;"	m	struct:MIR	typeref:struct:MIR::MIR
 processBB	processBB/processBB.c	/^void processBB(DexFile * pDexFile , DexCode * pDexCode , CodeItem * pCodeItem)$/;"	f
 protoIdsOff	DEX.h	/^    u4  protoIdsOff;$/;"	m	struct:DexHeader
 protoIdsSize	DEX.h	/^    u4  protoIdsSize;$/;"	m	struct:DexHeader
 protoIdx	DEX.h	/^    u2  protoIdx;           \/* index into protoIds for method prototype *\/$/;"	m	struct:DexMethodId
+ptr	compiler/CompilerUtility.h	/^	char ptr[0];$/;"	m	struct:ArenaMemBlock
 readUnsignedLeb128	toParse.c	/^int readUnsignedLeb128(u1**  pStream){$/;"	f
 registersSize	DEX.h	/^    u2  registersSize;$/;"	m	struct:DexCode
 returnTypeIdx	DEX.h	/^    u4  returnTypeIdx;      \/* index into typeIds list for return type *\/$/;"	m	struct:DexProtoId
@@ -490,6 +538,8 @@ shortyIdx	DEX.h	/^    u4  shortyIdx;          \/* index into stringIds for short
 signature	DEX.h	/^    u1  signature[20]; \/* SHA-1 hash *\/$/;"	m	struct:DexHeader
 size	DEX.h	/^    int     size;                       \/\/ total size, including "size"$/;"	m	struct:DexClassLookup
 sourceFileIdx	DEX.h	/^    u4  sourceFileIdx;      \/* index into stringIds for source file name *\/$/;"	m	struct:DexClassDef
+ssaRep	compiler/CompilerIR.h	/^    struct SSARepresentation *ssaRep;$/;"	m	struct:MIR	typeref:struct:MIR::SSARepresentation
+startOffset	compiler/CompilerIR.h	/^    unsigned int startOffset;$/;"	m	struct:BasicBlock
 staticFields	DEX.h	/^    DexField*          staticFields;$/;"	m	struct:DexClassData
 staticFieldsSize	DEX.h	/^    u4 staticFieldsSize;$/;"	m	struct:DexClassDataHeader
 staticValuesOff	DEX.h	/^    u4  staticValuesOff;    \/* file offset to DexEncodedArray *\/$/;"	m	struct:DexClassDef
@@ -499,6 +549,7 @@ stringIdsSize	DEX.h	/^    u4  stringIdsSize;$/;"	m	struct:DexHeader
 superclassIdx	DEX.h	/^    u4  superclassIdx;      \/* index into typeIds for superclass *\/$/;"	m	struct:DexClassDef
 table	DEX.h	/^    } table[1];$/;"	m	struct:DexClassLookup	typeref:struct:DexClassLookup::__anon2
 tail	DEX.h	/^	CodeItem* tail;$/;"	m	struct:CodeList
+tail	compiler/CompilerIR.h	/^	CompilationUnit *tail;$/;"	m	struct:CompilationUnitList
 triesSize	DEX.h	/^    u2  triesSize;$/;"	m	struct:DexCode
 true	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	e	enum:__anon1
 typeIdsOff	DEX.h	/^    u4  typeIdsOff;$/;"	m	struct:DexHeader
@@ -508,9 +559,11 @@ u1	DEX.h	/^typedef unsigned char u1;$/;"	t
 u2	DEX.h	/^typedef unsigned short int u2;$/;"	t
 u4	DEX.h	/^typedef unsigned  int u4;$/;"	t
 u8	DEX.h	/^typedef unsigned  long int u8;$/;"	t
+uses	compiler/Dataflow.h	/^    int *uses;$/;"	m	struct:SSARepresentation
 vA	DEX.h	/^    u4      vA;$/;"	m	struct:DecodedInstruction
 vB	DEX.h	/^    u4      vB;$/;"	m	struct:DecodedInstruction
 vB_wide	DEX.h	/^    u8      vB_wide;        \/* for kFmt51l *\/$/;"	m	struct:DecodedInstruction
 vC	DEX.h	/^    u4      vC;$/;"	m	struct:DecodedInstruction
 virtualMethods	DEX.h	/^    DexMethod*         virtualMethods;$/;"	m	struct:DexClassData
 virtualMethodsSize	DEX.h	/^    u4 virtualMethodsSize;$/;"	m	struct:DexClassDataHeader
+width	compiler/CompilerIR.h	/^    unsigned int width;$/;"	m	struct:MIR

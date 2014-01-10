@@ -924,6 +924,9 @@ void dumpCode(DexFile* pDexFile, DexMethod* pDexMethod){
 //    dumpLocals(pDexFile, pCode, pDexMethod);
 		
  	CodeItem* codeItem = malloc(sizeof(CodeItem));
+	if(NULL == codeItem){
+		printf("error: malloc codeItem !\n");
+	}
 	codeItem->codeBaseAddr = pDexMethod->codeOff;
 	codeItem->item = pCode;
 	codeItem->next = NULL;

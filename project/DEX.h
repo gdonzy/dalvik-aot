@@ -253,6 +253,8 @@ typedef struct LastInstrPosHead{
 	LastInstrPos* next;
 } LastInstrPosHead;
 
+
+
 typedef struct CodeItem {
 	u4 codeBaseAddr;
 	struct CodeItem* next;
@@ -626,6 +628,7 @@ static inline u2 get2LE(unsigned char const* pSrc)
 /*
  * Holds the contents of a decoded instruction.
  */
+
 typedef struct DecodedInstruction {
     u4      vA;
     u4      vB;
@@ -634,6 +637,5 @@ typedef struct DecodedInstruction {
     u4      arg[5];         /* vC/D/E/F/G in invoke or filled-new-array */  //D一般存放的是方法所在类的this指针
     OpCode  opCode;
 } DecodedInstruction;
-
 //donzy-OPT-end
 

@@ -218,6 +218,307 @@ char* dexGetOpcodeName(OpCode op){
 	return (char *)gOpNames[op];
 }
 
+
+void dumpDecodedInstruction(const DecodedInstruction* pDecInsn,int insnIdx){
+	int i = 0;	
+
+    
+    if (pDecInsn->opCode == OP_NOP) {
+            printf("| nop // spacer");
+    
+    } else {
+        printf("| %s",  dexGetOpcodeName(pDecInsn->opCode));
+    }
+
+	
+    switch (dexGetInstrFormat(instrFormatTable, pDecInsn->opCode)) {
+    case kFmt10x:        // op
+        break;
+    case kFmt12x:        // op vA, vB
+        printf(" v%d, v%d", pDecInsn->vA, pDecInsn->vB);
+        break;
+    case kFmt11n:        // op vA, #+B
+        printf(" v%d, #int %d // #%x",
+            pDecInsn->vA, (s4)pDecInsn->vB, (u1)pDecInsn->vB);
+        break;
+    case kFmt11x:        // op vAA
+        printf(" v%d", pDecInsn->vA);
+        break;
+    case kFmt10t:        // op +AA
+    case kFmt20t:        // op +AAAA
+        {
+            s4 targ = (s4) pDecInsn->vA;
+            printf(" %04x // %c%04x",
+                insnIdx + targ,
+                (targ < 0) ? '-' : '+',
+                (targ < 0) ? -targ : targ);
+        }
+        break;
+    case kFmt22x:        // op vAA, vBBBB
+        printf(" v%d, v%d", pDecInsn->vA, pDecInsn->vB);
+        break;
+    case kFmt21t:        // op vAA, +BBBB
+        {
+            s4 targ = (s4) pDecInsn->vB;
+            printf(" v%d, %04x // %c%04x", pDecInsn->vA,
+                insnIdx + targ,
+                (targ < 0) ? '-' : '+',
+                (targ < 0) ? -targ : targ);
+        }
+        break;
+    case kFmt21s:        // op vAA, #+BBBB
+        printf(" v%d, #int %d // #%x",
+            pDecInsn->vA, (s4)pDecInsn->vB, (u2)pDecInsn->vB);
+        break;
+    case kFmt21h:        // op vAA, #+BBBB0000[00000000]
+        // The printed format varies a bit based on the actual opcode.
+        if (pDecInsn->opCode == OP_CONST_HIGH16) {
+            s4 value = pDecInsn->vB << 16;
+            printf(" v%d, #int %d // #%x",
+                pDecInsn->vA, value, (u2)pDecInsn->vB);
+        } else {
+            s8 value = ((s8) pDecInsn->vB) << 48;
+            printf(" v%d, #long %lld // #%x",
+                pDecInsn->vA,(long long int) value, (u2)pDecInsn->vB);
+        }
+        break;
+    case kFmt21c:        // op vAA, thing@BBBB
+        if (pDecInsn->opCode == OP_CONST_STRING) {
+//donzy            printf(" v%d, \"%s\" // string@%04x", pDecInsn->vA,
+//donzy                dexStringById(pDexFile, pDecInsn->vB), pDecInsn->vB);
+            printf(" v%d, string@%04x", pDecInsn->vA,pDecInsn->vB);
+        } else if (pDecInsn->opCode == OP_CHECK_CAST ||
+                   pDecInsn->opCode == OP_NEW_INSTANCE ||
+                   pDecInsn->opCode == OP_CONST_CLASS)
+        {
+//donzy            printf(" v%d, %s // class@%04x", pDecInsn->vA,
+//donzy                getClassDescriptor(pDexFile, pDecInsn->vB), pDecInsn->vB);
+            printf(" v%d,class@%04x", pDecInsn->vA, pDecInsn->vB);
+        } else /* OP_SGET* */ {
+//donzy            FieldMethodInfo fieldInfo;
+//donzy            if (getFieldInfo(pDexFile, pDecInsn->vB, &fieldInfo)) {
+//donzy                printf(" v%d, %s.%s:%s // field@%04x", pDecInsn->vA,
+//donzy                    fieldInfo.classDescriptor, fieldInfo.name,
+//donzy                    fieldInfo.signature, pDecInsn->vB);
+//donzy            } else {
+                printf(" v%d,field@%04x", pDecInsn->vA, pDecInsn->vB);
+//donzy            }
+        }
+        break;
+    case kFmt23x:        // op vAA, vBB, vCC
+        printf(" v%d, v%d, v%d", pDecInsn->vA, pDecInsn->vB, pDecInsn->vC);
+        break;
+    case kFmt22b:        // op vAA, vBB, #+CC
+        printf(" v%d, v%d, #int %d // #%02x",
+            pDecInsn->vA, pDecInsn->vB, (s4)pDecInsn->vC, (u1)pDecInsn->vC);
+        break;
+    case kFmt22t:        // op vA, vB, +CCCC
+        {
+            s4 targ = (s4) pDecInsn->vC;
+            printf(" v%d, v%d, %04x // %c%04x", pDecInsn->vA, pDecInsn->vB,
+                insnIdx + targ,
+                (targ < 0) ? '-' : '+',
+                (targ < 0) ? -targ : targ);
+        }
+        break;
+    case kFmt22s:        // op vA, vB, #+CCCC
+        printf(" v%d, v%d, #int %d // #%04x",
+            pDecInsn->vA, pDecInsn->vB, (s4)pDecInsn->vC, (u2)pDecInsn->vC);
+        break;
+    case kFmt22c:        // op vA, vB, thing@CCCC
+        if (pDecInsn->opCode == OP_INSTANCE_OF ||
+            pDecInsn->opCode == OP_NEW_ARRAY)
+        {
+            printf(" v%d, v%d, class@%04x",
+                pDecInsn->vA, pDecInsn->vB, pDecInsn->vC);
+        } else {
+            /* iget* and iput*, including dexopt-generated -volatile */
+//            FieldMethodInfo fieldInfo;
+//            if (getFieldInfo(pDexFile, pDecInsn->vC, &fieldInfo)) {
+//                printf(" v%d, v%d, %s.%s:%s // field@%04x", pDecInsn->vA,
+//                    pDecInsn->vB, fieldInfo.classDescriptor, fieldInfo.name,
+//                    fieldInfo.signature, pDecInsn->vC);
+//            } else {
+                printf(" v%d, v%d,field@%04x", pDecInsn->vA, pDecInsn->vB, pDecInsn->vC);
+//            }
+        }
+        break;
+    case kFmt22cs:       // [opt] op vA, vB, field offset CCCC
+        printf(" v%d, v%d, [obj+%04x]",
+            pDecInsn->vA, pDecInsn->vB, pDecInsn->vC);
+        break;
+    case kFmt30t:
+        printf(" #%08x", pDecInsn->vA);
+        break;
+    case kFmt31i:        // op vAA, #+BBBBBBBB
+        {
+            /* this is often, but not always, a float */
+            union {
+                float f;
+                u4 i;
+            } conv;
+            conv.i = pDecInsn->vB;
+            printf(" v%d, #float %f // #%08x",
+                pDecInsn->vA, conv.f, pDecInsn->vB);
+        }
+        break;
+    case kFmt31c:        // op vAA, thing@BBBBBBBB
+        printf(" v%d, string@%08x", pDecInsn->vA, pDecInsn->vB);
+        break;
+    case kFmt31t:       // op vAA, offset +BBBBBBBB
+        printf(" v%d, %08x(insnIdx+vB) //vB= +%08x",
+            pDecInsn->vA, insnIdx + pDecInsn->vB, pDecInsn->vB);
+        break;
+    case kFmt32x:        // op vAAAA, vBBBB
+        printf(" v%d, v%d", pDecInsn->vA, pDecInsn->vB);
+        break;
+    case kFmt35c:        // op vB, {vD, vE, vF, vG, vA}, thing@CCCC
+        {
+            /* NOTE: decoding of 35c doesn't quite match spec */
+            fputs(" {", stdout);
+            for (i = 0; i < (int) pDecInsn->vA; i++) {
+                if (i == 0)
+                    printf("v%d", pDecInsn->arg[i]);
+                else
+                    printf(", v%d", pDecInsn->arg[i]);
+            }
+            if (pDecInsn->opCode == OP_FILLED_NEW_ARRAY) {
+                printf("}, class@%04x", pDecInsn->vB);
+            } else {
+//                FieldMethodInfo methInfo;
+//                if (getMethodInfo(pDexFile, pDecInsn->vB, &methInfo)) {
+//                    printf("}, %s.%s:%s // method@%04x",
+//                        methInfo.classDescriptor, methInfo.name,
+//                        methInfo.signature, pDecInsn->vB);
+//                } else {
+                    printf("}, method@%04x", pDecInsn->vB);
+//                }
+            }
+        }
+        break;
+    case kFmt35ms:       // [opt] invoke-virtual+super
+    case kFmt35fs:       // [opt] invoke-interface
+        {
+            fputs(" {", stdout);
+            for (i = 0; i < (int) pDecInsn->vA; i++) {
+                if (i == 0)
+                    printf("v%d", pDecInsn->arg[i]);
+                else
+                    printf(", v%d", pDecInsn->arg[i]);
+            }
+            printf("}, [%04x] // vtable #%04x", pDecInsn->vB, pDecInsn->vB);
+        }
+        break;
+    case kFmt3rc:        // op {vCCCC .. v(CCCC+AA-1)}, meth@BBBB
+        {
+            /*
+             * This doesn't match the "dx" output when some of the args are
+             * 64-bit values -- dx only shows the first register.
+             */
+            fputs(" {", stdout);
+            for (i = 0; i < (int) pDecInsn->vA; i++) {
+                if (i == 0)
+                    printf("v%d", pDecInsn->vC + i);
+                else
+                    printf(", v%d", pDecInsn->vC + i);
+            }
+            if (pDecInsn->opCode == OP_FILLED_NEW_ARRAY_RANGE) {
+                printf("}, class@%04x", pDecInsn->vB);
+            } else {
+//                FieldMethodInfo methInfo;
+//                if (getMethodInfo(pDexFile, pDecInsn->vB, &methInfo)) {
+//                    printf("}, %s.%s:%s // method@%04x",
+//                        methInfo.classDescriptor, methInfo.name,
+//                        methInfo.signature, pDecInsn->vB);
+//                } else {
+                    printf("}, ??? // method@%04x", pDecInsn->vB);
+//                }
+            }
+        }
+        break;
+    case kFmt3rms:       // [opt] invoke-virtual+super/range
+    case kFmt3rfs:       // [opt] invoke-interface/range
+        {
+            /*
+             * This doesn't match the "dx" output when some of the args are
+             * 64-bit values -- dx only shows the first register.
+             */
+            fputs(" {", stdout);
+            for (i = 0; i < (int) pDecInsn->vA; i++) {
+                if (i == 0)
+                    printf("v%d", pDecInsn->vC + i);
+                else
+                    printf(", v%d", pDecInsn->vC + i);
+            }
+            printf("}, [%04x] // vtable #%04x", pDecInsn->vB, pDecInsn->vB);
+        }
+        break;
+    case kFmt3rinline:   // [opt] execute-inline/range
+        {
+            fputs(" {", stdout);
+            for (i = 0; i < (int) pDecInsn->vA; i++) {
+                if (i == 0)
+                    printf("v%d", pDecInsn->vC + i);
+                else
+                    printf(", v%d", pDecInsn->vC + i);
+            }
+            printf("}, [%04x] // inline #%04x", pDecInsn->vB, pDecInsn->vB);
+        }
+        break;
+    case kFmt3inline:    // [opt] inline invoke
+        {
+#if 0
+            const InlineOperation* inlineOpsTable = dvmGetInlineOpsTable();
+            u4 tableLen = dvmGetInlineOpsTableLength();
+#endif
+
+            fputs(" {", stdout);
+            for (i = 0; i < (int) pDecInsn->vA; i++) {
+                if (i == 0)
+                    printf("v%d", pDecInsn->arg[i]);
+                else
+                    printf(", v%d", pDecInsn->arg[i]);
+            }
+#if 0
+            if (pDecInsn->vB < tableLen) {
+                printf("}, %s.%s:%s // inline #%04x",
+                    inlineOpsTable[pDecInsn->vB].classDescriptor,
+                    inlineOpsTable[pDecInsn->vB].methodName,
+                    inlineOpsTable[pDecInsn->vB].methodSignature,
+                    pDecInsn->vB);
+            } else {
+#endif
+                printf("}, [%04x] // inline #%04x", pDecInsn->vB, pDecInsn->vB);
+#if 0
+            }
+#endif
+        }
+        break;
+    case kFmt51l:        // op vAA, #+BBBBBBBBBBBBBBBB
+        {
+            /* this is often, but not always, a double */
+            union {
+                double d;
+                u8 j;
+            } conv;
+            conv.j = pDecInsn->vB_wide;
+            printf(" v%d, #double %f // #%016llx",
+                pDecInsn->vA, conv.d, (long long unsigned int)pDecInsn->vB_wide);
+        }
+        break;
+    case kFmtUnknown:
+        break;
+    default:
+        printf(" ???");
+        break;
+    }
+
+
+    putchar('\n');
+
+}
+
+
 void dumpInstruction(DexFile* pDexFile, const DexCode* pCode, int insnIdx,
     int insnWidth, const DecodedInstruction* pDecInsn){
 	int i = 0;	
@@ -672,7 +973,6 @@ void outputCode(DexFile* pDexFile, DexCode* pDexCode, CodeItem* pCodeItem ){
     }
 }
 
-
 void outputBBInsns(DexFile* pDexFile, DexCode* pDexCode, int startIdx ,int endIdx){
 	
 	u2* insns;
@@ -708,12 +1008,17 @@ void outputBBInsns(DexFile* pDexFile, DexCode* pDexCode, int startIdx ,int endId
         }
 
         dexDecodeInstruction(instrFormatTable, insns, &decInsn);
-	printf("=::=   ");
+	printf("=::==   ");
         dumpInstruction(pDexFile, pDexCode, insnIdx, insnWidth, &decInsn);
 
         insns += insnWidth;
         insnIdx += insnWidth;
     }
+}
+
+void parseInsn(const u2 *codePtr,DecodedInstruction *decInsn){
+	dexDecodeInstruction(instrFormatTable, codePtr,decInsn);
+	return ;
 }
 
 int nextInsn(u2 * insns , int * idx){
