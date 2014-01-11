@@ -997,3 +997,8 @@ void dvmCompilerNonLoopAnalysis(CompilationUnit *cUnit)
     dvmCompilerDataFlowAnalysisDispatcher(cUnit, dvmCompilerDoSSAConversion);
 }
 
+
+int dvmConvertSSARegToDalvik(CompilationUnit *cUnit, int ssaReg)
+{
+      return GET_ELEM_N(cUnit->ssaToDalvikMap, int, ssaReg);
+}

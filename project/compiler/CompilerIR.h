@@ -1,3 +1,15 @@
+
+#define INVALID_SREG (-1)
+#define INVALID_REG (-1)
+
+typedef struct LIR {
+    int offset;
+    struct LIR *next;
+    struct LIR *prev;
+    struct LIR *target;
+} LIR;
+
+
 typedef struct MIR {
     DecodedInstruction dalvikInsn;
 //    unsigned int width;
@@ -64,7 +76,7 @@ typedef struct CompilationUnit {
 //    int numChainingCells[kChainingCellGap];
 //    LIR *firstChainingLIR[kChainingCellGap];
 //    LIR *chainingCellBottom;
-//    struct RegisterPool *regPool;
+      struct RegisterPool *regPool;
 //    int optRound;                       // round number to tell an LIR's age
 //    jmp_buf *bailPtr;
 //    JitInstructionSetType instructionSet;
@@ -83,7 +95,7 @@ typedef struct CompilationUnit {
 //    struct LoopAnalysis *loopAnalysis;
 //
 //    /* Map SSA names to location */
-//    RegLocation *regLocation;
+      RegLocation *regLocation;
 //    int sequenceNumber;
 //
 //    /*

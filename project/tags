@@ -87,13 +87,22 @@ DexTypeId	DEX.h	/^typedef struct DexTypeId {$/;"	s
 DexTypeId	DEX.h	/^} DexTypeId;$/;"	t	typeref:struct:DexTypeId
 ENCODE_REG_SUB	compiler/Dataflow.h	50;"	d
 FETCH	toOpt.c	8;"	d	file:
+<<<<<<< HEAD
 GrowableList	compiler/CompilerUtility.h	/^typedef struct GrowableList {$/;"	s
 GrowableList	compiler/CompilerUtility.h	/^} GrowableList;$/;"	t	typeref:struct:GrowableList
+=======
+FPRegs	compiler/codegen/unicore/UnicoreLIR.h	/^    RegisterInfo *FPRegs;$/;"	m	struct:RegisterPool
+FPTemps	compiler/codegen/unicore/UnicoreLIR.h	/^    RegisterInfo *FPTemps;$/;"	m	struct:RegisterPool
+>>>>>>> donzy
 INST_A	toOpt.c	10;"	d	file:
 INST_AA	toOpt.c	12;"	d	file:
 INST_B	toOpt.c	11;"	d	file:
 INST_INST	toOpt.c	9;"	d	file:
+INVALID_REG	compiler/CompilerIR.h	3;"	d
+INVALID_SREG	compiler/CompilerIR.h	2;"	d
 InstructionFormat	DEX.h	/^enum InstructionFormat {$/;"	g
+LIR	compiler/CompilerIR.h	/^typedef struct LIR {$/;"	s
+LIR	compiler/CompilerIR.h	/^} LIR;$/;"	t	typeref:struct:LIR
 LastInstrPos	DEX.h	/^typedef struct LastInstrPos{$/;"	s
 LastInstrPos	DEX.h	/^} LastInstrPos;$/;"	t	typeref:struct:LastInstrPos
 LastInstrPosHead	DEX.h	/^typedef struct LastInstrPosHead{$/;"	s
@@ -101,6 +110,8 @@ LastInstrPosHead	DEX.h	/^} LastInstrPosHead;$/;"	t	typeref:struct:LastInstrPosHe
 MARKBB	toOpt.h	/^typedef int (*MARKBB)(DexCode * pDexCode, int insnIdx, int insnWidth, DecodedInstruction * pDecInsn,u4* BBMask);$/;"	t
 MIR	compiler/CompilerIR.h	/^typedef struct MIR {$/;"	s
 MIR	compiler/CompilerIR.h	/^} MIR;$/;"	t	typeref:struct:MIR
+NativeRegisterPool	compiler/codegen/unicore/UnicoreLIR.h	/^typedef enum NativeRegisterPool {$/;"	g
+NativeRegisterPool	compiler/codegen/unicore/UnicoreLIR.h	/^} NativeRegisterPool;$/;"	t	typeref:enum:NativeRegisterPool
 OP_ADD_DOUBLE	DEX.h	/^    OP_ADD_DOUBLE                   = 0xab,$/;"	e	enum:OpCode
 OP_ADD_DOUBLE_2ADDR	DEX.h	/^    OP_ADD_DOUBLE_2ADDR             = 0xcb,$/;"	e	enum:OpCode
 OP_ADD_FLOAT	DEX.h	/^    OP_ADD_FLOAT                    = 0xa6,$/;"	e	enum:OpCode
@@ -359,6 +370,10 @@ OP_XOR_LONG	DEX.h	/^    OP_XOR_LONG                     = 0xa2,$/;"	e	enum:OpCod
 OP_XOR_LONG_2ADDR	DEX.h	/^    OP_XOR_LONG_2ADDR               = 0xc2,$/;"	e	enum:OpCode
 OpCode	DEX.h	/^typedef enum OpCode {$/;"	g
 OpCode	DEX.h	/^} OpCode;$/;"	t	typeref:enum:OpCode
+RegisterInfo	compiler/codegen/unicore/UnicoreLIR.h	/^typedef struct RegisterInfo {$/;"	s
+RegisterInfo	compiler/codegen/unicore/UnicoreLIR.h	/^} RegisterInfo;$/;"	t	typeref:struct:RegisterInfo
+RegisterPool	compiler/codegen/unicore/UnicoreLIR.h	/^typedef struct RegisterPool {$/;"	s
+RegisterPool	compiler/codegen/unicore/UnicoreLIR.h	/^} RegisterPool;$/;"	t	typeref:struct:RegisterPool
 SSARepresentation	compiler/Dataflow.h	/^typedef struct SSARepresentation {$/;"	s
 SSARepresentation	compiler/Dataflow.h	/^} SSARepresentation;$/;"	t	typeref:struct:SSARepresentation
 accessFlags	DEX.h	/^    u4  accessFlags;$/;"	m	struct:DexClassDef
@@ -390,6 +405,9 @@ clearBBMask	toMarkBB.h	/^void clearBBMask(u4 targetPos, u4* BBMask){$/;"	f
 codeBaseAddr	DEX.h	/^	u4 codeBaseAddr;$/;"	m	struct:CodeItem
 codeList	dexmain.c	/^CodeList codeList;$/;"	v
 codeOff	DEX.h	/^    u4 codeOff;      \/* file offset to a code_item *\/$/;"	m	struct:DexMethod
+coreRegs	compiler/codegen/unicore/UnicoreLIR.h	/^    RegisterInfo *coreRegs;$/;"	m	struct:RegisterPool
+coreTemps	compiler/codegen/unicore/UnicoreLIR.h	/^    RegisterInfo *coreTemps;$/;"	m	struct:RegisterPool
+coreTemps	compiler/codegen/unicore/unity-2/Factory.c	/^static int coreTemps[] = {r0, r1, r2, r3, r4, r4PC, r7};$/;"	v	file:
 currentArena	compiler/Utility.c	/^static ArenaMemBlock *currentArena = NULL;$/;"	v	file:
 dalvikInsn	compiler/CompilerIR.h	/^    DecodedInstruction dalvikInsn;$/;"	m	struct:MIR
 dalvikToSSAMap	compiler/CompilerIR.h	/^      int *dalvikToSSAMap;                \/\/ length == method->registersSize$/;"	m	struct:CompilationUnit
@@ -398,6 +416,8 @@ dataFlowSSAFormat3RC	compiler/Dataflow.c	/^static void dataFlowSSAFormat3RC(Comp
 dataOff	DEX.h	/^    u4  dataOff;$/;"	m	struct:DexHeader
 dataSize	DEX.h	/^    u4  dataSize;$/;"	m	struct:DexHeader
 debugInfoOff	DEX.h	/^    u4  debugInfoOff;       \/* file offset to debug info stream *\/$/;"	m	struct:DexCode
+defEnd	compiler/codegen/unicore/UnicoreLIR.h	/^    struct LIR *defEnd;         \/\/ Ending inst in last def sequence$/;"	m	struct:RegisterInfo	typeref:struct:RegisterInfo::LIR
+defStart	compiler/codegen/unicore/UnicoreLIR.h	/^    struct LIR *defStart;       \/\/ Starting inst in last def sequence$/;"	m	struct:RegisterInfo	typeref:struct:RegisterInfo::LIR
 defs	compiler/Dataflow.h	/^    int *defs;$/;"	m	struct:SSARepresentation
 depsLength	DEX.h	/^    u4  depsLength;$/;"	m	struct:DexOptHeader
 depsOffset	DEX.h	/^    u4  depsOffset;         \/* offset of optimized DEX dependency table *\/$/;"	m	struct:DexOptHeader
@@ -420,21 +440,31 @@ dexReadAndFormatClassDataMethod	toParse.c	/^bool dexReadAndFormatClassDataMethod
 dexReadClassDataHeader	toParse.c	/^void dexReadClassDataHeader(u1** pData, DexClassDataHeader *pHeader){$/;"	f
 directMethods	DEX.h	/^    DexMethod*         directMethods;$/;"	m	struct:DexClassData
 directMethodsSize	DEX.h	/^    u4 directMethodsSize;$/;"	m	struct:DexClassDataHeader
+dirty	compiler/codegen/unicore/UnicoreLIR.h	/^    bool dirty;                 \/\/ If live, is it dirty?$/;"	m	struct:RegisterInfo
 dumpClass	toParse.c	/^void* dumpClass(DexFile* pDexFile,int idx){$/;"	f
 dumpCode	toParse.c	/^void dumpCode(DexFile* pDexFile, DexMethod* pDexMethod){$/;"	f
 dumpDecodedInstruction	toOpt.c	/^void dumpDecodedInstruction(const DecodedInstruction* pDecInsn,int insnIdx){$/;"	f
 dumpInstruction	toOpt.c	/^void dumpInstruction(DexFile* pDexFile, const DexCode* pCode, int insnIdx,$/;"	f
 dvmCompilerAppendMIR	processBB/processBB.c	/^void dvmCompilerAppendMIR(BasicBlock *bb,MIR *mir){$/;"	f
+<<<<<<< HEAD
 dvmCompilerDataFlowAnalysisDispatcher	compiler/Dataflow.c	/^void dvmCompilerDataFlowAnalysisDispatcher(CompilationUnit *cUnit,$/;"	f
 dvmCompilerDataFlowAttributes	compiler/Dataflow.c	/^int dvmCompilerDataFlowAttributes[kMirOpLast] = {$/;"	v
 dvmCompilerDoSSAConversion	compiler/Dataflow.c	/^void dvmCompilerDoSSAConversion(CompilationUnit *cUnit, BasicBlock *bb)$/;"	f
+=======
+>>>>>>> donzy
 dvmCompilerHeapInit	compiler/Utility.c	/^void dvmCompilerHeapInit(void){$/;"	f
+dvmCompilerInitPool	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerInitPool(RegisterInfo *regs, int *regNums, int num)$/;"	f
+dvmCompilerInitializeRegAlloc	compiler/codegen/unicore/unity-2/Gen-unicore.c	/^void dvmCompilerInitializeRegAlloc(CompilationUnit *cUnit)$/;"	f
 dvmCompilerNew	compiler/Utility.c	/^void * dvmCompilerNew(int size, bool zero)$/;"	f
+<<<<<<< HEAD
 dvmCompilerNonLoopAnalysis	compiler/Dataflow.c	/^void dvmCompilerNonLoopAnalysis(CompilationUnit *cUnit)                                  $/;"	f
 dvmInitGrowableList	compiler/Utility.c	/^void dvmInitGrowableList(GrowableList *gList, int initLength)$/;"	f
 dvmInitializeSSAConversion	compiler/Dataflow.c	/^void dvmInitializeSSAConversion(CompilationUnit *cUnit)$/;"	f
 dvmInsertGrowableList	compiler/Utility.c	/^void dvmInsertGrowableList(GrowableList *gList, void *elem)$/;"	f
 elemList	compiler/CompilerUtility.h	/^	void **elemList;$/;"	m	struct:GrowableList
+=======
+dvmCompilerRegAlloc	compiler/Ralloc.c	/^void dvmCompilerRegAlloc(CompilationUnit *cUnit)$/;"	f
+>>>>>>> donzy
 endianTag	DEX.h	/^    u4  endianTag;$/;"	m	struct:DexHeader
 expandGrowableList	compiler/Utility.c	/^static void expandGrowableList(GrowableList *gList)  $/;"	f	file:
 false	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	e	enum:__anon1
@@ -459,6 +489,7 @@ header	compiler/CompilerIR.h	/^	CompilationUnit *header;$/;"	m	struct:Compilatio
 headerSize	DEX.h	/^    u4  headerSize;         \/* offset to start of next section *\/$/;"	m	struct:DexHeader
 id_code	compiler/CompilerIR.h	/^    int id_code;$/;"	m	struct:CompilationUnit
 identifyBB	toOpt.c	/^void identifyBB(DexFile* pDexFile, DexCode* pDexCode, CodeItem* pCodeItem ){$/;"	f
+inUse	compiler/codegen/unicore/UnicoreLIR.h	/^    bool inUse;                 \/\/ Has it been allocated?$/;"	m	struct:RegisterInfo
 insSize	DEX.h	/^    u2  insSize;$/;"	m	struct:DexCode
 insertBB2cUnit	processBB/processBB.c	/^void insertBB2cUnit(DexFile *pDexFile,CodeItem *pCodeItem,int startIdx){$/;"	f
 insertInsns2BB	processBB/processBB.c	/^void insertInsns2BB(DexFile * pDexFile, CodeItem * pCodeItem ,int startIdx,int endIdx){$/;"	f
@@ -516,6 +547,7 @@ lastMIRInsn	compiler/CompilerIR.h	/^    MIR *lastMIRInsn;$/;"	m	struct:BasicBloc
 linkOff	DEX.h	/^    u4  linkOff;$/;"	m	struct:DexHeader
 linkSize	DEX.h	/^    u4  linkSize;$/;"	m	struct:DexHeader
 list_size	DEX.h	/^	int list_size;$/;"	m	struct:LastInstrPosHead
+live	compiler/codegen/unicore/UnicoreLIR.h	/^    bool live;                  \/\/ Is there an associated SSA name?$/;"	m	struct:RegisterInfo
 magic	DEX.h	/^    u1  magic[8];           \/* includes version number *\/$/;"	m	struct:DexHeader
 magic	DEX.h	/^    u1  magic[8];           \/* includes version number *\/$/;"	m	struct:DexOptHeader
 main	dexmain.c	/^int main(int argc , char * argv[]){$/;"	f
@@ -539,17 +571,28 @@ next	DEX.h	/^	struct CodeItem* next;$/;"	m	struct:CodeItem	typeref:struct:CodeIt
 next	DEX.h	/^	struct LastInstrPos* next;$/;"	m	struct:LastInstrPos	typeref:struct:LastInstrPos::LastInstrPos
 next	compiler/CompilerIR.h	/^    struct BasicBlock *next;            \/\/ Serial link for book keeping purposes$/;"	m	struct:BasicBlock	typeref:struct:BasicBlock::BasicBlock
 next	compiler/CompilerIR.h	/^    struct CompilationUnit *next;\/\/donzy$/;"	m	struct:CompilationUnit	typeref:struct:CompilationUnit::CompilationUnit
+next	compiler/CompilerIR.h	/^    struct LIR *next;$/;"	m	struct:LIR	typeref:struct:LIR::LIR
 next	compiler/CompilerIR.h	/^    struct MIR *next;$/;"	m	struct:MIR	typeref:struct:MIR::MIR
 next	compiler/CompilerUtility.h	/^	struct ArenaMemBlock * next;$/;"	m	struct:ArenaMemBlock	typeref:struct:ArenaMemBlock::ArenaMemBlock
+nextCoreTemp	compiler/codegen/unicore/UnicoreLIR.h	/^    int nextCoreTemp;$/;"	m	struct:RegisterPool
+nextFPTemp	compiler/codegen/unicore/UnicoreLIR.h	/^    int nextFPTemp;$/;"	m	struct:RegisterPool
 nextInsn	toOpt.c	/^int nextInsn(u2 * insns , int * idx){$/;"	f
 numAllocated	compiler/CompilerUtility.h	/^	int numAllocated;$/;"	m	struct:GrowableList
 numArenaBlocks	compiler/Utility.c	/^static int numArenaBlocks = 0;$/;"	v	file:
 numBlocks	compiler/CompilerIR.h	/^    int numBlocks;$/;"	m	struct:CompilationUnit
+numCoreRegs	compiler/codegen/unicore/UnicoreLIR.h	/^    int numCoreRegs;$/;"	m	struct:RegisterPool
+numCoreTemps	compiler/codegen/unicore/UnicoreLIR.h	/^    int numCoreTemps;$/;"	m	struct:RegisterPool
 numDefs	compiler/Dataflow.h	/^    int numDefs;$/;"	m	struct:SSARepresentation
 numEntries	DEX.h	/^    int     numEntries;                 \/\/ size of table[]; always power of 2$/;"	m	struct:DexClassLookup
+<<<<<<< HEAD
 numSSARegs	compiler/CompilerIR.h	/^      int numSSARegs;$/;"	m	struct:CompilationUnit
 numUsed	compiler/CompilerUtility.h	/^	int numUsed;$/;"	m	struct:GrowableList
+=======
+numFPRegs	compiler/codegen/unicore/UnicoreLIR.h	/^    int numFPRegs;$/;"	m	struct:RegisterPool
+numFPTemps	compiler/codegen/unicore/UnicoreLIR.h	/^    int numFPTemps;$/;"	m	struct:RegisterPool
+>>>>>>> donzy
 numUses	compiler/Dataflow.h	/^    int numUses;$/;"	m	struct:SSARepresentation
+offset	compiler/CompilerIR.h	/^    int offset;$/;"	m	struct:LIR
 offset	compiler/CompilerIR.h	/^    unsigned int offset;$/;"	m	struct:MIR
 opCode	DEX.h	/^    OpCode  opCode;$/;"	m	struct:DecodedInstruction
 optLength	DEX.h	/^    u4  optLength;$/;"	m	struct:DexOptHeader
@@ -572,29 +615,60 @@ pProtoIds	DEX.h	/^    const DexProtoId*   pProtoIds;     \/\/r7$/;"	m	struct:Dex
 pRegisterMapPool	DEX.h	/^    const void*         pRegisterMapPool;       \/\/ RegisterMapClassPool$/;"	m	struct:DexFile
 pStringIds	DEX.h	/^    const DexStringId*  pStringIds;   \/\/r9$/;"	m	struct:DexFile
 pTypeIds	DEX.h	/^    const DexTypeId*    pTypeIds;$/;"	m	struct:DexFile
+pair	compiler/codegen/unicore/UnicoreLIR.h	/^    bool pair;                  \/\/ Part of a register pair?$/;"	m	struct:RegisterInfo
 parametersOff	DEX.h	/^    u4  parametersOff;      \/* file offset to type_list for parameter types *\/$/;"	m	struct:DexProtoId
 parseDexFile	toParse.c	/^DexFile* parseDexFile(const u1* addr,size_t length){$/;"	f
 parseInsn	toOpt.c	/^void parseInsn(const u2 *codePtr,DecodedInstruction *decInsn){$/;"	f
+partner	compiler/codegen/unicore/UnicoreLIR.h	/^    int partner;                \/\/ If pair, other reg of pair$/;"	m	struct:RegisterInfo
+prev	compiler/CompilerIR.h	/^    struct LIR *prev;$/;"	m	struct:LIR	typeref:struct:LIR::LIR
 prev	compiler/CompilerIR.h	/^    struct MIR *prev;$/;"	m	struct:MIR	typeref:struct:MIR::MIR
 processBB	processBB/processBB.c	/^void processBB(DexFile * pDexFile , DexCode * pDexCode , CodeItem * pCodeItem)$/;"	f
 protoIdsOff	DEX.h	/^    u4  protoIdsOff;$/;"	m	struct:DexHeader
 protoIdsSize	DEX.h	/^    u4  protoIdsSize;$/;"	m	struct:DexHeader
 protoIdx	DEX.h	/^    u2  protoIdx;           \/* index into protoIds for method prototype *\/$/;"	m	struct:DexMethodId
 ptr	compiler/CompilerUtility.h	/^	char ptr[0];$/;"	m	struct:ArenaMemBlock
+r0	compiler/codegen/unicore/UnicoreLIR.h	/^    r0 = 0,$/;"	e	enum:NativeRegisterPool
+r1	compiler/codegen/unicore/UnicoreLIR.h	/^    r1 = 1,$/;"	e	enum:NativeRegisterPool
+r10	compiler/codegen/unicore/UnicoreLIR.h	/^    r10 = 23,$/;"	e	enum:NativeRegisterPool
+r11	compiler/codegen/unicore/UnicoreLIR.h	/^    r11 = 27,$/;"	e	enum:NativeRegisterPool
+r12	compiler/codegen/unicore/UnicoreLIR.h	/^    r12 = 28,$/;"	e	enum:NativeRegisterPool
+r13	compiler/codegen/unicore/UnicoreLIR.h	/^    r13 = 29,$/;"	e	enum:NativeRegisterPool
+r2	compiler/codegen/unicore/UnicoreLIR.h	/^    r2 = 2,$/;"	e	enum:NativeRegisterPool
+r20	compiler/codegen/unicore/UnicoreLIR.h	/^    r20 = 20,$/;"	e	enum:NativeRegisterPool
+r21	compiler/codegen/unicore/UnicoreLIR.h	/^    r21 = 21,$/;"	e	enum:NativeRegisterPool
+r22	compiler/codegen/unicore/UnicoreLIR.h	/^    r22 = 22,$/;"	e	enum:NativeRegisterPool
+r23	compiler/codegen/unicore/UnicoreLIR.h	/^    r23 = 23,$/;"	e	enum:NativeRegisterPool
+r29	compiler/codegen/unicore/UnicoreLIR.h	/^    r29 = 29,$/;"	e	enum:NativeRegisterPool
+r3	compiler/codegen/unicore/UnicoreLIR.h	/^    r3 = 3,$/;"	e	enum:NativeRegisterPool
+r4	compiler/codegen/unicore/UnicoreLIR.h	/^    r4 = 4,$/;"	e	enum:NativeRegisterPool
+r4PC	compiler/codegen/unicore/UnicoreLIR.h	/^    r4PC = 17,$/;"	e	enum:NativeRegisterPool
+r7	compiler/codegen/unicore/UnicoreLIR.h	/^    r7 = 20,$/;"	e	enum:NativeRegisterPool
+r8	compiler/codegen/unicore/UnicoreLIR.h	/^    r8 = 21,$/;"	e	enum:NativeRegisterPool
+r9	compiler/codegen/unicore/UnicoreLIR.h	/^    r9 = 22,$/;"	e	enum:NativeRegisterPool
+rFP	compiler/codegen/unicore/UnicoreLIR.h	/^    rFP = 18,$/;"	e	enum:NativeRegisterPool
+rGLUE	compiler/codegen/unicore/UnicoreLIR.h	/^    rGLUE = 19,$/;"	e	enum:NativeRegisterPool
 readUnsignedLeb128	toParse.c	/^int readUnsignedLeb128(u1**  pStream){$/;"	f
+reg	compiler/codegen/unicore/UnicoreLIR.h	/^    int reg;                    \/\/ Reg number$/;"	m	struct:RegisterInfo
+regPool	compiler/CompilerIR.h	/^      struct RegisterPool *regPool;$/;"	m	struct:CompilationUnit	typeref:struct:CompilationUnit::RegisterPool
 registersSize	DEX.h	/^    u2  registersSize;$/;"	m	struct:DexCode
 returnTypeIdx	DEX.h	/^    u4  returnTypeIdx;      \/* index into typeIds list for return type *\/$/;"	m	struct:DexProtoId
+rlr	compiler/codegen/unicore/UnicoreLIR.h	/^    rlr = 30,$/;"	e	enum:NativeRegisterPool
+rpc	compiler/codegen/unicore/UnicoreLIR.h	/^    rpc = 31,$/;"	e	enum:NativeRegisterPool
 s1	DEX.h	/^typedef signed char s1;$/;"	t
 s2	DEX.h	/^typedef signed short int s2;$/;"	t
 s4	DEX.h	/^typedef signed int s4;$/;"	t
 s8	DEX.h	/^typedef signed long int s8;$/;"	t
+sReg	compiler/codegen/unicore/UnicoreLIR.h	/^    int sReg;                   \/\/ Name of live value$/;"	m	struct:RegisterInfo
 setBBMaskIfNecessary	toMarkBB.h	/^void setBBMaskIfNecessary(u4 targetPos, u4* BBMask){$/;"	f
 shortyIdx	DEX.h	/^    u4  shortyIdx;          \/* index into stringIds for shorty descriptor *\/$/;"	m	struct:DexProtoId
 signature	DEX.h	/^    u1  signature[20]; \/* SHA-1 hash *\/$/;"	m	struct:DexHeader
 size	DEX.h	/^    int     size;                       \/\/ total size, including "size"$/;"	m	struct:DexClassLookup
 sourceFileIdx	DEX.h	/^    u4  sourceFileIdx;      \/* index into stringIds for source file name *\/$/;"	m	struct:DexClassDef
 ssaRep	compiler/CompilerIR.h	/^    struct SSARepresentation *ssaRep;$/;"	m	struct:MIR	typeref:struct:MIR::SSARepresentation
+<<<<<<< HEAD
 ssaToDalvikMap	compiler/CompilerIR.h	/^      GrowableList *ssaToDalvikMap;$/;"	m	struct:CompilationUnit
+=======
+>>>>>>> donzy
 startOffset	compiler/CompilerIR.h	/^    u4 startOffset;$/;"	m	struct:BasicBlock
 staticFields	DEX.h	/^    DexField*          staticFields;$/;"	m	struct:DexClassData
 staticFieldsSize	DEX.h	/^    u4 staticFieldsSize;$/;"	m	struct:DexClassDataHeader
@@ -606,6 +680,7 @@ superclassIdx	DEX.h	/^    u4  superclassIdx;      \/* index into typeIds for sup
 table	DEX.h	/^    } table[1];$/;"	m	struct:DexClassLookup	typeref:struct:DexClassLookup::__anon2
 tail	DEX.h	/^	CodeItem* tail;$/;"	m	struct:CodeList
 tail	compiler/CompilerIR.h	/^	CompilationUnit *tail;$/;"	m	struct:CompilationUnitList
+target	compiler/CompilerIR.h	/^    struct LIR *target;$/;"	m	struct:LIR	typeref:struct:LIR::LIR
 triesSize	DEX.h	/^    u2  triesSize;$/;"	m	struct:DexCode
 true	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	e	enum:__anon1
 typeIdsOff	DEX.h	/^    u4  typeIdsOff;$/;"	m	struct:DexHeader

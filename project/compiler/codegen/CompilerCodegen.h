@@ -1,0 +1,3 @@
+
+
+void dvmCompilerInitializeRegAlloc(CompilationUnit *cUnit);
