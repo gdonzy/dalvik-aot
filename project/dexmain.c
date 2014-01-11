@@ -10,6 +10,7 @@
 #include "processBB/hprocessBB.h"
 #include "compiler/CompilerUtility.h"
 #include "compiler/CompilerIR.h"
+#include "compiler/Compiler.h"
 
 #include "debug.c"
 
@@ -110,7 +111,9 @@ printf("memPtr address is %p", memPtr);
 	}
 
 	/*********prepare SSAConversion***********/
-	
+	for(cUnit = cUnitList.header; cUnit != NULL; cUnit = cUnit->next) {
+		dvmInitializeSSAConversion(cUnit); 
+	}	
 	
 	for(pCodeItem = codeList.header; pCodeItem != NULL; pCodeItem = pCodeItem->next){
 		//free more 子项 也要释放的

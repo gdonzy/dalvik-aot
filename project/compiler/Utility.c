@@ -70,3 +70,32 @@ retry:
     }
     return NULL;
 }
+
+void dvmInitGrowableList(GrowableList *gList, int initLength)
+{
+	gList->numAllocated = initLength; 
+	gList->numUsed = 0; 
+	gList->elemList = (void **) dvmCompilerNew(sizeof(void *) * initLength, true);
+}
+
+static void expandGrowableList(GrowableList *gList)  
+{
+	int newLength = gList->numAllocated;
+	if (newLength < 128) {
+		newLength <<= 1;   
+	} else {
+		newLength += 128;  
+	}
+	void *newArray = dvmCompilerNew(sizeof(void *) * newLength, true); 
+	memcpy(newArray, gList->elemList, sizeof(void *) * gList->numAllocated); 
+	gList->numAllocated = newLength;    
+	gList->elemList = newArray;
+}
+
+void dvmInsertGrowableList(GrowableList *gList, void *elem)
+{
+	if (gList->numUsed == gList->numAllocated) { 
+		expandGrowableList(gList);  
+	} 
+	gList->elemList[gList->numUsed++] = elem; 
+}

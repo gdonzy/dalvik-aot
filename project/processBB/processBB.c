@@ -5,8 +5,8 @@
 #include "../DEX.h"
 #include "../toOpt.h"
 #include "htoMarkBB.h"
-#include "../compiler/CompilerIR.h"
 #include "../compiler/CompilerUtility.h"
+#include "../compiler/CompilerIR.h"
 
 extern CompilationUnitList cUnitList;
 

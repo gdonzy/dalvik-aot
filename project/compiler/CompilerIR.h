@@ -69,13 +69,13 @@ typedef struct CompilationUnit {
 //    jmp_buf *bailPtr;
 //    JitInstructionSetType instructionSet;
 //    /* Number of total regs used in the whole cUnit after SSA transformation */
-//    int numSSARegs;
+      int numSSARegs;
 //    /* Map SSA reg i to the Dalvik[15..0]/Sub[31..16] pair. */
-//    GrowableList *ssaToDalvikMap;
+      GrowableList *ssaToDalvikMap;
 //
 //    /* The following are new data structures to support SSA representations */
 //    /* Map original Dalvik reg i to the SSA[15..0]/Sub[31..16] pair */
-//    int *dalvikToSSAMap;                // length == method->registersSize
+      int *dalvikToSSAMap;                // length == method->registersSize
 //    BitVector *isConstantV;             // length == numSSAReg
 //    int *constantValues;                // length == numSSAReg
 //

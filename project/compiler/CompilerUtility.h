@@ -9,5 +9,13 @@ typedef struct ArenaMemBlock{
 
 void dvmCompilerHeapInit(void);
 
-void * dvmCompilerNew(int size,bool zero);
+void *dvmCompilerNew(int size,bool zero);
 
+typedef struct GrowableList {
+	int numAllocated;
+	int numUsed;
+	void **elemList;
+} GrowableList;
+
+void dvmInitGrowableList(GrowableList *gList, int initLength);  
+void dvmInsertGrowableList(GrowableList *gList, void *elem);           
