@@ -1,3 +1,15 @@
+
+#define INVALID_SREG (-1)
+#define INVALID_REG (-1)
+
+typedef struct LIR {
+    int offset;
+    struct LIR *next;
+    struct LIR *prev;
+    struct LIR *target;
+} LIR;
+
+
 typedef struct MIR {
     DecodedInstruction dalvikInsn;
 //    unsigned int width;
@@ -64,14 +76,14 @@ typedef struct CompilationUnit {
 //    int numChainingCells[kChainingCellGap];
 //    LIR *firstChainingLIR[kChainingCellGap];
 //    LIR *chainingCellBottom;
-//    struct RegisterPool *regPool;
+      struct RegisterPool *regPool;
 //    int optRound;                       // round number to tell an LIR's age
 //    jmp_buf *bailPtr;
 //    JitInstructionSetType instructionSet;
 //    /* Number of total regs used in the whole cUnit after SSA transformation */
-//    int numSSARegs;
+      int numSSARegs;
 //    /* Map SSA reg i to the Dalvik[15..0]/Sub[31..16] pair. */
-//    GrowableList *ssaToDalvikMap;
+      GrowableList *ssaToDalvikMap;
 //
 //    /* The following are new data structures to support SSA representations */
 //    /* Map original Dalvik reg i to the SSA[15..0]/Sub[31..16] pair */
@@ -83,7 +95,7 @@ typedef struct CompilationUnit {
 //    struct LoopAnalysis *loopAnalysis;
 //
 //    /* Map SSA names to location */
-//    RegLocation *regLocation;
+      RegLocation *regLocation;
 //    int sequenceNumber;
 //
 //    /*

@@ -11,6 +11,8 @@
 #include "compiler/CompilerUtility.h"
 #include "compiler/CompilerIR.h"
 
+#include "compiler/codegen/CompilerCodegen.h"
+
 #include "debug.c"
 
 /*************global static var***********/
@@ -103,13 +105,21 @@ printf("memPtr address is %p", memPtr);
 	/******debug : print some info about BBs'mirs******/
 	//outputMIRsOfBB
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
-		curBB = cUnit->firstBB;
 		for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next){
 			outputMIRsOfBB(curBB);
 		}	
 	}
 
+	/************process debugBB**************/
+
 	/*********prepare SSAConversion***********/
+	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
+		//dvmInitializeSSAConversion(cUnit);
+		//dvmCompilerNoneLoopAnalysis(cUnit);
+		dvmCompilerInitializeRegAlloc(cUnit);
+		dvmCompilerRegAlloc(cUnit);
+	}
+	
 	
 	
 	for(pCodeItem = codeList.header; pCodeItem != NULL; pCodeItem = pCodeItem->next){

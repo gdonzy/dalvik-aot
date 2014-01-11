@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../DEX.h"
+#include "CompilerUtility.h"
 #include "CompilerIR.h"
 
 extern CodeList codeList;
