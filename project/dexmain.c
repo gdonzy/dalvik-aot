@@ -22,6 +22,8 @@ unsigned char * instrFormatTable = NULL;
 CodeList codeList;
 CompilationUnitList cUnitList;
 
+/********debug BB************/
+BasicBlock debugBB;
 
 int main(int argc , char * argv[]){
 	int fd=-1;
