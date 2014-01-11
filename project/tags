@@ -19,6 +19,38 @@ CompilationUnit	compiler/CompilerIR.h	/^typedef struct CompilationUnit {$/;"	s
 CompilationUnit	compiler/CompilerIR.h	/^} CompilationUnit;$/;"	t	typeref:struct:CompilationUnit
 CompilationUnitList	compiler/CompilerIR.h	/^typedef struct CompilationUnitList{$/;"	s
 CompilationUnitList	compiler/CompilerIR.h	/^}CompilationUnitList;$/;"	t	typeref:struct:CompilationUnitList
+DECODE_REG	compiler/Dataflow.h	51;"	d
+DECODE_SUB	compiler/Dataflow.h	52;"	d
+DF_A_IS_REG	compiler/Dataflow.h	34;"	d
+DF_B_IS_REG	compiler/Dataflow.h	35;"	d
+DF_C_IS_REG	compiler/Dataflow.h	36;"	d
+DF_DA	compiler/Dataflow.h	8;"	d
+DF_DA_WIDE	compiler/Dataflow.h	9;"	d
+DF_FORMAT_35C	compiler/Dataflow.h	13;"	d
+DF_FORMAT_3RC	compiler/Dataflow.h	14;"	d
+DF_FP_A	compiler/Dataflow.h	19;"	d
+DF_FP_B	compiler/Dataflow.h	20;"	d
+DF_FP_C	compiler/Dataflow.h	21;"	d
+DF_HAS_DEFS	compiler/Dataflow.h	28;"	d
+DF_HAS_NR_CHECKS	compiler/Dataflow.h	30;"	d
+DF_HAS_USES	compiler/Dataflow.h	25;"	d
+DF_IS_GETTER	compiler/Dataflow.h	22;"	d
+DF_IS_GETTER_OR_SETTER	compiler/Dataflow.h	37;"	d
+DF_IS_LINEAR	compiler/Dataflow.h	11;"	d
+DF_IS_MOVE	compiler/Dataflow.h	10;"	d
+DF_IS_SETTER	compiler/Dataflow.h	23;"	d
+DF_NOP	compiler/Dataflow.h	1;"	d
+DF_NULL_N_RANGE_CHECK_0	compiler/Dataflow.h	16;"	d
+DF_NULL_N_RANGE_CHECK_1	compiler/Dataflow.h	17;"	d
+DF_NULL_N_RANGE_CHECK_2	compiler/Dataflow.h	18;"	d
+DF_PHI	compiler/Dataflow.h	15;"	d
+DF_SETS_CONST	compiler/Dataflow.h	12;"	d
+DF_UA	compiler/Dataflow.h	2;"	d
+DF_UA_WIDE	compiler/Dataflow.h	5;"	d
+DF_UB	compiler/Dataflow.h	3;"	d
+DF_UB_WIDE	compiler/Dataflow.h	6;"	d
+DF_UC	compiler/Dataflow.h	4;"	d
+DF_UC_WIDE	compiler/Dataflow.h	7;"	d
 DecodedInstruction	DEX.h	/^typedef struct DecodedInstruction {$/;"	s
 DecodedInstruction	DEX.h	/^} DecodedInstruction;$/;"	t	typeref:struct:DecodedInstruction
 DexClassData	DEX.h	/^typedef struct DexClassData {$/;"	s
@@ -53,8 +85,10 @@ DexStringId	DEX.h	/^typedef struct DexStringId {$/;"	s
 DexStringId	DEX.h	/^} DexStringId;$/;"	t	typeref:struct:DexStringId
 DexTypeId	DEX.h	/^typedef struct DexTypeId {$/;"	s
 DexTypeId	DEX.h	/^} DexTypeId;$/;"	t	typeref:struct:DexTypeId
-ENCODE_REG_SUB	compiler/Dataflow.h	11;"	d
+ENCODE_REG_SUB	compiler/Dataflow.h	50;"	d
 FETCH	toOpt.c	8;"	d	file:
+GrowableList	compiler/CompilerUtility.h	/^typedef struct GrowableList {$/;"	s
+GrowableList	compiler/CompilerUtility.h	/^} GrowableList;$/;"	t	typeref:struct:GrowableList
 INST_A	toOpt.c	10;"	d	file:
 INST_AA	toOpt.c	12;"	d	file:
 INST_B	toOpt.c	11;"	d	file:
@@ -359,6 +393,8 @@ codeOff	DEX.h	/^    u4 codeOff;      \/* file offset to a code_item *\/$/;"	m	st
 currentArena	compiler/Utility.c	/^static ArenaMemBlock *currentArena = NULL;$/;"	v	file:
 dalvikInsn	compiler/CompilerIR.h	/^    DecodedInstruction dalvikInsn;$/;"	m	struct:MIR
 dalvikToSSAMap	compiler/CompilerIR.h	/^      int *dalvikToSSAMap;                \/\/ length == method->registersSize$/;"	m	struct:CompilationUnit
+dataFlowSSAFormat35C	compiler/Dataflow.c	/^static void dataFlowSSAFormat35C(CompilationUnit *cUnit, MIR *mir)$/;"	f	file:
+dataFlowSSAFormat3RC	compiler/Dataflow.c	/^static void dataFlowSSAFormat3RC(CompilationUnit *cUnit, MIR *mir)$/;"	f	file:
 dataOff	DEX.h	/^    u4  dataOff;$/;"	m	struct:DexHeader
 dataSize	DEX.h	/^    u4  dataSize;$/;"	m	struct:DexHeader
 debugInfoOff	DEX.h	/^    u4  debugInfoOff;       \/* file offset to debug info stream *\/$/;"	m	struct:DexCode
@@ -389,11 +425,16 @@ dumpCode	toParse.c	/^void dumpCode(DexFile* pDexFile, DexMethod* pDexMethod){$/;
 dumpDecodedInstruction	toOpt.c	/^void dumpDecodedInstruction(const DecodedInstruction* pDecInsn,int insnIdx){$/;"	f
 dumpInstruction	toOpt.c	/^void dumpInstruction(DexFile* pDexFile, const DexCode* pCode, int insnIdx,$/;"	f
 dvmCompilerAppendMIR	processBB/processBB.c	/^void dvmCompilerAppendMIR(BasicBlock *bb,MIR *mir){$/;"	f
+dvmCompilerDataFlowAnalysisDispatcher	compiler/Dataflow.c	/^void dvmCompilerDataFlowAnalysisDispatcher(CompilationUnit *cUnit,$/;"	f
+dvmCompilerDataFlowAttributes	compiler/Dataflow.c	/^int dvmCompilerDataFlowAttributes[kMirOpLast] = {$/;"	v
+dvmCompilerDoSSAConversion	compiler/Dataflow.c	/^void dvmCompilerDoSSAConversion(CompilationUnit *cUnit, BasicBlock *bb)$/;"	f
 dvmCompilerHeapInit	compiler/Utility.c	/^void dvmCompilerHeapInit(void){$/;"	f
 dvmCompilerNew	compiler/Utility.c	/^void * dvmCompilerNew(int size, bool zero)$/;"	f
+dvmCompilerNonLoopAnalysis	compiler/Dataflow.c	/^void dvmCompilerNonLoopAnalysis(CompilationUnit *cUnit)                                  $/;"	f
 dvmInitGrowableList	compiler/Utility.c	/^void dvmInitGrowableList(GrowableList *gList, int initLength)$/;"	f
 dvmInitializeSSAConversion	compiler/Dataflow.c	/^void dvmInitializeSSAConversion(CompilationUnit *cUnit)$/;"	f
 dvmInsertGrowableList	compiler/Utility.c	/^void dvmInsertGrowableList(GrowableList *gList, void *elem)$/;"	f
+elemList	compiler/CompilerUtility.h	/^	void **elemList;$/;"	m	struct:GrowableList
 endianTag	DEX.h	/^    u4  endianTag;$/;"	m	struct:DexHeader
 expandGrowableList	compiler/Utility.c	/^static void expandGrowableList(GrowableList *gList)  $/;"	f	file:
 false	DEX.h	/^typedef enum {false = 0 , true = !false} bool;$/;"	e	enum:__anon1
@@ -410,6 +451,8 @@ gOpNames	toOpt.h	/^static const char* gOpNames[256] = {$/;"	v
 get2LE	DEX.h	/^static inline u2 get2LE(unsigned char const* pSrc)$/;"	f
 getFirstIndexFromBBMask	toMarkBB.h	/^int getFirstIndexFromBBMask(u4* BBMask,int size){$/;"	f
 getInsn	toOpt.c	/^u2 getInsn(u2 * insns, int idx){$/;"	f
+handleSSADef	compiler/Dataflow.c	/^static void handleSSADef(CompilationUnit *cUnit, int *defs, int dalvikReg,$/;"	f	file:
+handleSSAUse	compiler/Dataflow.c	/^static void handleSSAUse(CompilationUnit *cUnit, int *uses, int dalvikReg,$/;"	f	file:
 header	DEX.h	/^	CodeItem* header;$/;"	m	struct:CodeList
 header	DEX.h	/^    DexClassDataHeader header;$/;"	m	struct:DexClassData
 header	compiler/CompilerIR.h	/^	CompilationUnit *header;$/;"	m	struct:CompilationUnitList
@@ -499,11 +542,13 @@ next	compiler/CompilerIR.h	/^    struct CompilationUnit *next;\/\/donzy$/;"	m	st
 next	compiler/CompilerIR.h	/^    struct MIR *next;$/;"	m	struct:MIR	typeref:struct:MIR::MIR
 next	compiler/CompilerUtility.h	/^	struct ArenaMemBlock * next;$/;"	m	struct:ArenaMemBlock	typeref:struct:ArenaMemBlock::ArenaMemBlock
 nextInsn	toOpt.c	/^int nextInsn(u2 * insns , int * idx){$/;"	f
+numAllocated	compiler/CompilerUtility.h	/^	int numAllocated;$/;"	m	struct:GrowableList
 numArenaBlocks	compiler/Utility.c	/^static int numArenaBlocks = 0;$/;"	v	file:
 numBlocks	compiler/CompilerIR.h	/^    int numBlocks;$/;"	m	struct:CompilationUnit
 numDefs	compiler/Dataflow.h	/^    int numDefs;$/;"	m	struct:SSARepresentation
 numEntries	DEX.h	/^    int     numEntries;                 \/\/ size of table[]; always power of 2$/;"	m	struct:DexClassLookup
 numSSARegs	compiler/CompilerIR.h	/^      int numSSARegs;$/;"	m	struct:CompilationUnit
+numUsed	compiler/CompilerUtility.h	/^	int numUsed;$/;"	m	struct:GrowableList
 numUses	compiler/Dataflow.h	/^    int numUses;$/;"	m	struct:SSARepresentation
 offset	compiler/CompilerIR.h	/^    unsigned int offset;$/;"	m	struct:MIR
 opCode	DEX.h	/^    OpCode  opCode;$/;"	m	struct:DecodedInstruction
