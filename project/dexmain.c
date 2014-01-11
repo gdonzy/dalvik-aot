@@ -111,9 +111,10 @@ printf("memPtr address is %p", memPtr);
 	}
 
 	/*********prepare SSAConversion***********/
+	/*eric*/
 	for(cUnit = cUnitList.header; cUnit != NULL; cUnit = cUnit->next) {
 		dvmInitializeSSAConversion(cUnit); 
-		dvmCompilerNonLoopAnalysis(cUnit);  
+    	dvmCompilerNonLoopAnalysis(cUnit);  
 	}	
 	
 	for(pCodeItem = codeList.header; pCodeItem != NULL; pCodeItem = pCodeItem->next){

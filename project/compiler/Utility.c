@@ -65,7 +65,7 @@ retry:
         currentArena = newArena;
         numArenaBlocks++;
         if (numArenaBlocks > 10)
-            printf("Total arena pages for JIT: %d", numArenaBlocks);
+            printf("Total arena pages for JIT: %d\n", numArenaBlocks);
         goto retry;
     }
     return NULL;

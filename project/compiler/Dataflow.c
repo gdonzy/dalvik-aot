@@ -791,6 +791,7 @@ void dvmInitializeSSAConversion(CompilationUnit *cUnit)
 	int i;
 	int numDalvikReg = cUnit->pCodeItem->item->registersSize;
 	
+	cUnit->ssaToDalvikMap = dvmCompilerNew(sizeof(GrowableList), false);
 	dvmInitGrowableList(cUnit->ssaToDalvikMap, numDalvikReg);
 	
 	cUnit->numSSARegs = numDalvikReg;
@@ -803,6 +804,7 @@ void dvmInitializeSSAConversion(CompilationUnit *cUnit)
 	for (i = 0; i < numDalvikReg; i++) {  
 		cUnit->dalvikToSSAMap[i] = i; 
 	}
+
 /*  这里暂时作用不知道，所以删除
 	for (i = 0; i < cUnit->numBlocks; i++) { 
 		BasicBlock *bb = cUnit->blockList[i]; 
