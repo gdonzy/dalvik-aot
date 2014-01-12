@@ -25,7 +25,7 @@ CompilationUnitList cUnitList;
 /********debug BB************/
 BasicBlock debugBB;
 CompilationUnit *pDebugCUnit;
-u4  debugCodeOffset = 0; 
+u8  debugCodeOffset = 0; 
 
 int main(int argc , char * argv[]){
 	int fd=-1;
@@ -116,12 +116,12 @@ printf("memPtr address is %p", memPtr);
 	}
 
 	/************process debugBB**************/
-	debugBB.startOffset = 0xff; 
+	debugBB.startOffset = 0x24fe; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
 	debugBB.next = NULL;
 
-	debugCodeOffset = 0xff;
+	debugCodeOffset = 0x24ec;
 	
 	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
 
@@ -132,7 +132,7 @@ printf("memPtr address is %p", memPtr);
 		dvmCompilerInitializeRegAlloc(cUnit);
 		dvmCompilerRegAlloc(cUnit);
 		/***********debug for pDebugCUnit*************/
-		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item->insns)-(u1*)(pDexFile->baseAddr))){
+		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item)-(u1*)(pDexFile->baseAddr))){
 			pDebugCUnit = cUnit;
 		}
 	}
