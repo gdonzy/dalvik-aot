@@ -29,7 +29,7 @@ typedef struct MIR {
 
 typedef struct BasicBlock {
 //    int id;
-//    int visited;
+    int visited;
     u8 startOffset;
 //    const Method *containingMethod;     // For blocks from the callee
 //    BBType blockType;

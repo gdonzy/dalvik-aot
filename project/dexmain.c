@@ -134,11 +134,14 @@ printf("memPtr address is %p", memPtr);
 		/***********debug for pDebugCUnit*************/
 		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item)-(u1*)(pDexFile->baseAddr))){
 			pDebugCUnit = cUnit;
+			//eric
+			printf("i'm in debugBB\n");
+			printf("%x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
 		}
 	}
-	
+
 	pDebugCUnit->debugBB = &debugBB;	
-	//dvmCompilerMIR2LIR(pDebugCUnit);
+	dvmCompilerMIR2LIR(pDebugCUnit);
 	
 	for(pCodeItem = codeList.header; pCodeItem != NULL; pCodeItem = pCodeItem->next){
 		//free more 子项 也要释放的
