@@ -7,6 +7,8 @@
 
 #include "../Ralloc.h"
 
+#include "../CodegenCommon.c"
+
 #include "Factory.c"
 
 #include "Gen-unicore.c"

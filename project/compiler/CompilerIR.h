@@ -37,6 +37,9 @@ typedef struct BasicBlock {
 //    bool isFallThroughFromInvoke;       // True means the block needs alignment
     MIR *firstMIRInsn;
     MIR *lastMIRInsn;
+    
+    LIR *firstLIRInsn;
+    LIR *lastLIRInsn;
 //    struct BasicBlock *fallThrough;
 //    struct BasicBlock *taken;
     struct BasicBlock *next;            // Serial link for book keeping purposes
@@ -113,3 +116,4 @@ typedef struct CompilationUnitList{
 
 void cUnitInit(void);
 void dumpDecodedInstruction(const DecodedInstruction *pDecInsn,int insnIdx);
+void dvmCompilerAppendLIR(BasicBlock *bb, LIR *lir);

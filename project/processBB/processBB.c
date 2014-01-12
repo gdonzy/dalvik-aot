@@ -35,6 +35,8 @@ void insertBB2cUnit(DexFile *pDexFile,CodeItem *pCodeItem,int startIdx){
 	pBB->startOffset = (u4)( (u1*)(&pCodeItem->item->insns[startIdx]) - (u1*)pDexFile->baseAddr);
 	pBB->firstMIRInsn = NULL;
 	pBB->lastMIRInsn = NULL;
+	pBB->firstLIRInsn = NULL;
+	pBB->lastLIRInsn = NULL;
 	pBB->next = NULL;
 	printf("BB startOffset is : 0x%lx",pBB->startOffset);
 
