@@ -840,6 +840,7 @@ static void handleSSADef(CompilationUnit *cUnit, int *defs, int dalvikReg,
     int newS2DMapping = ENCODE_REG_SUB(dalvikReg, dalvikSub);
     dvmInsertGrowableList(cUnit->ssaToDalvikMap, (void *) newS2DMapping);
 
+
     defs[regIndex] = ssaReg;
 }
 

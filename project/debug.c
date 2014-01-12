@@ -9,3 +9,5 @@ void outputMIRsOfBB(BasicBlock *bb){
 		dumpDecodedInstruction(&mir->dalvikInsn,mir->offset);
 	}
 }
+
+void debugInsertInsns2BB(BasicBlock *curBB , u2 * insns , int insnsCnt);

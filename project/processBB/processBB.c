@@ -107,6 +107,30 @@ void insertInsns2BB(DexFile * pDexFile, CodeItem * pCodeItem ,int startIdx,int e
 }
 		
 
+void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt){
+	int insnIdx = 0;
+		
+        DecodedInstruction decInsn;
+	
+    while (insnIdx < insnsCnt) {
+	MIR * mir;
+	mir = dvmCompilerNew(sizeof(MIR),true);
+	if( NULL==mir ){
+		printf("error : alloc mem of mir[debug]!\n");
+		return ;
+	}
+	mir->offset = insnIdx;
+	mir->prev = NULL;
+	mir->next = NULL;
+	mir->ssaRep = NULL;
+
+	parseInsn(&insns[insnIdx],&mir->dalvikInsn);
+	dvmCompilerAppendMIR(curBB,mir);
+	nextInsn(insns,&insnIdx);
+    }
+    
+    return ;
+}
 
 void outputBBMask(u4 *pBBMask,int count){
 	u4 i=0;

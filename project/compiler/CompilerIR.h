@@ -45,10 +45,11 @@ typedef struct BasicBlock {
 
 typedef struct CompilationUnit {
 //    int numInsts;
-    int id_code;
+    int id_code;//donzy
     int numBlocks;
     BasicBlock *firstBB; //donzy
     BasicBlock *lastBB;//donzy
+    BasicBlock *debugBB;
     CodeItem *pCodeItem;//donzy
     struct CompilationUnit *next;//donzy
 //    BasicBlock **blockList;

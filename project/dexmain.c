@@ -24,6 +24,8 @@ CompilationUnitList cUnitList;
 
 /********debug BB************/
 BasicBlock debugBB;
+CompilationUnit *pDebugCUnit;
+u4  debugCodeOffset = 0; 
 
 int main(int argc , char * argv[]){
 	int fd=-1;
@@ -114,6 +116,15 @@ printf("memPtr address is %p", memPtr);
 	}
 
 	/************process debugBB**************/
+	debugCodeOffset = 0xff;
+	debugBB.startOffset = 0xff; 
+	debugBB.firstMIRInsn = NULL;
+	debugBB.lastMIRInsn = NULL;
+	debugBB.next = NULL;
+
+	debugCodeOffset = 0xff;
+	
+	debugInsertInsns2BB(&debugBB,(u2 *)((int)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
 
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
@@ -121,9 +132,14 @@ printf("memPtr address is %p", memPtr);
 		dvmCompilerNonLoopAnalysis(cUnit);
 		dvmCompilerInitializeRegAlloc(cUnit);
 		dvmCompilerRegAlloc(cUnit);
+		/***********debug for pDebugCUnit*************/
+		if( debugCodeOffset ==(u4)( cUnit->pCodeItem->item->insns)){
+			pDebugCUnit = cUnit;
+		}
 	}
 	
-	
+	pDebugCUnit->debugBB = &debugBB;	
+	//dvmCompilerMIR2LIR(pDebugCUnit);
 	
 	for(pCodeItem = codeList.header; pCodeItem != NULL; pCodeItem = pCodeItem->next){
 		//free more 子项 也要释放的
