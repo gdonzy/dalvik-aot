@@ -30,7 +30,7 @@ typedef struct MIR {
 typedef struct BasicBlock {
 //    int id;
 //    int visited;
-    u4 startOffset;
+    u8 startOffset;
 //    const Method *containingMethod;     // For blocks from the callee
 //    BBType blockType;
 //    bool needFallThroughBranch;         // For blocks ended due to length limit

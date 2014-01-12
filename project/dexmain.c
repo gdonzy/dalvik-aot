@@ -116,7 +116,6 @@ printf("memPtr address is %p", memPtr);
 	}
 
 	/************process debugBB**************/
-	debugCodeOffset = 0xff;
 	debugBB.startOffset = 0xff; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
@@ -124,7 +123,7 @@ printf("memPtr address is %p", memPtr);
 
 	debugCodeOffset = 0xff;
 	
-	debugInsertInsns2BB(&debugBB,(u2 *)((int)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
+	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
 
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
@@ -133,7 +132,7 @@ printf("memPtr address is %p", memPtr);
 		dvmCompilerInitializeRegAlloc(cUnit);
 		dvmCompilerRegAlloc(cUnit);
 		/***********debug for pDebugCUnit*************/
-		if( debugCodeOffset ==(u4)( cUnit->pCodeItem->item->insns)){
+		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item->insns)-(u1*)(pDexFile->baseAddr))){
 			pDebugCUnit = cUnit;
 		}
 	}

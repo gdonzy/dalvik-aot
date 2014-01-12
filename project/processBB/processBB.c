@@ -36,7 +36,7 @@ void insertBB2cUnit(DexFile *pDexFile,CodeItem *pCodeItem,int startIdx){
 	pBB->firstMIRInsn = NULL;
 	pBB->lastMIRInsn = NULL;
 	pBB->next = NULL;
-	printf("BB startOffset is : 0x%x",pBB->startOffset);
+	printf("BB startOffset is : 0x%lx",pBB->startOffset);
 
 	if(NULL == cUnit->firstBB){
 		cUnit->firstBB = pBB;	
