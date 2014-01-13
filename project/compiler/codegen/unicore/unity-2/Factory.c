@@ -11,16 +11,16 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
     /* See if the value can be constructed cheaply */
     if ((value >= 0) && (value <= 511)) {
         //res = newLIR2(cUnit, kThumbMovImm, tDest, value);
-        res = newLIR2(cUnit, kUnicoreMovImm, tDest, value);
+        res = newLIR2(cUnit, cUnit->debugBB, kUnicoreMovImm, tDest, value);
         //if (rDest != tDest) {
         //   opRegReg(cUnit, kOpMov, rDest, tDest);
         //   dvmCompilerFreeTemp(cUnit, tDest);
         //}  
         return res; 
     } else if ((value & 0xFFFFFe00) == 0xFFFFFe00) {
-        res = newLIR2(cUnit, kUnicoreMovImm, tDest, ~value);
+        res = newLIR2(cUnit, cUnit->debugBB, kUnicoreMovImm, tDest, ~value);
         //newLIR2(cUnit, kThumbMvn, tDest, tDest);
-        newLIR2(cUnit, kUnicoreNotRR, tDest, tDest);
+        newLIR2(cUnit, cUnit->debugBB, kUnicoreNotRR, tDest, tDest);
         //if (rDest != tDest) {
         //   opRegReg(cUnit, kOpMov, rDest, tDest);
         //   dvmCompilerFreeTemp(cUnit, tDest);
@@ -62,7 +62,7 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
     //chenglin change
     if (dataTarget->operands[0] != value) {
         //newLIR2(cUnit, kThumbAddRI8, tDest, value - dataTarget->operands[0]);
-        newLIR3(cUnit, kUnicoreAddRRI9, tDest,tDest, value - dataTarget->operands[0]);
+        newLIR3(cUnit, cUnit->debugBB,  kUnicoreAddRRI9, tDest,tDest, value - dataTarget->operands[0]);
     }
     //if (rDest != tDest) {
     //    //chenglin change
@@ -112,7 +112,7 @@ static UnicoreLIR *opRegRegReg(CompilationUnit *cUnit, OpKind op, int rDest,
             }
             break;
     }
-    return newLIR3(cUnit, opCode, rDest, rSrc1, rSrc2);
+    return newLIR3(cUnit, cUnit->debugBB, opCode, rDest, rSrc1, rSrc2);
 }
 
 static UnicoreLIR *opRegRegImm(CompilationUnit *cUnit, OpKind op, int rDest,
@@ -211,7 +211,7 @@ static UnicoreLIR *opRegRegImm(CompilationUnit *cUnit, OpKind op, int rDest,
             break;
     }
     if (shortForm)
-        res = newLIR3(cUnit, opCode, rDest, rSrc1, absValue);
+        res = newLIR3(cUnit, cUnit->debugBB, opCode, rDest, rSrc1, absValue);
     else {
         if (rDest != rSrc1) {
             res = loadConstant(cUnit, rDest, value);
@@ -508,10 +508,10 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
                                  int displacement, int rSrc, int rSrcHi,
                                  OpSize size)
 {
-    ArmLIR *res;
-    ArmLIR *store = NULL;
-    ArmLIR *store2 = NULL;
-    ArmOpCode opCode = kUnicoreBkpt;
+    UnicoreLIR *res;
+    UnicoreLIR *store = NULL;
+    UnicoreLIR *store2 = NULL;
+    UnicoreOpCode opCode = kUnicoreBkpt;
     bool shortForm = false;
     int encodedDisp = displacement;
     bool pair = false;
