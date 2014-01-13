@@ -105,6 +105,41 @@ typedef enum ResourceEncodingPos {
 #define DECODE_ALIAS_INFO_REG(X)        (X & 0xffff)
 #define DECODE_ALIAS_INFO_WIDE(X)       ((X & 0x80000000) ? 1 : 0)
 
+typedef enum OpKind {
+    kOpMov,
+    kOpMvn,
+    kOpCmp,
+    kOpLsl,
+    kOpLsr,
+    kOpAsr,
+    kOpRor,
+    kOpNot,
+    kOpAnd,
+    kOpOr,
+    kOpXor,
+    kOpNeg,
+    kOpAdd,
+    kOpAdc,
+    kOpSub,
+    kOpSbc,
+    kOpRsub,
+    kOpMul,
+    kOpDiv,
+    kOpRem,
+    kOpBic,
+    kOpCmn,
+    kOpTst,
+    kOpBkpt,
+    kOpBlx,
+    kOpPush,
+    kOpPop,
+    kOp2Char,
+    kOp2Short,
+    kOp2Byte,
+    kOpCondBr,
+    kOpUncondBr,
+} OpKind;
+
 typedef enum NativeRegisterPool {
     r0 = 0,
     r1 = 1,

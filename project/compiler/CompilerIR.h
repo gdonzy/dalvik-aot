@@ -2,6 +2,28 @@
 #define INVALID_SREG (-1)
 #define INVALID_REG (-1)
 
+typedef enum RegisterClass {
+	kCoreReg,
+	kFPReg,
+	kAnyReg,
+} RegisterClass;
+
+typedef enum RegLocationType {
+	kLocDalvikFrame = 0,
+	kLocPhysReg,
+	kLocRetval,
+	kLocSpill,
+} RegLocationType;
+
+typedef struct RegLocation {
+	RegLocationType location:2;
+	unsigned wide:1;
+	unsigned fp:1;
+	u1 lowReg:6;
+	u1 highReg:6;
+	s2 sRegLow; 
+}
+
 typedef struct LIR {
     int offset;
     struct LIR *next;
@@ -29,7 +51,7 @@ typedef struct MIR {
 
 typedef struct BasicBlock {
 //    int id;
-//    int visited;
+    int visited;
     u8 startOffset;
 //    const Method *containingMethod;     // For blocks from the callee
 //    BBType blockType;

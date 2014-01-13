@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "../../../DEX.h"
+#include "UnicoreLIR.h"
 #include "../../CompilerUtility.h"
 #include "../../CompilerIR.h"
-#include "UnicoreLIR.h"
 
 
 

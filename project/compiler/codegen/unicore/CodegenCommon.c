@@ -51,6 +51,23 @@ static void setMemRefType(UnicoreLIR *lir, bool isLoad, int memType)
     }
 }
 
+/*
+ * Mark load/store instructions that access Dalvik registers through rFP +
+ * offset.
+ */
+static void annotateDalvikRegAccess(UnicoreLIR *lir, int regId, bool isLoad)                    
+{
+    setMemRefType(lir, isLoad, kDalvikReg);
+
+    /*  
+     * Store the Dalvik register id in aliasInfo. Mark he MSB if it is a 64-bit
+     * access.
+     */
+    lir->aliasInfo = regId;
+    if (DOUBLEREG(lir->operands[0])) {
+        lir->aliasInfo |= 0x80000000;
+    }   
+}
 
 static void setupResourceMasks(UnicoreLIR *lir)
 {

@@ -9,6 +9,9 @@ typedef signed int s4;
 typedef signed long int s8;
 typedef enum {false = 0 , true = !false} bool;
 
+# define assert(x) \
+    ((x) ? ((void)0) : (printf("ASSERT FAILED (%s:%d): %s\n", \
+        __FILE__, __LINE__, #x), *(int*)39=39, 0) ) 
 
 /*
  * Direct-mapped "code_item".
