@@ -51,5 +51,45 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 {
 	LIR *defStart;
 	LIR *defEnd;
-	assert(!rlDest.wide); assert(!rlSrc.wide);  
+	assert(!rlDest.wide); 
+	assert(!rlSrc.wide);  
+	//eric 
+	//dvmCompilerKillNullCheckedLoc(cUnit, rlDest);   
+	rlSrc = dvmCompilerUpdateLoc(cUnit, rlSrc);    
+	rlDest = dvmCompilerUpdateLoc(cUnit, rlDest);  
+	if (rlSrc.location == kLocPhysReg) {  
+        if (dvmCompilerIsLive(cUnit, rlSrc.lowReg) || (rlDest.location == kLocPhysReg)) {
+			// Src is live or Dest has assigned reg.
+			rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false); 
+			genRegCopy(cUnit, rlDest.lowReg, rlSrc.lowReg);
+		} else { 
+			// Just re-assign the registers.  Dest gets Src's regs 
+			rlDest.lowReg = rlSrc.lowReg;
+			dvmCompilerClobber(cUnit, rlSrc.lowReg);  
+		}
+	} else {
+		// Load Src either into promoted Dest or temps allocated for Dest
+		rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false);   
+		loadValueDirect(cUnit, rlSrc, rlDest.lowReg);  
+	}
+
+	// Dest is now live and dirty (until/if we flush it to home location)
+	dvmCompilerMarkLive(cUnit, rlDest.lowReg, rlDest.sRegLow); 
+	dvmCompilerMarkDirty(cUnit, rlDest.lowReg); 
+
+	if (rlDest.location == kLocRetval) { 
+		storeBaseDisp(cUnit, rGLUE, offsetof(InterpState, retval), rlDest.lowReg, kWord);
+		dvmCompilerClobber(cUnit, rlDest.lowReg); 
+	} else {
+		dvmCompilerResetDefLoc(cUnit, rlDest); 
+		//if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow)) { 
+		if (true) {
+			defStart = (LIR *)cUnit->lastLIRInsn;
+			int vReg = dvmCompilerS2VReg(cUnit, rlDest.sRegLow);
+			storeBaseDisp(cUnit, rFP, vReg << 2, rlDest.lowReg, kWord);  
+			dvmCompilerMarkClean(cUnit, rlDest.lowReg); 
+			defEnd = (LIR *)cUnit->lastLIRInsn; 
+			dvmCompilerMarkDef(cUnit, rlDest, defStart, defEnd);	
+		}
+	}
 }

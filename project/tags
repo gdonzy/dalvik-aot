@@ -111,7 +111,7 @@ ENCODE_REG_PC	compiler/codegen/unicore/UnicoreLIR.h	87;"	d
 ENCODE_REG_SP	compiler/codegen/unicore/UnicoreLIR.h	36;"	d
 ENCODE_REG_SP	compiler/codegen/unicore/UnicoreLIR.h	85;"	d
 ENCODE_REG_SUB	compiler/Dataflow.h	76;"	d
-ENCODING_MAP	compiler/codegen/unicore/Assemble.c	8;"	d	file:
+ENCODING_MAP	compiler/codegen/unicore/Assemble.c	9;"	d	file:
 EncodingMap	compiler/codegen/unicore/Assemble.c	/^UnicoreEncodingMap EncodingMap[kUnicoreLast] = {$/;"	v
 FETCH	toOpt.c	8;"	d	file:
 FPREG	compiler/codegen/unicore/UnicoreLIR.h	8;"	d
@@ -482,6 +482,7 @@ annotationsOff	DEX.h	/^    u4  annotationsOff;     \/* file offset to annotation
 arenaHead	compiler/Utility.c	/^static ArenaMemBlock *arenaHead = NULL;$/;"	v	file:
 arg	DEX.h	/^    u4      arg[5];         \/* vC\/D\/E\/F\/G in invoke or filled-new-array *\/  \/\/D一般存放的是方法所在类的this指针$/;"	m	struct:DecodedInstruction
 array	markBB.h	1;"	d
+assembleInstructions	compiler/codegen/unicore/Assemble.c	/^static void assembleInstructions(BasicBlock * bb)$/;"	f	file:
 assert	DEX.h	12;"	d
 baseAddr	DEX.h	/^    const u1*           baseAddr;  \/\/指向映射空间$/;"	m	struct:DexFile
 bleargh	DEX.h	/^    u1  bleargh;$/;"	m	struct:DexLink
@@ -506,6 +507,7 @@ clearBBMask	toMarkBB.h	/^void clearBBMask(u4 targetPos, u4* BBMask){$/;"	f
 clobberRegBody	compiler/codegen/unicore/RallocUtil.c	/^static bool clobberRegBody(CompilationUnit *cUnit, RegisterInfo *p,$/;"	f	file:
 clobberSRegBody	compiler/codegen/unicore/RallocUtil.c	/^static void clobberSRegBody(RegisterInfo *p, int numTemps, int sReg)                      $/;"	f	file:
 codeBaseAddr	DEX.h	/^	u4 codeBaseAddr;$/;"	m	struct:CodeItem
+codeBuffer	compiler/CompilerIR.h	/^    u4 *codeBuffer;$/;"	m	struct:BasicBlock
 codeList	dexmain.c	/^CodeList codeList;$/;"	v
 codeOff	DEX.h	/^    u4 codeOff;      \/* file offset to a code_item *\/$/;"	m	struct:DexMethod
 copyRegInfo	compiler/codegen/unicore/RallocUtil.c	/^void copyRegInfo(CompilationUnit *cUnit, int newReg, int oldReg)                            $/;"	f
@@ -522,8 +524,15 @@ dataSize	DEX.h	/^    u4  dataSize;$/;"	m	struct:DexHeader
 debugBB	compiler/CompilerIR.h	/^    BasicBlock *debugBB;$/;"	m	struct:CompilationUnit
 debugBB	dexmain.c	/^BasicBlock debugBB;$/;"	v
 debugCodeOffset	dexmain.c	/^u8  debugCodeOffset = 0; $/;"	v
+debugDvmCompilerAssembleLIR	compiler/codegen/unicore/Assemble.c	/^void debugDvmCompilerAssembleLIR(BasicBlock *bb){$/;"	f
 debugInfoOff	DEX.h	/^    u4  debugInfoOff;       \/* file offset to debug info stream *\/$/;"	m	struct:DexCode
 debugInsertInsns2BB	processBB/processBB.c	/^void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt){$/;"	f
+debugNewLIR0	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR0(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode){$/;"	f
+debugNewLIR1	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR1(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest){$/;"	f
+debugNewLIR2	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR2(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1){$/;"	f
+debugNewLIR2Assemble	debug.c	/^void debugNewLIR2Assemble(CompilationUnit *pDebugCUnit){$/;"	f
+debugNewLIR3	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR3(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1,int src2){$/;"	f
+debugNewLIR4	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR4(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1,int src2,int info){$/;"	f
 defEnd	compiler/codegen/unicore/UnicoreLIR.h	/^    struct LIR *defEnd;         \/\/ Ending inst in last def sequence$/;"	m	struct:RegisterInfo	typeref:struct:RegisterInfo::LIR
 defMask	compiler/codegen/unicore/UnicoreLIR.h	/^    u8 defMask;         \/\/ Resource mask for def$/;"	m	struct:UnicoreLIR
 defStart	compiler/codegen/unicore/UnicoreLIR.h	/^    struct LIR *defStart;       \/\/ Starting inst in last def sequence$/;"	m	struct:RegisterInfo	typeref:struct:RegisterInfo::LIR
@@ -578,6 +587,9 @@ dvmCompilerInitPool	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompi
 dvmCompilerInitializeRegAlloc	compiler/codegen/unicore/unity-2/Gen-unicore.c	/^void dvmCompilerInitializeRegAlloc(CompilationUnit *cUnit)$/;"	f
 dvmCompilerIsTemp	compiler/codegen/unicore/RallocUtil.c	/^extern RegisterInfo *dvmCompilerIsTemp(CompilationUnit *cUnit, int reg)                  $/;"	f
 dvmCompilerMIR2LIR	compiler/codegen/unicore/CodegenDriver.c	/^void dvmCompilerMIR2LIR(CompilationUnit *cUnit)$/;"	f
+dvmCompilerMarkClean	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerMarkClean(CompilationUnit *cUnit, int reg) $/;"	f
+dvmCompilerMarkDef	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerMarkDef(CompilationUnit *cUnit, RegLocation rl,                $/;"	f
+dvmCompilerMarkDirty	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerMarkDirty(CompilationUnit *cUnit, int reg)     $/;"	f
 dvmCompilerMarkInUse	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerMarkInUse(CompilationUnit *cUnit, int reg) $/;"	f
 dvmCompilerMarkLive	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerMarkLive(CompilationUnit *cUnit, int reg, int sReg)$/;"	f
 dvmCompilerNew	compiler/Utility.c	/^void * dvmCompilerNew(int size, bool zero)$/;"	f
@@ -585,6 +597,7 @@ dvmCompilerNonLoopAnalysis	compiler/Dataflow.c	/^void dvmCompilerNonLoopAnalysis
 dvmCompilerRegAlloc	compiler/Ralloc.c	/^void dvmCompilerRegAlloc(CompilationUnit *cUnit)$/;"	f
 dvmCompilerRegCopy	compiler/codegen/unicore/CodegenDriver.c	/^UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)$/;"	f
 dvmCompilerResetDef	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerResetDef(CompilationUnit *cUnit, int reg)$/;"	f
+dvmCompilerResetDefLoc	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerResetDefLoc(CompilationUnit *cUnit, RegLocation rl)$/;"	f
 dvmCompilerResetDefTracking	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerResetDefTracking(CompilationUnit *cUnit)                          $/;"	f
 dvmCompilerResetNullCheck	compiler/codegen/unicore/Ralloc.h	/^static inline void dvmCompilerResetNullCheck(CompilationUnit *cUnit)$/;"	f
 dvmCompilerResetRegPool	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerResetRegPool(CompilationUnit *cUnit)                              $/;"	f
@@ -607,7 +620,7 @@ fieldLoc	compiler/codegen/unicore/UnicoreLIR.h	/^    } fieldLoc[4];$/;"	m	struct
 fileSize	DEX.h	/^    u4  fileSize;           \/* length of entire file *\/$/;"	m	struct:DexHeader
 first	compiler/Ralloc.c	/^    int first;$/;"	m	struct:LiveRange	file:
 firstBB	compiler/CompilerIR.h	/^    BasicBlock *firstBB; \/\/donzy$/;"	m	struct:CompilationUnit
-firstLIRInsn	compiler/CompilerIR.h	/^    LIR *firstLIRInsn;$/;"	m	struct:BasicBlock
+firstLIRInsn	compiler/CompilerIR.h	/^    LIR *firstLIRInsn;\/\/donzy$/;"	m	struct:BasicBlock
 firstMIRInsn	compiler/CompilerIR.h	/^    MIR *firstMIRInsn;$/;"	m	struct:BasicBlock
 flags	DEX.h	/^    u4  flags;              \/* some info flags *\/$/;"	m	struct:DexOptHeader
 flags	compiler/codegen/unicore/UnicoreLIR.h	/^    int flags;$/;"	m	struct:UnicoreEncodingMap
@@ -616,6 +629,7 @@ flushRegWide	compiler/codegen/unicore/RallocUtil.c	/^static void flushRegWide(Co
 fmt	compiler/codegen/unicore/UnicoreLIR.h	/^    char* fmt;$/;"	m	struct:UnicoreEncodingMap
 fp	compiler/CompilerIR.h	/^	unsigned fp:1;$/;"	m	struct:RegLocation
 fpDef	compiler/Dataflow.h	/^    bool *fpDef;$/;"	m	struct:SSARepresentation
+fpHint	compiler/codegen/unicore/Codegen.h	/^                                         bool fpHint, int regClass);$/;"	v
 fpUse	compiler/Dataflow.h	/^    bool *fpUse;$/;"	m	struct:SSARepresentation
 freshLoc	compiler/Ralloc.c	/^static const RegLocation freshLoc = {kLocDalvikFrame, 0, 0, INVALID_REG,$/;"	v	file:
 gOpNames	toOpt.h	/^static const char* gOpNames[256] = {$/;"	v
@@ -866,7 +880,7 @@ last	compiler/Ralloc.c	/^    int last;$/;"	m	struct:LiveRange	file:
 lastBB	compiler/CompilerIR.h	/^    BasicBlock *lastBB;\/\/donzy$/;"	m	struct:CompilationUnit
 lastInsPos	DEX.h	/^	u4 lastInsPos;$/;"	m	struct:LastInstrPos
 lastInstrPosHead	DEX.h	/^	LastInstrPosHead lastInstrPosHead;$/;"	m	struct:CodeItem
-lastLIRInsn	compiler/CompilerIR.h	/^    LIR *lastLIRInsn;$/;"	m	struct:BasicBlock
+lastLIRInsn	compiler/CompilerIR.h	/^    LIR *lastLIRInsn;\/\/donzy$/;"	m	struct:BasicBlock
 lastMIRInsn	compiler/CompilerIR.h	/^    MIR *lastMIRInsn;$/;"	m	struct:BasicBlock
 linkOff	DEX.h	/^    u4  linkOff;$/;"	m	struct:DexHeader
 linkSize	DEX.h	/^    u4  linkSize;$/;"	m	struct:DexHeader
@@ -894,6 +908,7 @@ markBB_packedSwitch	toMarkBB.h	/^int markBB_packedSwitch(DexCode* pDexCode, int 
 markBB_return	toMarkBB.h	/^int markBB_return(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_sparseSwitch	toMarkBB.h	/^int markBB_sparseSwitch(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_throw	toMarkBB.h	/^int markBB_throw(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+memAlloc4Assemble	compiler/codegen/unicore/Assemble.c	/^void memAlloc4Assemble(BasicBlock *bb){$/;"	f
 methodIdsOff	DEX.h	/^    u4  methodIdsOff;$/;"	m	struct:DexHeader
 methodIdsSize	DEX.h	/^    u4  methodIdsSize;$/;"	m	struct:DexHeader
 methodIdx	DEX.h	/^    u4 methodIdx;    \/* index to a method_id_item *\/$/;"	m	struct:DexMethod
@@ -916,6 +931,7 @@ next	compiler/CompilerUtility.h	/^	struct ArenaMemBlock * next;$/;"	m	struct:Are
 nextCoreTemp	compiler/codegen/unicore/UnicoreLIR.h	/^    int nextCoreTemp;$/;"	m	struct:RegisterPool
 nextFPTemp	compiler/codegen/unicore/UnicoreLIR.h	/^    int nextFPTemp;$/;"	m	struct:RegisterPool
 nextInsn	toOpt.c	/^int nextInsn(u2 * insns , int * idx){$/;"	f
+nullifyRange	compiler/codegen/unicore/RallocUtil.c	/^static void nullifyRange(CompilationUnit *cUnit, LIR *start, LIR *finish,$/;"	f	file:
 numAllocated	compiler/CompilerUtility.h	/^    u4 numAllocated;$/;"	m	struct:GrowableList
 numArenaBlocks	compiler/Utility.c	/^static int numArenaBlocks = 0;$/;"	v	file:
 numBlocks	compiler/CompilerIR.h	/^    int numBlocks;$/;"	m	struct:CompilationUnit
@@ -942,6 +958,7 @@ optOffset	DEX.h	/^    u4  optOffset;          \/* file offset of optimized data 
 outputBBInsns	toOpt.c	/^void outputBBInsns(DexFile* pDexFile, DexCode* pDexCode, int startIdx ,int endIdx){$/;"	f
 outputBBMask	processBB/processBB.c	/^void outputBBMask(u4 *pBBMask,int count){$/;"	f
 outputCode	toOpt.c	/^void outputCode(DexFile* pDexFile, DexCode* pDexCode, CodeItem* pCodeItem ){$/;"	f
+outputCodeBuffer	debug.c	/^void outputCodeBuffer(BasicBlock *bb){$/;"	f
 outputMIRsOfBB	debug.c	/^void outputMIRsOfBB(BasicBlock *bb){$/;"	f
 outsSize	DEX.h	/^    u2  outsSize;$/;"	m	struct:DexCode
 overhead	DEX.h	/^    int                 overhead;$/;"	m	struct:DexFile
@@ -993,6 +1010,7 @@ rGLUE	compiler/codegen/unicore/UnicoreLIR.h	/^    rGLUE = 19,$/;"	e	enum:NativeR
 rNone	compiler/codegen/unicore/UnicoreLIR.h	25;"	d
 readUnsignedLeb128	toParse.c	/^int readUnsignedLeb128(u1**  pStream){$/;"	f
 reg	compiler/codegen/unicore/UnicoreLIR.h	/^    int reg;                    \/\/ Reg number$/;"	m	struct:RegisterInfo
+regClass	compiler/codegen/unicore/Codegen.h	/^                                         bool fpHint, int regClass);$/;"	v
 regClassMatches	compiler/codegen/unicore/RallocUtil.c	/^static bool regClassMatches(int regClass, int reg)$/;"	f	file:
 regLocation	compiler/CompilerIR.h	/^      RegLocation *regLocation;$/;"	m	struct:CompilationUnit
 regPool	compiler/CompilerIR.h	/^      struct RegisterPool *regPool;$/;"	m	struct:CompilationUnit	typeref:struct:CompilationUnit::RegisterPool
@@ -1016,6 +1034,7 @@ simpleTrace	compiler/Ralloc.c	/^static bool simpleTrace(CompilationUnit *cUnit)$
 size	DEX.h	/^    int     size;                       \/\/ total size, including "size"$/;"	m	struct:DexClassLookup
 size	compiler/codegen/unicore/UnicoreLIR.h	/^    int size;           \/\/ 16-bit unit size (1 for thumb, 1 or 2 for thumb2)$/;"	m	struct:UnicoreLIR
 size	compiler/codegen/unicore/UnicoreLIR.h	/^    int size;$/;"	m	struct:UnicoreEncodingMap
+sizeOfBuffer	compiler/CompilerIR.h	/^    int sizeOfBuffer;$/;"	m	struct:BasicBlock
 skeleton	compiler/codegen/unicore/UnicoreLIR.h	/^    u4 skeleton;$/;"	m	struct:UnicoreEncodingMap
 sourceFileIdx	DEX.h	/^    u4  sourceFileIdx;      \/* index into stringIds for source file name *\/$/;"	m	struct:DexClassDef
 ssaName	compiler/Ralloc.c	/^    int ssaName;$/;"	m	struct:LiveRange	file:
@@ -1028,6 +1047,7 @@ staticFieldsSize	DEX.h	/^    u4 staticFieldsSize;$/;"	m	struct:DexClassDataHeade
 staticValuesOff	DEX.h	/^    u4  staticValuesOff;    \/* file offset to DexEncodedArray *\/$/;"	m	struct:DexClassDef
 storeBaseDisp	compiler/codegen/unicore/unity-2/Factory.c	/^static enicoreLIR *storeBaseDisp(CompilationUnit *cUnit, int rBase,     $/;"	f	file:
 storeBaseDispBody	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,$/;"	f	file:
+storeValue	compiler/codegen/unicore/CodegenFactory.c	/^static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation rlSrc)$/;"	f	file:
 stringDataOff	DEX.h	/^    u4  stringDataOff;      \/* file offset to string_data_item *\/$/;"	m	struct:DexStringId
 stringIdsOff	DEX.h	/^    u4  stringIdsOff;$/;"	m	struct:DexHeader
 stringIdsSize	DEX.h	/^    u4  stringIdsSize;$/;"	m	struct:DexHeader

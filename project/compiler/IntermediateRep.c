@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include "../DEX.h"
-#include "compile/codegen/unicore/UnicoreLIR.h"
+//#include "compiler/codegen/unicore/UnicoreLIR.h"
 #include "CompilerUtility.h"
 #include "CompilerIR.h"
-
-
 
 void dvmCompilerAppendLIR(BasicBlock *bb, LIR *lir)
 {

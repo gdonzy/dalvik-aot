@@ -1,4 +1,3 @@
-
 static inline void setupRegMask(u8 *mask, int reg)
 {
     u8 seed;

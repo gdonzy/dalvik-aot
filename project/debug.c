@@ -1,5 +1,3 @@
-#include "compiler/codegen/unicore/UnicoreLIR.h"
-
 void dumpDecodedInstruction(const DecodedInstruction *pDecInsn, int insnIdx);
 
 void outputMIRsOfBB(BasicBlock *bb){

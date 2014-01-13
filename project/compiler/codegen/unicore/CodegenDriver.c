@@ -1,8 +1,3 @@
-#include "compiler/DEX.h"
-#include "compiler/CompilerUtility.h"
-#include "compiler/CompilerIR.h"
-#include "compiler/codegen/unicore/Ralloc.h"
-
 extern unsigned char *instrFormatTable;
 extern inline unsigned char dexGetInstrFormat(const unsigned char* fmts, OpCode opCode);
 extern char* dexGetOpcodeName(OpCode op);

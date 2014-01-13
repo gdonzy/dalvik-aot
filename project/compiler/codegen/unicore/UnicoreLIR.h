@@ -105,6 +105,17 @@ typedef enum ResourceEncodingPos {
 #define DECODE_ALIAS_INFO_REG(X)        (X & 0xffff)
 #define DECODE_ALIAS_INFO_WIDE(X)       ((X & 0x80000000) ? 1 : 0)
 
+typedef enum OpSize {                                                                                                                                                                           
+    kWord,
+    kLong,
+    kSingle,
+    kDouble,
+    kUnsignedHalf,
+    kSignedHalf,
+    kUnsignedByte,
+    kSignedByte,
+} OpSize;
+
 typedef enum OpKind {
     kOpMov,
     kOpMvn,
@@ -322,8 +333,6 @@ typedef struct UnicoreLIR {
     u8 useMask;         // Resource mask for use
     u8 defMask;         // Resource mask for def
 } UnicoreLIR;
-
-
 
 
 #define IS_LOAD         (1 << kMemLoad)

@@ -1,0 +1,259 @@
+In file included from dexmain.c:11:
+compiler/codegen/unicore/UnicoreLIR.h:324: error: expected specifier-qualifier-list before ‘LIR’
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:3:
+compiler/codegen/unicore/unity-2/../UnicoreLIR.h:324: error: expected specifier-qualifier-list before ‘LIR’
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:7:
+compiler/codegen/unicore/unity-2/../Ralloc.h: In function ‘dvmCompilerSSASrc’:
+compiler/codegen/unicore/unity-2/../Ralloc.h:14: error: dereferencing pointer to incomplete type
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:8:
+compiler/codegen/unicore/unity-2/../Codegen.h:2:33: error: compiler/CompilerIR.h: 没有那个文件或目录
+compiler/codegen/unicore/unity-2/../Codegen.h:3:27: error: CalloutHelper.h: 没有那个文件或目录
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:8:
+compiler/codegen/unicore/unity-2/../Codegen.h: At top level:
+compiler/codegen/unicore/unity-2/../Codegen.h:44: error: expected identifier or ‘(’ before ‘int’
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:10:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘setMemRefType’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:27: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:30: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘annotateDalvikRegAccess’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:66: error: ‘UnicoreLIR’ has no member named ‘aliasInfo’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:67: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:68: error: ‘UnicoreLIR’ has no member named ‘aliasInfo’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘setupResourceMasks’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:74: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:78: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:78: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:82: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:91: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:92: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:96: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:96: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:100: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:100: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:104: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:108: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:112: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:112: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:116: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:116: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:120: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:125: error: ‘UnicoreLIR’ has no member named ‘defMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:130: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:138: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:138: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:144: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:148: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:152: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:152: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:156: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:156: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:160: error: ‘UnicoreLIR’ has no member named ‘useMask’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘newLIR0’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:169: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘newLIR1’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:180: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:181: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘newLIR2’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:193: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:194: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:195: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘newLIR3’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:211: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:212: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:213: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:214: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c: In function ‘newLIR4’:
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:227: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:228: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:229: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:230: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:231: error: ‘UnicoreLIR’ has no member named ‘operands’
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:11:
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘loadConstantNoClobber’:
+compiler/codegen/unicore/unity-2/Factory.c:14: warning: passing argument 2 of ‘newLIR2’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:14: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:21: warning: passing argument 2 of ‘newLIR2’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:21: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:23: warning: passing argument 2 of ‘newLIR2’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:23: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:33: warning: initialization makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/Factory.c:35: warning: assignment makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/Factory.c:40: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/Factory.c:41: error: ‘UnicoreLIR’ has no member named ‘generic’
+compiler/codegen/unicore/unity-2/Factory.c:42: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/Factory.c:54: error: ‘UnicoreLIR’ has no member named ‘aliasInfo’
+compiler/codegen/unicore/unity-2/Factory.c:54: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/Factory.c:56: warning: passing argument 1 of ‘dvmCompilerAppendLIR’ from incompatible pointer type
+compiler/codegen/unicore/unity-2/../../../CompilerIR.h:141: note: expected ‘struct BasicBlock *’ but argument is of type ‘struct CompilationUnit *’
+compiler/codegen/unicore/unity-2/Factory.c:63: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/Factory.c:65: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/Factory.c:65: warning: passing argument 2 of ‘newLIR3’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:65: error: too few arguments to function ‘newLIR3’
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:11:
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘opRegRegReg’:
+compiler/codegen/unicore/unity-2/Factory.c:115: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:115: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘opRegRegImm’:
+compiler/codegen/unicore/unity-2/Factory.c:214: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:214: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:218: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:218: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:222: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:222: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘opRegReg’:
+compiler/codegen/unicore/unity-2/Factory.c:249: error: incompatible type for argument 2 of ‘newLIR2’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:249: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:254: error: incompatible type for argument 2 of ‘newLIR2’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:254: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:272: error: incompatible type for argument 2 of ‘newLIR2’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:272: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:281: error: incompatible type for argument 2 of ‘newLIR2’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:281: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:286: error: incompatible type for argument 2 of ‘newLIR2’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:286: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:299: error: incompatible type for argument 2 of ‘newLIR2’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:187: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:299: error: too few arguments to function ‘newLIR2’
+compiler/codegen/unicore/unity-2/Factory.c:336: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:336: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘loadBaseDispBody’:
+compiler/codegen/unicore/unity-2/Factory.c:460: error: incompatible type for argument 2 of ‘newLIR4’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:221: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:460: error: too few arguments to function ‘newLIR4’
+compiler/codegen/unicore/unity-2/Factory.c:462: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:462: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:465: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:465: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:472: warning: passing argument 2 of ‘newLIR3’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:472: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:474: warning: passing argument 2 of ‘newLIR3’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:474: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:480: error: incompatible type for argument 2 of ‘newLIR3’
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘UnicoreOpCode’
+compiler/codegen/unicore/unity-2/Factory.c:480: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘storeBaseDispBody’:
+compiler/codegen/unicore/unity-2/Factory.c:511: error: ‘ArmLIR’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/Factory.c:511: error: (Each undeclared identifier is reported only once
+compiler/codegen/unicore/unity-2/Factory.c:511: error: for each function it appears in.)
+compiler/codegen/unicore/unity-2/Factory.c:511: error: ‘res’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/Factory.c:512: error: ‘store’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/Factory.c:513: error: ‘store2’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/Factory.c:514: error: ‘ArmOpCode’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/Factory.c:514: error: expected ‘;’ before ‘opCode’
+compiler/codegen/unicore/unity-2/Factory.c:538: error: ‘opCode’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/Factory.c:604: error: too few arguments to function ‘newLIR4’
+compiler/codegen/unicore/unity-2/Factory.c:606: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:610: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:618: warning: passing argument 2 of ‘newLIR3’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:618: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:619: warning: passing argument 2 of ‘newLIR3’ makes pointer from integer without a cast
+compiler/codegen/unicore/unity-2/../CodegenCommon.c:201: note: expected ‘struct BasicBlock *’ but argument is of type ‘int’
+compiler/codegen/unicore/unity-2/Factory.c:619: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c:623: error: too few arguments to function ‘newLIR3’
+compiler/codegen/unicore/unity-2/Factory.c: At top level:
+compiler/codegen/unicore/unity-2/Factory.c:644: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘*’ token
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘genRegCopyNoInsert’:
+compiler/codegen/unicore/unity-2/Factory.c:667: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/Factory.c:668: error: ‘UnicoreLIR’ has no member named ‘operands’
+compiler/codegen/unicore/unity-2/Factory.c:669: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/unity-2/Factory.c:672: error: ‘UnicoreLIR’ has no member named ‘isNop’
+compiler/codegen/unicore/unity-2/Factory.c: In function ‘genRegCopy’:
+compiler/codegen/unicore/unity-2/Factory.c:680: warning: passing argument 1 of ‘dvmCompilerAppendLIR’ from incompatible pointer type
+compiler/codegen/unicore/unity-2/../../../CompilerIR.h:141: note: expected ‘struct BasicBlock *’ but argument is of type ‘struct CompilationUnit *’
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:12:
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:1:17: error: DEX.h: 没有那个文件或目录
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:2:38: error: compiler/CompilerUtility.h: 没有那个文件或目录
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:4:45: error: compiler/codegen/unicore/Ralloc.h: 没有那个文件或目录
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:12:
+compiler/codegen/unicore/unity-2/../CodegenFactory.c: In function ‘loadValueDirect’:
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:26: error: ‘InterpState’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:26: error: ‘retval’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenFactory.c: In function ‘loadValue’:
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:43: error: ‘InterpState’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:43: error: ‘retval’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenFactory.c: In function ‘storeValue’:
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:81: error: ‘InterpState’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:81: error: ‘retval’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:87: error: ‘CompilationUnit’ has no member named ‘lastLIRInsn’
+compiler/codegen/unicore/unity-2/../CodegenFactory.c:91: error: ‘CompilationUnit’ has no member named ‘lastLIRInsn’
+compiler/codegen/unicore/unity-2/Codegen.c:14:23: error: ../Ralloc.c: 没有那个文件或目录
+In file included from compiler/codegen/unicore/unity-2/Codegen.c:15:
+compiler/codegen/unicore/unity-2/../CodegenDriver.c: In function ‘genArithOpInt’:
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:43: error: ‘__aeabi_idiv’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:51: error: ‘__aeabi_idivmod’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenDriver.c: In function ‘genArithOp’:
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:140: error: dereferencing pointer to incomplete type
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:143: error: dereferencing pointer to incomplete type
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:149: error: dereferencing pointer to incomplete type
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:151: error: dereferencing pointer to incomplete type
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:154: error: dereferencing pointer to incomplete type
+compiler/codegen/unicore/unity-2/../CodegenDriver.c: In function ‘dvmCompilerMIR2LIR’:
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:313: error: ‘DecodedInstruction’ has no member named ‘opcode’
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:314: error: ‘InstructionFormat’ undeclared (first use in this function)
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:314: error: expected ‘;’ before ‘dalvikFormat’
+compiler/codegen/unicore/unity-2/../CodegenDriver.c:317: error: ‘dalvikFormat’ undeclared (first use in this function)
+In file included from compiler/codegen/unicore/RallocUtil.c:7:
+compiler/codegen/unicore/Codegen.h:2:33: error: compiler/CompilerIR.h: 没有那个文件或目录
+compiler/codegen/unicore/Codegen.h:3:27: error: CalloutHelper.h: 没有那个文件或目录
+In file included from compiler/codegen/unicore/RallocUtil.c:7:
+compiler/codegen/unicore/Codegen.h:44: error: expected identifier or ‘(’ before ‘int’
+In file included from compiler/codegen/unicore/RallocUtil.c:8:
+compiler/codegen/unicore/Ralloc.h: In function ‘dvmCompilerSSASrc’:
+compiler/codegen/unicore/Ralloc.h:14: error: dereferencing pointer to incomplete type
+compiler/codegen/unicore/RallocUtil.c: In function ‘regClassMatches’:
+compiler/codegen/unicore/RallocUtil.c:363: error: expected ‘(’ before ‘{’ token
+compiler/codegen/unicore/RallocUtil.c: In function ‘getDestSSAName’:
+compiler/codegen/unicore/RallocUtil.c:466: error: dereferencing pointer to incomplete type
+compiler/codegen/unicore/CodegenDriver.c:2: error: expected declaration specifiers or ‘...’ before ‘OpCode’
+compiler/codegen/unicore/CodegenDriver.c:3: error: expected ‘)’ before ‘op’
+compiler/codegen/unicore/CodegenDriver.c:5: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘genArithOpInt’
+compiler/codegen/unicore/CodegenDriver.c:132: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘genArithOp’
+compiler/codegen/unicore/CodegenDriver.c:193: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘handleFmt12x’
+compiler/codegen/unicore/CodegenDriver.c:297: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/CodegenDriver.c:338: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘*’ token
+compiler/codegen/unicore/CodegenDriver.c:343: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/CodegenDriver.c:349: error: expected ‘)’ before ‘*’ token
+compiler/Dataflow.c: In function ‘dvmInitializeSSAConversion’:
+compiler/Dataflow.c:800: warning: cast to pointer from integer of different size
+compiler/Dataflow.c: In function ‘handleSSADef’:
+compiler/Dataflow.c:841: warning: cast to pointer from integer of different size
+In file included from compiler/codegen/unicore/Assemble.c:3:
+compiler/codegen/unicore/UnicoreLIR.h:324: error: expected specifier-qualifier-list before ‘LIR’
+In file included from compiler/codegen/unicore/Assemble.c:4:
+compiler/codegen/unicore/Codegen.h:2:33: error: compiler/CompilerIR.h: 没有那个文件或目录
+compiler/codegen/unicore/Codegen.h:3:27: error: CalloutHelper.h: 没有那个文件或目录
+In file included from compiler/codegen/unicore/Assemble.c:4:
+compiler/codegen/unicore/Codegen.h:8: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/Codegen.h:10: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/Codegen.h:44: error: expected identifier or ‘(’ before ‘int’
+compiler/codegen/unicore/Codegen.h:46: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/Codegen.h:52: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/Codegen.h:59: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/Codegen.h:62: error: expected ‘)’ before ‘*’ token
+compiler/codegen/unicore/Assemble.c: In function ‘memAlloc4Assemble’:
+compiler/codegen/unicore/Assemble.c:354: error: ‘UnicoreLIR’ has no member named ‘generic’
+compiler/codegen/unicore/Assemble.c:355: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/Assemble.c: In function ‘assembleInstructions’:
+compiler/codegen/unicore/Assemble.c:380: error: ‘UnicoreLIR’ has no member named ‘generic’
+compiler/codegen/unicore/Assemble.c:391: error: ‘UnicoreLIR’ has no member named ‘isNop’
+compiler/codegen/unicore/Assemble.c:444: error: ‘UnicoreLIR’ has no member named ‘opCode’
+compiler/codegen/unicore/Assemble.c:450: error: ‘UnicoreLIR’ has no member named ‘operands’

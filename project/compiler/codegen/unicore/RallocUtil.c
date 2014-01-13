@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "../../../DEX.h"
 #include "../../CompilerUtility.h"
@@ -290,6 +291,49 @@ extern void dvmCompilerResetDef(CompilationUnit *cUnit, int reg)
     p->defEnd = NULL;
 }
 
+static void nullifyRange(CompilationUnit *cUnit, LIR *start, LIR *finish,
+                         int sReg1, int sReg2)
+{
+    if (start && finish) {
+        LIR *p;
+        assert(sReg1 == sReg2);
+        for (p = start; ;p = p->next) {
+            ((UnicoreLIR *)p)->isNop = true;
+            if (p == finish)
+                break;
+        }
+    }
+}                    
+
+/*
+ * Mark the beginning and end LIR of a def sequence.  Note that
+ * on entry start points to the LIR prior to the beginning of the
+ * sequence.
+ */
+extern void dvmCompilerMarkDef(CompilationUnit *cUnit, RegLocation rl,                
+                               LIR *start, LIR *finish)
+{
+    assert(!rl.wide);
+    assert(start && start->next);
+    assert(finish);
+    RegisterInfo *p = getRegInfo(cUnit, rl.lowReg);
+    p->defStart = start->next;
+    p->defEnd = finish;
+}
+
+extern void dvmCompilerResetDefLoc(CompilationUnit *cUnit, RegLocation rl)
+{                                                                                           
+    assert(!rl.wide);
+//eric
+//    if (!(gDvmJit.disableOpt & (1 << kSuppressLoads))) {
+        RegisterInfo *p = getRegInfo(cUnit, rl.lowReg);
+        assert(!p->pair);
+        nullifyRange(cUnit, p->defStart, p->defEnd,
+                     p->sReg, rl.sRegLow);
+//    }    
+    dvmCompilerResetDef(cUnit, rl.lowReg);
+}
+
 extern void dvmCompilerResetDefTracking(CompilationUnit *cUnit)                          
 {
     int i;
@@ -336,6 +380,18 @@ extern void dvmCompilerMarkLive(CompilationUnit *cUnit, int reg, int sReg)
         info->live = false;
     }    
     info->sReg = sReg;
+}
+
+extern void dvmCompilerMarkClean(CompilationUnit *cUnit, int reg) 
+{
+    RegisterInfo *info = getRegInfo(cUnit, reg);                                            
+    info->dirty = false;
+}
+
+extern void dvmCompilerMarkDirty(CompilationUnit *cUnit, int reg)     
+{
+    RegisterInfo *info = getRegInfo(cUnit, reg); 
+	info->dirty = true; 
 }
 
 extern void dvmCompilerMarkInUse(CompilationUnit *cUnit, int reg) 

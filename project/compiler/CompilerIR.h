@@ -1,4 +1,3 @@
-
 #define INVALID_SREG (-1)
 #define INVALID_REG (-1)
 
@@ -22,7 +21,7 @@ typedef struct RegLocation {
 	u1 lowReg:6;
 	u1 highReg:6;
 	s2 sRegLow; 
-}
+} RegLocation;
 
 typedef struct LIR {
     int offset;
@@ -30,7 +29,6 @@ typedef struct LIR {
     struct LIR *prev;
     struct LIR *target;
 } LIR;
-
 
 typedef struct MIR {
     DecodedInstruction dalvikInsn;
