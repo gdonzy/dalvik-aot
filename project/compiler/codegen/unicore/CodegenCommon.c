@@ -216,3 +216,20 @@ static UnicoreLIR *newLIR4(CompilationUnit *cUnit,BasicBlock *bb, UnicoreOpCode 
     dvmCompilerAppendLIR(bb, (LIR *) insn);
     return insn;
 }
+
+
+UnicoreLIR *  debugNewLIR0(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode){
+	return (newLIR0(pCUnit,bb,opCode));
+}
+UnicoreLIR *  debugNewLIR1(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest){
+	return (newLIR1(pCUnit,bb,opCode,dest));
+}
+UnicoreLIR *  debugNewLIR2(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1){
+	return (newLIR2(pCUnit,bb,opCode,dest,src1));
+}
+UnicoreLIR *  debugNewLIR3(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1,int src2){
+	return (newLIR3(pCUnit,bb,opCode,dest,src1,src2));
+}
+UnicoreLIR *  debugNewLIR4(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1,int src2,int info){
+	return (newLIR4(pCUnit,bb,opCode,dest,src1,src2,info));
+}

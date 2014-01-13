@@ -38,8 +38,10 @@ typedef struct BasicBlock {
     MIR *firstMIRInsn;
     MIR *lastMIRInsn;
     
-    LIR *firstLIRInsn;
-    LIR *lastLIRInsn;
+    LIR *firstLIRInsn;//donzy
+    LIR *lastLIRInsn;//donzy
+    u4 *codeBuffer;
+    int sizeOfBuffer;
 //    struct BasicBlock *fallThrough;
 //    struct BasicBlock *taken;
     struct BasicBlock *next;            // Serial link for book keeping purposes

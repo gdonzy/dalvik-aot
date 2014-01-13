@@ -119,6 +119,9 @@ printf("memPtr address is %p", memPtr);
 	debugBB.startOffset = 0x24fe; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
+	debugBB.firstLIRInsn = NULL;
+	debugBB.lastMIRInsn = NULL;
+	debugBB.codeBuffer = NULL;
 	debugBB.next = NULL;
 
 	debugCodeOffset = 0x24ec;
@@ -139,6 +142,7 @@ printf("memPtr address is %p", memPtr);
 	
 	pDebugCUnit->debugBB = &debugBB;	
 	//dvmCompilerMIR2LIR(pDebugCUnit);
+	debugNewLIR2Assemble(pDebugCUnit);
 	
 	for(pCodeItem = codeList.header; pCodeItem != NULL; pCodeItem = pCodeItem->next){
 		//free more 子项 也要释放的
