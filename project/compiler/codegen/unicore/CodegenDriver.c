@@ -4,6 +4,135 @@
 #include "compiler/codegen/unicore/Ralloc.h"
 
 extern unsigned char *instrFormatTable;
+extern inline unsigned char dexGetInstrFormat(const unsigned char* fmts, OpCode opCode);
+extern char* dexGetOpcodeName(OpCode op);
+
+static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,  
+						  RegLocation rlDest, RegLocation rlSrc1, 
+						  RegLocation rlSrc2)
+{
+	OpKind op = kOpBkpt;
+    bool callOut = false;
+    bool checkZero = false;
+    bool unary = false;
+    int retReg = r0;
+    void *callTgt;
+    RegLocation rlResult;
+    bool shiftOp = false;
+
+    switch (mir->dalvikInsn.opCode) {
+        case OP_NEG_INT:
+            op = kOpNeg;
+            unary = true;
+            break;
+        case OP_NOT_INT:
+            op = kOpMvn;
+            unary = true;
+            break;
+        case OP_ADD_INT:
+        case OP_ADD_INT_2ADDR:
+            op = kOpAdd;
+            break;
+        case OP_SUB_INT:
+        case OP_SUB_INT_2ADDR:
+            op = kOpSub;
+            break;
+        case OP_MUL_INT:
+        case OP_MUL_INT_2ADDR:
+            op = kOpMul;
+            break;
+        case OP_DIV_INT:
+        case OP_DIV_INT_2ADDR:
+            callOut = true;
+            checkZero = true;
+            callTgt = __aeabi_idiv;
+            retReg = r0;
+            break;
+        /* NOTE: returns in r1 */
+        case OP_REM_INT:
+        case OP_REM_INT_2ADDR:
+            callOut = true;
+            checkZero = true;
+            callTgt = __aeabi_idivmod;
+            retReg = r1;
+            break;
+        case OP_AND_INT:
+        case OP_AND_INT_2ADDR:
+            op = kOpAnd;
+            break;
+        case OP_OR_INT:
+        case OP_OR_INT_2ADDR:
+            op = kOpOr;
+            break;
+        case OP_XOR_INT:
+        case OP_XOR_INT_2ADDR:
+            op = kOpXor;
+            break;
+        case OP_SHL_INT:
+        case OP_SHL_INT_2ADDR:
+            shiftOp = true;
+            op = kOpLsl;
+            break;
+        case OP_SHR_INT:
+        case OP_SHR_INT_2ADDR:
+            shiftOp = true;
+            op = kOpAsr;
+            break;
+        case OP_USHR_INT:
+        case OP_USHR_INT_2ADDR:
+            shiftOp = true;
+            op = kOpLsr;
+            break;
+        default:
+            printf("Invalid word arith op: 0x%x(%d)",
+                  mir->dalvikInsn.opCode, mir->dalvikInsn.opCode);
+            //dvmCompilerAbort(cUnit);
+			//exit(-1);
+    }
+    if (!callOut) {
+        rlSrc1 = loadValue(cUnit, rlSrc1, kCoreReg);
+        if (unary) {
+            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+            opRegReg(cUnit, op, rlResult.lowReg,
+                     rlSrc1.lowReg);
+        } else {
+            rlSrc2 = loadValue(cUnit, rlSrc2, kCoreReg);
+            if (shiftOp) {
+                int tReg = dvmCompilerAllocTemp(cUnit);
+                opRegRegImm(cUnit, kOpAnd, tReg, rlSrc2.lowReg, 31);
+                rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+                opRegRegReg(cUnit, op, rlResult.lowReg,
+                            rlSrc1.lowReg, tReg);
+                dvmCompilerFreeTemp(cUnit, tReg);
+            } else {
+                rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+                opRegRegReg(cUnit, op, rlResult.lowReg,
+                            rlSrc1.lowReg, rlSrc2.lowReg);
+            }
+        }
+        storeValue(cUnit, rlDest, rlResult);
+    } 
+	/*
+	else {
+        RegLocation rlResult;
+        dvmCompilerFlushAllRegs(cUnit);   
+	*/ /*
+        loadValueDirectFixed(cUnit, rlSrc2, r1);
+        LOAD_FUNC_ADDR(cUnit, r2, (int) callTgt);
+        loadValueDirectFixed(cUnit, rlSrc1, r0);
+        if (checkZero) {
+            genNullCheck(cUnit, rlSrc2.sRegLow, r1, mir->offset, NULL);
+        }
+        opReg(cUnit, kOpBlx, r2);
+        dvmCompilerClobberCallRegs(cUnit);
+        if (retReg == r0)
+            rlResult = dvmCompilerGetReturn(cUnit);
+        else
+            rlResult = dvmCompilerGetReturnAlt(cUnit);
+        storeValue(cUnit, rlDest, rlResult);
+    }*/
+    return false;	
+}
 
 static bool genArithOp(CompilationUnit *cUnit, MIR *mir)
 {
@@ -179,7 +308,8 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 	for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
 		dvmCompilerResetRegPool(cUnit); 
 		dvmCompilerClobberAllRegs(cUnit); 
-		dvmCompilerResetNullCheck(cUnit);  
+		//eric: 暂时没有用处
+		//dvmCompilerResetNullCheck(cUnit);  
 
 		for(mir = curBB->firstMIRInsn; mir; mir = mir->next) {
 			dvmCompilerResetRegPool(cUnit);	
@@ -203,8 +333,27 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 					mir->offset,
 					dalvikOpCode, dexGetOpcodeName(dalvikOpCode),
 					dalvikFormat);
-				exit(1);
+				//exit(1);
+				break;
 			}
 		}
 	}
 }
+
+UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
+{
+	return genRegCopy(cUnit, rDest, rSrc);
+}
+
+void dvmCompilerFlushRegImpl(CompilationUnit *cUnit, int rBase,
+                             int displacement, int rSrc, OpSize size)                       
+{
+    storeBaseDisp(cUnit, rBase, displacement, rSrc, size);
+}
+
+void dvmCompilerFlushRegWideImpl(CompilationUnit *cUnit, int rBase,
+								int displacement, int rSrcLo, int rSrcHi)
+{
+    storeBaseDispWide(cUnit, rBase, displacement, rSrcLo, rSrcHi);
+}
+
