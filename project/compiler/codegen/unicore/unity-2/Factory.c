@@ -215,11 +215,11 @@ static UnicoreLIR *opRegRegImm(CompilationUnit *cUnit, OpKind op, int rDest,
     else {
         if (rDest != rSrc1) {
             res = loadConstant(cUnit, rDest, value);
-            newLIR3(cUnit, opCode, rDest, rSrc1, rDest);
+            newLIR3(cUnit, cUnit->debugBB,opCode, rDest, rSrc1, rDest);
         } else {
             int rScratch = dvmCompilerAllocTemp(cUnit);
             res = loadConstant(cUnit, rScratch, value);
-            newLIR3(cUnit, opCode, rDest, rSrc1, rScratch);
+            newLIR3(cUnit, cUnit->debugBB,opCode, rDest, rSrc1, rScratch);
         }
     }
     return res;
@@ -246,12 +246,12 @@ static UnicoreLIR *opRegReg(CompilationUnit *cUnit, OpKind op, int rDestSrc1,
         case kOpCmn:
             //opCode = kThumbCmnRR;
             opCode = kUnicoreCmpAddRR;
-        return newLIR2(cUnit, opCode, rDestSrc1, rSrc2);
+        return newLIR2(cUnit,cUnit->debugBB, opCode, rDestSrc1, rSrc2);
             break;
         case kOpCmp:
             //opCode = kThumbCmpRR;
             opCode = kUnicoreCmpSubRR;
-        return newLIR2(cUnit, opCode, rDestSrc1, rSrc2);
+        return newLIR2(cUnit,cUnit->debugBB, opCode, rDestSrc1, rSrc2);
             break;
         case kOpXor:
             //opCode = kThumbEorRR;
@@ -269,7 +269,7 @@ static UnicoreLIR *opRegReg(CompilationUnit *cUnit, OpKind op, int rDestSrc1,
             //    opCode = kThumbMovRR_L2H;
             //break;
                 opCode = kUnicoreMovRR; //319
-        return newLIR2(cUnit, opCode, rDestSrc1, rSrc2);
+        return newLIR2(cUnit,cUnit->debugBB, opCode, rDestSrc1, rSrc2);
             break;
         case kOpMul:
             //opCode = kThumbMul;
@@ -278,12 +278,12 @@ static UnicoreLIR *opRegReg(CompilationUnit *cUnit, OpKind op, int rDestSrc1,
         case kOpMvn:
             //opCode = kThumbMvn;
             opCode = kUnicoreNotRR;
-        return newLIR2(cUnit, opCode, rDestSrc1, rSrc2);
+        return newLIR2(cUnit,cUnit->debugBB ,opCode, rDestSrc1, rSrc2);
             break;
         case kOpNeg:
             //opCode = kThumbNeg;
         opCode = kUnicoreRsubRR;
-        return newLIR2(cUnit, opCode, rDestSrc1, rSrc2);
+        return newLIR2(cUnit,cUnit->debugBB, opCode, rDestSrc1, rSrc2);
             break;
         case kOpOr:
             //opCode = kThumbOrr;
@@ -296,7 +296,7 @@ static UnicoreLIR *opRegReg(CompilationUnit *cUnit, OpKind op, int rDestSrc1,
         case kOpTst:
             //opCode = kThumbTst;  //bug
             opCode = kUnicoreCmpAndRR;
-        return newLIR2(cUnit, opCode, rDestSrc1, rSrc2);
+        return newLIR2(cUnit,cUnit->debugBB, opCode, rDestSrc1, rSrc2);
             break;
         case kOpLsl:
             //opCode = kThumbLslRR;
@@ -333,7 +333,7 @@ static UnicoreLIR *opRegReg(CompilationUnit *cUnit, OpKind op, int rDestSrc1,
             // dvmCompilerAbort(cUnit);
             break;
     }
-    return newLIR3(cUnit, opCode, rDestSrc1,rDestSrc1, rSrc2);
+    return newLIR3(cUnit,cUnit->debugBB, opCode, rDestSrc1,rDestSrc1, rSrc2);
 }
 
 static UnicoreLIR *loadBaseDispBody(CompilationUnit *cUnit, MIR *mir, int rBase,
@@ -457,21 +457,21 @@ static UnicoreLIR *loadBaseDispBody(CompilationUnit *cUnit, MIR *mir, int rBase,
     }
     if (shortForm) {
         if(opCode == kUnicoreLdhRRI5I5){ //chenglin change and only armv7 define
-            load = res = newLIR4(cUnit,opCode,rDest,rBase,(encodedDisp&0x3e0)>>5,encodedDisp&0x1f);
+            load = res = newLIR4(cUnit,cUnit->debugBB,opCode,rDest,rBase,(encodedDisp&0x3e0)>>5,encodedDisp&0x1f);
         }else{
-            load = res = newLIR3(cUnit, opCode, rDest, rBase, encodedDisp);
+            load = res = newLIR3(cUnit, cUnit->debugBB,opCode, rDest, rBase, encodedDisp);
         }
         if (pair) { //pass for unicore
-            load2 = newLIR3(cUnit, opCode, rDestHi, rBase, encodedDisp+4);
+            load2 = newLIR3(cUnit,cUnit->debugBB, opCode, rDestHi, rBase, encodedDisp+4);
         }
     } else {
         if (pair) { //pass for unicore
             int rTmp = dvmCompilerAllocFreeTemp(cUnit);
-            res = opRegRegImm(cUnit, kOpAdd, rTmp, rBase, displacement);
+            res = opRegRegImm(cUnit,cUnit->debugBB ,kOpAdd, rTmp, rBase, displacement);
             //load = newLIR3(cUnit, kThumbLdrRRI5, rDest, rTmp, 0);
-            load = newLIR3(cUnit, kUnicoreLdwRRI14, rDest, rTmp, 0);
+            load = newLIR3(cUnit,cUnit->debugBB ,kUnicoreLdwRRI14, rDest, rTmp, 0);
             //load2 = newLIR3(cUnit, kThumbLdrRRI5, rDestHi, rTmp, 1);
-            load2 = newLIR3(cUnit, kUnicoreLdwRRI14, rDestHi, rTmp, 4);
+            load2 = newLIR3(cUnit,cUnit->debugBB, kUnicoreLdwRRI14, rDestHi, rTmp, 4);
             dvmCompilerFreeTemp(cUnit, rTmp);
         } else {
             int rTmp = (rBase == rDest) ? dvmCompilerAllocFreeTemp(cUnit)
@@ -601,13 +601,13 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
     }
     if (shortForm) {
     if(opCode == kUnicoreSthRRI5I5){//chenglin change
-        store = res = newLIR4(cUnit,opCode,rSrc,rBase,(encodedDisp&0x3e0)>>5,encodedDisp&0x1f);
+        store = res = newLIR4(cUnit,cUnit->debugBB,opCode,rSrc,rBase,(encodedDisp&0x3e0)>>5,encodedDisp&0x1f);
     }else{
-        store = res = newLIR3(cUnit, opCode, rSrc, rBase, encodedDisp);
+        store = res = newLIR3(cUnit,cUnit->debugBB, opCode, rSrc, rBase, encodedDisp);
     }
         if (pair) {  //pass for unicore
            // store2 = newLIR3(cUnit, opCode, rSrcHi, rBase, encodedDisp + 1);
-            store2 = newLIR3(cUnit, opCode, rSrcHi, rBase, encodedDisp + 4);
+            store2 = newLIR3(cUnit,cUnit->debugBB, opCode, rSrcHi, rBase, encodedDisp + 4);
         }
     } else {
         int rScratch = dvmCompilerAllocTemp(cUnit);
@@ -615,12 +615,12 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
             res = opRegRegImm(cUnit, kOpAdd, rScratch, rBase, displacement);
             //store =  newLIR3(cUnit, kThumbStrRRI5, rSrc, rScratch, 0);
             //store2 = newLIR3(cUnit, kThumbStrRRI5, rSrcHi, rScratch, 1);
-        store =  newLIR3(cUnit, kUnicoreStwRRI14, rSrc, rScratch, 0);
-            store2 = newLIR3(cUnit, kUnicoreStwRRI14, rSrcHi, rScratch, 4);
+        store =  newLIR3(cUnit,debugBB, kUnicoreStwRRI14, rSrc, rScratch, 0);
+            store2 = newLIR3(cUnit,cUnit->debugBB, kUnicoreStwRRI14, rSrcHi, rScratch, 4);
 
         } else {
             res = loadConstant(cUnit, rScratch, displacement);
-            store = newLIR3(cUnit, opCode, rSrc, rBase, rScratch);
+            store = newLIR3(cUnit,cUnit->debugBB,opCode, rSrc, rBase, rScratch);
         }
         dvmCompilerFreeTemp(cUnit, rScratch);
     }
