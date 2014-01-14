@@ -55,7 +55,8 @@ void insertBB2cUnit(DexFile *pDexFile,CodeItem *pCodeItem,int startIdx){
 
 }
 
-void dvmCompilerAppendMIR(BasicBlock *bb,MIR *mir){
+void dvmCompilerAppendMIR(BasicBlock *bb,MIR *mir)
+{
 	if(NULL == bb->firstMIRInsn){
 		bb->lastMIRInsn = bb->firstMIRInsn = mir;
 		mir->prev = mir->next = NULL;
@@ -110,26 +111,26 @@ void insertInsns2BB(DexFile * pDexFile, CodeItem * pCodeItem ,int startIdx,int e
 }
 		
 
-void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt){
+void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt)
+{
 	int insnIdx = 0;
-		
-        DecodedInstruction decInsn;
+	DecodedInstruction decInsn;
 	
     while (insnIdx < insnsCnt) {
-	MIR * mir;
-	mir = dvmCompilerNew(sizeof(MIR),true);
-	if( NULL==mir ){
-		printf("error : alloc mem of mir[debug]!\n");
-		return ;
-	}
-	mir->offset = insnIdx;
-	mir->prev = NULL;
-	mir->next = NULL;
-	mir->ssaRep = NULL;
+		MIR * mir;
+		mir = dvmCompilerNew(sizeof(MIR),true);
+		if( NULL==mir ){
+			printf("error : alloc mem of mir[debug]!\n");
+			return ;
+		}
+		mir->offset = insnIdx;
+		mir->prev = NULL;
+		mir->next = NULL;
+		mir->ssaRep = NULL;
 
-	parseInsn(&insns[insnIdx],&mir->dalvikInsn);
-	dvmCompilerAppendMIR(curBB,mir);
-	nextInsn(insns,&insnIdx);
+		parseInsn(&insns[insnIdx],&mir->dalvikInsn);
+		dvmCompilerAppendMIR(curBB,mir);
+		nextInsn(insns,&insnIdx);
     }
     
     return ;

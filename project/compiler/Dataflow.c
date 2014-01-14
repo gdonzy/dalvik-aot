@@ -877,6 +877,10 @@ static void dataFlowSSAFormat3RC(CompilationUnit *cUnit, MIR *mir)
 void dvmCompilerDoSSAConversion(CompilationUnit *cUnit, BasicBlock *bb)
 {
 	MIR *mir;
+#ifdef DEBUG                                                                           
+    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
+#endif
+
 	for (mir = bb->firstMIRInsn; mir; mir = mir->next) {
 		mir->ssaRep = dvmCompilerNew(sizeof(SSARepresentation), true);
 		

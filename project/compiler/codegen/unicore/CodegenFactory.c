@@ -61,6 +61,11 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 	rlSrc = dvmCompilerUpdateLoc(cUnit, rlSrc);    
 	rlDest = dvmCompilerUpdateLoc(cUnit, rlDest);  
 	if (rlSrc.location == kLocPhysReg) {  
+#ifdef DEBUG 
+    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
+	printf("the Src reg is phy\n");
+#endif
+
         if (dvmCompilerIsLive(cUnit, rlSrc.lowReg) || (rlDest.location == kLocPhysReg)) {
 			// Src is live or Dest has assigned reg.
 			rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false); 
@@ -71,6 +76,11 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 			dvmCompilerClobber(cUnit, rlSrc.lowReg);  
 		}
 	} else {
+#ifdef DEBUG 
+    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
+	printf("the Dest reg is not phy\n");
+#endif
+
 		// Load Src either into promoted Dest or temps allocated for Dest
 		rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false);   
 		loadValueDirect(cUnit, rlSrc, rlDest.lowReg);  

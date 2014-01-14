@@ -197,15 +197,18 @@ static bool genArithOp(CompilationUnit *cUnit, MIR *mir)
 static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
 {
 	OpCode opCode = mir->dalvikInsn.opCode;
-/*
+
 	RegLocation rlDest;
 	RegLocation rlSrc;
 	RegLocation rlResult;
-*/
+
+#ifdef DEBUG 
+	printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);	
+#endif
     if ( (opCode >= OP_ADD_INT_2ADDR) && (opCode <= OP_REM_DOUBLE_2ADDR)) {
         return genArithOp( cUnit, mir );
     }
-/*
+
     if (mir->ssaRep->numUses == 2)
         rlSrc = dvmCompilerGetSrcWide(cUnit, mir, 0, 1);
     else
@@ -216,6 +219,7 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
         rlDest = dvmCompilerGetDest(cUnit, mir, 0);
 
     switch (opCode) {
+/*
         case OP_DOUBLE_TO_INT:
         case OP_INT_TO_FLOAT:
         case OP_FLOAT_TO_INT:
@@ -257,10 +261,12 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
             rlSrc = dvmCompilerUpdateLocWide(cUnit, rlSrc);
             rlSrc = dvmCompilerWideToNarrow(cUnit, rlSrc);
             // Intentional fallthrough
+*/
         case OP_MOVE:
         case OP_MOVE_OBJECT:           
             storeValue(cUnit, rlDest, rlSrc);
             break;
+/*
         case OP_INT_TO_BYTE:
             rlSrc = loadValue(cUnit, rlSrc, kCoreReg);
             rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
@@ -290,21 +296,24 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
             storeValue(cUnit, rlDest, rlResult);
             break;
         }
+*/
         default:
             return true;
 		
     }
     return false;
-	*/
 }
 
 void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 {
 	BasicBlock *curBB;
 	MIR *mir;
-	bool notHandled;	
+	bool notHandled = false;	
 
-	for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
+	//for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
+#ifdef DEBUG
+		curBB = cUnit->debugBB;
+#endif
 		dvmCompilerResetRegPool(cUnit); 
 		dvmCompilerClobberAllRegs(cUnit); 
 		//eric: 暂时没有用处
@@ -319,6 +328,9 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 
 			switch(dalvikFormat) {
 				case kFmt12x:
+#ifdef DEBUG
+					printf("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);	
+#endif
 					notHandled = handleFmt12x(cUnit, mir);	
 					break;
 				default:
@@ -335,7 +347,7 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 				break;
 			}
 		}
-	}
+//	}
 }
 
 UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)

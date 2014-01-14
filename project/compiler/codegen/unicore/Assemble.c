@@ -349,14 +349,14 @@ UnicoreEncodingMap EncodingMap[kUnicoreLast] = {
 
 };
 
-void memAlloc4Assemble(BasicBlock *bb){
+void memAlloc4Assemble(BasicBlock *bb) {
 	int size = 0;
 	UnicoreLIR * curLIR = NULL;
 	for(curLIR = (UnicoreLIR*)(bb->firstLIRInsn) ; curLIR != NULL ; curLIR =(UnicoreLIR *)(curLIR->generic.next)){
 		size += EncodingMap[curLIR->opCode].size*2;		
 	}
 
-	printf("malloc buffer size = %d",size);
+	printf("!!!!!The current function is %s: malloc buffer size = %d\n", __func__, size);
 	
 	if( 0 != size ){
 		bb->codeBuffer = dvmCompilerNew(size,true);
@@ -368,9 +368,7 @@ void memAlloc4Assemble(BasicBlock *bb){
 	}
 	
 	return ;
-	
 }
-
 
 //static void assembleInstructions(CompilationUnit *cUnit,
 //                                            intptr_t startAddr)

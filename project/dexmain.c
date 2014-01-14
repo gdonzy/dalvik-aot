@@ -72,7 +72,7 @@ int main(int argc , char * argv[]){
 
 	instrWidthTable=dexCreateInstrWidthTable();
 	instrFormatTable=dexCreateInstrFormatTable();
-printf("memPtr address is %p", memPtr);
+	printf("memPtr address is %p", memPtr);
 
 	pDexFile = parseDexFile(memPtr,length);
 	
@@ -127,7 +127,10 @@ printf("memPtr address is %p", memPtr);
 
 	debugCodeOffset = 0x24ec;
 	
-//	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
+	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
+	#ifdef DEBUG
+		printf("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
+	#endif
 
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
@@ -139,8 +142,10 @@ printf("memPtr address is %p", memPtr);
 		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item)-(u1*)(pDexFile->baseAddr))){
 			pDebugCUnit = cUnit;
 			//eric
+		#ifdef DEBUG
 			printf("i'm in debugBB\n");
 			printf("%x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
+		#endif
 		}
 	}
 
