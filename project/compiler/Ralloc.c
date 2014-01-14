@@ -67,7 +67,7 @@ void dvmCompilerRegAlloc(CompilationUnit *cUnit)
 //        inferTypes(cUnit, cUnit->blockList[i]);
 //    }
     for (curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
-	inferTypes(cUnit,curBB);
+		inferTypes(cUnit,curBB);
     }
 
     if (simpleTrace(cUnit)) {
@@ -80,12 +80,12 @@ void dvmCompilerRegAlloc(CompilationUnit *cUnit)
             cUnit->regLocation[i].sRegLow =
                 DECODE_REG(dvmConvertSSARegToDalvik(cUnit, loc[i].sRegLow));
         }
-    } else {
+    }// else {
 //        // Compute live ranges
 //        ranges = dvmCompilerNew(cUnit->numSSARegs * sizeof(*ranges), true);
 //        for (i=0; i < cUnit->numSSARegs; i++)
 //            ranges[i].active = false;
 //        seqNum = computeLiveRange(ranges, cUnit->blockList[i], seqNum);
 //        //TODO: phi squash & linear scan promotion
-    }
+//    }
 }

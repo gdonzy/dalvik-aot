@@ -576,7 +576,7 @@ typedef enum OpCode {
     OP_UNUSED_FF                    = 0xff, /* reserved for code expansion */
 } OpCode;
 
-
+typedef unsigned char InstructionFormat;
 enum InstructionFormat {
     kFmtUnknown = 0,
     kFmt10x,        // op

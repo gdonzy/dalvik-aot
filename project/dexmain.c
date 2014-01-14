@@ -8,9 +8,9 @@
 #include "toOpt.h"
 #include <string.h>
 #include "processBB/hprocessBB.h"
-#include "compiler/codegen/unicore/UnicoreLIR.h"
 #include "compiler/CompilerUtility.h"
 #include "compiler/CompilerIR.h"
+#include "compiler/codegen/unicore/UnicoreLIR.h"
 #include "compiler/Compiler.h"
 
 #include "compiler/codegen/CompilerCodegen.h"

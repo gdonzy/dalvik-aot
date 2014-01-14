@@ -53,7 +53,7 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
         setMemRefType(loadPcRel, true, kLiteral);
     loadPcRel->aliasInfo = dataTarget->operands[0];
     res = loadPcRel;
-    dvmCompilerAppendLIR(cUnit, (LIR *) loadPcRel);
+    dvmCompilerAppendLIR(cUnit->debugBB, (LIR *) loadPcRel);
 
     /*
      * To save space in the constant pool, we use the ADD_RRI8 instruction to
@@ -85,10 +85,95 @@ static UnicoreLIR *loadConstant(CompilationUnit *cUnit, int rDest, int value)
     return loadConstantNoClobber(cUnit, rDest, value);
 }    
 
-static UnicoreLIR *opRegRegReg(CompilationUnit *cUnit, OpKind op, int rDest,                                                                                              
-                           int rSrc1, int rSrc2)                                                                                                                      
+static UnicoreLIR *opRegImm(CompilationUnit *cUnit, OpKind op, int rDestSrc1,
+                        int value)
+{
+    UnicoreLIR *res;
+    bool neg = (value < 0);
+    int absValue = (neg) ? -value : value;
+//    bool shortForm = (absValue & 0xff) == absValue;
+    bool shortForm = (absValue & 0x1ff) == absValue;
+    UnicoreOpCode opCode = kUnicoreBkpt;
+    switch (op) {
+        case kOpAdd:
+            //if ( !neg && (rDestSrc1 == 13) && (value <= 508)) { /* sp */
+            //    assert((value & 0x3) == 0);
+            //    return newLIR1(cUnit, kThumbAddSpI7, value >> 2);
+            //} else if (shortForm) {
+            //    opCode = (neg) ? kThumbSubRI8 : kThumbAddRI8;
+            //} else
+            //    opCode = kThumbAddRRR;
+        if ( !neg && (rDestSrc1 == 29) && (value <= 508)) { /* sp */
+                assert((value & 0x3) == 0);
+                return newLIR1(cUnit, cUnit->debugBB, kUnicoreAddSpI9, value);
+            } else if (shortForm) {
+                opCode = (neg) ? kUnicoreSubRRI9 : kUnicoreAddRRI9;
+            } else 
+                opCode = kUnicoreAddRRR;
+            break;
+        case kOpSub:
+            //if (!neg && (rDestSrc1 == 13) && (value <= 508)) { /* sp */
+            //    assert((value & 0x3) == 0);
+            //    return newLIR1(cUnit, kThumbSubSpI7, value >> 2);
+            //} else if (shortForm) {
+            //    opCode = (neg) ? kThumbAddRI8 : kThumbSubRI8;
+            //} else
+            //    opCode = kThumbSubRRR;
+        if (!neg && (rDestSrc1 == 29) && (value <= 508)) { /* sp */
+                assert((value & 0x3) == 0);
+                return newLIR1(cUnit, cUnit->debugBB,  kUnicoreSubSpI9, value);
+            } else if (shortForm) {
+                opCode = (neg) ? kUnicoreAddRRI9 : kUnicoreSubRRI9;
+            } else
+                opCode = kUnicoreSubRRR;
+            break;
+        case kOpCmp:
+            //if (neg)
+            //   shortForm = false;
+            //if (LOWREG(rDestSrc1) && shortForm) {
+            //    opCode = kThumbCmpRI8;
+            //} else if (LOWREG(rDestSrc1)) {
+            //    opCode = kThumbCmpRR;
+            //} else {
+            //    shortForm = false;
+            //    opCode = kThumbCmpHL;
+            //}
+        if (neg)
+               shortForm = false;
+            if (shortForm) {
+                opCode = kUnicoreCmpSubRI9;
+            } else{
+                opCode = kUnicoreCmpSubRR;
+            }
+
+            break;
+        default:
+            printf("Jit: bad case in opRegImm");
+           // dvmCompilerAbort(cUnit);
+            break;
+    }
+    if (shortForm){
+    if(op == kOpCmp){
+        res = newLIR2(cUnit, cUnit->debugBB, opCode,rDestSrc1,absValue);
+    }else{
+        res = newLIR3(cUnit, cUnit->debugBB, opCode, rDestSrc1,rDestSrc1, absValue);
+    }
+    }
+    else {
+        int rScratch = dvmCompilerAllocTemp(cUnit);
+        res = loadConstant(cUnit, rScratch, value);
+        if (op == kOpCmp)
+            newLIR2(cUnit, cUnit->debugBB, opCode, rDestSrc1, rScratch);
+        else
+            newLIR3(cUnit, cUnit->debugBB, opCode, rDestSrc1, rDestSrc1, rScratch);
+    }
+    return res;                                                                 
+}
+
+static UnicoreLIR *opRegRegReg(CompilationUnit *cUnit, OpKind op, int rDest,      
+                           int rSrc1, int rSrc2)                                  
 {   
-    UnicoreOpCode opCode = kUnicoreBkpt;                                                                                                                                  
+    UnicoreOpCode opCode = kUnicoreBkpt;                                   
     switch (op) {
         case kOpAdd:
             //opCode = kThumbAddRRR;                                                                                                                                  
@@ -467,7 +552,7 @@ static UnicoreLIR *loadBaseDispBody(CompilationUnit *cUnit, MIR *mir, int rBase,
     } else {
         if (pair) { //pass for unicore
             int rTmp = dvmCompilerAllocFreeTemp(cUnit);
-            res = opRegRegImm(cUnit,cUnit->debugBB ,kOpAdd, rTmp, rBase, displacement);
+            res = opRegRegImm(cUnit, kOpAdd, rTmp, rBase, displacement);
             //load = newLIR3(cUnit, kThumbLdrRRI5, rDest, rTmp, 0);
             load = newLIR3(cUnit,cUnit->debugBB ,kUnicoreLdwRRI14, rDest, rTmp, 0);
             //load2 = newLIR3(cUnit, kThumbLdrRRI5, rDestHi, rTmp, 1);
@@ -477,7 +562,7 @@ static UnicoreLIR *loadBaseDispBody(CompilationUnit *cUnit, MIR *mir, int rBase,
             int rTmp = (rBase == rDest) ? dvmCompilerAllocFreeTemp(cUnit)
                                         : rDest;
             res = loadConstant(cUnit, rTmp, displacement);
-            load = newLIR3(cUnit, opCode, rDest, rBase, rTmp);
+            load = newLIR3(cUnit, cUnit->debugBB, opCode, rDest, rBase, rTmp);
             if (rBase == rFP)
                 annotateDalvikRegAccess(load, displacement >> 2,
                                         true /* isLoad */);
@@ -596,8 +681,8 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
 
             break;
         default:
-            LOGE("Jit: bad case in storeBaseIndexedBody");
-            dvmCompilerAbort(cUnit);
+            printf("Jit: bad case in storeBaseIndexedBody");
+            //dvmCompilerAbort(cUnit);
     }
     if (shortForm) {
     if(opCode == kUnicoreSthRRI5I5){//chenglin change
@@ -615,7 +700,7 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
             res = opRegRegImm(cUnit, kOpAdd, rScratch, rBase, displacement);
             //store =  newLIR3(cUnit, kThumbStrRRI5, rSrc, rScratch, 0);
             //store2 = newLIR3(cUnit, kThumbStrRRI5, rSrcHi, rScratch, 1);
-        store =  newLIR3(cUnit,debugBB, kUnicoreStwRRI14, rSrc, rScratch, 0);
+        store =  newLIR3(cUnit, cUnit->debugBB, kUnicoreStwRRI14, rSrc, rScratch, 0);
             store2 = newLIR3(cUnit,cUnit->debugBB, kUnicoreStwRRI14, rSrcHi, rScratch, 4);
 
         } else {
@@ -641,11 +726,18 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
     return res;
 }
 
-static enicoreLIR *storeBaseDisp(CompilationUnit *cUnit, int rBase,     
+static UnicoreLIR *storeBaseDisp(CompilationUnit *cUnit, int rBase,     
 							 int displacement, int rSrc, OpSize size)       
 {
     return storeBaseDispBody(cUnit, rBase, displacement, rSrc, -1, size);
 }
+
+static UnicoreLIR *storeBaseDispWide(CompilationUnit *cUnit, int rBase,
+                                 int displacement, int rSrcLo, int rSrcHi)
+{
+    return storeBaseDispBody(cUnit, rBase, displacement, rSrcLo, rSrcHi, kLong);
+}
+
 
 static UnicoreLIR* genRegCopyNoInsert(CompilationUnit *cUnit, int rDest, int rSrc)
 {
@@ -677,7 +769,7 @@ static UnicoreLIR* genRegCopyNoInsert(CompilationUnit *cUnit, int rDest, int rSr
 static UnicoreLIR* genRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)                    
 {
     UnicoreLIR *res = genRegCopyNoInsert(cUnit, rDest, rSrc);
-    dvmCompilerAppendLIR(cUnit, (LIR*)res);
+    dvmCompilerAppendLIR(cUnit->debugBB, (LIR*)res);
     return res;
 }
 

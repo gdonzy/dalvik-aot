@@ -3,6 +3,7 @@
 #include "../../../DEX.h"
 #include "../../CompilerUtility.h"
 #include "../../CompilerIR.h"
+#include "../../Dataflow.h"
 #include "UnicoreLIR.h"
 #include "Codegen.h"
 #include "Ralloc.h"
@@ -264,6 +265,30 @@ extern void dvmCompilerFreeTemp(CompilationUnit *cUnit, int reg)
     //dvmCompilerAbort(cUnit);
 }
 
+/*          
+ * FIXME - this needs to also check the preserved pool once we start
+ * start using preserved registers.
+ */ 
+extern RegisterInfo *dvmCompilerIsLive(CompilationUnit *cUnit, int reg)
+{
+    RegisterInfo *p = cUnit->regPool->coreTemps;
+    int numTemps = cUnit->regPool->numCoreTemps;
+    int i;
+    for (i=0; i< numTemps; i++) {
+        if (p[i].reg == reg) {
+            return p[i].live ? &p[i] : NULL;
+        }
+    }
+    p = cUnit->regPool->FPTemps;
+    numTemps = cUnit->regPool->numFPTemps;
+    for (i=0; i< numTemps; i++) {
+        if (p[i].reg == reg) {
+            return p[i].live ? &p[i] : NULL;
+        }
+    }
+    return NULL;
+}
+
 extern RegisterInfo *dvmCompilerIsTemp(CompilationUnit *cUnit, int reg)                  
 {       
     RegisterInfo *p = cUnit->regPool->coreTemps;
@@ -352,7 +377,7 @@ extern void dvmCompilerClobberAllRegs(CompilationUnit *cUnit)
         dvmCompilerClobber(cUnit, cUnit->regPool->coreTemps[i].reg);
     }    
     for (i=0; i< cUnit->regPool->numFPTemps; i++) {
-        dvmCompilerClobber(cUnit, cUnit->regPool->FPTemps[i].reg);                    
+        dvmCompilerClobber(cUnit, cUnit->regPool->FPTemps[i].reg);            
 	}    
 }
 
@@ -360,7 +385,7 @@ static bool regClassMatches(int regClass, int reg)
 {
 	if (regClass == kAnyReg) {
 		return true;
-	} else if {
+	} else if (regClass == kCoreReg) {
 		return !FPREG(reg);
 	} else {
 		return FPREG(reg);

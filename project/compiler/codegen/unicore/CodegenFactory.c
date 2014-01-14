@@ -1,7 +1,8 @@
-#include "DEX.h"
+/*#include "DEX.h"
 #include "compiler/CompilerUtility.h"
 #include "compiler/CompilerIR.h"
 #include "compiler/codegen/unicore/Ralloc.h"
+*/
 
 /* Load a word at base + displacement.  Displacement must be word multiple */
 static UnicoreLIR *loadWordDisp(CompilationUnit *cUnit, int rBase, int displacement,
@@ -23,7 +24,8 @@ static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,
     if (rlSrc.location == kLocPhysReg) {
         genRegCopy(cUnit, reg1, rlSrc.lowReg);
     } else  if (rlSrc.location == kLocRetval) {
-        loadWordDisp(cUnit, rGLUE, offsetof(InterpState, retval), reg1);
+        //eric
+		//loadWordDisp(cUnit, rGLUE, offsetof(InterpState, retval), reg1);
     } else {
         assert(rlSrc.location == kLocDalvikFrame);
         loadWordDisp(cUnit, rFP, dvmCompilerS2VReg(cUnit, rlSrc.sRegLow) << 2,
@@ -40,9 +42,10 @@ static RegLocation loadValue(CompilationUnit *cUnit, RegLocation rlSrc,
         rlSrc.location = kLocPhysReg;
         dvmCompilerMarkLive(cUnit, rlSrc.lowReg, rlSrc.sRegLow);
     } else if (rlSrc.location == kLocRetval) {
-        loadWordDisp(cUnit, rGLUE, offsetof(InterpState, retval), rlSrc.lowReg);
-        rlSrc.location = kLocPhysReg;
-        dvmCompilerClobber(cUnit, rlSrc.lowReg);
+        //eric
+		//loadWordDisp(cUnit, rGLUE, offsetof(InterpState, retval), rlSrc.lowReg);
+        //rlSrc.location = kLocPhysReg;
+        //dvmCompilerClobber(cUnit, rlSrc.lowReg);
     }
     return rlSrc;
 }
@@ -78,18 +81,21 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 	dvmCompilerMarkDirty(cUnit, rlDest.lowReg); 
 
 	if (rlDest.location == kLocRetval) { 
-		storeBaseDisp(cUnit, rGLUE, offsetof(InterpState, retval), rlDest.lowReg, kWord);
-		dvmCompilerClobber(cUnit, rlDest.lowReg); 
+		//eric
+		//	storeBaseDisp(cUnit, rGLUE, offsetof(InterpState, retval), rlDest.lowReg, kWord);
+		//dvmCompilerClobber(cUnit, rlDest.lowReg); 
 	} else {
 		dvmCompilerResetDefLoc(cUnit, rlDest); 
 		//if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow)) { 
 		if (true) {
-			defStart = (LIR *)cUnit->lastLIRInsn;
+//eric
+/*			defStart = (LIR *)cUnit->lastLIRInsn;
 			int vReg = dvmCompilerS2VReg(cUnit, rlDest.sRegLow);
 			storeBaseDisp(cUnit, rFP, vReg << 2, rlDest.lowReg, kWord);  
 			dvmCompilerMarkClean(cUnit, rlDest.lowReg); 
 			defEnd = (LIR *)cUnit->lastLIRInsn; 
 			dvmCompilerMarkDef(cUnit, rlDest, defStart, defEnd);	
+*/
 		}
 	}
 }

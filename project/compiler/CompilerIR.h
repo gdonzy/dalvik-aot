@@ -82,7 +82,7 @@ typedef struct CompilationUnit {
 //    const JitTraceDescription *traceDesc;
 //    LIR *firstLIRInsn;
 //    LIR *lastLIRInsn;
-//    LIR *wordList;
+    LIR *wordList;     //eric
 //    LIR *chainCellOffsetLIR;
 //    GrowableList pcReconstructionList;
 //    int headerSize;                     // bytes before the first code ptr

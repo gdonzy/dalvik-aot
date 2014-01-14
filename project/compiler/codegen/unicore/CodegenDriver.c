@@ -37,21 +37,25 @@ static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,
             op = kOpMul;
             break;
         case OP_DIV_INT:
-        case OP_DIV_INT_2ADDR:
+        //eric
+	/*	case OP_DIV_INT_2ADDR:
             callOut = true;
             checkZero = true;
             callTgt = __aeabi_idiv;
             retReg = r0;
-            break;
+            break;*/
         /* NOTE: returns in r1 */
         case OP_REM_INT:
+//eric
+/*
         case OP_REM_INT_2ADDR:
             callOut = true;
             checkZero = true;
             callTgt = __aeabi_idivmod;
             retReg = r1;
             break;
-        case OP_AND_INT:
+  */
+	      case OP_AND_INT:
         case OP_AND_INT_2ADDR:
             op = kOpAnd;
             break;
@@ -310,9 +314,8 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 			dvmCompilerResetRegPool(cUnit);	
 			dvmCompilerResetDefTracking(cUnit);
 			
-			OpCode dalvikOpCode = mir->dalvikInsn.opcode;
-			InstructionFormat dalvikFormat = 
-				dexGetInstrFormat(instrFormatTable, dalvikOpCode);
+			OpCode dalvikOpCode = mir->dalvikInsn.opCode;
+			InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
 
 			switch(dalvikFormat) {
 				case kFmt12x:

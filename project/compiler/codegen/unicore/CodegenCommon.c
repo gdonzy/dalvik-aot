@@ -233,6 +233,44 @@ static UnicoreLIR *newLIR4(CompilationUnit *cUnit,BasicBlock *bb, UnicoreOpCode 
     return insn;
 }
 
+/*
+ * Search the existing constants in the literal pool for an exact or close match
+ * within specified delta (greater or equal to 0). 
+ */
+static UnicoreLIR *scanLiteralPool(CompilationUnit *cUnit, int value, unsigned int delta)
+{
+    LIR *dataTarget = cUnit->wordList;
+    while (dataTarget) {
+        if (((unsigned) (value - ((UnicoreLIR *) dataTarget)->operands[0])) <= delta)
+		return (UnicoreLIR *) dataTarget; 
+	dataTarget = dataTarget->next;
+	}
+	return NULL;
+}
+
+/*
+ * The following are building blocks to insert constants into the pool or
+ * instruction streams.
+ */
+
+/* Add a 32-bit constant either in the constant pool or mixed with code */ 
+static UnicoreLIR *addWordData(CompilationUnit *cUnit, int value, bool inPlace)
+{
+    /* Add the constant to the literal pool */   
+    if (!inPlace) {  
+        UnicoreLIR *newValue = dvmCompilerNew(sizeof(UnicoreLIR), true);
+        newValue->operands[0] = value;
+        newValue->generic.next = cUnit->wordList; 
+        cUnit->wordList = (LIR *) newValue; 
+        return newValue;
+    } else {
+           /* Add the constant in the middle of code stream */ 
+   		//newLIR1(cUnit, kArm16BitData, (value & 0xffff));  
+        //newLIR1(cUnit, kArm16BitData, (value >> 16)); 
+  		newLIR1(cUnit, cUnit->debugBB, kUnicore32BitData, value); 
+    }  
+    return NULL; 
+}
 
 UnicoreLIR *  debugNewLIR0(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode){
 	return (newLIR0(pCUnit,bb,opCode));

@@ -1,8 +1,8 @@
-/*#include "compiler/CompilerUtility.h"
-#include "compiler/CompilerIR.h"
-#include "compiler/Dataflow.h"
-#include "compiler/codegen/unicore/UnicoreLIR.h"
-*/
+//#include "../../CompilerUtility.h"
+//#include "../../CompilerIR.h"
+//#include ",,/../Dataflow.h"
+//#include "UnicoreLIR.h"
+
 static inline int dvmCompilerS2VReg(CompilationUnit *cUnit, int sReg)
 {                              
     assert(sReg != INVALID_SREG);
@@ -36,6 +36,7 @@ extern RegLocation dvmCompilerGetDestWide(CompilationUnit *cUnit, MIR *mir, int 
 extern RegLocation dvmCompilerGetSrc(CompilationUnit *cUnit, MIR *mir, int num); 
 extern RegLocation dvmCompilerGetDest(CompilationUnit *cUnit, MIR *mir, int num);
 
+extern RegisterInfo *dvmCompilerIsLive(CompilationUnit *cUnit, int reg);
 extern RegisterInfo *dvmCompilerIsTemp(CompilationUnit *cUnit, int reg);
 extern void dvmCompilerFreeTemp(CompilationUnit *cUnit, int reg);
 extern void dvmCompilerClobberAllRegs(CompilationUnit *cUnit);
