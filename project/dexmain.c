@@ -127,7 +127,7 @@ printf("memPtr address is %p", memPtr);
 
 	debugCodeOffset = 0x24ec;
 	
-	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
+//	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
 
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){

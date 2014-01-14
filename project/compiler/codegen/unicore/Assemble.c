@@ -356,6 +356,8 @@ void memAlloc4Assemble(BasicBlock *bb){
 		size += EncodingMap[curLIR->opCode].size*2;		
 	}
 
+	printf("malloc buffer size = %d",size);
+	
 	if( 0 != size ){
 		bb->codeBuffer = dvmCompilerNew(size,true);
 		bb->sizeOfBuffer = size;

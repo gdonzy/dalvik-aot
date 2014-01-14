@@ -42,10 +42,10 @@ UnicoreLIR *  debugNewLIR4(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode 
 void debugNewLIR2Assemble(CompilationUnit *pDebugCUnit){
 	BasicBlock *bb = pDebugCUnit->debugBB;
 	//to do something (switch case .....)	
-	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r1,20);
-	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r0,0);
-	debugNewLIR3(pDebugCUnit,bb,kUnicoreLdwRRR,r2,rFP,r1);
-	debugNewLIR3(pDebugCUnit,bb,kUnicoreStwRRR,r2,rFP,r0);	
+//	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r1,20);
+//	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r0,0);
+//	debugNewLIR3(pDebugCUnit,bb,kUnicoreLdwRRR,r2,rFP,r1);
+//	debugNewLIR3(pDebugCUnit,bb,kUnicoreStwRRR,r2,rFP,r0);	
 
 	debugDvmCompilerAssembleLIR(bb);		
 	
