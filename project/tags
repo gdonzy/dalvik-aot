@@ -20,8 +20,8 @@ CompilationUnit	compiler/CompilerIR.h	/^} CompilationUnit;$/;"	t	typeref:struct:
 CompilationUnitList	compiler/CompilerIR.h	/^typedef struct CompilationUnitList{$/;"	s
 CompilationUnitList	compiler/CompilerIR.h	/^}CompilationUnitList;$/;"	t	typeref:struct:CompilationUnitList
 DEBUG	DEX.h	13;"	d
-DECODE_ALIAS_INFO_REG	compiler/codegen/unicore/UnicoreLIR.h	105;"	d
-DECODE_ALIAS_INFO_WIDE	compiler/codegen/unicore/UnicoreLIR.h	106;"	d
+DECODE_ALIAS_INFO_REG	compiler/codegen/unicore/UnicoreLIR.h	111;"	d
+DECODE_ALIAS_INFO_WIDE	compiler/codegen/unicore/UnicoreLIR.h	112;"	d
 DECODE_REG	compiler/Dataflow.h	77;"	d
 DECODE_SUB	compiler/Dataflow.h	78;"	d
 DF_A_IS_REG	compiler/Dataflow.h	59;"	d
@@ -91,26 +91,26 @@ DexStringId	DEX.h	/^typedef struct DexStringId {$/;"	s
 DexStringId	DEX.h	/^} DexStringId;$/;"	t	typeref:struct:DexStringId
 DexTypeId	DEX.h	/^typedef struct DexTypeId {$/;"	s
 DexTypeId	DEX.h	/^} DexTypeId;$/;"	t	typeref:struct:DexTypeId
-ENCODE_ALL	compiler/codegen/unicore/UnicoreLIR.h	100;"	d
+ENCODE_ALL	compiler/codegen/unicore/UnicoreLIR.h	106;"	d
 ENCODE_CCODE	compiler/codegen/unicore/UnicoreLIR.h	39;"	d
-ENCODE_CCODE	compiler/codegen/unicore/UnicoreLIR.h	88;"	d
-ENCODE_DALVIK_REG	compiler/codegen/unicore/UnicoreLIR.h	92;"	d
+ENCODE_CCODE	compiler/codegen/unicore/UnicoreLIR.h	94;"	d
+ENCODE_DALVIK_REG	compiler/codegen/unicore/UnicoreLIR.h	98;"	d
 ENCODE_FP_STATUS	compiler/codegen/unicore/UnicoreLIR.h	40;"	d
-ENCODE_FP_STATUS	compiler/codegen/unicore/UnicoreLIR.h	89;"	d
-ENCODE_FRAME_REF	compiler/codegen/unicore/UnicoreLIR.h	96;"	d
-ENCODE_HEAP_REF	compiler/codegen/unicore/UnicoreLIR.h	97;"	d
-ENCODE_LITERAL	compiler/codegen/unicore/UnicoreLIR.h	93;"	d
-ENCODE_LITPOOL_REF	compiler/codegen/unicore/UnicoreLIR.h	98;"	d
-ENCODE_MEM_DEF	compiler/codegen/unicore/UnicoreLIR.h	101;"	d
-ENCODE_MEM_USE	compiler/codegen/unicore/UnicoreLIR.h	102;"	d
+ENCODE_FP_STATUS	compiler/codegen/unicore/UnicoreLIR.h	95;"	d
+ENCODE_FRAME_REF	compiler/codegen/unicore/UnicoreLIR.h	102;"	d
+ENCODE_HEAP_REF	compiler/codegen/unicore/UnicoreLIR.h	103;"	d
+ENCODE_LITERAL	compiler/codegen/unicore/UnicoreLIR.h	99;"	d
+ENCODE_LITPOOL_REF	compiler/codegen/unicore/UnicoreLIR.h	104;"	d
+ENCODE_MEM_DEF	compiler/codegen/unicore/UnicoreLIR.h	107;"	d
+ENCODE_MEM_USE	compiler/codegen/unicore/UnicoreLIR.h	108;"	d
 ENCODE_REG_LIST	compiler/codegen/unicore/UnicoreLIR.h	35;"	d
-ENCODE_REG_LIST	compiler/codegen/unicore/UnicoreLIR.h	84;"	d
+ENCODE_REG_LIST	compiler/codegen/unicore/UnicoreLIR.h	90;"	d
 ENCODE_REG_LR	compiler/codegen/unicore/UnicoreLIR.h	37;"	d
-ENCODE_REG_LR	compiler/codegen/unicore/UnicoreLIR.h	86;"	d
+ENCODE_REG_LR	compiler/codegen/unicore/UnicoreLIR.h	92;"	d
 ENCODE_REG_PC	compiler/codegen/unicore/UnicoreLIR.h	38;"	d
-ENCODE_REG_PC	compiler/codegen/unicore/UnicoreLIR.h	87;"	d
+ENCODE_REG_PC	compiler/codegen/unicore/UnicoreLIR.h	93;"	d
 ENCODE_REG_SP	compiler/codegen/unicore/UnicoreLIR.h	36;"	d
-ENCODE_REG_SP	compiler/codegen/unicore/UnicoreLIR.h	85;"	d
+ENCODE_REG_SP	compiler/codegen/unicore/UnicoreLIR.h	91;"	d
 ENCODE_REG_SUB	compiler/Dataflow.h	76;"	d
 ENCODING_MAP	compiler/codegen/unicore/Assemble.c	11;"	d	file:
 EncodingMap	compiler/codegen/unicore/Assemble.c	/^UnicoreEncodingMap EncodingMap[kUnicoreLast] = {$/;"	v
@@ -130,14 +130,14 @@ INST_B	toOpt.c	11;"	d	file:
 INST_INST	toOpt.c	9;"	d	file:
 INVALID_REG	compiler/CompilerIR.h	2;"	d
 INVALID_SREG	compiler/CompilerIR.h	1;"	d
-IS_BINARY_OP	compiler/codegen/unicore/UnicoreLIR.h	357;"	d
-IS_BRANCH	compiler/codegen/unicore/UnicoreLIR.h	340;"	d
-IS_IT	compiler/codegen/unicore/UnicoreLIR.h	360;"	d
-IS_LOAD	compiler/codegen/unicore/UnicoreLIR.h	338;"	d
-IS_QUAD_OP	compiler/codegen/unicore/UnicoreLIR.h	359;"	d
-IS_STORE	compiler/codegen/unicore/UnicoreLIR.h	339;"	d
-IS_TERTIARY_OP	compiler/codegen/unicore/UnicoreLIR.h	358;"	d
-IS_UNARY_OP	compiler/codegen/unicore/UnicoreLIR.h	356;"	d
+IS_BINARY_OP	compiler/codegen/unicore/UnicoreLIR.h	363;"	d
+IS_BRANCH	compiler/codegen/unicore/UnicoreLIR.h	346;"	d
+IS_IT	compiler/codegen/unicore/UnicoreLIR.h	366;"	d
+IS_LOAD	compiler/codegen/unicore/UnicoreLIR.h	344;"	d
+IS_QUAD_OP	compiler/codegen/unicore/UnicoreLIR.h	365;"	d
+IS_STORE	compiler/codegen/unicore/UnicoreLIR.h	345;"	d
+IS_TERTIARY_OP	compiler/codegen/unicore/UnicoreLIR.h	364;"	d
+IS_UNARY_OP	compiler/codegen/unicore/UnicoreLIR.h	362;"	d
 InstructionFormat	DEX.h	/^enum InstructionFormat {$/;"	g
 InstructionFormat	DEX.h	/^typedef unsigned char InstructionFormat;$/;"	t
 LIR	compiler/CompilerIR.h	/^typedef struct LIR {$/;"	s
@@ -156,7 +156,7 @@ LiveRange	compiler/Ralloc.c	/^} LiveRange;$/;"	t	typeref:struct:LiveRange	file:
 MARKBB	toOpt.h	/^typedef int (*MARKBB)(DexCode * pDexCode, int insnIdx, int insnWidth, DecodedInstruction * pDecInsn,u4* BBMask);$/;"	t
 MIR	compiler/CompilerIR.h	/^typedef struct MIR {$/;"	s
 MIR	compiler/CompilerIR.h	/^} MIR;$/;"	t	typeref:struct:MIR
-NO_OPERAND	compiler/codegen/unicore/UnicoreLIR.h	355;"	d
+NO_OPERAND	compiler/codegen/unicore/UnicoreLIR.h	361;"	d
 NativeRegisterPool	compiler/codegen/unicore/UnicoreLIR.h	/^typedef enum NativeRegisterPool {$/;"	g
 NativeRegisterPool	compiler/codegen/unicore/UnicoreLIR.h	/^} NativeRegisterPool;$/;"	t	typeref:enum:NativeRegisterPool
 OP_ADD_DOUBLE	DEX.h	/^    OP_ADD_DOUBLE                   = 0xab,$/;"	e	enum:OpCode
@@ -422,28 +422,28 @@ OpKind	compiler/codegen/unicore/UnicoreLIR.h	/^} OpKind;$/;"	t	typeref:enum:OpKi
 OpSize	compiler/codegen/unicore/UnicoreLIR.h	/^typedef enum OpSize {                                                                                                                                                                           $/;"	g
 OpSize	compiler/codegen/unicore/UnicoreLIR.h	/^} OpSize;$/;"	t	typeref:enum:OpSize
 REGTYPE	compiler/codegen/unicore/UnicoreLIR.h	7;"	d
-REG_DEF0	compiler/codegen/unicore/UnicoreLIR.h	341;"	d
-REG_DEF01_USE2	compiler/codegen/unicore/UnicoreLIR.h	372;"	d
-REG_DEF0_USE0	compiler/codegen/unicore/UnicoreLIR.h	368;"	d
-REG_DEF0_USE01	compiler/codegen/unicore/UnicoreLIR.h	370;"	d
-REG_DEF0_USE1	compiler/codegen/unicore/UnicoreLIR.h	369;"	d
-REG_DEF0_USE12	compiler/codegen/unicore/UnicoreLIR.h	371;"	d
-REG_DEF1	compiler/codegen/unicore/UnicoreLIR.h	342;"	d
-REG_DEF_LIST0	compiler/codegen/unicore/UnicoreLIR.h	345;"	d
-REG_DEF_LIST1	compiler/codegen/unicore/UnicoreLIR.h	346;"	d
-REG_DEF_LR	compiler/codegen/unicore/UnicoreLIR.h	344;"	d
-REG_DEF_SP	compiler/codegen/unicore/UnicoreLIR.h	343;"	d
-REG_USE0	compiler/codegen/unicore/UnicoreLIR.h	347;"	d
-REG_USE01	compiler/codegen/unicore/UnicoreLIR.h	365;"	d
-REG_USE012	compiler/codegen/unicore/UnicoreLIR.h	366;"	d
-REG_USE1	compiler/codegen/unicore/UnicoreLIR.h	348;"	d
-REG_USE12	compiler/codegen/unicore/UnicoreLIR.h	367;"	d
-REG_USE2	compiler/codegen/unicore/UnicoreLIR.h	349;"	d
-REG_USE3	compiler/codegen/unicore/UnicoreLIR.h	350;"	d
-REG_USE_LIST0	compiler/codegen/unicore/UnicoreLIR.h	353;"	d
-REG_USE_LIST1	compiler/codegen/unicore/UnicoreLIR.h	354;"	d
-REG_USE_PC	compiler/codegen/unicore/UnicoreLIR.h	352;"	d
-REG_USE_SP	compiler/codegen/unicore/UnicoreLIR.h	351;"	d
+REG_DEF0	compiler/codegen/unicore/UnicoreLIR.h	347;"	d
+REG_DEF01_USE2	compiler/codegen/unicore/UnicoreLIR.h	378;"	d
+REG_DEF0_USE0	compiler/codegen/unicore/UnicoreLIR.h	374;"	d
+REG_DEF0_USE01	compiler/codegen/unicore/UnicoreLIR.h	376;"	d
+REG_DEF0_USE1	compiler/codegen/unicore/UnicoreLIR.h	375;"	d
+REG_DEF0_USE12	compiler/codegen/unicore/UnicoreLIR.h	377;"	d
+REG_DEF1	compiler/codegen/unicore/UnicoreLIR.h	348;"	d
+REG_DEF_LIST0	compiler/codegen/unicore/UnicoreLIR.h	351;"	d
+REG_DEF_LIST1	compiler/codegen/unicore/UnicoreLIR.h	352;"	d
+REG_DEF_LR	compiler/codegen/unicore/UnicoreLIR.h	350;"	d
+REG_DEF_SP	compiler/codegen/unicore/UnicoreLIR.h	349;"	d
+REG_USE0	compiler/codegen/unicore/UnicoreLIR.h	353;"	d
+REG_USE01	compiler/codegen/unicore/UnicoreLIR.h	371;"	d
+REG_USE012	compiler/codegen/unicore/UnicoreLIR.h	372;"	d
+REG_USE1	compiler/codegen/unicore/UnicoreLIR.h	354;"	d
+REG_USE12	compiler/codegen/unicore/UnicoreLIR.h	373;"	d
+REG_USE2	compiler/codegen/unicore/UnicoreLIR.h	355;"	d
+REG_USE3	compiler/codegen/unicore/UnicoreLIR.h	356;"	d
+REG_USE_LIST0	compiler/codegen/unicore/UnicoreLIR.h	359;"	d
+REG_USE_LIST1	compiler/codegen/unicore/UnicoreLIR.h	360;"	d
+REG_USE_PC	compiler/codegen/unicore/UnicoreLIR.h	358;"	d
+REG_USE_SP	compiler/codegen/unicore/UnicoreLIR.h	357;"	d
 RegLocation	compiler/CompilerIR.h	/^typedef struct RegLocation {$/;"	s
 RegLocation	compiler/CompilerIR.h	/^} RegLocation;$/;"	t	typeref:struct:RegLocation
 RegLocationType	compiler/CompilerIR.h	/^typedef enum RegLocationType {$/;"	g
@@ -457,12 +457,12 @@ RegisterPool	compiler/codegen/unicore/UnicoreLIR.h	/^} RegisterPool;$/;"	t	typer
 ResourceEncodingPos	compiler/codegen/unicore/UnicoreLIR.h	/^typedef enum ResourceEncodingPos {$/;"	g
 ResourceEncodingPos	compiler/codegen/unicore/UnicoreLIR.h	/^} ResourceEncodingPos;$/;"	t	typeref:enum:ResourceEncodingPos
 S2D	compiler/codegen/unicore/UnicoreLIR.h	19;"	d
-SETS_CCODES	compiler/codegen/unicore/UnicoreLIR.h	361;"	d
+SETS_CCODES	compiler/codegen/unicore/UnicoreLIR.h	367;"	d
 SINGLEREG	compiler/codegen/unicore/UnicoreLIR.h	11;"	d
 SREG	compiler/codegen/unicore/RallocUtil.c	11;"	d	file:
 SSARepresentation	compiler/Dataflow.h	/^typedef struct SSARepresentation {$/;"	s
 SSARepresentation	compiler/Dataflow.h	/^} SSARepresentation;$/;"	t	typeref:struct:SSARepresentation
-USES_CCODES	compiler/codegen/unicore/UnicoreLIR.h	362;"	d
+USES_CCODES	compiler/codegen/unicore/UnicoreLIR.h	368;"	d
 UnicoreEncodingKind	compiler/codegen/unicore/UnicoreLIR.h	/^typedef enum UnicoreEncodingKind {$/;"	g
 UnicoreEncodingKind	compiler/codegen/unicore/UnicoreLIR.h	/^} UnicoreEncodingKind;$/;"	t	typeref:enum:UnicoreEncodingKind
 UnicoreEncodingMap	compiler/codegen/unicore/UnicoreLIR.h	/^typedef struct UnicoreEncodingMap {$/;"	s

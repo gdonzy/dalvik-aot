@@ -121,7 +121,7 @@ int main(int argc , char * argv[]){
 	}
 
 	/************process debugBB**************/
-/*
+
 	debugBB.startOffset = 0x24fe; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
@@ -129,15 +129,15 @@ int main(int argc , char * argv[]){
 	debugBB.lastMIRInsn = NULL;
 	debugBB.codeBuffer = NULL;
 	debugBB.next = NULL;
-*/
+
 	debugCodeOffset = 0x24ec;
-/*
+
 	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
 
 	#ifdef DEBUG
 		printf("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
 	#endif
-*/
+
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
 		dvmInitializeSSAConversion(cUnit);
@@ -150,14 +150,14 @@ int main(int argc , char * argv[]){
 			pDebugCUnit = cUnit;
 			//eric
 		#ifdef DEBUG
-	//		dvmCompilerDoSSAConversion(cUnit, &debugBB);
+			dvmCompilerDoSSAConversion(cUnit, &debugBB);
 			printf("i'm in debugBB\n");
 			printf("%x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
 		#endif
 		}
 	}
 
-//	pDebugCUnit->debugBB = &debugBB;	
+	pDebugCUnit->debugBB = &debugBB;	
 
 	dvmCompilerMIR2LIR(pDebugCUnit);
 	debugNewLIR2Assemble(pDebugCUnit);
