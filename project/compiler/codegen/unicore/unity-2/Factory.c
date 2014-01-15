@@ -614,7 +614,7 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
             //} else {
             //    opCode = kThumbStrRRR;
             //}
-        pair = true;
+	        pair = true;
             if ((displacement < 16384) && (displacement >= 0)) {
                 assert((displacement & 0x3) == 0);
                 pair = true;

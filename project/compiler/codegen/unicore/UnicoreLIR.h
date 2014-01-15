@@ -39,14 +39,20 @@
 #define ENCODE_CCODE            (1ULL << kCCode)
 #define ENCODE_FP_STATUS        (1ULL << kFPStatus)
 
+/*
+Data structure tracking the mapping between a
+Dalvik virtual register/pair and a native register/pair
+*/
 typedef struct RegisterInfo {
     int reg;                    // Reg number
     bool inUse;                 // Has it been allocated?
     bool pair;                  // Part of a register pair?
     int partner;                // If pair, other reg of pair
+
     bool live;                  // Is there an associated SSA name?
     bool dirty;                 // If live, is it dirty?
     int sReg;                   // Name of live value
+
     struct LIR *defStart;       // Starting inst in last def sequence
     struct LIR *defEnd;         // Ending inst in last def sequence
 } RegisterInfo;

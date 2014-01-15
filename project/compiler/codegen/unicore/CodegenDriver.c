@@ -310,10 +310,11 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 	MIR *mir;
 	bool notHandled = false;	
 
-	//for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
-#ifdef DEBUG
-		curBB = cUnit->debugBB;
-#endif
+	for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
+//#ifdef DEBUG
+//		curBB = cUnit->debugBB;
+//#endif
+		cUnit->debugBB = curBB;
 		dvmCompilerResetRegPool(cUnit); 
 		dvmCompilerClobberAllRegs(cUnit); 
 		//eric: 暂时没有用处
@@ -325,7 +326,7 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 			
 			OpCode dalvikOpCode = mir->dalvikInsn.opCode;
 			InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
-
+			if(mir->dalvikInsn.opCode == 1){
 			switch(dalvikFormat) {
 				case kFmt12x:
 #ifdef DEBUG
@@ -346,8 +347,9 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 				//exit(1);
 				break;
 			}
+			} else continue;
 		}
-//	}
+	}
 }
 
 UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)

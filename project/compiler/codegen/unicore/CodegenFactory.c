@@ -59,6 +59,7 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 	//eric 
 	//dvmCompilerKillNullCheckedLoc(cUnit, rlDest);   
 	rlSrc = dvmCompilerUpdateLoc(cUnit, rlSrc);    
+	//eric:if the register is DalvikFrame, so change it to physical
 	rlDest = dvmCompilerUpdateLoc(cUnit, rlDest);  
 	if (rlSrc.location == kLocPhysReg) {  
 #ifdef DEBUG 
@@ -78,7 +79,7 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 	} else {
 #ifdef DEBUG 
     printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
-	printf("the Dest reg is not phy\n");
+	printf("the Src reg is not phy\n");
 #endif
 
 		// Load Src either into promoted Dest or temps allocated for Dest
@@ -99,13 +100,14 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 		//if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow)) { 
 		if (true) {
 //eric
-/*			defStart = (LIR *)cUnit->lastLIRInsn;
+		//	defStart = (LIR *)cUnit->lastLIRInsn;
 			int vReg = dvmCompilerS2VReg(cUnit, rlDest.sRegLow);
 			storeBaseDisp(cUnit, rFP, vReg << 2, rlDest.lowReg, kWord);  
+//			storeBaseDisp(cUnit, rFP, 20, rlDest.lowReg, kWord);  
 			dvmCompilerMarkClean(cUnit, rlDest.lowReg); 
-			defEnd = (LIR *)cUnit->lastLIRInsn; 
-			dvmCompilerMarkDef(cUnit, rlDest, defStart, defEnd);	
-*/
+		//	defEnd = (LIR *)cUnit->lastLIRInsn; 
+	//		dvmCompilerMarkDef(cUnit, rlDest, defStart, defEnd);	
+
 		}
 	}
 }

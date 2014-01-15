@@ -1005,5 +1005,5 @@ void dvmCompilerNonLoopAnalysis(CompilationUnit *cUnit)
 
 int dvmConvertSSARegToDalvik(CompilationUnit *cUnit, int ssaReg)
 {
-      return GET_ELEM_N(cUnit->ssaToDalvikMap, int, ssaReg);
+      return GET_ELEM_N(cUnit->ssaToDalvikMap, long, ssaReg);
 }

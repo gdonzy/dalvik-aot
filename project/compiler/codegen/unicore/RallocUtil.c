@@ -99,6 +99,7 @@ static bool clobberRegBody(CompilationUnit *cUnit, RegisterInfo *p,
                     flushRegWide(cUnit, p[i].reg, p[i].partner);
                 } else {
                     flushReg(cUnit, p[i].reg);
+					//这里应该是写回的作用
                 }
             }
             p[i].live = false;
@@ -192,6 +193,7 @@ extern int dvmCompilerAllocFreeTemp(CompilationUnit *cUnit)
                          &cUnit->regPool->nextCoreTemp, true);
 }                  
 
+/*alloc a temp phy register*/
 extern int dvmCompilerAllocTemp(CompilationUnit *cUnit)                                    
 {
     return allocTempBody(cUnit, cUnit->regPool->coreTemps,
@@ -213,12 +215,15 @@ static RegisterInfo *allocLiveBody(RegisterInfo *p, int numTemps, int sReg)
     return NULL;
 }
 
+/*find sReg which live property is true*/
+//the register in regPool is described by RegisterInfo
 static RegisterInfo *allocLive(CompilationUnit *cUnit, int sReg,
                                int regClass)
 {
     RegisterInfo *res = NULL;
     switch(regClass) {
         case kAnyReg:
+/*live means the reg has a associated ssa name*/
             res = allocLiveBody(cUnit->regPool->FPTemps,
                                 cUnit->regPool->numFPTemps, sReg);
             if (res)
@@ -227,6 +232,9 @@ static RegisterInfo *allocLive(CompilationUnit *cUnit, int sReg,
         case kCoreReg:
             res = allocLiveBody(cUnit->regPool->coreTemps,
                                 cUnit->regPool->numCoreTemps, sReg);
+#ifdef DEBUG 
+    printf(">>>>>>>>>>>>>>>The function is %s, core reg<<<<<<<<<<<<<<<<<\n", __func__);   
+#endif
             break;
         case kFPReg:
             res = allocLiveBody(cUnit->regPool->FPTemps,
@@ -437,6 +445,7 @@ extern RegLocation dvmCompilerUpdateLoc(CompilationUnit *cUnit, RegLocation loc)
 {
     assert(!loc.wide);
     if (loc.location == kLocDalvikFrame) {
+		//the mediator is ssa num
         RegisterInfo *infoLo = allocLive(cUnit, loc.sRegLow, kAnyReg);
         if (infoLo) {
             if (infoLo->pair) {
@@ -462,7 +471,9 @@ extern RegLocation dvmCompilerEvalLoc(CompilationUnit *cUnit, RegLocation loc,
     */
 	loc = dvmCompilerUpdateLoc(cUnit, loc);
 
+//if a register is a phy register
     if (loc.location == kLocPhysReg) {
+		//if the parameter regClass is kAnyReg, the code will not execute
         if (!regClassMatches(regClass, loc.lowReg)) {
             /* Wrong register class.  Realloc, copy and transfer ownership */
             newReg = dvmCompilerAllocTypedTemp(cUnit, loc.fp, regClass);
@@ -474,8 +485,10 @@ extern RegLocation dvmCompilerEvalLoc(CompilationUnit *cUnit, RegLocation loc,
         return loc; 
     }    
 
+//if a register is Dalvik virtual register
     assert((loc.location != kLocRetval) || (loc.sRegLow == INVALID_SREG));
 
+//alloc a new phy register
     newReg = dvmCompilerAllocTypedTemp(cUnit, loc.fp, regClass);
     loc.lowReg = newReg;
 
@@ -493,6 +506,9 @@ static inline int getDestSSAName(MIR *mir, int num)
 
 extern RegLocation dvmCompilerGetSrc(CompilationUnit *cUnit, MIR *mir, int num)  
 { 
+#ifdef DEBUG 
+    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
+#endif
     RegLocation loc = cUnit->regLocation[ 
          SREG(cUnit, dvmCompilerSSASrc(mir, num))]; 
     loc.fp = cUnit->regLocation[dvmCompilerSSASrc(mir, num)].fp; 
@@ -502,6 +518,9 @@ extern RegLocation dvmCompilerGetSrc(CompilationUnit *cUnit, MIR *mir, int num)
 
 extern RegLocation dvmCompilerGetDest(CompilationUnit *cUnit, MIR *mir, int num)
 {
+#ifdef DEBUG 
+    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
+#endif
 	RegLocation loc = cUnit->regLocation[SREG(cUnit, getDestSSAName(mir, num))]; 
 	loc.fp = cUnit->regLocation[getDestSSAName(mir, num)].fp; 
 	loc.wide = false;  
