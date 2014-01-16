@@ -62,6 +62,7 @@ typedef struct BasicBlock {
     LIR *lastLIRInsn;//donzy
     u4 *codeBuffer;
     int sizeOfBuffer;
+    int sizeOfWidthMIRs;
 //    struct BasicBlock *fallThrough;
 //    struct BasicBlock *taken;
     struct BasicBlock *next;            // Serial link for book keeping purposes

@@ -13,15 +13,32 @@ void outputMIRsOfBB(BasicBlock *bb){
 void  debugInsertInsns2BB(BasicBlock *curBB , u2 * insns , int insnsCnt);
 
 void outputCodeBuffer(BasicBlock *bb){
-	int size = (bb->sizeOfBuffer)/4;
+	int codeEnd = (bb->sizeOfBuffer - 12)/4;
+	// donzy:12 is for the code return mterp
 	int i = 0;
+	u4 maskWidth;
+	u4 maskTmp;
 	FILE *fp;
 	char filename[30];
 	u4 *buffer = bb->codeBuffer;
-	for(i = 0; i<size ; i++){
+	for(i = 0; i<codeEnd ; i++){
 		printf("[code buffer]:%x\n",buffer[i]);
 	}
 	
+	/****** insert return code ******/
+	i = codeEnd;
+	maskWidth = (bb->sizeOfWidthMIRs)*2;
+	if(1023 < maskWidth){
+		printf("error: num of mirs is too large!\n");
+	}
+	maskTmp = maskWidth;
+	maskWidth &= 0x1f;
+	maskWidth |= ((maskTmp&0x3e0)<<4);
+	buffer[i++] = ((u4)0x5f8d0160|maskWidth);
+	buffer[i++] = (u4)(0x20a700ff);
+	buffer[i] = (u4)(0x08afcc1c);
+	
+		
 	snprintf(filename,30,"BB-%lx.bin",bb->startOffset);
 	printf("[code buffer]:%s",filename);	
 	if( NULL == (fp = fopen(filename,"w"))){
@@ -50,8 +67,11 @@ void debugNewLIR2Assemble(CompilationUnit *pDebugCUnit){
 //	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r1,20);
 //	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r0,0);
 //	debugNewLIR3(pDebugCUnit,bb,kUnicoreLdwRRR,r2,rFP,r1);
-//	debugNewLIR3(pDebugCUnit,bb,kUnicoreStwRRR,r2,rFP,r0);	
+//	debugNewLIR3(pDebugCUnit,bb,kUnicoreStwRRR,r2,rFP,r0);
 
+	//return from nativecode to mterp	
+	
+	
 	debugDvmCompilerAssembleLIR(bb);		
 	
 	outputCodeBuffer(bb);

@@ -6,7 +6,7 @@
 #include "UnicoreLIR.h"
 #include "Codegen.h"
 
-
+extern signed char * instrWidthTable;
 
 #define ENCODING_MAP(opcode, skeleton, k0, ds, de, k1, s1s, s1e, k2, s2s, s2e, \
                      k3, k3s, k3e, flags, name, fmt, size) \
@@ -359,8 +359,10 @@ void memAlloc4Assemble(BasicBlock *bb) {
 	printf("!!!!!The current function is %s: malloc buffer size = %d\n", __func__, size);
 	
 	if( 0 != size ){
-		bb->codeBuffer = dvmCompilerNew(size,true);
-		bb->sizeOfBuffer = size;
+		bb->codeBuffer = dvmCompilerNew(size+12,true);
+		bb->sizeOfBuffer = size+12;
+		//donzy: 12 is for the code return mterp
+
 	}
 	
 	if(NULL == bb->codeBuffer){
@@ -547,7 +549,21 @@ static void assembleInstructions(BasicBlock * bb)
 //void dvmCompilerAssembleLIR(CompilationUnit *cUnit){
 //}
 
+void calWidthMIRs4BB(BasicBlock *bb){
+	int size = 0;
+	MIR * mir = NULL;
+	for(mir = bb->firstMIRInsn ; mir !=NULL ; mir = mir->next){
+		size += dexGetInstrWidthAbs(instrWidthTable,mir->dalvikInsn.opCode);
+	}
+	
+	bb->sizeOfWidthMIRs = size;
+	
+	return ;
+}
+
 void debugDvmCompilerAssembleLIR(BasicBlock *bb){
+	calWidthMIRs4BB(bb);
+
 	memAlloc4Assemble(bb);
 	
 	assembleInstructions(bb);
