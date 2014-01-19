@@ -9,8 +9,16 @@ typedef signed int s4;
 typedef signed long int s8;
 typedef enum {false = 0 , true = !false} bool;
 
-/*eric: use for debug*/
+/*eric: log define, use for debug*/
 #define DEBUG 1
+
+#define DEBUG1
+#ifdef DEBUG1
+//#define LOG(fmt, ...) printf(fmt, ##__VA_ARGS__);
+#define LOG(format, args...) printf(format, ##args);
+#else
+#define LOG(format, args...)  
+#endif
 
 # define assert(x) \
     ((x) ? ((void)0) : (printf("ASSERT FAILED (%s:%d): %s\n", \

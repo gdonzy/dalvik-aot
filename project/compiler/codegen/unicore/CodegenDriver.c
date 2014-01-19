@@ -311,10 +311,9 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 	bool notHandled = false;	
 
 //	for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
-#ifdef DEBUG
+//debug
 		curBB = cUnit->debugBB;
-#endif
-//		cUnit->debugBB = curBB;
+	
 		dvmCompilerResetRegPool(cUnit); 
 		dvmCompilerClobberAllRegs(cUnit); 
 		//eric: 暂时没有用处
@@ -328,10 +327,17 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 			InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
 //			if(mir->dalvikInsn.opCode == 1){
 			switch(dalvikFormat) {
-				case kFmt12x:
+/*
+				case kFmt11n:
+				case kFmt31i:
 #ifdef DEBUG
 					printf("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);	
 #endif
+					notHandled = handleFmt11n_Fmt31i(cUnit, mir);
+					break;
+*/
+				case kFmt12x:
+					LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode)
 					notHandled = handleFmt12x(cUnit, mir);	
 					break;
 				default:
