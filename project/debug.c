@@ -15,7 +15,7 @@ void  debugInsertInsns2BB(BasicBlock *curBB , u2 * insns , int insnsCnt);
 void outputCodeBuffer(BasicBlock *bb){
 	int codeEnd = (bb->sizeOfBuffer - 12)/4;
 	// donzy:12 is for the code return mterp
-	LOG("buffer size is %d\n", bb->sizeOfBuffer)
+	LOG("buffer size is %d\n", bb->sizeOfBuffer);
 	int i = 0;
 	u4 maskWidth;
 	u4 maskTmp;

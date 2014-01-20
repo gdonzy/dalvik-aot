@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "../DEX.h"
 #include "CompilerUtility.h"
@@ -795,6 +796,8 @@ void dvmInitializeSSAConversion(CompilationUnit *cUnit)
 	dvmInitGrowableList(cUnit->ssaToDalvikMap, numDalvikReg);
 	
 	cUnit->numSSARegs = numDalvikReg;
+	LOG(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<<\n", __func__);
+	LOG("cUnit->numSSARegs is %d\n", cUnit->numSSARegs);
 
 	for(i = 0; i < numDalvikReg; i++) {
 		dvmInsertGrowableList(cUnit->ssaToDalvikMap, (void *)ENCODE_REG_SUB(i, 0));
@@ -839,7 +842,7 @@ static void handleSSADef(CompilationUnit *cUnit, int *defs, int dalvikReg,
 
     int newS2DMapping = ENCODE_REG_SUB(dalvikReg, dalvikSub);
     dvmInsertGrowableList(cUnit->ssaToDalvikMap, (void *) newS2DMapping);
-
+	LOG("the insert newS2DMapping is %x\n", newS2DMapping);
 
     defs[regIndex] = ssaReg;
 }
@@ -969,7 +972,7 @@ void dvmCompilerDoSSAConversion(CompilationUnit *cUnit, BasicBlock *bb)
         }
         if (dfAttributes & DF_HAS_DEFS) {
             mir->ssaRep->fpDef[0] = dfAttributes & DF_FP_A;
-            //这里对ssa寄存器进行增加
+            //这里对ssa寄存器进行增加，并建立新的v reg和ssa reg映射关系
             handleSSADef(cUnit, mir->ssaRep->defs, dInsn->vA, 0);
             if (dfAttributes & DF_DA_WIDE) {
                 mir->ssaRep->fpDef[1] = dfAttributes & DF_FP_A;

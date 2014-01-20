@@ -46,6 +46,7 @@ static void inferTypes(CompilationUnit *cUnit, BasicBlock *bb)
 static const RegLocation freshLoc = {kLocDalvikFrame, 0, 0, INVALID_REG,
                                      INVALID_REG, INVALID_SREG};
 
+/*alloc RegLocation and initialize sRegLow*/
 void dvmCompilerRegAlloc(CompilationUnit *cUnit)
 {
     int i;
@@ -59,6 +60,7 @@ void dvmCompilerRegAlloc(CompilationUnit *cUnit)
     for (i=0; i< cUnit->numSSARegs; i++) {
         loc[i] = freshLoc;
         loc[i].sRegLow = i;
+	LOG(">>>>>>>>>>>>>loc[%d]sRegLow is %d<<<<<<<<<<<<\n", i, loc[i].sRegLow);
     }
     cUnit->regLocation = loc;
 
@@ -79,6 +81,7 @@ void dvmCompilerRegAlloc(CompilationUnit *cUnit)
         for (i=0; i < cUnit->numSSARegs; i++) {
             cUnit->regLocation[i].sRegLow =
                 DECODE_REG(dvmConvertSSARegToDalvik(cUnit, loc[i].sRegLow));
+	LOG(">>>>>>>>>>>>>cUnit->regLocation[%d].sRegLow is %d<<<<<<<<<<<<\n", i, cUnit->regLocation[i].sRegLow);
         }
     }// else {
 //        // Compute live ranges

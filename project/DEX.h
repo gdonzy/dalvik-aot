@@ -15,7 +15,7 @@ typedef enum {false = 0 , true = !false} bool;
 #define DEBUG1
 #ifdef DEBUG1
 //#define LOG(fmt, ...) printf(fmt, ##__VA_ARGS__);
-#define LOG(format, args...) printf(format, ##args);
+#define LOG(format, args...) printf(format, ##args)
 #else
 #define LOG(format, args...)  
 #endif

@@ -77,6 +77,7 @@ static void flushRegWide(CompilationUnit *cUnit, int reg1, int reg2)
     }    
 }
 
+/*if reg is live and dirty, then flush reg*/
 static void flushReg(CompilationUnit *cUnit, int reg)
 {
     RegisterInfo *info = getRegInfo(cUnit, reg);
@@ -88,6 +89,12 @@ static void flushReg(CompilationUnit *cUnit, int reg)
     }
 }
 
+/*
+ * 根据物理寄存器号reg和RegisterInfo查找ssa，
+ * 如果查找到，并且ssa寄存器是live and dirty, 
+ * 那么将虚拟寄存器的内容放入物理寄存器中
+ * 否则直接返回
+ */
 static bool clobberRegBody(CompilationUnit *cUnit, RegisterInfo *p,
                            int numTemps, int reg)
 {
@@ -209,6 +216,7 @@ static RegisterInfo *allocLiveBody(RegisterInfo *p, int numTemps, int sReg)
     for (i=0; i < numTemps; i++) {
         if (p[i].live && (p[i].sReg == sReg)) {
             p[i].inUse = true;
+			LOG("The alloclive reg is %d\n", sReg);
             return &p[i];
         }    
     }    
@@ -232,9 +240,7 @@ static RegisterInfo *allocLive(CompilationUnit *cUnit, int sReg,
         case kCoreReg:
             res = allocLiveBody(cUnit->regPool->coreTemps,
                                 cUnit->regPool->numCoreTemps, sReg);
-#ifdef DEBUG 
-    printf(">>>>>>>>>>>>>>>The function is %s, core reg<<<<<<<<<<<<<<<<<\n", __func__);   
-#endif
+    		LOG(">>>>>>>>>>>>>>>The function is %s, core reg<<<<<<<<<<<<<<<<<\n", __func__);   
             break;
         case kFPReg:
             res = allocLiveBody(cUnit->regPool->FPTemps,
@@ -518,9 +524,7 @@ extern RegLocation dvmCompilerGetSrc(CompilationUnit *cUnit, MIR *mir, int num)
 
 extern RegLocation dvmCompilerGetDest(CompilationUnit *cUnit, MIR *mir, int num)
 {
-#ifdef DEBUG 
-    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
-#endif
+    LOG(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
 	RegLocation loc = cUnit->regLocation[SREG(cUnit, getDestSSAName(mir, num))]; 
 	loc.fp = cUnit->regLocation[getDestSSAName(mir, num)].fp; 
 	loc.wide = false;  

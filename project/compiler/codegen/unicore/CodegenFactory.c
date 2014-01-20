@@ -61,11 +61,10 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 	rlSrc = dvmCompilerUpdateLoc(cUnit, rlSrc);    
 	//eric:if the register is DalvikFrame, so change it to physical
 	rlDest = dvmCompilerUpdateLoc(cUnit, rlDest);  
+	LOG(">>>>>>>>>>>>>sRegLow is %d<<<<<<<<<<<<\n", rlDest.sRegLow);
 	if (rlSrc.location == kLocPhysReg) {  
-#ifdef DEBUG 
-    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
-	printf("the Src reg is phy\n");
-#endif
+    	LOG(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
+		LOG(">>>>>>>>>>>>>>>the Src reg is phy<<<<<<<<<<<<<<<<<\n");
 
         if (dvmCompilerIsLive(cUnit, rlSrc.lowReg) || (rlDest.location == kLocPhysReg)) {
 			// Src is live or Dest has assigned reg.
@@ -77,16 +76,16 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 			dvmCompilerClobber(cUnit, rlSrc.lowReg);  
 		}
 	} else {
-#ifdef DEBUG 
-    printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
-	printf("the Src reg is not phy\n");
-#endif
+    	LOG(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
+		LOG("the Src reg is not phy\n");
 
 		// Load Src either into promoted Dest or temps allocated for Dest
 		rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false);   
 		loadValueDirect(cUnit, rlSrc, rlDest.lowReg);  
 	}
 
+	
+	LOG(">>>>>>>>>>>>>sRegLow is %d<<<<<<<<<<<<\n", rlDest.sRegLow);
 	// Dest is now live and dirty (until/if we flush it to home location)
 	dvmCompilerMarkLive(cUnit, rlDest.lowReg, rlDest.sRegLow); 
 	dvmCompilerMarkDirty(cUnit, rlDest.lowReg); 
@@ -101,7 +100,9 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 		if (true) {
 //eric
 		//	defStart = (LIR *)cUnit->lastLIRInsn;
+			LOG(">>>>>>>>>>>>>sRegLow is %d<<<<<<<<<<<<\n", rlDest.sRegLow);
 			int vReg = dvmCompilerS2VReg(cUnit, rlDest.sRegLow);
+			LOG(">>>>>>>>>>>>>vReg is v%d<<<<<<<<<<<<<\n", vReg);
 			storeBaseDisp(cUnit, rFP, vReg << 2, rlDest.lowReg, kWord);  
 //			storeBaseDisp(cUnit, rFP, 20, rlDest.lowReg, kWord);  
 			dvmCompilerMarkClean(cUnit, rlDest.lowReg); 

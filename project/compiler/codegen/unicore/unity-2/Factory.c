@@ -589,6 +589,7 @@ static UnicoreLIR *loadBaseDisp(CompilationUnit *cUnit, MIR *mir, int rBase,
                             size, sReg);
 }                                          
 
+/*this function's src may be two register, so has rSrc and rSrcHi*/
 static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
                                  int displacement, int rSrc, int rSrcHi,
                                  OpSize size)
@@ -685,12 +686,13 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
             //dvmCompilerAbort(cUnit);
     }
     if (shortForm) {
-    if(opCode == kUnicoreSthRRI5I5){//chenglin change
-        store = res = newLIR4(cUnit,cUnit->debugBB,opCode,rSrc,rBase,(encodedDisp&0x3e0)>>5,encodedDisp&0x1f);
-    }else{
-        store = res = newLIR3(cUnit,cUnit->debugBB, opCode, rSrc, rBase, encodedDisp);
-    }
-        if (pair) {  //pass for unicore
+    	if(opCode == kUnicoreSthRRI5I5) {//chenglin change
+        	store = res = newLIR4(cUnit,cUnit->debugBB,opCode,rSrc,rBase,(encodedDisp&0x3e0)>>5,encodedDisp&0x1f);
+    	} else {
+        	store = res = newLIR3(cUnit,cUnit->debugBB, opCode, rSrc, rBase, encodedDisp);
+    	}
+        
+		if (pair) {  //pass for unicore
            // store2 = newLIR3(cUnit, opCode, rSrcHi, rBase, encodedDisp + 1);
             store2 = newLIR3(cUnit,cUnit->debugBB, opCode, rSrcHi, rBase, encodedDisp + 4);
         }
@@ -709,6 +711,7 @@ static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
         }
         dvmCompilerFreeTemp(cUnit, rScratch);
     }
+
     if (rBase == rFP) {
         if (store != NULL)
             annotateDalvikRegAccess(store, displacement >> 2,

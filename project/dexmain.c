@@ -142,14 +142,19 @@ int main(int argc , char * argv[]){
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
 		dvmInitializeSSAConversion(cUnit);
+		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerNonLoopAnalysis(cUnit);
+		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerInitializeRegAlloc(cUnit);
+		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerRegAlloc(cUnit);
+		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 
 		/***********debug for pDebugCUnit*************/
 		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item)-(u1*)(pDexFile->baseAddr))){
 			pDebugCUnit = cUnit;
-			//eric
+			pDebugCUnit->debugBB = &debugBB;	
+			LOG("The register size is %d\n", cUnit->pCodeItem->item->registersSize);
 		#ifdef DEBUG
 			dvmCompilerDoSSAConversion(cUnit, &debugBB);
 			LOG("I'm in debugBB\n");
@@ -158,7 +163,7 @@ int main(int argc , char * argv[]){
 		}
 	}
 
-	pDebugCUnit->debugBB = &debugBB;	
+//	pDebugCUnit->debugBB = &debugBB;	
 
 	dvmCompilerMIR2LIR(pDebugCUnit);
 	debugNewLIR2Assemble(pDebugCUnit);

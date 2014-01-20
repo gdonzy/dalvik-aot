@@ -206,6 +206,7 @@ static bool handleFmt11n_Fmt31i(CompilationUnit *cUnit, MIR *mir)
         rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
     } else {
         rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+	LOG(">>>>>>>>>>>>>sRegLow is %d<<<<<<<<<<<<\n", rlDest.sRegLow);
     }
 
     switch (mir->dalvikInsn.opCode) {
@@ -369,11 +370,11 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 			switch(dalvikFormat) {
 				case kFmt11n:
 				case kFmt31i:
-					LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode)	
+					LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);	
 					notHandled = handleFmt11n_Fmt31i(cUnit, mir);
 					break;
 				case kFmt12x:
-					LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode)
+					LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
 					notHandled = handleFmt12x(cUnit, mir);	
 					break;
 				default:
@@ -399,6 +400,7 @@ UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
 	return genRegCopy(cUnit, rDest, rSrc);
 }
 
+//通过rBase和displacement找到虚拟寄存器，rSrc是物理寄存器号
 void dvmCompilerFlushRegImpl(CompilationUnit *cUnit, int rBase,
                              int displacement, int rSrc, OpSize size)                       
 {
