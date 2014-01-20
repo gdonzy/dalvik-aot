@@ -194,6 +194,46 @@ static bool genArithOp(CompilationUnit *cUnit, MIR *mir)
     return true;
 }
 
+/* 
+ * The following are the first-level codegen routines that analyze the format
+ * of each bytecode.
+ */
+static bool handleFmt11n_Fmt31i(CompilationUnit *cUnit, MIR *mir)
+{
+    RegLocation rlDest;
+    RegLocation rlResult;
+    if (mir->ssaRep->numDefs == 2) {
+        rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+    } else {
+        rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+    }
+
+    switch (mir->dalvikInsn.opCode) {
+        case OP_CONST:
+        case OP_CONST_4: {
+            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, true);
+            loadConstantNoClobber(cUnit, rlResult.lowReg, mir->dalvikInsn.vB);
+            storeValue(cUnit, rlDest, rlResult);
+            break;
+        }
+/*
+        case OP_CONST_WIDE_32: {
+            //TUNING: single routine to load constant pair for support doubles
+            //TUNING: load 0/-1 separately to avoid load dependency
+            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+            loadConstantNoClobber(cUnit, rlResult.lowReg, mir->dalvikInsn.vB);
+            opRegRegImm(cUnit, kOpAsr, rlResult.highReg,
+                        rlResult.lowReg, 31);
+            storeValueWide(cUnit, rlDest, rlResult);
+            break;
+        }
+*/
+        default:
+            return true;
+    }
+    return false;
+}
+
 static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
 {
 	OpCode opCode = mir->dalvikInsn.opCode;
@@ -327,15 +367,11 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 			InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
 //			if(mir->dalvikInsn.opCode == 1){
 			switch(dalvikFormat) {
-/*
 				case kFmt11n:
 				case kFmt31i:
-#ifdef DEBUG
-					printf("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);	
-#endif
+					LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode)	
 					notHandled = handleFmt11n_Fmt31i(cUnit, mir);
 					break;
-*/
 				case kFmt12x:
 					LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode)
 					notHandled = handleFmt12x(cUnit, mir);	

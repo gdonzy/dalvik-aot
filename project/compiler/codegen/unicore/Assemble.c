@@ -353,7 +353,9 @@ void memAlloc4Assemble(BasicBlock *bb) {
 	int size = 0;
 	UnicoreLIR * curLIR = NULL;
 	for(curLIR = (UnicoreLIR*)(bb->firstLIRInsn) ; curLIR != NULL ; curLIR =(UnicoreLIR *)(curLIR->generic.next)){
-		size += EncodingMap[curLIR->opCode].size*2;		
+		//size += EncodingMap[curLIR->opCode].size*2;		
+		size += 4;		
+		LOG(" The unicore opcode is %x\n", curLIR->opCode)
 	}
 
 	printf("!!!!!The current function is %s: malloc buffer size = %d\n", __func__, size);
@@ -362,7 +364,6 @@ void memAlloc4Assemble(BasicBlock *bb) {
 		bb->codeBuffer = dvmCompilerNew(size+12,true);
 		bb->sizeOfBuffer = size+12;
 		//donzy: 12 is for the code return mterp
-
 	}
 	
 	if(NULL == bb->codeBuffer){
@@ -391,9 +392,13 @@ static void assembleInstructions(BasicBlock * bb)
 //            continue;
 //        }
 
+
+/*eric*/
+/*
         if (lir->isNop) {
             continue;
         }
+*/
 	
 //	if(lir->opCode == kUnicoreLdwPcRel||
 //       lir->opCode == kUnicoreAddPcRel){
@@ -446,6 +451,7 @@ static void assembleInstructions(BasicBlock * bb)
 //    }
         UnicoreEncodingMap *encoder = &EncodingMap[lir->opCode];
         u4 bits = encoder->skeleton;
+		LOG("lir opcode is %x\n", bits)		
         int i;
         for (i = 0; i < 4; i++) {
             u4 operand;
@@ -554,6 +560,7 @@ void calWidthMIRs4BB(BasicBlock *bb){
 	MIR * mir = NULL;
 	for(mir = bb->firstMIRInsn ; mir !=NULL ; mir = mir->next){
 		size += dexGetInstrWidthAbs(instrWidthTable,mir->dalvikInsn.opCode);
+		LOG("The opcode is %x, vA is %d, vB is %d\n", mir->dalvikInsn.opCode, mir->dalvikInsn.vA, mir->dalvikInsn.vB)
 	}
 	
 	bb->sizeOfWidthMIRs = size;

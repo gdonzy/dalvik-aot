@@ -122,7 +122,7 @@ int main(int argc , char * argv[]){
 
 	/************process debugBB**************/
 
-	debugBB.startOffset = 0x24fe; 
+	debugBB.startOffset = 0x24fc; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
 	debugBB.firstLIRInsn = NULL;
@@ -132,7 +132,8 @@ int main(int argc , char * argv[]){
 
 	debugCodeOffset = 0x24ec;
 
-	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)),1); //last argument is count of insns .
+	//last argument is count of insns .
+	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 1);
 
 	#ifdef DEBUG
 		printf("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
@@ -151,8 +152,8 @@ int main(int argc , char * argv[]){
 			//eric
 		#ifdef DEBUG
 			dvmCompilerDoSSAConversion(cUnit, &debugBB);
-			printf("i'm in debugBB\n");
-			printf("%x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
+			LOG("I'm in debugBB\n");
+			LOG("The code item's first bytecode is %x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
 		#endif
 		}
 	}
