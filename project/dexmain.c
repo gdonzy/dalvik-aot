@@ -133,36 +133,30 @@ int main(int argc , char * argv[]){
 	debugCodeOffset = 0x24ec;
 
 	//last argument is count of insns .
-	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 1);
+//	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 1);
 
-	#ifdef DEBUG
-		printf("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
-	#endif
+//	LOG("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
 
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
 		dvmInitializeSSAConversion(cUnit);
-		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
+		LOG(">>>>>>>>>>>>>After dvmInitializeSSAConversion, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerNonLoopAnalysis(cUnit);
-		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
+		LOG(">>>>>>>>>>>>>After dvmCompilerNonLoopAnalysis, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerInitializeRegAlloc(cUnit);
-		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
+		LOG(">>>>>>>>>>>>>After dvmCompilerInitializeRegAlloc, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerRegAlloc(cUnit);
-		LOG(">>>>>>>>>>>>>numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
+		LOG(">>>>>>>>>>>>>After dvmCompilerRegAlloc, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 
 		/***********debug for pDebugCUnit*************/
 		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item)-(u1*)(pDexFile->baseAddr))){
 			pDebugCUnit = cUnit;
-			pDebugCUnit->debugBB = &debugBB;	
+//			pDebugCUnit->debugBB = &debugBB;	
 			LOG("The register size is %d\n", cUnit->pCodeItem->item->registersSize);
-		#ifdef DEBUG
-			dvmCompilerDoSSAConversion(cUnit, &debugBB);
 			LOG("I'm in debugBB\n");
 			LOG("The code item's first bytecode is %x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
-		#endif
 		}
 	}
-
 //	pDebugCUnit->debugBB = &debugBB;	
 
 	dvmCompilerMIR2LIR(pDebugCUnit);

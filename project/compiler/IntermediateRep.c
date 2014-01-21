@@ -7,7 +7,7 @@
 void dvmCompilerAppendLIR(BasicBlock *bb, LIR *lir)
 {
     if (bb->firstLIRInsn == NULL) {
-       // assert(cUnit->lastLIRInsn == NULL);
+        //assert(cUnit->lastLIRInsn == NULL);
         bb->lastLIRInsn = bb->firstLIRInsn = lir;
         lir->prev = lir->next = NULL;
     } else {

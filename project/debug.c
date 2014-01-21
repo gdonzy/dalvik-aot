@@ -58,12 +58,12 @@ UnicoreLIR *  debugNewLIR3(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode 
 UnicoreLIR *  debugNewLIR4(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1,int src2,int info);
 
 void debugNewLIR2Assemble(CompilationUnit *pDebugCUnit){
-	BasicBlock *bb = pDebugCUnit->debugBB;
-	//BasicBlock *bb = NULL;
-//	for(bb = pDebugCUnit->firstBB; bb; bb = bb->next) {
-//		if(bb->startOffset == 0x24fe)
-//			break;
-//	}
+//	BasicBlock *bb = pDebugCUnit->debugBB;
+	BasicBlock *bb = NULL;
+	for(bb = pDebugCUnit->firstBB; bb; bb = bb->next) {
+		if(bb->startOffset == 0x24fc)
+			break;
+	}
 	//to do something (switch case .....)	
 //	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r1,20);
 //	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r0,0);
