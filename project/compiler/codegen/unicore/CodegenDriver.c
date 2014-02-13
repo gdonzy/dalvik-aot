@@ -346,6 +346,122 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
+{
+    OpCode dalvikOpCode = mir->dalvikInsn.opCode;
+    RegLocation rlSrc = dvmCompilerGetSrc(cUnit, mir, 0);
+    RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+    RegLocation rlResult;
+    int lit = mir->dalvikInsn.vC;
+    OpKind op = 0;      /* Make gcc happy */
+    int shiftOp = false;
+    bool isDiv = false;
+
+    switch (dalvikOpCode) {
+//        case OP_RSUB_INT_LIT8:
+//        case OP_RSUB_INT: {
+//            int tReg;
+//            //TUNING: add support for use of Arm rsub op
+//            rlSrc = loadValue(cUnit, rlSrc, kCoreReg);
+//            tReg = dvmCompilerAllocTemp(cUnit);
+//            loadConstant(cUnit, tReg, lit);
+//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+//            opRegRegReg(cUnit, kOpSub, rlResult.lowReg,
+//                        tReg, rlSrc.lowReg);
+//            storeValue(cUnit, rlDest, rlResult);
+//            return false;
+//            break;
+//        }
+
+        case OP_ADD_INT_LIT8:
+        case OP_ADD_INT_LIT16:
+            op = kOpAdd;
+            break;
+//        case OP_MUL_INT_LIT8:
+//        case OP_MUL_INT_LIT16: {
+//            if (handleEasyMultiply(cUnit, rlSrc, rlDest, lit)) {
+//                return false;
+//            }
+//            op = kOpMul;
+//            break;
+//        }
+//        case OP_AND_INT_LIT8:
+//        case OP_AND_INT_LIT16:
+//            op = kOpAnd;
+//            break;
+//        case OP_OR_INT_LIT8:
+//        case OP_OR_INT_LIT16:
+//            op = kOpOr;
+//            break;
+//        case OP_XOR_INT_LIT8:
+//        case OP_XOR_INT_LIT16:
+//            op = kOpXor;
+//            break;
+//        case OP_SHL_INT_LIT8:
+//            lit &= 31;
+//            shiftOp = true;
+//            op = kOpLsl;
+//            break;
+//        case OP_SHR_INT_LIT8:
+//            lit &= 31;
+//            shiftOp = true;
+//            op = kOpAsr;
+//            break;
+//        case OP_USHR_INT_LIT8:
+//            lit &= 31;
+//            shiftOp = true;
+//            op = kOpLsr;
+//            break;
+//
+//        case OP_DIV_INT_LIT8:
+//        case OP_DIV_INT_LIT16:
+//        case OP_REM_INT_LIT8:
+//        case OP_REM_INT_LIT16:
+//            if (lit == 0) {
+//                /* Let the interpreter deal with div by 0 */
+//                genInterpSingleStep(cUnit, mir);
+//                return false;
+//            }
+//            if (handleEasyDivide(cUnit, dalvikOpCode, rlSrc, rlDest, lit)) {
+//                return false;
+//            }   
+//            dvmCompilerFlushAllRegs(cUnit);   /* Everything to home location */
+//            loadValueDirectFixed(cUnit, rlSrc, r0);
+//            dvmCompilerClobber(cUnit, r0);
+//            if ((dalvikOpCode == OP_DIV_INT_LIT8) ||
+//                (dalvikOpCode == OP_DIV_INT_LIT16)) {
+//                LOAD_FUNC_ADDR(cUnit, r2, (int)__aeabi_idiv);
+//                isDiv = true;
+//            } else {
+//                LOAD_FUNC_ADDR(cUnit, r2, (int)__aeabi_idivmod);
+//                isDiv = false;
+//            }
+//            loadConstant(cUnit, r1, lit);
+//            opReg(cUnit, kOpBlx, r2);
+//            dvmCompilerClobberCallRegs(cUnit);
+//            if (isDiv)
+//                rlResult = dvmCompilerGetReturn(cUnit);
+//            else
+//                rlResult = dvmCompilerGetReturnAlt(cUnit);
+//            storeValue(cUnit, rlDest, rlResult);
+//            return false;
+//            break;
+        default:
+            return true;
+    }
+    rlSrc = loadValue(cUnit, rlSrc, kCoreReg);
+    rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+    // Avoid shifts by literal 0 - no support in Thumb.  Change to copy
+    if (shiftOp && (lit == 0)) {
+        genRegCopy(cUnit, rlResult.lowReg, rlSrc.lowReg);
+    } else {
+        opRegRegImm(cUnit, op, rlResult.lowReg, rlSrc.lowReg, lit);
+    }
+    storeValue(cUnit, rlDest, rlResult);
+    return false;
+}
+
+
 void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 {
 	BasicBlock *curBB;
@@ -371,7 +487,7 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 			
 				OpCode dalvikOpCode = mir->dalvikInsn.opCode;
 				InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
-				if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1){
+				if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1 || mir->dalvikInsn.opCode == 0xd8){
 					switch(dalvikFormat) {
 						case kFmt11n:
 						case kFmt31i:
@@ -381,6 +497,10 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 						case kFmt12x:
 							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
 							notHandled = handleFmt12x(cUnit, mir);	
+							break;
+						case kFmt22b:
+							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
+							notHandled = handleFmt22b_Fmt22s(cUnit, mir);
 							break;
 						default:
 							notHandled = true;
