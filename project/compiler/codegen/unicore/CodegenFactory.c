@@ -52,6 +52,7 @@ static RegLocation loadValue(CompilationUnit *cUnit, RegLocation rlSrc,
 
 static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation rlSrc)
 {
+	LOG("rlDest.location is %d\nrlSrc.location is %d\n", rlDest.location, rlSrc.location);
 	LIR *defStart;
 	LIR *defEnd;
 	assert(!rlDest.wide); 

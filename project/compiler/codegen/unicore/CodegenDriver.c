@@ -206,7 +206,8 @@ static bool handleFmt11n_Fmt31i(CompilationUnit *cUnit, MIR *mir)
         rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
     } else {
         rlDest = dvmCompilerGetDest(cUnit, mir, 0);
-	LOG(">>>>>>>>>>>>>sRegLow is %d<<<<<<<<<<<<\n", rlDest.sRegLow);
+	LOG(">>>>>>>>>>>>>rlDest.sRegLow is %d<<<<<<<<<<<<\n", rlDest.sRegLow);
+	LOG(">>>>>>>>>>>>>rlDest.location is %d<<<<<<<<<<<<\n", rlDest.location);
     }
 
     switch (mir->dalvikInsn.opCode) {

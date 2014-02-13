@@ -60,7 +60,7 @@ void dvmCompilerRegAlloc(CompilationUnit *cUnit)
     for (i=0; i< cUnit->numSSARegs; i++) {
         loc[i] = freshLoc;
         loc[i].sRegLow = i;
-	LOG(">>>>>>>>>>>>>loc[%d]sRegLow is %d<<<<<<<<<<<<\n", i, loc[i].sRegLow);
+	LOG(">>>>>>>>>>>>>loc[%d].sRegLow is %d<<<<<<<<<<<<\n", i, loc[i].sRegLow);
     }
     cUnit->regLocation = loc;
 
@@ -68,10 +68,12 @@ void dvmCompilerRegAlloc(CompilationUnit *cUnit)
 //    for (i=0; i < cUnit->numBlocks; i++) {
 //        inferTypes(cUnit, cUnit->blockList[i]);
 //    }
+	//对fp进行操作
     for (curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
 		inferTypes(cUnit,curBB);
     }
 
+	//always true
     if (simpleTrace(cUnit)) {
         /*
          * Just rename everything back to subscript 0 names and don't do

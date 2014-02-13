@@ -879,6 +879,7 @@ static void dataFlowSSAFormat3RC(CompilationUnit *cUnit, MIR *mir)
 
 void dvmCompilerDoSSAConversion(CompilationUnit *cUnit, BasicBlock *bb)
 {
+	LOG(">>>>>>>>>>>>>The function is %s<<<<<<<<<<<<\n", __func__);
 	MIR *mir;
 
 	for (mir = bb->firstMIRInsn; mir; mir = mir->next) {

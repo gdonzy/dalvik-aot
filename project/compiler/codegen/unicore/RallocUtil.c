@@ -172,6 +172,7 @@ static int allocTempBody(CompilationUnit *cUnit, RegisterInfo *p, int numTemps,
         }
         next++;
     }
+//eric:这里应该是降低要求
     next = *nextTemp;
     for (i=0; i< numTemps; i++) {
         if (next >= numTemps)
@@ -216,7 +217,7 @@ static RegisterInfo *allocLiveBody(RegisterInfo *p, int numTemps, int sReg)
     for (i=0; i < numTemps; i++) {
         if (p[i].live && (p[i].sReg == sReg)) {
             p[i].inUse = true;
-			LOG("The alloclive reg is %d\n", sReg);
+			LOG("p[%d].sReg == %d, RegisterInfo[%d] and The alloclive reg is %d\n", i, p[i].sReg, i, sReg);
             return &p[i];
         }    
     }    
@@ -450,6 +451,8 @@ void copyRegInfo(CompilationUnit *cUnit, int newReg, int oldReg)
 extern RegLocation dvmCompilerUpdateLoc(CompilationUnit *cUnit, RegLocation loc)
 {
     assert(!loc.wide);
+	
+				LOG("loc.lowReg = %d\n", loc.lowReg);
     if (loc.location == kLocDalvikFrame) {
 		//the mediator is ssa num
         RegisterInfo *infoLo = allocLive(cUnit, loc.sRegLow, kAnyReg);
@@ -460,6 +463,7 @@ extern RegLocation dvmCompilerUpdateLoc(CompilationUnit *cUnit, RegLocation loc)
             } else {
                 loc.lowReg = infoLo->reg;
                 loc.location = kLocPhysReg;
+				LOG("loc.lowReg = %d\n", loc.lowReg);
             }
         }
     }
@@ -500,6 +504,7 @@ extern RegLocation dvmCompilerEvalLoc(CompilationUnit *cUnit, RegLocation loc,
 
     if (update) {
         loc.location = kLocPhysReg;
+		//该函数的意义是什么，将物理寄存器和虚拟机存器建立联系
         dvmCompilerMarkLive(cUnit, loc.lowReg, loc.sRegLow);
     }    
     return loc; 
@@ -526,6 +531,8 @@ extern RegLocation dvmCompilerGetDest(CompilationUnit *cUnit, MIR *mir, int num)
 {
     LOG(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);   
 	RegLocation loc = cUnit->regLocation[SREG(cUnit, getDestSSAName(mir, num))]; 
+	LOG(">>>>>>>>>>>>>>>the ssaReg is %d<<<<<<<<<<<<<<<<<\n", getDestSSAName(mir, num));	
+	LOG(">>>>>>>>>>>>>>>loc = cUnit->regLocation[%d]<<<<<<<<<<<<<<<\n", SREG(cUnit, getDestSSAName(mir, num)));
 	loc.fp = cUnit->regLocation[getDestSSAName(mir, num)].fp; 
 	loc.wide = false;  
 	return loc; 
