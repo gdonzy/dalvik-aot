@@ -382,74 +382,8 @@ static void assembleInstructions(BasicBlock * bb)
     UnicoreLIR *lir;
 
     for (lir = (UnicoreLIR *) bb->firstLIRInsn; lir; lir =(UnicoreLIR *) (lir->generic.next)) {
-//        if (lir->opCode < 0) {
-//            if ((lir->opCode == kArmPseudoPseudoAlign4) &&
-//                /* 1 means padding is needed */
-//                (lir->operands[0] == 1)) {
-//                LOGI("chenglin funtion assembleInstructions  impossible +++++++++here0000");
-//                *bufferAddr++ = PADDING_MOV_R5_R5;
-//            }
-//            continue;
-//        }
-
-
-/*eric*/
-/*
-        if (lir->isNop) {
-            continue;
-        }
-*/
-	
-//	if(lir->opCode == kUnicoreLdwPcRel||
-//       lir->opCode == kUnicoreAddPcRel){
-//		ArmLIR *lirTarget = (ArmLIR *) lir->generic.target;
-//		intptr_t pc = (lir->generic.offset + 4) & ~3;
-//		intptr_t target = lirTarget->generic.offset;
-//		int delta = target - pc;
-//		if (delta & 0x3) {
-//            LOGE("PC-rel distance is not multiples of 4: %d\n", delta);
-//            dvmCompilerAbort(cUnit);
-//        }else if (lir->opCode == kUnicoreLdwPcRel && delta > 16380) {
-//            return kRetryHalve;
-//        }else if (lir->opCode == kUnicoreAddPcRel && delta >508){
-//            return kRetryHalve;
-//        }
-//        lir->operands[1] = delta;
-//    }else if(lir->opCode == kUnicoreBCond){
-//        ArmLIR *targetLIR = (ArmLIR *) lir->generic.target;
-//        intptr_t pc = lir->generic.offset + 4;
-//        intptr_t target = targetLIR->generic.offset;
-//        int delta = target - pc;
-//        if (delta > 33554428 || delta < -33554432) {
-//            return kRetryHalve;
-//        }
-//        lir->operands[0] = delta >> 2;
-//    } else if (lir->opCode == kUnicoreBUncond) {
-//        ArmLIR *targetLIR = (ArmLIR *) lir->generic.target;
-//        intptr_t pc = lir->generic.offset + 4;
-//        intptr_t target = targetLIR->generic.offset;
-//        int delta = target - pc;
-//        if (delta > 33554428 || delta < -33554432) {
-//            LOGE("Unconditional branch distance out of range: %d\n", delta);
-//            dvmCompilerAbort(cUnit);
-//        }
-//        lir->operands[0] = delta >> 2;
-//    }else if (lir->opCode == kUnicoreBl) {
-//        /* curPC is Thumb */
-//        intptr_t curPC = (startAddr + lir->generic.offset + 4) & ~3;
-//        intptr_t target = lir->operands[0];
-//
-//        /* Match bit[1] in target with base */
-//        //if (curPC & 0x2) {
-//        //    target |= 0x2;
-//        //}
-//        int delta = target - curPC;
-//        assert((delta >= -(1<<25)) && (delta <= ((1<<25)-4)));
-//
-//        lir->operands[0] = delta>>2; 
-//        //NEXT_LIR(lir)->operands[0] = (delta>> 1) & 0x7ff;
-//    }
-        UnicoreEncodingMap *encoder = &EncodingMap[lir->opCode];
+        
+	UnicoreEncodingMap *encoder = &EncodingMap[lir->opCode];
         u4 bits = encoder->skeleton;
 		LOG("lir opcode is %x\n", bits);
         int i;

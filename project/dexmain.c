@@ -133,31 +133,36 @@ int main(int argc , char * argv[]){
 	debugCodeOffset = 0x24ec;
 
 	//last argument is count of insns .
-//	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 1);
+	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 2);
 
 //	LOG("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
 
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
 		dvmInitializeSSAConversion(cUnit);
-		LOG(">>>>>>>>>>>>>After dvmInitializeSSAConversion, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerNonLoopAnalysis(cUnit);
-		LOG(">>>>>>>>>>>>>After dvmCompilerNonLoopAnalysis, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerInitializeRegAlloc(cUnit);
-		LOG(">>>>>>>>>>>>>After dvmCompilerInitializeRegAlloc, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 		dvmCompilerRegAlloc(cUnit);
-		LOG(">>>>>>>>>>>>>After dvmCompilerRegAlloc, numSSARegs is %d<<<<<<<<<<<<\n", cUnit->numSSARegs);
 
 		/***********debug for pDebugCUnit*************/
 		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item)-(u1*)(pDexFile->baseAddr))){
+			dvmInitializeSSAConversion(cUnit);
 			pDebugCUnit = cUnit;
-//			pDebugCUnit->debugBB = &debugBB;	
+			dvmCompilerDoSSAConversion(cUnit,&debugBB);
 			LOG("The register size is %d\n", cUnit->pCodeItem->item->registersSize);
 			LOG("I'm in debugBB\n");
 			LOG("The code item's first bytecode is %x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
+			dvmCompilerInitializeRegAlloc(cUnit);
+			dvmCompilerRegAlloc(cUnit);
+		}
+		else{
+			dvmInitializeSSAConversion(cUnit);
+			dvmCompilerNonLoopAnalysis(cUnit);
+			dvmCompilerInitializeRegAlloc(cUnit);
+			dvmCompilerRegAlloc(cUnit);
 		}
 	}
-//	pDebugCUnit->debugBB = &debugBB;	
+	pDebugCUnit->debugBB = &debugBB;	
 
 	dvmCompilerMIR2LIR(pDebugCUnit);
 	debugNewLIR2Assemble(pDebugCUnit);

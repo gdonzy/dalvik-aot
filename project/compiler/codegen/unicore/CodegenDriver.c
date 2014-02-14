@@ -471,23 +471,23 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 	dvmCompilerResetRegPool(cUnit); 
 	dvmCompilerClobberAllRegs(cUnit); 
 	
-	for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
+	//for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
 //debug
-	//	curBB = cUnit->debugBB;
+		curBB = cUnit->debugBB;
 		
 		//eric: 暂时没有用处
 		//dvmCompilerResetNullCheck(cUnit);  
 
-		if(curBB->startOffset == 0x24fc) {	
+	//	if(curBB->startOffset == 0x24fc) {	
 		/*LIR insn is designed to insert debugBB in newLIRxxx functions, so we need to initialize debugBB*/
-			cUnit->debugBB = curBB;
+	//		cUnit->debugBB = curBB;
 			for(mir = curBB->firstMIRInsn; mir; mir = mir->next) {
 				dvmCompilerResetRegPool(cUnit);	
 				dvmCompilerResetDefTracking(cUnit);
 			
 				OpCode dalvikOpCode = mir->dalvikInsn.opCode;
 				InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
-				if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1 || mir->dalvikInsn.opCode == 0xd8){
+	//			if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1 || mir->dalvikInsn.opCode == 0xd8){
 					switch(dalvikFormat) {
 						case kFmt11n:
 						case kFmt31i:
@@ -515,10 +515,10 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 					//exit(1);
 					break;
 					}
-				} else continue;
+	//			} else continue;
 			}
-		}
-	}
+	//	}
+	//}
 }
 
 UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)

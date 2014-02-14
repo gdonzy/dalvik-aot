@@ -60,10 +60,10 @@ UnicoreLIR *  debugNewLIR4(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode 
 void debugNewLIR2Assemble(CompilationUnit *pDebugCUnit){
 //	BasicBlock *bb = pDebugCUnit->debugBB;
 	BasicBlock *bb = NULL;
-	for(bb = pDebugCUnit->firstBB; bb; bb = bb->next) {
-		if(bb->startOffset == 0x24fc)
-			break;
-	}
+//	for(bb = pDebugCUnit->firstBB; bb; bb = bb->next) {
+//		if(bb->startOffset == 0x24fc)
+//			break;
+//	}
 	//to do something (switch case .....)	
 //	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r1,20);
 //	debugNewLIR2(pDebugCUnit,bb,kUnicoreMovImm,r0,0);
@@ -72,7 +72,7 @@ void debugNewLIR2Assemble(CompilationUnit *pDebugCUnit){
 
 	//return from nativecode to mterp	
 	
-	
+	bb = pDebugCUnit->debugBB;	
 	debugDvmCompilerAssembleLIR(bb);		
 	
 	outputCodeBuffer(bb);
