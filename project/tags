@@ -644,6 +644,7 @@ freshLoc	compiler/Ralloc.c	/^static const RegLocation freshLoc = {kLocDalvikFram
 gOpNames	toOpt.h	/^static const char* gOpNames[256] = {$/;"	v
 genArithOp	compiler/codegen/unicore/CodegenDriver.c	/^static bool genArithOp(CompilationUnit *cUnit, MIR *mir)$/;"	f	file:
 genArithOpInt	compiler/codegen/unicore/CodegenDriver.c	/^static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,  $/;"	f	file:
+genMultiplyByTwoBitMultiplier	compiler/codegen/unicore/unity-2/Gen-unicore.c	/^static void genMultiplyByTwoBitMultiplier(CompilationUnit *cUnit,$/;"	f	file:
 genRegCopy	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR* genRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)                    $/;"	f	file:
 genRegCopyNoInsert	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR* genRegCopyNoInsert(CompilationUnit *cUnit, int rDest, int rSrc)$/;"	f	file:
 generic	compiler/codegen/unicore/UnicoreLIR.h	/^    LIR generic;$/;"	m	struct:UnicoreLIR
@@ -653,8 +654,10 @@ getFirstIndexFromBBMask	toMarkBB.h	/^int getFirstIndexFromBBMask(u4* BBMask,int 
 getInsn	toOpt.c	/^u2 getInsn(u2 * insns, int idx){$/;"	f
 getLocWide	compiler/codegen/unicore/RallocUtil.c	/^static RegLocation getLocWide(CompilationUnit *cUnit, MIR *mir, int low, int high, bool isSrc)$/;"	f	file:
 getRegInfo	compiler/codegen/unicore/RallocUtil.c	/^static RegisterInfo *getRegInfo(CompilationUnit *cUnit, int reg)                          $/;"	f	file:
+handleEasyMultiply	compiler/codegen/unicore/CodegenDriver.c	/^static bool handleEasyMultiply(CompilationUnit *cUnit,$/;"	f	file:
 handleFmt11n_Fmt31i	compiler/codegen/unicore/CodegenDriver.c	/^static bool handleFmt11n_Fmt31i(CompilationUnit *cUnit, MIR *mir)$/;"	f	file:
 handleFmt12x	compiler/codegen/unicore/CodegenDriver.c	/^static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)$/;"	f	file:
+handleFmt22b_Fmt22s	compiler/codegen/unicore/CodegenDriver.c	/^static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)$/;"	f	file:
 handleSSADef	compiler/Dataflow.c	/^static void handleSSADef(CompilationUnit *cUnit, int *defs, int dalvikReg,$/;"	f	file:
 handleSSAUse	compiler/Dataflow.c	/^static void handleSSAUse(CompilationUnit *cUnit, int *uses, int dalvikReg,$/;"	f	file:
 header	DEX.h	/^	CodeItem* header;$/;"	m	struct:CodeList
@@ -678,6 +681,8 @@ instrFormatTable	dexmain.c	/^unsigned char * instrFormatTable = NULL;$/;"	v
 instrWidthTable	dexmain.c	/^signed char * instrWidthTable = NULL;	$/;"	v
 interfacesOff	DEX.h	/^    u4  interfacesOff;      \/* file offset to DexTypeList *\/$/;"	m	struct:DexClassDef
 isNop	compiler/codegen/unicore/UnicoreLIR.h	/^    bool isNop;         \/\/ LIR is optimized away$/;"	m	struct:UnicoreLIR
+isPopCountLE2	compiler/codegen/unicore/CodegenDriver.c	/^static bool isPopCountLE2(unsigned int x)                                                $/;"	f	file:
+isPowerOfTwo	compiler/codegen/unicore/CodegenDriver.c	/^static bool isPowerOfTwo(int x)                                                           $/;"	f	file:
 item	DEX.h	/^	DexCode* item;$/;"	m	struct:CodeItem
 kAnyReg	compiler/CompilerIR.h	/^	kAnyReg,$/;"	e	enum:RegisterClass
 kArrayDataSignature	DEX.h	634;"	d
@@ -913,18 +918,25 @@ loadValueDirect	compiler/codegen/unicore/CodegenFactory.c	/^static void loadValu
 loadWordDisp	compiler/codegen/unicore/CodegenFactory.c	/^static UnicoreLIR *loadWordDisp(CompilationUnit *cUnit, int rBase, int displacement,$/;"	f	file:
 location	compiler/CompilerIR.h	/^	RegLocationType location:2;$/;"	m	struct:RegLocation
 lowReg	compiler/CompilerIR.h	/^	u1 lowReg:6;$/;"	m	struct:RegLocation
+lowestSetBit	compiler/codegen/unicore/CodegenDriver.c	/^static int lowestSetBit(unsigned int x) {                                                $/;"	f	file:
 magic	DEX.h	/^    u1  magic[8];           \/* includes version number *\/$/;"	m	struct:DexHeader
 magic	DEX.h	/^    u1  magic[8];           \/* includes version number *\/$/;"	m	struct:DexOptHeader
 main	dexmain.c	/^int main(int argc , char * argv[]){$/;"	f
 mapOff	DEX.h	/^    u4  mapOff;$/;"	m	struct:DexHeader
+markBB_aget	toMarkBB.h	/^int markBB_aget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_aput	toMarkBB.h	/^int markBB_aput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_goto	toMarkBB.h	/^int markBB_goto(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_if	toMarkBB.h	/^int markBB_if(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_ifZ	toMarkBB.h	/^int markBB_ifZ(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_iget	toMarkBB.h	/^int markBB_iget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_invoke	toMarkBB.h	/^int markBB_invoke(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_invokeRange	toMarkBB.h	/^int markBB_invokeRange(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_iput	toMarkBB.h	/^int markBB_iput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_packedSwitch	toMarkBB.h	/^int markBB_packedSwitch(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_return	toMarkBB.h	/^int markBB_return(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_sget	toMarkBB.h	/^int markBB_sget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_sparseSwitch	toMarkBB.h	/^int markBB_sparseSwitch(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
+markBB_sput	toMarkBB.h	/^int markBB_sput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 markBB_throw	toMarkBB.h	/^int markBB_throw(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){$/;"	f
 memAlloc4Assemble	compiler/codegen/unicore/Assemble.c	/^void memAlloc4Assemble(BasicBlock *bb) {$/;"	f
 methodIdsOff	DEX.h	/^    u4  methodIdsOff;$/;"	m	struct:DexHeader

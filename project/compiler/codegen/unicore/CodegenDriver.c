@@ -368,6 +368,78 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+static bool isPowerOfTwo(int x)                                                           
+{   
+    return (x & (x - 1)) == 0;                                                               
+}            
+
+// Returns true if no more than two bits are set in 'x'.                                
+static bool isPopCountLE2(unsigned int x)                                                
+{   
+    x &= x - 1; 
+    return (x & (x - 1)) == 0;                                                             
+}                             
+
+// Returns the index of the lowest set bit in 'x'.                                       
+static int lowestSetBit(unsigned int x) {                                                
+	int bit_posn = 0;
+    while ((x & 0xf) == 0) {                                                             
+	    bit_posn += 4;                                                                   
+	    x >>= 4;                                                                          
+	}
+    while ((x & 1) == 0) {                                                              
+		bit_posn++;                                                                     
+ 	   	x >>= 1;                                                                             
+	}
+    return bit_posn;                                                                         
+}                     
+
+// Returns true if it added instructions to 'cUnit' to multiply 'rlSrc' by 'lit'
+// and store the result in 'rlDest'.
+static bool handleEasyMultiply(CompilationUnit *cUnit,
+                               RegLocation rlSrc, RegLocation rlDest, int lit)
+{
+    // Can we simplify this multiplication?
+    bool powerOfTwo = false;
+    bool popCountLE2 = false;
+    bool powerOfTwoMinusOne = false;
+
+    if (lit < 2) {
+        // Avoid special cases.
+        return false;
+    } else if (isPowerOfTwo(lit)) {
+        powerOfTwo = true;
+    } else if (isPopCountLE2(lit)) {
+        popCountLE2 = true;
+    } else if (isPowerOfTwo(lit + 1)) {
+        powerOfTwoMinusOne = true;
+    } else {
+        return false;
+    }
+    rlSrc = loadValue(cUnit, rlSrc, kCoreReg);
+    RegLocation rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+    if (powerOfTwo) {
+        // Shift.
+        opRegRegImm(cUnit, kOpLsl, rlResult.lowReg, rlSrc.lowReg,
+                    lowestSetBit(lit));
+    } else if (popCountLE2) {
+        // Shift and add and shift.
+        int firstBit = lowestSetBit(lit);
+        int secondBit = lowestSetBit(lit ^ (1 << firstBit));
+        genMultiplyByTwoBitMultiplier(cUnit, rlSrc, rlResult, lit,
+                                      firstBit, secondBit);
+    } else {
+        // Reverse subtract: (src << (shift + 1)) - src.
+        assert(powerOfTwoMinusOne);
+        // TODO: rsb dst, src, src lsl#lowestSetBit(lit + 1)
+        int tReg = dvmCompilerAllocTemp(cUnit);
+        opRegRegImm(cUnit, kOpLsl, tReg, rlSrc.lowReg, lowestSetBit(lit + 1));
+        opRegRegReg(cUnit, kOpSub, rlResult.lowReg, tReg, rlSrc.lowReg);
+    }
+    storeValue(cUnit, rlDest, rlResult);
+    return true;
+}                                                       
+
 static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
 {
     OpCode dalvikOpCode = mir->dalvikInsn.opCode;
@@ -399,14 +471,14 @@ static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
         case OP_ADD_INT_LIT16:
             op = kOpAdd;
             break;
-//        case OP_MUL_INT_LIT8:
-//        case OP_MUL_INT_LIT16: {
-//            if (handleEasyMultiply(cUnit, rlSrc, rlDest, lit)) {
-//                return false;
-//            }
-//            op = kOpMul;
-//            break;
-//        }
+        case OP_MUL_INT_LIT8:
+        case OP_MUL_INT_LIT16: {
+            if (handleEasyMultiply(cUnit, rlSrc, rlDest, lit)) {
+                return false;
+            }
+            op = kOpMul;
+            break;
+        }
 //        case OP_AND_INT_LIT8:
 //        case OP_AND_INT_LIT16:
 //            op = kOpAnd;
