@@ -122,7 +122,7 @@ int main(int argc , char * argv[]){
 
 	/************process debugBB**************/
 
-	debugBB.startOffset = 0x24fc; 
+	debugBB.startOffset = 0x24fe; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
 	debugBB.firstLIRInsn = NULL;
@@ -133,7 +133,7 @@ int main(int argc , char * argv[]){
 	debugCodeOffset = 0x24ec;
 
 	//last argument is count of insns .
-	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 2);
+	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 1);
 
 //	LOG("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
 

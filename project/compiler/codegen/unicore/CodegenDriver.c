@@ -194,6 +194,28 @@ static bool genArithOp(CompilationUnit *cUnit, MIR *mir)
     return true;
 }
 
+//static void genIGet(CompilationUnit *cUnit, MIR *mir, OpSize size,
+//                    int fieldOffset, bool isVolatile)
+//{
+//    RegLocation rlResult;
+//    RegisterClass regClass = dvmCompilerRegClassBySize(size);
+//    RegLocation rlObj = dvmCompilerGetSrc(cUnit, mir, 0);
+//    RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+//    rlObj = loadValue(cUnit, rlObj, kCoreReg);
+//    rlResult = dvmCompilerEvalLoc(cUnit, rlDest, regClass, true);
+//    genNullCheck(cUnit, rlObj.sRegLow, rlObj.lowReg, mir->offset,
+//                 NULL);/* null object? */
+//
+//    HEAP_ACCESS_SHADOW(true);
+//    loadBaseDisp(cUnit, mir, rlObj.lowReg, fieldOffset, rlResult.lowReg,
+//                 size, rlObj.sRegLow);
+//    HEAP_ACCESS_SHADOW(false);
+//    if (isVolatile) {
+//        dvmCompilerGenMemBarrier(cUnit);
+//    }
+//
+//    storeValue(cUnit, rlDest, rlResult);
+//}
 /* 
  * The following are the first-level codegen routines that analyze the format
  * of each bytecode.
@@ -461,6 +483,186 @@ static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+//static bool handleFmt22c(CompilationUnit *cUnit, MIR *mir)
+//{
+//    OpCode dalvikOpCode = mir->dalvikInsn.opCode;
+//    int fieldOffset = -1;
+//    bool isVolatile = false;
+//    switch (dalvikOpCode) {
+//        /*
+//         * Wide volatiles currently handled via single step.
+//         * Add them here if generating in-line code.
+//         *     case OP_IGET_WIDE_VOLATILE:
+//         *     case OP_IPUT_WIDE_VOLATILE:
+//         */
+//        case OP_IGET:
+//        case OP_IGET_VOLATILE:
+//        case OP_IGET_WIDE:
+//        case OP_IGET_OBJECT:
+//        case OP_IGET_OBJECT_VOLATILE:
+//        case OP_IGET_BOOLEAN:
+//        case OP_IGET_BYTE:
+//        case OP_IGET_CHAR:
+//        case OP_IGET_SHORT:
+//        case OP_IPUT:
+//        case OP_IPUT_VOLATILE:
+//        case OP_IPUT_WIDE:
+//        case OP_IPUT_OBJECT:
+//        case OP_IPUT_OBJECT_VOLATILE:
+//        case OP_IPUT_BOOLEAN:
+//        case OP_IPUT_BYTE:
+//        case OP_IPUT_CHAR:
+//        case OP_IPUT_SHORT: {
+//            const Method *method = (mir->OptimizationFlags & MIR_CALLEE) ?
+//                mir->meta.calleeMethod : cUnit->method;
+//            Field *fieldPtr =
+//                method->clazz->pDvmDex->pResFields[mir->dalvikInsn.vC];
+//
+//            if (fieldPtr == NULL) {
+//                LOGE("Unexpected null instance field");
+//                dvmAbort();
+//            }
+//            isVolatile = dvmIsVolatileField(fieldPtr);
+//            fieldOffset = ((InstField *)fieldPtr)->byteOffset;
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//
+//    switch (dalvikOpCode) {
+////        case OP_NEW_ARRAY: {
+////            // Generates a call - use explicit registers
+////            RegLocation rlSrc = dvmCompilerGetSrc(cUnit, mir, 0);
+////            RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+////            RegLocation rlResult;
+////            void *classPtr = (void*)
+////              (cUnit->method->clazz->pDvmDex->pResClasses[mir->dalvikInsn.vC]);
+////
+////            if (classPtr == NULL) {
+////                LOGE("Unexpected null class");
+////                dvmAbort();
+////            }
+////
+////            dvmCompilerFlushAllRegs(cUnit);   /* Everything to home location */
+////            genExportPC(cUnit, mir);
+////            loadValueDirectFixed(cUnit, rlSrc, r1);   /* Len */
+////            loadConstant(cUnit, r0, (int) classPtr );
+////            LOAD_FUNC_ADDR(cUnit, r3, (int)dvmAllocArrayByClass);
+////            /*
+////             * "len < 0": bail to the interpreter to re-execute the
+////             * instruction
+////             */
+////            genRegImmCheck(cUnit, kArmCondMi, r1, 0, mir->offset, NULL);
+////            loadConstant(cUnit, r2, ALLOC_DONT_TRACK);
+////            opReg(cUnit, kOpBlx, r3);
+////            dvmCompilerClobberCallRegs(cUnit);
+////            /* generate a branch over if allocation is successful */
+////            opRegImm(cUnit, kOpCmp, r0, 0); /* NULL? */
+////            ArmLIR *branchOver = opCondBranch(cUnit, kArmCondNe);
+////            /*
+////             * OOM exception needs to be thrown here and cannot re-execute
+////             */
+////            loadConstant(cUnit, r0,
+////                         (int) (cUnit->method->insns + mir->offset));
+////            genDispatchToHandler(cUnit, TEMPLATE_THROW_EXCEPTION_COMMON);
+////            /* noreturn */
+////
+////            ArmLIR *target = newLIR0(cUnit, kArmPseudoTargetLabel);
+////            target->defMask = ENCODE_ALL;
+////            branchOver->generic.target = (LIR *) target;
+////            rlResult = dvmCompilerGetReturn(cUnit);
+////            storeValue(cUnit, rlDest, rlResult);
+////            break;
+////        }
+////        case OP_INSTANCE_OF: {
+////            // May generate a call - use explicit registers
+////            RegLocation rlSrc = dvmCompilerGetSrc(cUnit, mir, 0);
+////            RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+////            RegLocation rlResult;
+////            ClassObject *classPtr =
+////              (cUnit->method->clazz->pDvmDex->pResClasses[mir->dalvikInsn.vC]);
+////            /*
+////             * Note: It is possible that classPtr is NULL at this point,
+////             * even though this instruction has been successfully interpreted.
+////             * If the previous interpretation had a null source, the
+////             * interpreter would not have bothered to resolve the clazz.
+////             * Bail out to the interpreter in this case, and log it
+////             * so that we can tell if it happens frequently.
+////             */
+////            if (classPtr == NULL) {
+////                LOGD("null clazz in OP_INSTANCE_OF, single-stepping");
+////                genInterpSingleStep(cUnit, mir);
+////                break;
+////            }
+////            dvmCompilerFlushAllRegs(cUnit);   /* Everything to home location */
+////            loadValueDirectFixed(cUnit, rlSrc, r0);  /* Ref */
+////            loadConstant(cUnit, r2, (int) classPtr );
+//////TUNING: compare to 0 primative to allow use of CB[N]Z
+////            opRegImm(cUnit, kOpCmp, r0, 0); /* NULL? */
+////            /* When taken r0 has NULL which can be used for store directly */
+////            ArmLIR *branch1 = opCondBranch(cUnit, kArmCondEq);
+////            /* r1 now contains object->clazz */
+////            loadWordDisp(cUnit, r0, offsetof(Object, clazz), r1);
+////            /* r1 now contains object->clazz */
+////            LOAD_FUNC_ADDR(cUnit, r3, (int)dvmInstanceofNonTrivial);
+////            loadConstant(cUnit, r0, 1);                /* Assume true */
+////            opRegReg(cUnit, kOpCmp, r1, r2);
+////            ArmLIR *branch2 = opCondBranch(cUnit, kArmCondEq);
+////            genRegCopy(cUnit, r0, r1);
+////            genRegCopy(cUnit, r1, r2);
+////            opReg(cUnit, kOpBlx, r3);
+////            dvmCompilerClobberCallRegs(cUnit);
+////            /* branch target here */
+////            ArmLIR *target = newLIR0(cUnit, kArmPseudoTargetLabel);
+////            target->defMask = ENCODE_ALL;
+////            rlResult = dvmCompilerGetReturn(cUnit);
+////            storeValue(cUnit, rlDest, rlResult);
+////            branch1->generic.target = (LIR *)target;
+////            branch2->generic.target = (LIR *)target;
+////            break;
+////        }
+////        case OP_IGET_WIDE:
+////            genIGetWide(cUnit, mir, fieldOffset);
+////            break;
+////        case OP_IGET_VOLATILE:
+////        case OP_IGET_OBJECT_VOLATILE:
+////            isVolatile = true;
+//            // NOTE: intentional fallthrough
+//        case OP_IGET:
+//        case OP_IGET_OBJECT:
+//        case OP_IGET_BOOLEAN:
+//        case OP_IGET_BYTE:
+//        case OP_IGET_CHAR:
+//        case OP_IGET_SHORT:
+//            genIGet(cUnit, mir, kWord, fieldOffset, isVolatile);
+//            break;
+////        case OP_IPUT_WIDE:
+////            genIPutWide(cUnit, mir, fieldOffset);
+////            break;
+////        case OP_IPUT:
+////        case OP_IPUT_SHORT:
+////        case OP_IPUT_CHAR:
+////        case OP_IPUT_BYTE:
+////        case OP_IPUT_BOOLEAN:
+////            genIPut(cUnit, mir, kWord, fieldOffset, false, isVolatile);
+////            break;
+////        case OP_IPUT_VOLATILE:
+////        case OP_IPUT_OBJECT_VOLATILE:
+////            isVolatile = true;
+////            // NOTE: intentional fallthrough
+////        case OP_IPUT_OBJECT:
+////            genIPut(cUnit, mir, kWord, fieldOffset, true, isVolatile);
+////            break;
+////        case OP_IGET_WIDE_VOLATILE:
+////        case OP_IPUT_WIDE_VOLATILE:
+////            genInterpSingleStep(cUnit, mir);
+////            break;
+//        default:
+//            return true;
+//    }
+//    return false;
+//}
 
 void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 {
@@ -502,6 +704,9 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
 							notHandled = handleFmt22b_Fmt22s(cUnit, mir);
 							break;
+                    				case kFmt22c:
+                        			//	notHandled = handleFmt22c(cUnit, mir);
+                        				break;
 						default:
 							notHandled = true;
 							break;			

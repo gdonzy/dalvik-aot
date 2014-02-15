@@ -47,17 +47,53 @@ array[OP_IF_LEZ] = markBB_ifZ;
 //throw
 array[OP_THROW] = markBB_throw;
 
+//donzy2delete iget/iput...
+array[OP_IGET] = markBB_iget;
+array[OP_IGET_WIDE] = markBB_iget;
+array[OP_IGET_OBJECT] = markBB_iget; 
+array[OP_IGET_BOOLEAN] = markBB_iget;
+array[OP_IGET_BYTE]= markBB_iget;
+array[OP_IGET_CHAR]= markBB_iget;
+array[OP_IGET_SHORT]= markBB_iget;
+array[OP_IPUT]= markBB_iput;
+array[OP_IPUT_WIDE]= markBB_iput;
+array[OP_IPUT_OBJECT]= markBB_iput;
+array[OP_IPUT_BOOLEAN]= markBB_iput;
+array[OP_IPUT_BYTE]= markBB_iput;
+array[OP_IPUT_CHAR]= markBB_iput;
+array[OP_IPUT_SHORT]= markBB_iput;
 
+//donzy2delete sget/sput...
+array[OP_SGET] = markBB_sget;
+array[OP_SGET_WIDE] = markBB_sget;
+array[OP_SGET_OBJECT] = markBB_sget;
+array[OP_SGET_BOOLEAN] = markBB_sget;
+array[OP_SGET_BYTE] = markBB_sget;
+array[OP_SGET_CHAR] = markBB_sget;
+array[OP_SGET_SHORT] = markBB_sget;
+array[OP_SPUT] = markBB_sput;
+array[OP_SPUT_WIDE] = markBB_sput;
+array[OP_SPUT_OBJECT] = markBB_sput;
+array[OP_SPUT_BOOLEAN] = markBB_sput;
+array[OP_SPUT_BYTE] = markBB_sput;
+array[OP_SPUT_CHAR] = markBB_sput;
+array[OP_SPUT_SHORT] = markBB_sput;
 
-
-
-
-
-
-
-
-
-
+//donzy2delete aget/aput...
+array[OP_AGET] = markBB_aget;
+array[OP_AGET_WIDE] = markBB_aget;
+array[OP_AGET_OBJECT] = markBB_aget;
+array[OP_AGET_BOOLEAN] = markBB_aget;
+array[OP_AGET_BYTE] = markBB_aget;
+array[OP_AGET_CHAR] = markBB_aget;
+array[OP_AGET_SHORT] = markBB_aget;
+array[OP_APUT] = markBB_aput;
+array[OP_APUT_WIDE] = markBB_aput;
+array[OP_APUT_OBJECT] = markBB_aput;
+array[OP_APUT_BOOLEAN] = markBB_aput;
+array[OP_APUT_BYTE] = markBB_aput;
+array[OP_APUT_CHAR] = markBB_aput;
+array[OP_APUT_SHORT] = markBB_aput;
 
 
 
