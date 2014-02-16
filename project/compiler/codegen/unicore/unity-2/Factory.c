@@ -776,3 +776,24 @@ static UnicoreLIR* genRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
     return res;
 }
 
+//static inline UnicoreLIR *genRegImmCheck(CompilationUnit *cUnit,
+//                                     ArmConditionCode cond, int reg,
+//                                     int checkValue, int dOffset,
+//                                     UnicoreLIR *pcrLabel)
+//{
+//    int tReg;
+//    UnicoreLIR *res;
+//    if ((checkValue & 0xff) != checkValue) {
+//        tReg = dvmCompilerAllocTemp(cUnit);
+//        loadConstant(cUnit, tReg, checkValue);
+//        res = genRegRegCheck(cUnit, cond, reg, tReg, dOffset, pcrLabel);
+//        dvmCompilerFreeTemp(cUnit, tReg);
+//        return res;
+//    }
+//    //newLIR2(cUnit, kThumbCmpRI8, reg, checkValue);
+//    //ArmLIR *branch = newLIR2(cUnit, kThumbBCond, 0, cond);
+//    newLIR2(cUnit, kUnicoreCmpSubRI9, reg, checkValue);
+//    UnicoreLIR *branch = newLIR2(cUnit, kUnicoreBCond, 0, cond);
+//
+//    return genCheckCommon(cUnit, dOffset, branch, pcrLabel);
+//}                                                           

@@ -118,6 +118,7 @@ void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt)
 	
     while (insnIdx < insnsCnt) {
 		MIR * mir;
+		LOG("insnIdx is %d\n", insnIdx);
 		mir = dvmCompilerNew(sizeof(MIR),true);
 		if( NULL==mir ){
 			printf("error : alloc mem of mir[debug]!\n");

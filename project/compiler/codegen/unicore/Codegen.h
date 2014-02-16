@@ -1,6 +1,6 @@
 
 //#include "compiler/CompilerIR.h"
-//#include "CalloutHelper.h"
+#include "CalloutHelper.h"
 
 /*
  * loadConstant() sometimes needs to add a small imm to a pre-existing constant

@@ -36,13 +36,23 @@ extern RegLocation dvmCompilerGetDestWide(CompilationUnit *cUnit, MIR *mir, int 
 extern RegLocation dvmCompilerGetSrc(CompilationUnit *cUnit, MIR *mir, int num); 
 extern RegLocation dvmCompilerGetDest(CompilationUnit *cUnit, MIR *mir, int num);
 
+extern RegLocation dvmCompilerGetReturnWide(CompilationUnit *cUnit); 
+
 extern RegisterInfo *dvmCompilerIsLive(CompilationUnit *cUnit, int reg);
 extern RegisterInfo *dvmCompilerIsTemp(CompilationUnit *cUnit, int reg);
+
+/* Clobber all regs that might be used by an external C call */
+extern void dvmCompilerClobberCallRegs(CompilationUnit *cUnit);  
+
 extern void dvmCompilerFreeTemp(CompilationUnit *cUnit, int reg);
 extern void dvmCompilerClobberAllRegs(CompilationUnit *cUnit);
 extern void dvmCompilerMarkInUse(CompilationUnit *cUnit, int reg);
 
 extern int dvmCompilerAllocTemp(CompilationUnit *cUnit); 
+
+extern void dvmCompilerFlushAllRegs(CompilationUnit *cUnit);
+extern RegLocation dvmCompilerGetReturnWideAlt(CompilationUnit *cUnit);
+
 extern int dvmCompilerAllocFreeTemp(CompilationUnit *cUnit);  
 extern void dvmCompilerResetRegPool(CompilationUnit *cUnit);
 extern void dvmCompilerResetDef(CompilationUnit *cUnit, int reg);

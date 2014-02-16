@@ -33,6 +33,20 @@ static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,
     }
 }
 
+
+/*
+ * Similar to loadValueDirect, but clobbers and allocates the target
+ * register.  Should be used when loading to a fixed register (for example,
+ * loading arguments to an out of line call.                                             
+ */
+static void loadValueDirectFixed(CompilationUnit *cUnit, RegLocation rlSrc,
+                                 int reg1)
+{
+    dvmCompilerClobber(cUnit, reg1);
+    dvmCompilerMarkInUse(cUnit, reg1);
+    loadValueDirect(cUnit, rlSrc, reg1);
+}
+
 static RegLocation loadValue(CompilationUnit *cUnit, RegLocation rlSrc,
                              RegisterClass opKind)
 {
@@ -113,3 +127,22 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 		}
 	}
 }
+
+/*
+ * Perform null-check on a register. sReg is the ssa register being checked,
+ * and mReg is the machine register holding the actual value. If internal state
+ * indicates that sReg has been checked before the check request is ignored.
+ */
+//
+//static UnicoreLIR *genNullCheck(CompilationUnit *cUnit, int sReg, int mReg,
+//                                int dOffset, UnicoreLIR *pcrLabel)
+//{   
+//    /* This particular Dalvik register has been null-checked */
+//    if (dvmIsBitSet(cUnit->regPool->nullCheckedRegs, sReg)) {
+//        return pcrLabel;
+//    }                                                                                  
+//    dvmSetBit(cUnit->regPool->nullCheckedRegs, sReg);
+//    return genRegImmCheck(cUnit, kArmCondEq, mReg, 0, dOffset, pcrLabel);
+//}
+
+

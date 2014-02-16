@@ -1,6 +1,6 @@
 prepare to parse dex file!
-memPtr address is 0x7fc3c8192000this is from parseDexFile
-addr addr is 0x7fc3c8192000sizeof(u2) is 2
+memPtr address is 0x7f9275133000this is from parseDexFile
+addr addr is 0x7f9275133000sizeof(u2) is 2
 sizeof(u4) is 4
 sizeof(unsigned long int) is 8
 stringIdsOff is 70
@@ -46,65 +46,65 @@ virtualMethods[5] codeoff is 1130
 virtualMethods[6] codeoff is 1150
   Direct methods    -
 ##======##0codeoff is f78
-baseAddr is 0x7fc3c8192000,codeoff is 3960
-pCode is 0x7fc3c8192f78
+baseAddr is 0x7f9275133000,codeoff is 3960
+pCode is 0x7f9275133f78
       registers     : 1
       ins           : 0
       outs          : 0
       insns size    : 5 16-bit code units
 ##======##1codeoff is f94
-baseAddr is 0x7fc3c8192000,codeoff is 3988
-pCode is 0x7fc3c8192f94
+baseAddr is 0x7f9275133000,codeoff is 3988
+pCode is 0x7f9275133f94
       registers     : 3
       ins           : 2
       outs          : 1
       insns size    : 16 16-bit code units
   Virtual methods   -
 ##======##0codeoff is fc4
-baseAddr is 0x7fc3c8192000,codeoff is 4036
-pCode is 0x7fc3c8192fc4
+baseAddr is 0x7f9275133000,codeoff is 4036
+pCode is 0x7f9275133fc4
       registers     : 5
       ins           : 1
       outs          : 2
       insns size    : 25 16-bit code units
 ##======##1codeoff is 1008
-baseAddr is 0x7fc3c8192000,codeoff is 4104
-pCode is 0x7fc3c8193008
+baseAddr is 0x7f9275133000,codeoff is 4104
+pCode is 0x7f9275134008
       registers     : 7
       ins           : 1
       outs          : 2
       insns size    : 52 16-bit code units
 ##======##2codeoff is 1080
-baseAddr is 0x7fc3c8192000,codeoff is 4224
-pCode is 0x7fc3c8193080
+baseAddr is 0x7f9275133000,codeoff is 4224
+pCode is 0x7f9275134080
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 6 16-bit code units
 ##======##3codeoff is 109c
-baseAddr is 0x7fc3c8192000,codeoff is 4252
-pCode is 0x7fc3c819309c
+baseAddr is 0x7f9275133000,codeoff is 4252
+pCode is 0x7f927513409c
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 6 16-bit code units
 ##======##4codeoff is 10b8
-baseAddr is 0x7fc3c8192000,codeoff is 4280
-pCode is 0x7fc3c81930b8
+baseAddr is 0x7f9275133000,codeoff is 4280
+pCode is 0x7f92751340b8
       registers     : 7
       ins           : 2
       outs          : 2
       insns size    : 52 16-bit code units
 ##======##5codeoff is 1130
-baseAddr is 0x7fc3c8192000,codeoff is 4400
-pCode is 0x7fc3c8193130
+baseAddr is 0x7f9275133000,codeoff is 4400
+pCode is 0x7f9275134130
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 7 16-bit code units
 ##======##6codeoff is 1150
-baseAddr is 0x7fc3c8192000,codeoff is 4432
-pCode is 0x7fc3c8193150
+baseAddr is 0x7f9275133000,codeoff is 4432
+pCode is 0x7f9275134150
       registers     : 5
       ins           : 1
       outs          : 2
@@ -116,23 +116,23 @@ virtualMethods[0] codeoff is 11b0
 virtualMethods[1] codeoff is 11c4
   Direct methods    -
 ##======##0codeoff is 1198
-baseAddr is 0x7fc3c8192000,codeoff is 4504
-pCode is 0x7fc3c8193198
+baseAddr is 0x7f9275133000,codeoff is 4504
+pCode is 0x7f9275134198
       registers     : 1
       ins           : 1
       outs          : 1
       insns size    : 4 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 11b0
-baseAddr is 0x7fc3c8192000,codeoff is 4528
-pCode is 0x7fc3c81931b0
+baseAddr is 0x7f9275133000,codeoff is 4528
+pCode is 0x7f92751341b0
       registers     : 2
       ins           : 2
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##1codeoff is 11c4
-baseAddr is 0x7fc3c8192000,codeoff is 4548
-pCode is 0x7fc3c81931c4
+baseAddr is 0x7f9275133000,codeoff is 4548
+pCode is 0x7f92751341c4
       registers     : 7
       ins           : 2
       outs          : 2
@@ -155,100 +155,100 @@ directMethods[12] codeoff is 16ec
 virtualMethods[0] codeoff is 1748
   Direct methods    -
 ##======##0codeoff is 12bc
-baseAddr is 0x7fc3c8192000,codeoff is 4796
-pCode is 0x7fc3c81932bc
+baseAddr is 0x7f9275133000,codeoff is 4796
+pCode is 0x7f92751342bc
       registers     : 1
       ins           : 0
       outs          : 1
       insns size    : 15 16-bit code units
 ##======##1codeoff is 12ec
-baseAddr is 0x7fc3c8192000,codeoff is 4844
-pCode is 0x7fc3c81932ec
+baseAddr is 0x7f9275133000,codeoff is 4844
+pCode is 0x7f92751342ec
       registers     : 1
       ins           : 1
       outs          : 1
       insns size    : 4 16-bit code units
 ##======##2codeoff is 1304
-baseAddr is 0x7fc3c8192000,codeoff is 4868
-pCode is 0x7fc3c8193304
+baseAddr is 0x7f9275133000,codeoff is 4868
+pCode is 0x7f9275134304
       registers     : 9
       ins           : 0
       outs          : 3
       insns size    : 77 16-bit code units
 ##======##3codeoff is 13b0
-baseAddr is 0x7fc3c8192000,codeoff is 5040
-pCode is 0x7fc3c81933b0
+baseAddr is 0x7f9275133000,codeoff is 5040
+pCode is 0x7f92751343b0
       registers     : 5
       ins           : 1
       outs          : 2
       insns size    : 184 16-bit code units
 ##======##4codeoff is 1530
-baseAddr is 0x7fc3c8192000,codeoff is 5424
-pCode is 0x7fc3c8193530
+baseAddr is 0x7f9275133000,codeoff is 5424
+pCode is 0x7f9275134530
       registers     : 1
       ins           : 0
       outs          : 1
       insns size    : 14 16-bit code units
 ##======##5codeoff is 155c
-baseAddr is 0x7fc3c8192000,codeoff is 5468
-pCode is 0x7fc3c819355c
+baseAddr is 0x7f9275133000,codeoff is 5468
+pCode is 0x7f927513455c
       registers     : 4
       ins           : 0
       outs          : 1
       insns size    : 21 16-bit code units
 ##======##6codeoff is 1598
-baseAddr is 0x7fc3c8192000,codeoff is 5528
-pCode is 0x7fc3c8193598
+baseAddr is 0x7f9275133000,codeoff is 5528
+pCode is 0x7f9275134598
       registers     : 3
       ins           : 1
       outs          : 2
       insns size    : 21 16-bit code units
 ##======##7codeoff is 15d4
-baseAddr is 0x7fc3c8192000,codeoff is 5588
-pCode is 0x7fc3c81935d4
+baseAddr is 0x7f9275133000,codeoff is 5588
+pCode is 0x7f92751345d4
       registers     : 3
       ins           : 1
       outs          : 2
       insns size    : 24 16-bit code units
 ##======##8codeoff is 1614
-baseAddr is 0x7fc3c8192000,codeoff is 5652
-pCode is 0x7fc3c8193614
+baseAddr is 0x7f9275133000,codeoff is 5652
+pCode is 0x7f9275134614
       registers     : 3
       ins           : 1
       outs          : 2
       insns size    : 23 16-bit code units
 ##======##9codeoff is 1654
-baseAddr is 0x7fc3c8192000,codeoff is 5716
-pCode is 0x7fc3c8193654
+baseAddr is 0x7f9275133000,codeoff is 5716
+pCode is 0x7f9275134654
       registers     : 3
       ins           : 0
       outs          : 2
       insns size    : 24 16-bit code units
 ##======##10codeoff is 1694
-baseAddr is 0x7fc3c8192000,codeoff is 5780
-pCode is 0x7fc3c8193694
+baseAddr is 0x7f9275133000,codeoff is 5780
+pCode is 0x7f9275134694
       registers     : 3
       ins           : 0
       outs          : 2
       insns size    : 24 16-bit code units
 ##======##11codeoff is 16d4
-baseAddr is 0x7fc3c8192000,codeoff is 5844
-pCode is 0x7fc3c81936d4
+baseAddr is 0x7f9275133000,codeoff is 5844
+pCode is 0x7f92751346d4
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 4 16-bit code units
 ##======##12codeoff is 16ec
-baseAddr is 0x7fc3c8192000,codeoff is 5868
-pCode is 0x7fc3c81936ec
+baseAddr is 0x7f9275133000,codeoff is 5868
+pCode is 0x7f92751346ec
       registers     : 2
       ins           : 0
       outs          : 1
       insns size    : 37 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 1748
-baseAddr is 0x7fc3c8192000,codeoff is 5960
-pCode is 0x7fc3c8193748
+baseAddr is 0x7f9275133000,codeoff is 5960
+pCode is 0x7f9275134748
       registers     : 6
       ins           : 1
       outs          : 3
@@ -263,44 +263,44 @@ virtualMethods[2] codeoff is 189c
 virtualMethods[3] codeoff is 18c4
   Direct methods    -
 ##======##0codeoff is 1808
-baseAddr is 0x7fc3c8192000,codeoff is 6152
-pCode is 0x7fc3c8193808
+baseAddr is 0x7f9275133000,codeoff is 6152
+pCode is 0x7f9275134808
       registers     : 3
       ins           : 1
       outs          : 3
       insns size    : 8 16-bit code units
 ##======##1codeoff is 1828
-baseAddr is 0x7fc3c8192000,codeoff is 6184
-pCode is 0x7fc3c8193828
+baseAddr is 0x7f9275133000,codeoff is 6184
+pCode is 0x7f9275134828
       registers     : 3
       ins           : 3
       outs          : 1
       insns size    : 6 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 1844
-baseAddr is 0x7fc3c8192000,codeoff is 6212
-pCode is 0x7fc3c8193844
+baseAddr is 0x7f9275133000,codeoff is 6212
+pCode is 0x7f9275134844
       registers     : 6
       ins           : 2
       outs          : 1
       insns size    : 24 16-bit code units
 ##======##1codeoff is 1884
-baseAddr is 0x7fc3c8192000,codeoff is 6276
-pCode is 0x7fc3c8193884
+baseAddr is 0x7f9275133000,codeoff is 6276
+pCode is 0x7f9275134884
       registers     : 3
       ins           : 1
       outs          : 0
       insns size    : 3 16-bit code units
 ##======##2codeoff is 189c
-baseAddr is 0x7fc3c8192000,codeoff is 6300
-pCode is 0x7fc3c819389c
+baseAddr is 0x7f9275133000,codeoff is 6300
+pCode is 0x7f927513489c
       registers     : 6
       ins           : 1
       outs          : 1
       insns size    : 12 16-bit code units
 ##======##3codeoff is 18c4
-baseAddr is 0x7fc3c8192000,codeoff is 6340
-pCode is 0x7fc3c81938c4
+baseAddr is 0x7f9275133000,codeoff is 6340
+pCode is 0x7f92751348c4
       registers     : 3
       ins           : 3
       outs          : 0
@@ -311,15 +311,15 @@ directMethods[0] codeoff is 18dc
 directMethods[1] codeoff is 18f4
   Direct methods    -
 ##======##0codeoff is 18dc
-baseAddr is 0x7fc3c8192000,codeoff is 6364
-pCode is 0x7fc3c81938dc
+baseAddr is 0x7f9275133000,codeoff is 6364
+pCode is 0x7f92751348dc
       registers     : 1
       ins           : 1
       outs          : 1
       insns size    : 4 16-bit code units
 ##======##1codeoff is 18f4
-baseAddr is 0x7fc3c8192000,codeoff is 6388
-pCode is 0x7fc3c81938f4
+baseAddr is 0x7f9275133000,codeoff is 6388
+pCode is 0x7f92751348f4
       registers     : 8
       ins           : 1
       outs          : 3
@@ -331,15 +331,15 @@ directMethods[0] codeoff is 19a4
 directMethods[1] codeoff is 19bc
   Direct methods    -
 ##======##0codeoff is 19a4
-baseAddr is 0x7fc3c8192000,codeoff is 6564
-pCode is 0x7fc3c81939a4
+baseAddr is 0x7f9275133000,codeoff is 6564
+pCode is 0x7f92751349a4
       registers     : 1
       ins           : 1
       outs          : 1
       insns size    : 4 16-bit code units
 ##======##1codeoff is 19bc
-baseAddr is 0x7fc3c8192000,codeoff is 6588
-pCode is 0x7fc3c81939bc
+baseAddr is 0x7f9275133000,codeoff is 6588
+pCode is 0x7f92751349bc
       registers     : 11
       ins           : 1
       outs          : 3
@@ -357,58 +357,58 @@ virtualMethods[5] codeoff is 1dbc
 virtualMethods[6] codeoff is 1dd0
   Direct methods    -
 ##======##0codeoff is 1aa4
-baseAddr is 0x7fc3c8192000,codeoff is 6820
-pCode is 0x7fc3c8193aa4
+baseAddr is 0x7f9275133000,codeoff is 6820
+pCode is 0x7f9275134aa4
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 12 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 1acc
-baseAddr is 0x7fc3c8192000,codeoff is 6860
-pCode is 0x7fc3c8193acc
+baseAddr is 0x7f9275133000,codeoff is 6860
+pCode is 0x7f9275134acc
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 2 16-bit code units
 ##======##1codeoff is 1ae0
-baseAddr is 0x7fc3c8192000,codeoff is 6880
-pCode is 0x7fc3c8193ae0
+baseAddr is 0x7f9275133000,codeoff is 6880
+pCode is 0x7f9275134ae0
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 3 16-bit code units
 ##======##2codeoff is 1af8
-baseAddr is 0x7fc3c8192000,codeoff is 6904
-pCode is 0x7fc3c8193af8
+baseAddr is 0x7f9275133000,codeoff is 6904
+pCode is 0x7f9275134af8
       registers     : 19
       ins           : 1
       outs          : 2
       insns size    : 241 16-bit code units
 ##======##3codeoff is 1cec
-baseAddr is 0x7fc3c8192000,codeoff is 7404
-pCode is 0x7fc3c8193cec
+baseAddr is 0x7f9275133000,codeoff is 7404
+pCode is 0x7f9275134cec
       registers     : 10
       ins           : 2
       outs          : 2
       insns size    : 86 16-bit code units
 ##======##4codeoff is 1da8
-baseAddr is 0x7fc3c8192000,codeoff is 7592
-pCode is 0x7fc3c8193da8
+baseAddr is 0x7f9275133000,codeoff is 7592
+pCode is 0x7f9275134da8
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##5codeoff is 1dbc
-baseAddr is 0x7fc3c8192000,codeoff is 7612
-pCode is 0x7fc3c8193dbc
+baseAddr is 0x7f9275133000,codeoff is 7612
+pCode is 0x7f9275134dbc
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##6codeoff is 1dd0
-baseAddr is 0x7fc3c8192000,codeoff is 7632
-pCode is 0x7fc3c8193dd0
+baseAddr is 0x7f9275133000,codeoff is 7632
+pCode is 0x7f9275134dd0
       registers     : 3
       ins           : 1
       outs          : 2
@@ -425,58 +425,58 @@ virtualMethods[5] codeoff is 2254
 virtualMethods[6] codeoff is 2268
   Direct methods    -
 ##======##0codeoff is 1df0
-baseAddr is 0x7fc3c8192000,codeoff is 7664
-pCode is 0x7fc3c8193df0
+baseAddr is 0x7f9275133000,codeoff is 7664
+pCode is 0x7f9275134df0
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 8 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 1e10
-baseAddr is 0x7fc3c8192000,codeoff is 7696
-pCode is 0x7fc3c8193e10
+baseAddr is 0x7f9275133000,codeoff is 7696
+pCode is 0x7f9275134e10
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 2 16-bit code units
 ##======##1codeoff is 1e24
-baseAddr is 0x7fc3c8192000,codeoff is 7716
-pCode is 0x7fc3c8193e24
+baseAddr is 0x7f9275133000,codeoff is 7716
+pCode is 0x7f9275134e24
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 3 16-bit code units
 ##======##2codeoff is 1e3c
-baseAddr is 0x7fc3c8192000,codeoff is 7740
-pCode is 0x7fc3c8193e3c
+baseAddr is 0x7f9275133000,codeoff is 7740
+pCode is 0x7f9275134e3c
       registers     : 19
       ins           : 1
       outs          : 0
       insns size    : 492 16-bit code units
 ##======##3codeoff is 2224
-baseAddr is 0x7fc3c8192000,codeoff is 8740
-pCode is 0x7fc3c8194224
+baseAddr is 0x7f9275133000,codeoff is 8740
+pCode is 0x7f9275135224
       registers     : 3
       ins           : 2
       outs          : 0
       insns size    : 6 16-bit code units
 ##======##4codeoff is 2240
-baseAddr is 0x7fc3c8192000,codeoff is 8768
-pCode is 0x7fc3c8194240
+baseAddr is 0x7f9275133000,codeoff is 8768
+pCode is 0x7f9275135240
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##5codeoff is 2254
-baseAddr is 0x7fc3c8192000,codeoff is 8788
-pCode is 0x7fc3c8194254
+baseAddr is 0x7f9275133000,codeoff is 8788
+pCode is 0x7f9275135254
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##6codeoff is 2268
-baseAddr is 0x7fc3c8192000,codeoff is 8808
-pCode is 0x7fc3c8194268
+baseAddr is 0x7f9275133000,codeoff is 8808
+pCode is 0x7f9275135268
       registers     : 3
       ins           : 1
       outs          : 2
@@ -493,58 +493,58 @@ virtualMethods[5] codeoff is 23e4
 virtualMethods[6] codeoff is 23f8
   Direct methods    -
 ##======##0codeoff is 2288
-baseAddr is 0x7fc3c8192000,codeoff is 8840
-pCode is 0x7fc3c8194288
+baseAddr is 0x7f9275133000,codeoff is 8840
+pCode is 0x7f9275135288
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 12 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 22b0
-baseAddr is 0x7fc3c8192000,codeoff is 8880
-pCode is 0x7fc3c81942b0
+baseAddr is 0x7f9275133000,codeoff is 8880
+pCode is 0x7f92751352b0
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 2 16-bit code units
 ##======##1codeoff is 22c4
-baseAddr is 0x7fc3c8192000,codeoff is 8900
-pCode is 0x7fc3c81942c4
+baseAddr is 0x7f9275133000,codeoff is 8900
+pCode is 0x7f92751352c4
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 3 16-bit code units
 ##======##2codeoff is 22dc
-baseAddr is 0x7fc3c8192000,codeoff is 8924
-pCode is 0x7fc3c81942dc
+baseAddr is 0x7f9275133000,codeoff is 8924
+pCode is 0x7f92751352dc
       registers     : 13
       ins           : 1
       outs          : 0
       insns size    : 93 16-bit code units
 ##======##3codeoff is 23a8
-baseAddr is 0x7fc3c8192000,codeoff is 9128
-pCode is 0x7fc3c81943a8
+baseAddr is 0x7f9275133000,codeoff is 9128
+pCode is 0x7f92751353a8
       registers     : 3
       ins           : 2
       outs          : 0
       insns size    : 12 16-bit code units
 ##======##4codeoff is 23d0
-baseAddr is 0x7fc3c8192000,codeoff is 9168
-pCode is 0x7fc3c81943d0
+baseAddr is 0x7f9275133000,codeoff is 9168
+pCode is 0x7f92751353d0
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##5codeoff is 23e4
-baseAddr is 0x7fc3c8192000,codeoff is 9188
-pCode is 0x7fc3c81943e4
+baseAddr is 0x7f9275133000,codeoff is 9188
+pCode is 0x7f92751353e4
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##6codeoff is 23f8
-baseAddr is 0x7fc3c8192000,codeoff is 9208
-pCode is 0x7fc3c81943f8
+baseAddr is 0x7f9275133000,codeoff is 9208
+pCode is 0x7f92751353f8
       registers     : 3
       ins           : 1
       outs          : 2
@@ -563,72 +563,72 @@ virtualMethods[7] codeoff is 2558
 virtualMethods[8] codeoff is 256c
   Direct methods    -
 ##======##0codeoff is 2418
-baseAddr is 0x7fc3c8192000,codeoff is 9240
-pCode is 0x7fc3c8194418
+baseAddr is 0x7f9275133000,codeoff is 9240
+pCode is 0x7f9275135418
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 8 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 2438
-baseAddr is 0x7fc3c8192000,codeoff is 9272
-pCode is 0x7fc3c8194438
+baseAddr is 0x7f9275133000,codeoff is 9272
+pCode is 0x7f9275135438
       registers     : 3
       ins           : 2
       outs          : 2
       insns size    : 13 16-bit code units
 ##======##1codeoff is 2464
-baseAddr is 0x7fc3c8192000,codeoff is 9316
-pCode is 0x7fc3c8194464
+baseAddr is 0x7f9275133000,codeoff is 9316
+pCode is 0x7f9275135464
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 2 16-bit code units
 ##======##2codeoff is 2478
-baseAddr is 0x7fc3c8192000,codeoff is 9336
-pCode is 0x7fc3c8194478
+baseAddr is 0x7f9275133000,codeoff is 9336
+pCode is 0x7f9275135478
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 3 16-bit code units
 ##======##3codeoff is 2490
-baseAddr is 0x7fc3c8192000,codeoff is 9360
-pCode is 0x7fc3c8194490
+baseAddr is 0x7f9275133000,codeoff is 9360
+pCode is 0x7f9275135490
       registers     : 6
       ins           : 1
       outs          : 2
       insns size    : 23 16-bit code units
 ##======##4codeoff is 24d0
-baseAddr is 0x7fc3c8192000,codeoff is 9424
-pCode is 0x7fc3c81944d0
+baseAddr is 0x7f9275133000,codeoff is 9424
+pCode is 0x7f92751354d0
       registers     : 3
       ins           : 2
       outs          : 0
       insns size    : 6 16-bit code units
 ##======##5codeoff is 24ec
-baseAddr is 0x7fc3c8192000,codeoff is 9452
-pCode is 0x7fc3c81944ec
+baseAddr is 0x7f9275133000,codeoff is 9452
+pCode is 0x7f92751354ec
       registers     : 6
       ins           : 2
       outs          : 2
       insns size    : 35 16-bit code units
 ##======##6codeoff is 2544
-baseAddr is 0x7fc3c8192000,codeoff is 9540
-pCode is 0x7fc3c8194544
+baseAddr is 0x7f9275133000,codeoff is 9540
+pCode is 0x7f9275135544
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##7codeoff is 2558
-baseAddr is 0x7fc3c8192000,codeoff is 9560
-pCode is 0x7fc3c8194558
+baseAddr is 0x7f9275133000,codeoff is 9560
+pCode is 0x7f9275135558
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##8codeoff is 256c
-baseAddr is 0x7fc3c8192000,codeoff is 9580
-pCode is 0x7fc3c819456c
+baseAddr is 0x7f9275133000,codeoff is 9580
+pCode is 0x7f927513556c
       registers     : 3
       ins           : 1
       outs          : 2
@@ -638,8 +638,8 @@ header.staticFieldsSize is 0,header.instanceFieldsSize is 0,header.directMethods
 directMethods[0] codeoff is 258c
   Direct methods    -
 ##======##0codeoff is 258c
-baseAddr is 0x7fc3c8192000,codeoff is 9612
-pCode is 0x7fc3c819458c
+baseAddr is 0x7f9275133000,codeoff is 9612
+pCode is 0x7f927513558c
       registers     : 1
       ins           : 1
       outs          : 1
@@ -650,8 +650,8 @@ header.staticFieldsSize is 1,header.instanceFieldsSize is 0,header.directMethods
 directMethods[0] codeoff is 25a4
   Direct methods    -
 ##======##0codeoff is 25a4
-baseAddr is 0x7fc3c8192000,codeoff is 9636
-pCode is 0x7fc3c81945a4
+baseAddr is 0x7f9275133000,codeoff is 9636
+pCode is 0x7f92751355a4
       registers     : 1
       ins           : 1
       outs          : 1
@@ -662,8 +662,8 @@ header.staticFieldsSize is 1,header.instanceFieldsSize is 0,header.directMethods
 directMethods[0] codeoff is 25bc
   Direct methods    -
 ##======##0codeoff is 25bc
-baseAddr is 0x7fc3c8192000,codeoff is 9660
-pCode is 0x7fc3c81945bc
+baseAddr is 0x7f9275133000,codeoff is 9660
+pCode is 0x7f92751355bc
       registers     : 1
       ins           : 1
       outs          : 1
@@ -674,8 +674,8 @@ header.staticFieldsSize is 2,header.instanceFieldsSize is 0,header.directMethods
 directMethods[0] codeoff is 25d4
   Direct methods    -
 ##======##0codeoff is 25d4
-baseAddr is 0x7fc3c8192000,codeoff is 9684
-pCode is 0x7fc3c81945d4
+baseAddr is 0x7f9275133000,codeoff is 9684
+pCode is 0x7f92751355d4
       registers     : 1
       ins           : 1
       outs          : 1
@@ -686,8 +686,8 @@ header.staticFieldsSize is 0,header.instanceFieldsSize is 0,header.directMethods
 directMethods[0] codeoff is 25ec
   Direct methods    -
 ##======##0codeoff is 25ec
-baseAddr is 0x7fc3c8192000,codeoff is 9708
-pCode is 0x7fc3c81945ec
+baseAddr is 0x7f9275133000,codeoff is 9708
+pCode is 0x7f92751355ec
       registers     : 1
       ins           : 1
       outs          : 1
@@ -705,58 +705,58 @@ virtualMethods[5] codeoff is 2720
 virtualMethods[6] codeoff is 2734
   Direct methods    -
 ##======##0codeoff is 2604
-baseAddr is 0x7fc3c8192000,codeoff is 9732
-pCode is 0x7fc3c8194604
+baseAddr is 0x7f9275133000,codeoff is 9732
+pCode is 0x7f9275135604
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 8 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 2624
-baseAddr is 0x7fc3c8192000,codeoff is 9764
-pCode is 0x7fc3c8194624
+baseAddr is 0x7f9275133000,codeoff is 9764
+pCode is 0x7f9275135624
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 2 16-bit code units
 ##======##1codeoff is 2638
-baseAddr is 0x7fc3c8192000,codeoff is 9784
-pCode is 0x7fc3c8194638
+baseAddr is 0x7f9275133000,codeoff is 9784
+pCode is 0x7f9275135638
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 3 16-bit code units
 ##======##2codeoff is 2650
-baseAddr is 0x7fc3c8192000,codeoff is 9808
-pCode is 0x7fc3c8194650
+baseAddr is 0x7f9275133000,codeoff is 9808
+pCode is 0x7f9275135650
       registers     : 9
       ins           : 1
       outs          : 0
       insns size    : 65 16-bit code units
 ##======##3codeoff is 26e4
-baseAddr is 0x7fc3c8192000,codeoff is 9956
-pCode is 0x7fc3c81946e4
+baseAddr is 0x7f9275133000,codeoff is 9956
+pCode is 0x7f92751356e4
       registers     : 3
       ins           : 2
       outs          : 0
       insns size    : 12 16-bit code units
 ##======##4codeoff is 270c
-baseAddr is 0x7fc3c8192000,codeoff is 9996
-pCode is 0x7fc3c819470c
+baseAddr is 0x7f9275133000,codeoff is 9996
+pCode is 0x7f927513570c
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##5codeoff is 2720
-baseAddr is 0x7fc3c8192000,codeoff is 10016
-pCode is 0x7fc3c8194720
+baseAddr is 0x7f9275133000,codeoff is 10016
+pCode is 0x7f9275135720
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##6codeoff is 2734
-baseAddr is 0x7fc3c8192000,codeoff is 10036
-pCode is 0x7fc3c8194734
+baseAddr is 0x7f9275133000,codeoff is 10036
+pCode is 0x7f9275135734
       registers     : 3
       ins           : 1
       outs          : 2
@@ -770,37 +770,37 @@ virtualMethods[2] codeoff is 27dc
 virtualMethods[3] codeoff is 281c
   Direct methods    -
 ##======##0codeoff is 2754
-baseAddr is 0x7fc3c8192000,codeoff is 10068
-pCode is 0x7fc3c8194754
+baseAddr is 0x7f9275133000,codeoff is 10068
+pCode is 0x7f9275135754
       registers     : 3
       ins           : 1
       outs          : 1
       insns size    : 13 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 2780
-baseAddr is 0x7fc3c8192000,codeoff is 10112
-pCode is 0x7fc3c8194780
+baseAddr is 0x7f9275133000,codeoff is 10112
+pCode is 0x7f9275135780
       registers     : 3
       ins           : 1
       outs          : 1
       insns size    : 8 16-bit code units
 ##======##1codeoff is 27a0
-baseAddr is 0x7fc3c8192000,codeoff is 10144
-pCode is 0x7fc3c81947a0
+baseAddr is 0x7f9275133000,codeoff is 10144
+pCode is 0x7f92751357a0
       registers     : 6
       ins           : 1
       outs          : 1
       insns size    : 21 16-bit code units
 ##======##2codeoff is 27dc
-baseAddr is 0x7fc3c8192000,codeoff is 10204
-pCode is 0x7fc3c81947dc
+baseAddr is 0x7f9275133000,codeoff is 10204
+pCode is 0x7f92751357dc
       registers     : 4
       ins           : 1
       outs          : 1
       insns size    : 23 16-bit code units
 ##======##3codeoff is 281c
-baseAddr is 0x7fc3c8192000,codeoff is 10268
-pCode is 0x7fc3c819481c
+baseAddr is 0x7f9275133000,codeoff is 10268
+pCode is 0x7f927513581c
       registers     : 4
       ins           : 1
       outs          : 1
@@ -817,58 +817,58 @@ virtualMethods[5] codeoff is 2978
 virtualMethods[6] codeoff is 298c
   Direct methods    -
 ##======##0codeoff is 2854
-baseAddr is 0x7fc3c8192000,codeoff is 10324
-pCode is 0x7fc3c8194854
+baseAddr is 0x7f9275133000,codeoff is 10324
+pCode is 0x7f9275135854
       registers     : 2
       ins           : 1
       outs          : 1
       insns size    : 8 16-bit code units
   Virtual methods   -
 ##======##0codeoff is 2874
-baseAddr is 0x7fc3c8192000,codeoff is 10356
-pCode is 0x7fc3c8194874
+baseAddr is 0x7f9275133000,codeoff is 10356
+pCode is 0x7f9275135874
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 2 16-bit code units
 ##======##1codeoff is 2888
-baseAddr is 0x7fc3c8192000,codeoff is 10376
-pCode is 0x7fc3c8194888
+baseAddr is 0x7f9275133000,codeoff is 10376
+pCode is 0x7f9275135888
       registers     : 2
       ins           : 1
       outs          : 0
       insns size    : 3 16-bit code units
 ##======##2codeoff is 28a0
-baseAddr is 0x7fc3c8192000,codeoff is 10400
-pCode is 0x7fc3c81948a0
+baseAddr is 0x7f9275133000,codeoff is 10400
+pCode is 0x7f92751358a0
       registers     : 7
       ins           : 1
       outs          : 3
       insns size    : 63 16-bit code units
 ##======##3codeoff is 2930
-baseAddr is 0x7fc3c8192000,codeoff is 10544
-pCode is 0x7fc3c8194930
+baseAddr is 0x7f9275133000,codeoff is 10544
+pCode is 0x7f9275135930
       registers     : 3
       ins           : 2
       outs          : 0
       insns size    : 18 16-bit code units
 ##======##4codeoff is 2964
-baseAddr is 0x7fc3c8192000,codeoff is 10596
-pCode is 0x7fc3c8194964
+baseAddr is 0x7f9275133000,codeoff is 10596
+pCode is 0x7f9275135964
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##5codeoff is 2978
-baseAddr is 0x7fc3c8192000,codeoff is 10616
-pCode is 0x7fc3c8194978
+baseAddr is 0x7f9275133000,codeoff is 10616
+pCode is 0x7f9275135978
       registers     : 1
       ins           : 1
       outs          : 0
       insns size    : 1 16-bit code units
 ##======##6codeoff is 298c
-baseAddr is 0x7fc3c8192000,codeoff is 10636
-pCode is 0x7fc3c819498c
+baseAddr is 0x7f9275133000,codeoff is 10636
+pCode is 0x7f927513598c
       registers     : 3
       ins           : 1
       outs          : 2
@@ -10560,6 +10560,7 @@ count insns of BB is 0
 [mirs of bb] =====startoffset is 299c  ======
 [mirs of bb] | new-instance v0,class@0027
 [mirs of bb] | const-string v1, string@0066
+insnIdx is 0
 >>>>>>>>>>>>>>>The function is dvmInitializeSSAConversion<<<<<<<<<<<<<<<<<<
 cUnit->numSSARegs is 1
 >>>>>>>>>>>>>loc[0].sRegLow is 0<<<<<<<<<<<<

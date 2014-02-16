@@ -143,6 +143,7 @@ InstructionFormat	DEX.h	/^enum InstructionFormat {$/;"	g
 InstructionFormat	DEX.h	/^typedef unsigned char InstructionFormat;$/;"	t
 LIR	compiler/CompilerIR.h	/^typedef struct LIR {$/;"	s
 LIR	compiler/CompilerIR.h	/^} LIR;$/;"	t	typeref:struct:LIR
+LOAD_FUNC_ADDR	compiler/codegen/unicore/CalloutHelper.h	1;"	d
 LOC_C_RETURN	compiler/codegen/unicore/UnicoreLIR.h	28;"	d
 LOC_C_RETURN_WIDE	compiler/codegen/unicore/UnicoreLIR.h	29;"	d
 LOC_DALVIK_RETURN_VAL	compiler/codegen/unicore/UnicoreLIR.h	31;"	d
@@ -580,16 +581,20 @@ dvmCompilerAppendLIR	compiler/IntermediateRep.c	/^void dvmCompilerAppendLIR(Basi
 dvmCompilerAppendMIR	processBB/processBB.c	/^void dvmCompilerAppendMIR(BasicBlock *bb,MIR *mir)$/;"	f
 dvmCompilerClobber	compiler/codegen/unicore/RallocUtil.c	/^void dvmCompilerClobber(CompilationUnit *cUnit, int reg) $/;"	f
 dvmCompilerClobberAllRegs	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerClobberAllRegs(CompilationUnit *cUnit)$/;"	f
+dvmCompilerClobberCallRegs	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerClobberCallRegs(CompilationUnit *cUnit)$/;"	f
 dvmCompilerClobberSReg	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerClobberSReg(CompilationUnit *cUnit, int sReg)$/;"	f
 dvmCompilerDataFlowAnalysisDispatcher	compiler/Dataflow.c	/^void dvmCompilerDataFlowAnalysisDispatcher(CompilationUnit *cUnit,$/;"	f
 dvmCompilerDataFlowAttributes	compiler/Dataflow.c	/^int dvmCompilerDataFlowAttributes[257] = {$/;"	v
 dvmCompilerDoSSAConversion	compiler/Dataflow.c	/^void dvmCompilerDoSSAConversion(CompilationUnit *cUnit, BasicBlock *bb)$/;"	f
 dvmCompilerEvalLoc	compiler/codegen/unicore/RallocUtil.c	/^extern RegLocation dvmCompilerEvalLoc(CompilationUnit *cUnit, RegLocation loc, $/;"	f
+dvmCompilerFlushAllRegs	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerFlushAllRegs(CompilationUnit *cUnit)$/;"	f
 dvmCompilerFlushRegImpl	compiler/codegen/unicore/CodegenDriver.c	/^void dvmCompilerFlushRegImpl(CompilationUnit *cUnit, int rBase,$/;"	f
 dvmCompilerFlushRegWideImpl	compiler/codegen/unicore/CodegenDriver.c	/^void dvmCompilerFlushRegWideImpl(CompilationUnit *cUnit, int rBase,$/;"	f
 dvmCompilerFreeTemp	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerFreeTemp(CompilationUnit *cUnit, int reg)$/;"	f
 dvmCompilerGetDest	compiler/codegen/unicore/RallocUtil.c	/^extern RegLocation dvmCompilerGetDest(CompilationUnit *cUnit, MIR *mir, int num)$/;"	f
 dvmCompilerGetDestWide	compiler/codegen/unicore/RallocUtil.c	/^extern RegLocation dvmCompilerGetDestWide(CompilationUnit *cUnit, MIR *mir, int low, int high)$/;"	f
+dvmCompilerGetReturn	compiler/codegen/unicore/RallocUtil.c	/^extern RegLocation dvmCompilerGetReturn(CompilationUnit *cUnit)                            $/;"	f
+dvmCompilerGetReturnAlt	compiler/codegen/unicore/RallocUtil.c	/^extern RegLocation dvmCompilerGetReturnAlt(CompilationUnit *cUnit)$/;"	f
 dvmCompilerGetSrc	compiler/codegen/unicore/RallocUtil.c	/^extern RegLocation dvmCompilerGetSrc(CompilationUnit *cUnit, MIR *mir, int num)  $/;"	f
 dvmCompilerGetSrcWide	compiler/codegen/unicore/RallocUtil.c	/^extern RegLocation dvmCompilerGetSrcWide(CompilationUnit *cUnit, MIR *mir, int low, int high)$/;"	f
 dvmCompilerHeapInit	compiler/Utility.c	/^void dvmCompilerHeapInit(void){$/;"	f
@@ -618,6 +623,8 @@ dvmConvertSSARegToDalvik	compiler/Dataflow.c	/^int dvmConvertSSARegToDalvik(Comp
 dvmInitGrowableList	compiler/Utility.c	/^void dvmInitGrowableList(GrowableList *gList, int initLength)$/;"	f
 dvmInitializeSSAConversion	compiler/Dataflow.c	/^void dvmInitializeSSAConversion(CompilationUnit *cUnit)$/;"	f
 dvmInsertGrowableList	compiler/Utility.c	/^void dvmInsertGrowableList(GrowableList *gList, void *elem)$/;"	f
+dvmIsBitSet	compiler/Misc.c	/^bool dvmIsBitSet(const BitVector* pBits, int num)                                        $/;"	f
+dvmSetBit	compiler/Misc.c	/^bool dvmSetBit(BitVector* pBits, int num)                                                  $/;"	f
 elemList	compiler/CompilerUtility.h	/^    void **elemList;$/;"	m	struct:GrowableList
 end	compiler/codegen/unicore/UnicoreLIR.h	/^        int end;   \/* end for kFmtBitBlt, 1-bit slice end for FP regs *\/$/;"	m	struct:UnicoreEncodingMap::__anon1
 endianTag	DEX.h	/^    u4  endianTag;$/;"	m	struct:DexHeader
@@ -634,6 +641,7 @@ firstLIRInsn	compiler/CompilerIR.h	/^    LIR *firstLIRInsn;\/\/donzy$/;"	m	struc
 firstMIRInsn	compiler/CompilerIR.h	/^    MIR *firstMIRInsn;$/;"	m	struct:BasicBlock
 flags	DEX.h	/^    u4  flags;              \/* some info flags *\/$/;"	m	struct:DexOptHeader
 flags	compiler/codegen/unicore/UnicoreLIR.h	/^    int flags;$/;"	m	struct:UnicoreEncodingMap
+flushAllRegsBody	compiler/codegen/unicore/RallocUtil.c	/^static void flushAllRegsBody(CompilationUnit *cUnit, RegisterInfo *info,                $/;"	f	file:
 flushReg	compiler/codegen/unicore/RallocUtil.c	/^static void flushReg(CompilationUnit *cUnit, int reg)$/;"	f	file:
 flushRegWide	compiler/codegen/unicore/RallocUtil.c	/^static void flushRegWide(CompilationUnit *cUnit, int reg1, int reg2)$/;"	f	file:
 fmt	compiler/codegen/unicore/UnicoreLIR.h	/^    char* fmt;$/;"	m	struct:UnicoreEncodingMap
@@ -915,6 +923,7 @@ loadConstant	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *loa
 loadConstantNoClobber	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,$/;"	f	file:
 loadValue	compiler/codegen/unicore/CodegenFactory.c	/^static RegLocation loadValue(CompilationUnit *cUnit, RegLocation rlSrc,$/;"	f	file:
 loadValueDirect	compiler/codegen/unicore/CodegenFactory.c	/^static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,$/;"	f	file:
+loadValueDirectFixed	compiler/codegen/unicore/CodegenFactory.c	/^static void loadValueDirectFixed(CompilationUnit *cUnit, RegLocation rlSrc,$/;"	f	file:
 loadWordDisp	compiler/codegen/unicore/CodegenFactory.c	/^static UnicoreLIR *loadWordDisp(CompilationUnit *cUnit, int rBase, int displacement,$/;"	f	file:
 location	compiler/CompilerIR.h	/^	RegLocationType location:2;$/;"	m	struct:RegLocation
 lowReg	compiler/CompilerIR.h	/^	u1 lowReg:6;$/;"	m	struct:RegLocation

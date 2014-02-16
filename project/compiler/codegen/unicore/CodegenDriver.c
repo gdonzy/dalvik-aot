@@ -38,20 +38,20 @@ static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,
             break;
         case OP_DIV_INT:
         //eric
-	/*	case OP_DIV_INT_2ADDR:
-            callOut = true;
-            checkZero = true;
-            callTgt = __aeabi_idiv;
-            retReg = r0;
-            break;*/
+	//	case OP_DIV_INT_2ADDR:
+    //        callOut = true;
+    //        checkZero = true;
+    //        callTgt = __divsi3;
+    //        retReg = r0;
+    //        break;
         /* NOTE: returns in r1 */
-        case OP_REM_INT:
-//eric
-/*
+/*        case OP_REM_INT:
+
+
         case OP_REM_INT_2ADDR:
             callOut = true;
             checkZero = true;
-            callTgt = __aeabi_idivmod;
+            callTgt = __modsi3;
             retReg = r1;
             break;
   */
@@ -111,25 +111,23 @@ static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,
         }
         storeValue(cUnit, rlDest, rlResult);
     } 
-	/*
 	else {
-        RegLocation rlResult;
-        dvmCompilerFlushAllRegs(cUnit);   
-	*/ /*
-        loadValueDirectFixed(cUnit, rlSrc2, r1);
-        LOAD_FUNC_ADDR(cUnit, r2, (int) callTgt);
-        loadValueDirectFixed(cUnit, rlSrc1, r0);
-        if (checkZero) {
-            genNullCheck(cUnit, rlSrc2.sRegLow, r1, mir->offset, NULL);
-        }
-        opReg(cUnit, kOpBlx, r2);
-        dvmCompilerClobberCallRegs(cUnit);
-        if (retReg == r0)
-            rlResult = dvmCompilerGetReturn(cUnit);
-        else
-            rlResult = dvmCompilerGetReturnAlt(cUnit);
-        storeValue(cUnit, rlDest, rlResult);
-    }*/
+//        RegLocation rlResult;
+//        dvmCompilerFlushAllRegs(cUnit);   
+//        loadValueDirectFixed(cUnit, rlSrc2, r1);
+//        LOAD_FUNC_ADDR(cUnit, r2, (int) callTgt);
+//        loadValueDirectFixed(cUnit, rlSrc1, r0);
+//        if (checkZero) {
+//            genNullCheck(cUnit, rlSrc2.sRegLow, r1, mir->offset, NULL);
+//        }
+//        opReg(cUnit, kOpBlx, r2);
+//        dvmCompilerClobberCallRegs(cUnit);
+//        if (retReg == r0)
+//            rlResult = dvmCompilerGetReturn(cUnit);
+//        else
+//            rlResult = dvmCompilerGetReturnAlt(cUnit);
+//        storeValue(cUnit, rlDest, rlResult);
+    }
     return false;	
 }
 
@@ -266,9 +264,8 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
 	RegLocation rlSrc;
 	RegLocation rlResult;
 
-#ifdef DEBUG 
-	printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);	
-#endif
+	LOG(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);	
+
     if ( (opCode >= OP_ADD_INT_2ADDR) && (opCode <= OP_REM_DOUBLE_2ADDR)) {
         return genArithOp( cUnit, mir );
     }

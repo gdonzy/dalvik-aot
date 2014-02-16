@@ -324,6 +324,33 @@ extern RegisterInfo *dvmCompilerIsTemp(CompilationUnit *cUnit, int reg)
     return NULL;
 }           
 
+/* Clobber all regs that might be used by an external C call */
+extern void dvmCompilerClobberCallRegs(CompilationUnit *cUnit)
+{
+    dvmCompilerClobber(cUnit, r0); 
+    dvmCompilerClobber(cUnit, r1); 
+    dvmCompilerClobber(cUnit, r2); 
+    dvmCompilerClobber(cUnit, r3); 
+    //chenglin change
+    dvmCompilerClobber(cUnit, r4); 
+    //dvmCompilerClobber(cUnit, r5_l);
+    //dvmCompilerClobber(cUnit, r6_l);
+    //dvmCompilerClobber(cUnit, r7_l);
+    //dvmCompilerClobber(cUnit, r8_l);
+    //dvmCompilerClobber(cUnit, r9_l);
+    //dvmCompilerClobber(cUnit, r10_l);
+    //dvmCompilerClobber(cUnit, r11_l);
+    //dvmCompilerClobber(cUnit, r12_l);
+    //dvmCompilerClobber(cUnit, r13_l);
+    //dvmCompilerClobber(cUnit, r14_l);
+    //dvmCompilerClobber(cUnit, r15_l);
+
+    dvmCompilerClobber(cUnit, r9); // Need to do this?, be conservative
+    dvmCompilerClobber(cUnit, r11);
+    dvmCompilerClobber(cUnit, r12);
+    dvmCompilerClobber(cUnit, rlr);
+}
+
 extern void dvmCompilerResetDef(CompilationUnit *cUnit, int reg)
 {                                                                                          
     RegisterInfo *p = getRegInfo(cUnit, reg);
@@ -395,6 +422,31 @@ extern void dvmCompilerClobberAllRegs(CompilationUnit *cUnit)
         dvmCompilerClobber(cUnit, cUnit->regPool->FPTemps[i].reg);            
 	}    
 }
+
+// Make sure nothing is live and dirty
+static void flushAllRegsBody(CompilationUnit *cUnit, RegisterInfo *info,                
+                             int numRegs)
+{
+    int i;
+    for (i=0; i < numRegs; i++) {
+        if (info[i].live && info[i].dirty) {
+            if (info[i].pair) {
+                flushRegWide(cUnit, info[i].reg, info[i].partner);
+            } else {
+                flushReg(cUnit, info[i].reg);
+            }    
+        }    
+    }    
+}
+
+extern void dvmCompilerFlushAllRegs(CompilationUnit *cUnit)
+{
+    flushAllRegsBody(cUnit, cUnit->regPool->coreTemps,
+                     cUnit->regPool->numCoreTemps);
+    flushAllRegsBody(cUnit, cUnit->regPool->FPTemps,
+                     cUnit->regPool->numFPTemps);
+    dvmCompilerClobberAllRegs(cUnit);
+}              
 
 static bool regClassMatches(int regClass, int reg)
 {
@@ -565,3 +617,21 @@ extern RegLocation dvmCompilerGetSrcWide(CompilationUnit *cUnit, MIR *mir, int l
 {
 	return getLocWide(cUnit, mir, low, high, true);
 }
+
+extern RegLocation dvmCompilerGetReturn(CompilationUnit *cUnit)                            
+{
+    RegLocation res = LOC_C_RETURN;
+    dvmCompilerClobber(cUnit, r0); 
+    dvmCompilerMarkInUse(cUnit, r0); 
+    return res; 
+}
+
+extern RegLocation dvmCompilerGetReturnAlt(CompilationUnit *cUnit)
+{
+    RegLocation res = LOC_C_RETURN;
+    res.lowReg = r1;
+    dvmCompilerClobber(cUnit, r1); 
+    dvmCompilerMarkInUse(cUnit, r1); 
+    return res; 
+}
+
