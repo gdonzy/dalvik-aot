@@ -40,8 +40,8 @@ static bool genConversionPortable(CompilationUnit *cUnit, MIR *mir);
  * Architecture-dependent register allocation routines implemented in
  * Thumb[2]/Ralloc.c
  */
-//extern int dvmCompilerAllocTypedTempPair(CompilationUnit *cUnit,
-//                                         bool fpHint, int regClass);
+extern int dvmCompilerAllocTypedTempPair(CompilationUnit *cUnit,
+                                         bool fpHint, int regClass);
 
 extern int dvmCompilerAllocTypedTemp(CompilationUnit *cUnit, bool fpHint, int regClass);
 
@@ -50,8 +50,8 @@ extern int dvmCompilerAllocTypedTemp(CompilationUnit *cUnit, bool fpHint, int re
 
 extern UnicoreLIR* dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc);
 
-//extern void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo,
-//                                   int destHi, int srcLo, int srcHi);
+extern void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo,
+                                   int destHi, int srcLo, int srcHi);
 
 //extern void dvmCompilerSetupResourceMasks(ArmLIR *lir);
 

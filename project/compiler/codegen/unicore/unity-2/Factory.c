@@ -589,6 +589,15 @@ static UnicoreLIR *loadBaseDisp(CompilationUnit *cUnit, MIR *mir, int rBase,
                             size, sReg);
 }                                          
 
+static UnicoreLIR *loadBaseDispWide(CompilationUnit *cUnit, MIR *mir, int rBase,
+                                int displacement, int rDestLo, int rDestHi,
+                                int sReg)
+{
+    return loadBaseDispBody(cUnit, mir, rBase, displacement, rDestLo, rDestHi,
+                            kLong, sReg);
+}
+
+
 /*this function's src may be two register, so has rSrc and rSrcHi*/
 static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
                                  int displacement, int rSrc, int rSrcHi,
@@ -774,6 +783,19 @@ static UnicoreLIR* genRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
     UnicoreLIR *res = genRegCopyNoInsert(cUnit, rDest, rSrc);
     dvmCompilerAppendLIR(cUnit->debugBB, (LIR*)res);
     return res;
+}
+
+static void genRegCopyWide(CompilationUnit *cUnit, int destLo, int destHi,
+                           int srcLo, int srcHi)
+{
+    // Handle overlap
+    if (srcHi == destLo) {
+        genRegCopy(cUnit, destHi, srcHi);
+        genRegCopy(cUnit, destLo, srcLo);
+    } else {
+        genRegCopy(cUnit, destLo, srcLo);
+        genRegCopy(cUnit, destHi, srcHi);
+    }
 }
 
 //static inline UnicoreLIR *genRegImmCheck(CompilationUnit *cUnit,

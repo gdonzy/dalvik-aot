@@ -33,6 +33,27 @@ static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,
     }
 }
 
+/*
+ * Load a Dalvik register pair into a physical register[s].  Take care when
+ * using this routine, as it doesn't perform any bookkeeping regarding
+ * register liveness.  That is the responsibility of the caller.
+ */
+static void loadValueDirectWide(CompilationUnit *cUnit, RegLocation rlSrc,                 
+                                int regLo, int regHi)
+{
+    rlSrc = dvmCompilerUpdateLocWide(cUnit, rlSrc);
+    if (rlSrc.location == kLocPhysReg) {
+        genRegCopyWide(cUnit, regLo, regHi, rlSrc.lowReg, rlSrc.highReg);
+    } else if (rlSrc.location == kLocRetval) {
+    //    loadBaseDispWide(cUnit, NULL, rGLUE, offsetof(InterpState, retval),
+     //                    regLo, regHi, INVALID_SREG);
+    } else {
+        assert(rlSrc.location == kLocDalvikFrame);
+            loadBaseDispWide(cUnit, NULL, rFP,
+                             dvmCompilerS2VReg(cUnit, rlSrc.sRegLow) << 2,
+                             regLo, regHi, INVALID_SREG);
+    }
+}
 
 /*
  * Similar to loadValueDirect, but clobbers and allocates the target
@@ -127,6 +148,69 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 		}
 	}
 }
+
+static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,                    
+							RegLocation rlSrc)
+{
+    LIR *defStart;
+    LIR *defEnd;
+    assert(FPREG(rlSrc.lowReg)==FPREG(rlSrc.highReg));
+    assert(rlDest.wide);
+    assert(rlSrc.wide);
+   // dvmCompilerKillNullCheckedLoc(cUnit, rlDest);
+    if (rlSrc.location == kLocPhysReg) {
+        if (dvmCompilerIsLive(cUnit, rlSrc.lowReg) ||
+            dvmCompilerIsLive(cUnit, rlSrc.highReg) ||
+            (rlDest.location == kLocPhysReg)) {
+            // Src is live or Dest has assigned reg.
+            rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false);
+            genRegCopyWide(cUnit, rlDest.lowReg, rlDest.highReg,
+                           rlSrc.lowReg, rlSrc.highReg);
+        } else {
+            // Just re-assign the registers.  Dest gets Src's regs
+            rlDest.lowReg = rlSrc.lowReg;
+            rlDest.highReg = rlSrc.highReg;
+            dvmCompilerClobber(cUnit, rlSrc.lowReg);
+            dvmCompilerClobber(cUnit, rlSrc.highReg);
+        }
+    } else {
+        // Load Src either into promoted Dest or temps allocated for Dest
+        rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false);
+        loadValueDirectWide(cUnit, rlSrc, rlDest.lowReg,
+                            rlDest.highReg);
+    }
+
+    // Dest is now live and dirty (until/if we flush it to home location)
+    dvmCompilerMarkLive(cUnit, rlDest.lowReg, rlDest.sRegLow);
+    dvmCompilerMarkLive(cUnit, rlDest.highReg,
+                        dvmCompilerSRegHi(rlDest.sRegLow));
+    dvmCompilerMarkDirty(cUnit, rlDest.lowReg);
+    dvmCompilerMarkDirty(cUnit, rlDest.highReg);
+    dvmCompilerMarkPair(cUnit, rlDest.lowReg, rlDest.highReg);
+
+    if (rlDest.location == kLocRetval) {
+       // storeBaseDispWide(cUnit, rGLUE, offsetof(InterpState, retval),
+       //                   rlDest.lowReg, rlDest.highReg);
+       // dvmCompilerClobber(cUnit, rlDest.lowReg);
+       // dvmCompilerClobber(cUnit, rlDest.highReg);
+    } else {
+        dvmCompilerResetDefLocWide(cUnit, rlDest);
+        if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow) ||
+            dvmCompilerLiveOut(cUnit, dvmCompilerSRegHi(rlDest.sRegLow))) {
+            //defStart = (LIR *)cUnit->lastLIRInsn;
+            int vReg = dvmCompilerS2VReg(cUnit, rlDest.sRegLow);
+            assert((vReg+1) == dvmCompilerS2VReg(cUnit,
+                                     dvmCompilerSRegHi(rlDest.sRegLow)));
+            storeBaseDispWide(cUnit, rFP, vReg << 2, rlDest.lowReg,
+                              rlDest.highReg);
+            dvmCompilerMarkClean(cUnit, rlDest.lowReg);
+            dvmCompilerMarkClean(cUnit, rlDest.highReg);
+            //defEnd = (LIR *)cUnit->lastLIRInsn;
+            //dvmCompilerMarkDefWide(cUnit, rlDest, defStart, defEnd);
+        }
+    }
+}
+
 
 /*
  * Perform null-check on a register. sReg is the ssa register being checked,
