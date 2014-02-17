@@ -374,6 +374,19 @@ extern void dvmCompilerResetDefLoc(CompilationUnit *cUnit, RegLocation rl)
     dvmCompilerResetDef(cUnit, rl.lowReg);
 }
 
+extern void dvmCompilerResetDefLocWide(CompilationUnit *cUnit, RegLocation rl)
+{
+    assert(rl.wide);
+//    if (!(gDvmJit.disableOpt & (1 << kSuppressLoads))) {
+        RegisterInfo *p = getRegInfo(cUnit, rl.lowReg);
+        assert(p->pair);
+        nullifyRange(cUnit, p->defStart, p->defEnd,
+                     p->sReg, rl.sRegLow);
+//    }
+    dvmCompilerResetDef(cUnit, rl.lowReg);
+    dvmCompilerResetDef(cUnit, rl.highReg);
+}
+
 extern void dvmCompilerResetDefTracking(CompilationUnit *cUnit)                          
 {
     int i;
@@ -420,6 +433,16 @@ extern void dvmCompilerMarkLive(CompilationUnit *cUnit, int reg, int sReg)
         info->live = false;
     }    
     info->sReg = sReg;
+}
+
+
+extern void dvmCompilerMarkPair(CompilationUnit *cUnit, int lowReg, int highReg)
+{
+    RegisterInfo *infoLo = getRegInfo(cUnit, lowReg);
+    RegisterInfo *infoHi = getRegInfo(cUnit, highReg);
+    infoLo->pair = infoHi->pair = true;
+    infoLo->partner = highReg;
+    infoHi->partner = lowReg;
 }
 
 extern void dvmCompilerMarkClean(CompilationUnit *cUnit, int reg) 
@@ -471,14 +494,116 @@ extern RegLocation dvmCompilerUpdateLoc(CompilationUnit *cUnit, RegLocation loc)
     return loc;
 }
 
+extern RegLocation dvmCompilerUpdateLocWide(CompilationUnit *cUnit,
+                                            RegLocation loc)
+{
+    assert(loc.wide);
+    if (loc.location == kLocDalvikFrame) {
+        // Are the dalvik regs already live in physical registers?
+        RegisterInfo *infoLo = allocLive(cUnit, loc.sRegLow, kAnyReg);
+        RegisterInfo *infoHi = allocLive(cUnit,
+              dvmCompilerSRegHi(loc.sRegLow), kAnyReg);
+        bool match = true;
+        match = match && (infoLo != NULL);
+        match = match && (infoHi != NULL);
+        // Are they both core or both FP?
+        match = match && (FPREG(infoLo->reg) == FPREG(infoHi->reg));
+        // If a pair of floating point singles, are they properly aligned?
+        if (match && FPREG(infoLo->reg)) {
+            match &= ((infoLo->reg & 0x1) == 0);
+            match &= ((infoHi->reg - infoLo->reg) == 1);
+        }
+        // If previously used as a pair, it is the same pair?
+        if (match && (infoLo->pair || infoHi->pair)) {
+            match = (infoLo->pair == infoHi->pair);
+            match &= ((infoLo->reg == infoHi->partner) &&
+                      (infoHi->reg == infoLo->partner));
+        }
+        if (match) {
+            // Can reuse - update the register usage info
+            loc.lowReg = infoLo->reg;
+            loc.highReg = infoHi->reg;
+            loc.location = kLocPhysReg;
+            dvmCompilerMarkPair(cUnit, loc.lowReg, loc.highReg);
+            assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0));
+            return loc;
+        }
+        // Can't easily reuse - clobber any overlaps
+        if (infoLo) {
+            dvmCompilerClobber(cUnit, infoLo->reg);
+            if (infoLo->pair)
+                dvmCompilerClobber(cUnit, infoLo->partner);
+        }
+        if (infoHi) {
+            dvmCompilerClobber(cUnit, infoHi->reg);
+            if (infoHi->pair)
+                dvmCompilerClobber(cUnit, infoHi->partner);
+        }
+    }
+
+    return loc;
+}
+
+
+static RegLocation evalLocWide(CompilationUnit *cUnit, RegLocation loc,
+                               int regClass, bool update)
+{
+    assert(loc.wide);
+    int newRegs;
+    int lowReg;
+    int highReg;
+
+    loc = dvmCompilerUpdateLocWide(cUnit, loc);
+
+    /* If already in registers, we can assume proper form.  Right reg class? */
+    if (loc.location == kLocPhysReg) {
+        assert(FPREG(loc.lowReg) == FPREG(loc.highReg));
+        assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0));
+        if (!regClassMatches(regClass, loc.lowReg)) {
+            /* Wrong register class.  Reallocate and copy */
+            newRegs = dvmCompilerAllocTypedTempPair(cUnit, loc.fp, regClass);
+            lowReg = newRegs & 0xff;
+            highReg = (newRegs >> 8) & 0xff;
+            dvmCompilerRegCopyWide(cUnit, lowReg, highReg, loc.lowReg,
+                                   loc.highReg);
+            copyRegInfo(cUnit, lowReg, loc.lowReg);
+            copyRegInfo(cUnit, highReg, loc.highReg);
+            dvmCompilerClobber(cUnit, loc.lowReg);
+            dvmCompilerClobber(cUnit, loc.highReg);
+            loc.lowReg = lowReg;
+            loc.highReg = highReg;
+            dvmCompilerMarkPair(cUnit, loc.lowReg, loc.highReg);
+            assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0));
+        }
+        return loc;
+    }
+
+    assert((loc.location != kLocRetval) || (loc.sRegLow == INVALID_SREG));
+    assert((loc.location != kLocRetval) ||
+           (dvmCompilerSRegHi(loc.sRegLow) == INVALID_SREG));
+
+    newRegs = dvmCompilerAllocTypedTempPair(cUnit, loc.fp, regClass);
+    loc.lowReg = newRegs & 0xff;
+    loc.highReg = (newRegs >> 8) & 0xff;
+
+    dvmCompilerMarkPair(cUnit, loc.lowReg, loc.highReg);
+    if (update) {
+        loc.location = kLocPhysReg;
+        dvmCompilerMarkLive(cUnit, loc.lowReg, loc.sRegLow);
+        dvmCompilerMarkLive(cUnit, loc.highReg, dvmCompilerSRegHi(loc.sRegLow));
+    }
+    assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0));
+    return loc;
+}
+
 extern RegLocation dvmCompilerEvalLoc(CompilationUnit *cUnit, RegLocation loc, 
                                       int regClass, bool update)
 {
     int newReg;
-	/*
+	
     if (loc.wide)
         return evalLocWide(cUnit, loc, regClass, update);
-    */
+    
 	loc = dvmCompilerUpdateLoc(cUnit, loc);
 
 //if a register is a phy register

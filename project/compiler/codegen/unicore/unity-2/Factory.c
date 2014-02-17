@@ -776,3 +776,15 @@ static UnicoreLIR* genRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
     return res;
 }
 
+static void genRegCopyWide(CompilationUnit *cUnit, int destLo, int destHi,
+                           int srcLo, int srcHi)
+{
+    // Handle overlap
+    if (srcHi == destLo) {
+        genRegCopy(cUnit, destHi, srcHi);
+        genRegCopy(cUnit, destLo, srcLo);
+    } else {
+        genRegCopy(cUnit, destLo, srcLo);
+        genRegCopy(cUnit, destHi, srcHi);
+    }
+}

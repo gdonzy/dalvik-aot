@@ -50,8 +50,8 @@ extern int dvmCompilerAllocTypedTemp(CompilationUnit *cUnit, bool fpHint, int re
 
 extern UnicoreLIR* dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc);
 
-//extern void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo,
-//                                   int destHi, int srcLo, int srcHi);
+extern void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo,
+                                   int destHi, int srcLo, int srcHi);
 
 //extern void dvmCompilerSetupResourceMasks(ArmLIR *lir);
 

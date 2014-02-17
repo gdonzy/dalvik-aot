@@ -307,7 +307,7 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
             return genArithOpDouble(cUnit, mir, rlDest, rlSrc, rlSrc);
         case OP_MOVE_WIDE:
             storeValueWide(cUnit, rlDest, rlSrc);
-            break;
+            break; */
         case OP_INT_TO_LONG:
             rlSrc = dvmCompilerUpdateLoc(cUnit, rlSrc);
             rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
@@ -321,7 +321,7 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
                         rlResult.lowReg, 31);
             storeValueWide(cUnit, rlDest, rlResult);
             break;
-        case OP_LONG_TO_INT:
+/*        case OP_LONG_TO_INT:
             rlSrc = dvmCompilerUpdateLocWide(cUnit, rlSrc);
             rlSrc = dvmCompilerWideToNarrow(cUnit, rlSrc);
             // Intentional fallthrough
@@ -729,6 +729,12 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
 {
 	return genRegCopy(cUnit, rDest, rSrc);
+}
+
+void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo, int destHi,
+                            int srcLo, int srcHi)
+{
+    genRegCopyWide(cUnit, destLo, destHi, srcLo, srcHi);
 }
 
 //通过rBase和displacement找到虚拟寄存器，rSrc是物理寄存器号
