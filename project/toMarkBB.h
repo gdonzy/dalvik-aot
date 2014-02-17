@@ -192,58 +192,58 @@ int markBB_throw(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstructi
 	return 0;
 }
 
-//donzy2delete iget
-int markBB_iget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
-	int targetPos = 0;
-	
-	targetPos = (insnIdx + insnWidth)*2;
-	setBBMaskIfNecessary(targetPos,BBMask);
-}
-
-//donzy2delete iput
-int markBB_iput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
-	int targetPos = 0;
-	
-	targetPos = (insnIdx + insnWidth)*2;
-	setBBMaskIfNecessary(targetPos,BBMask);
-}
-
-
-//donzy2delete sget
-int markBB_sget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
-	int targetPos = 0;
-	
-	targetPos = (insnIdx + insnWidth)*2;
-	setBBMaskIfNecessary(targetPos,BBMask);
-}
-
-
-//donzy2delete sput
-int markBB_sput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
-	int targetPos = 0;
-	
-	targetPos = (insnIdx + insnWidth)*2;
-	setBBMaskIfNecessary(targetPos,BBMask);
-}
-
-
-//donzy2delete aget
-int markBB_aget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
-	int targetPos = 0;
-	
-	targetPos = (insnIdx + insnWidth)*2;
-	setBBMaskIfNecessary(targetPos,BBMask);
-}
-
-
-//donzy2delete aput
-int markBB_aput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
-	int targetPos = 0;
-	
-	targetPos = (insnIdx + insnWidth)*2;
-	setBBMaskIfNecessary(targetPos,BBMask);
-}
-
+////donzy2delete iget
+//int markBB_iget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
+//	int targetPos = 0;
+//	
+//	targetPos = (insnIdx + insnWidth)*2;
+//	setBBMaskIfNecessary(targetPos,BBMask);
+//}
+//
+////donzy2delete iput
+//int markBB_iput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
+//	int targetPos = 0;
+//	
+//	targetPos = (insnIdx + insnWidth)*2;
+//	setBBMaskIfNecessary(targetPos,BBMask);
+//}
+//
+//
+////donzy2delete sget
+//int markBB_sget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
+//	int targetPos = 0;
+//	
+//	targetPos = (insnIdx + insnWidth)*2;
+//	setBBMaskIfNecessary(targetPos,BBMask);
+//}
+//
+//
+////donzy2delete sput
+//int markBB_sput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
+//	int targetPos = 0;
+//	
+//	targetPos = (insnIdx + insnWidth)*2;
+//	setBBMaskIfNecessary(targetPos,BBMask);
+//}
+//
+//
+////donzy2delete aget
+//int markBB_aget(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
+//	int targetPos = 0;
+//	
+//	targetPos = (insnIdx + insnWidth)*2;
+//	setBBMaskIfNecessary(targetPos,BBMask);
+//}
+//
+//
+////donzy2delete aput
+//int markBB_aput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
+//	int targetPos = 0;
+//	
+//	targetPos = (insnIdx + insnWidth)*2;
+//	setBBMaskIfNecessary(targetPos,BBMask);
+//}
+//
 
 
 
