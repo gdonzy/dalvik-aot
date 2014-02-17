@@ -122,7 +122,7 @@ int main(int argc , char * argv[]){
 
 	/************process debugBB**************/
 
-	debugBB.startOffset = 0x1316; 
+	debugBB.startOffset = 0x1354; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
 	debugBB.firstLIRInsn = NULL;

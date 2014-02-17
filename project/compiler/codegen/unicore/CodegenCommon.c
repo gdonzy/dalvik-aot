@@ -242,8 +242,8 @@ static UnicoreLIR *scanLiteralPool(CompilationUnit *cUnit, int value, unsigned i
     LIR *dataTarget = cUnit->wordList;
     while (dataTarget) {
         if (((unsigned) (value - ((UnicoreLIR *) dataTarget)->operands[0])) <= delta)
-		return (UnicoreLIR *) dataTarget; 
-	dataTarget = dataTarget->next;
+			return (UnicoreLIR *) dataTarget; 
+		dataTarget = dataTarget->next;
 	}
 	return NULL;
 }

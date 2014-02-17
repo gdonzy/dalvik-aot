@@ -4,6 +4,7 @@ static int coreTemps[] = {r0, r1, r2, r3, r4, r4PC, r7};
 static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
                                      int value)
 {
+	printf("value is %x\n", value);
     UnicoreLIR *res;
     //chenglin change
     //int tDest = LOWREG(rDest) ? rDest : dvmCompilerAllocTemp(cUnit);
@@ -30,6 +31,8 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
     /* No shortcut - go ahead and use literal pool */
     //chenglin change
     //ArmLIR *dataTarget = scanLiteralPool(cUnit, value, 255);
+	
+	printf("1\n", value);
     UnicoreLIR *dataTarget = scanLiteralPool(cUnit, value, 511);
     if (dataTarget == NULL) {
         dataTarget = addWordData(cUnit, value, false);
@@ -52,6 +55,7 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
     if (rDest != rlr)
         setMemRefType(loadPcRel, true, kLiteral);
     loadPcRel->aliasInfo = dataTarget->operands[0];
+	printf("aliasInfo is %x\n", loadPcRel->aliasInfo);
     res = loadPcRel;
     dvmCompilerAppendLIR(cUnit->debugBB, (LIR *) loadPcRel);
 
@@ -61,14 +65,15 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
      */
     //chenglin change
     if (dataTarget->operands[0] != value) {
+	printf("2\n", value);
         //newLIR2(cUnit, kThumbAddRI8, tDest, value - dataTarget->operands[0]);
         newLIR3(cUnit, cUnit->debugBB,  kUnicoreAddRRI9, tDest,tDest, value - dataTarget->operands[0]);
     }
-    //if (rDest != tDest) {
-    //    //chenglin change
-    //   opRegReg(cUnit, kOpMov, rDest, tDest);
-    //   dvmCompilerFreeTemp(cUnit, tDest);
-    //}
+    if (rDest != tDest) {
+        //chenglin change
+       opRegReg(cUnit, kOpMov, rDest, tDest);
+       dvmCompilerFreeTemp(cUnit, tDest);
+    }
     return res;
 }
 
@@ -420,6 +425,15 @@ static UnicoreLIR *opRegReg(CompilationUnit *cUnit, OpKind op, int rDestSrc1,
     }
     return newLIR3(cUnit,cUnit->debugBB, opCode, rDestSrc1,rDestSrc1, rSrc2);
 }
+
+static UnicoreLIR *loadConstantValueWide(CompilationUnit *cUnit, int rDestLo,
+                                     int rDestHi, int valLo, int valHi)
+{
+    UnicoreLIR *res;
+    res = loadConstantNoClobber(cUnit, rDestLo, valLo);
+    loadConstantNoClobber(cUnit, rDestHi, valHi);
+    return res;                                                                            
+}                     
 
 static UnicoreLIR *loadBaseDispBody(CompilationUnit *cUnit, MIR *mir, int rBase,
                                 int displacement, int rDest, int rDestHi,
