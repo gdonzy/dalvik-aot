@@ -122,8 +122,7 @@ int main(int argc , char * argv[]){
 
 	/************process debugBB**************/
 
-	//debugBB.startOffset = 0x104c; 
-	debugBB.startOffset = 0x1316; 
+	debugBB.startOffset = 0x1354; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
 	debugBB.firstLIRInsn = NULL;
@@ -131,7 +130,6 @@ int main(int argc , char * argv[]){
 	debugBB.codeBuffer = NULL;
 	debugBB.next = NULL;
 
-	//debugCodeOffset = 0x1008;
 	debugCodeOffset = 0x1304;
 
 	//last argument is count of insns .

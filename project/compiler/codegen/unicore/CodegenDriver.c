@@ -256,6 +256,37 @@ static bool handleFmt11n_Fmt31i(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+static bool handleFmt21h(CompilationUnit *cUnit, MIR *mir)
+{
+    RegLocation rlDest;
+    RegLocation rlResult;
+    if (mir->ssaRep->numDefs == 2) { 
+        rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+    } else {
+        rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+    }    
+    rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, true);
+
+    switch (mir->dalvikInsn.opCode) {
+        case OP_CONST_HIGH16: {
+			LOG("THE function is %s\n", __func__);
+            loadConstantNoClobber(cUnit, rlResult.lowReg,
+                                  mir->dalvikInsn.vB << 16); 
+            storeValue(cUnit, rlDest, rlResult);
+            break;
+        }    
+        case OP_CONST_WIDE_HIGH16: {
+            loadConstantValueWide(cUnit, rlResult.lowReg, rlResult.highReg,
+                                  0, mir->dalvikInsn.vB << 16); 
+            storeValueWide(cUnit, rlDest, rlResult);
+            break;
+        }    
+        default:
+            return true;
+    }    
+    return false;
+}
+
 static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
 {
 	OpCode opCode = mir->dalvikInsn.opCode;
@@ -1078,6 +1109,9 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
     	                case kFmt31c:
         	                notHandled = handleFmt21c_Fmt31c(cUnit, mir);                
  			        	    break;
+						case kFmt21h:
+	                        notHandled = handleFmt21h(cUnit, mir);                 
+	                        break;
                     	case kFmt21s:
                         	notHandled = handleFmt21s(cUnit, mir);
                         	break;             
