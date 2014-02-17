@@ -33,6 +33,8 @@ static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,
     }
 }
 
+
+
 /*
  * Load a Dalvik register pair into a physical register[s].  Take care when
  * using this routine, as it doesn't perform any bookkeeping regarding
@@ -66,6 +68,7 @@ static void loadValueDirectFixed(CompilationUnit *cUnit, RegLocation rlSrc,
     dvmCompilerClobber(cUnit, reg1);
     dvmCompilerMarkInUse(cUnit, reg1);
     loadValueDirect(cUnit, rlSrc, reg1);
+
 }
 
 static RegLocation loadValue(CompilationUnit *cUnit, RegLocation rlSrc,

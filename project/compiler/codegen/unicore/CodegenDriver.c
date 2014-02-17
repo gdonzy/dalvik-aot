@@ -335,7 +335,7 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
             return genArithOpDouble(cUnit, mir, rlDest, rlSrc, rlSrc);
         case OP_MOVE_WIDE:
             storeValueWide(cUnit, rlDest, rlSrc);
-            break;
+            break; */
         case OP_INT_TO_LONG:
             rlSrc = dvmCompilerUpdateLoc(cUnit, rlSrc);
             rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
@@ -349,7 +349,7 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
                         rlResult.lowReg, 31);
             storeValueWide(cUnit, rlDest, rlResult);
             break;
-        case OP_LONG_TO_INT:
+/*        case OP_LONG_TO_INT:
             rlSrc = dvmCompilerUpdateLocWide(cUnit, rlSrc);
             rlSrc = dvmCompilerWideToNarrow(cUnit, rlSrc);
             // Intentional fallthrough

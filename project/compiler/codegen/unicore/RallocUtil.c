@@ -653,7 +653,7 @@ static RegLocation evalLocWide(CompilationUnit *cUnit, RegLocation loc,
     newRegs = dvmCompilerAllocTypedTempPair(cUnit, loc.fp, regClass);
     loc.lowReg = newRegs & 0xff;
     loc.highReg = (newRegs >> 8) & 0xff;
-	
+
 	dvmCompilerMarkPair(cUnit, loc.lowReg, loc.highReg);
     if (update) {
         loc.location = kLocPhysReg;
