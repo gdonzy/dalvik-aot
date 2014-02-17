@@ -589,6 +589,15 @@ static UnicoreLIR *loadBaseDisp(CompilationUnit *cUnit, MIR *mir, int rBase,
                             size, sReg);
 }                                          
 
+static UnicoreLIR *loadBaseDispWide(CompilationUnit *cUnit, MIR *mir, int rBase,
+                                int displacement, int rDestLo, int rDestHi,
+                                int sReg)
+{
+    return loadBaseDispBody(cUnit, mir, rBase, displacement, rDestLo, rDestHi,
+                            kLong, sReg);
+}
+
+
 /*this function's src may be two register, so has rSrc and rSrcHi*/
 static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,
                                  int displacement, int rSrc, int rSrcHi,
@@ -788,3 +797,25 @@ static void genRegCopyWide(CompilationUnit *cUnit, int destLo, int destHi,
         genRegCopy(cUnit, destHi, srcHi);
     }
 }
+
+//static inline UnicoreLIR *genRegImmCheck(CompilationUnit *cUnit,
+//                                     ArmConditionCode cond, int reg,
+//                                     int checkValue, int dOffset,
+//                                     UnicoreLIR *pcrLabel)
+//{
+//    int tReg;
+//    UnicoreLIR *res;
+//    if ((checkValue & 0xff) != checkValue) {
+//        tReg = dvmCompilerAllocTemp(cUnit);
+//        loadConstant(cUnit, tReg, checkValue);
+//        res = genRegRegCheck(cUnit, cond, reg, tReg, dOffset, pcrLabel);
+//        dvmCompilerFreeTemp(cUnit, tReg);
+//        return res;
+//    }
+//    //newLIR2(cUnit, kThumbCmpRI8, reg, checkValue);
+//    //ArmLIR *branch = newLIR2(cUnit, kThumbBCond, 0, cond);
+//    newLIR2(cUnit, kUnicoreCmpSubRI9, reg, checkValue);
+//    UnicoreLIR *branch = newLIR2(cUnit, kUnicoreBCond, 0, cond);
+//
+//    return genCheckCommon(cUnit, dOffset, branch, pcrLabel);
+//}                                                           

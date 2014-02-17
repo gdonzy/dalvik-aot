@@ -122,7 +122,8 @@ int main(int argc , char * argv[]){
 
 	/************process debugBB**************/
 
-	debugBB.startOffset = 0x104c; 
+	//debugBB.startOffset = 0x104c; 
+	debugBB.startOffset = 0x1316; 
 	debugBB.firstMIRInsn = NULL;
 	debugBB.lastMIRInsn = NULL;
 	debugBB.firstLIRInsn = NULL;
@@ -130,7 +131,8 @@ int main(int argc , char * argv[]){
 	debugBB.codeBuffer = NULL;
 	debugBB.next = NULL;
 
-	debugCodeOffset = 0x1008;
+	//debugCodeOffset = 0x1008;
+	debugCodeOffset = 0x1304;
 
 	//last argument is count of insns .
 	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 1);
@@ -162,6 +164,9 @@ int main(int argc , char * argv[]){
 			dvmCompilerRegAlloc(cUnit);
 		}
 	}
+
+
+		LOG("!!!!!!!!!!!!!!haha\n");
 	pDebugCUnit->debugBB = &debugBB;	
 
 	dvmCompilerMIR2LIR(pDebugCUnit);

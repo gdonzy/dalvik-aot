@@ -33,21 +33,42 @@ static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,
     }
 }
 
-static void loadValueDirectWide(CompilationUnit *cUnit, RegLocation rlSrc,
+
+
+/*
+ * Load a Dalvik register pair into a physical register[s].  Take care when
+ * using this routine, as it doesn't perform any bookkeeping regarding
+ * register liveness.  That is the responsibility of the caller.
+ */
+static void loadValueDirectWide(CompilationUnit *cUnit, RegLocation rlSrc,                 
                                 int regLo, int regHi)
 {
     rlSrc = dvmCompilerUpdateLocWide(cUnit, rlSrc);
-//    if (rlSrc.location == kLocPhysReg) {
-//        genRegCopyWide(cUnit, regLo, regHi, rlSrc.lowReg, rlSrc.highReg);
-//    } else if (rlSrc.location == kLocRetval) {
-//        loadBaseDispWide(cUnit, NULL, rGLUE, offsetof(InterpState, retval),
-//                         regLo, regHi, INVALID_SREG);
-//    } else {
-//        assert(rlSrc.location == kLocDalvikFrame);
-//            loadBaseDispWide(cUnit, NULL, rFP,
-//                             dvmCompilerS2VReg(cUnit, rlSrc.sRegLow) << 2,
-//                             regLo, regHi, INVALID_SREG);
-//    }
+    if (rlSrc.location == kLocPhysReg) {
+        genRegCopyWide(cUnit, regLo, regHi, rlSrc.lowReg, rlSrc.highReg);
+    } else if (rlSrc.location == kLocRetval) {
+    //    loadBaseDispWide(cUnit, NULL, rGLUE, offsetof(InterpState, retval),
+     //                    regLo, regHi, INVALID_SREG);
+    } else {
+        assert(rlSrc.location == kLocDalvikFrame);
+            loadBaseDispWide(cUnit, NULL, rFP,
+                             dvmCompilerS2VReg(cUnit, rlSrc.sRegLow) << 2,
+                             regLo, regHi, INVALID_SREG);
+    }
+}
+
+/*
+ * Similar to loadValueDirect, but clobbers and allocates the target
+ * register.  Should be used when loading to a fixed register (for example,
+ * loading arguments to an out of line call.                                             
+ */
+static void loadValueDirectFixed(CompilationUnit *cUnit, RegLocation rlSrc,
+                                 int reg1)
+{
+    dvmCompilerClobber(cUnit, reg1);
+    dvmCompilerMarkInUse(cUnit, reg1);
+    loadValueDirect(cUnit, rlSrc, reg1);
+
 }
 
 static RegLocation loadValue(CompilationUnit *cUnit, RegLocation rlSrc,
@@ -131,15 +152,15 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 	}
 }
 
-static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,
-                       RegLocation rlSrc)
+static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,                    
+							RegLocation rlSrc)
 {
     LIR *defStart;
     LIR *defEnd;
     assert(FPREG(rlSrc.lowReg)==FPREG(rlSrc.highReg));
     assert(rlDest.wide);
     assert(rlSrc.wide);
-//    dvmCompilerKillNullCheckedLoc(cUnit, rlDest);
+   // dvmCompilerKillNullCheckedLoc(cUnit, rlDest);
     if (rlSrc.location == kLocPhysReg) {
         if (dvmCompilerIsLive(cUnit, rlSrc.lowReg) ||
             dvmCompilerIsLive(cUnit, rlSrc.highReg) ||
@@ -160,7 +181,7 @@ static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,
         rlDest = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, false);
         loadValueDirectWide(cUnit, rlSrc, rlDest.lowReg,
                             rlDest.highReg);
-   }
+    }
 
     // Dest is now live and dirty (until/if we flush it to home location)
     dvmCompilerMarkLive(cUnit, rlDest.lowReg, rlDest.sRegLow);
@@ -170,26 +191,45 @@ static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,
     dvmCompilerMarkDirty(cUnit, rlDest.highReg);
     dvmCompilerMarkPair(cUnit, rlDest.lowReg, rlDest.highReg);
 
-
     if (rlDest.location == kLocRetval) {
-//  //      storeBaseDispWide(cUnit, rGLUE, offsetof(InterpState, retval),
-//  //                        rlDest.lowReg, rlDest.highReg);
-//        dvmCompilerClobber(cUnit, rlDest.lowReg);
-//        dvmCompilerClobber(cUnit, rlDest.highReg);
+       // storeBaseDispWide(cUnit, rGLUE, offsetof(InterpState, retval),
+       //                   rlDest.lowReg, rlDest.highReg);
+       // dvmCompilerClobber(cUnit, rlDest.lowReg);
+       // dvmCompilerClobber(cUnit, rlDest.highReg);
     } else {
         dvmCompilerResetDefLocWide(cUnit, rlDest);
-//        if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow) ||
-//            dvmCompilerLiveOut(cUnit, dvmCompilerSRegHi(rlDest.sRegLow))) {
-//    //        defStart = (LIR *)cUnit->lastLIRInsn;
+        if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow) ||
+            dvmCompilerLiveOut(cUnit, dvmCompilerSRegHi(rlDest.sRegLow))) {
+            //defStart = (LIR *)cUnit->lastLIRInsn;
             int vReg = dvmCompilerS2VReg(cUnit, rlDest.sRegLow);
-//            assert((vReg+1) == dvmCompilerS2VReg(cUnit,
-//                                     dvmCompilerSRegHi(rlDest.sRegLow)));
+            assert((vReg+1) == dvmCompilerS2VReg(cUnit,
+                                     dvmCompilerSRegHi(rlDest.sRegLow)));
             storeBaseDispWide(cUnit, rFP, vReg << 2, rlDest.lowReg,
                               rlDest.highReg);
             dvmCompilerMarkClean(cUnit, rlDest.lowReg);
             dvmCompilerMarkClean(cUnit, rlDest.highReg);
-//    //        defEnd = (LIR *)cUnit->lastLIRInsn;
-//    //        dvmCompilerMarkDefWide(cUnit, rlDest, defStart, defEnd);
-//        }
+            //defEnd = (LIR *)cUnit->lastLIRInsn;
+            //dvmCompilerMarkDefWide(cUnit, rlDest, defStart, defEnd);
+        }
     }
 }
+
+
+/*
+ * Perform null-check on a register. sReg is the ssa register being checked,
+ * and mReg is the machine register holding the actual value. If internal state
+ * indicates that sReg has been checked before the check request is ignored.
+ */
+//
+//static UnicoreLIR *genNullCheck(CompilationUnit *cUnit, int sReg, int mReg,
+//                                int dOffset, UnicoreLIR *pcrLabel)
+//{   
+//    /* This particular Dalvik register has been null-checked */
+//    if (dvmIsBitSet(cUnit->regPool->nullCheckedRegs, sReg)) {
+//        return pcrLabel;
+//    }                                                                                  
+//    dvmSetBit(cUnit->regPool->nullCheckedRegs, sReg);
+//    return genRegImmCheck(cUnit, kArmCondEq, mReg, 0, dOffset, pcrLabel);
+//}
+
+

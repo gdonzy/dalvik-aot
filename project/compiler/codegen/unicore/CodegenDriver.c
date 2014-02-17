@@ -38,20 +38,20 @@ static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,
             break;
         case OP_DIV_INT:
         //eric
-	/*	case OP_DIV_INT_2ADDR:
-            callOut = true;
-            checkZero = true;
-            callTgt = __aeabi_idiv;
-            retReg = r0;
-            break;*/
+	//	case OP_DIV_INT_2ADDR:
+    //        callOut = true;
+    //        checkZero = true;
+    //        callTgt = __divsi3;
+    //        retReg = r0;
+    //        break;
         /* NOTE: returns in r1 */
-        case OP_REM_INT:
-//eric
-/*
+/*        case OP_REM_INT:
+
+
         case OP_REM_INT_2ADDR:
             callOut = true;
             checkZero = true;
-            callTgt = __aeabi_idivmod;
+            callTgt = __modsi3;
             retReg = r1;
             break;
   */
@@ -111,25 +111,23 @@ static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,
         }
         storeValue(cUnit, rlDest, rlResult);
     } 
-	/*
 	else {
-        RegLocation rlResult;
-        dvmCompilerFlushAllRegs(cUnit);   
-	*/ /*
-        loadValueDirectFixed(cUnit, rlSrc2, r1);
-        LOAD_FUNC_ADDR(cUnit, r2, (int) callTgt);
-        loadValueDirectFixed(cUnit, rlSrc1, r0);
-        if (checkZero) {
-            genNullCheck(cUnit, rlSrc2.sRegLow, r1, mir->offset, NULL);
-        }
-        opReg(cUnit, kOpBlx, r2);
-        dvmCompilerClobberCallRegs(cUnit);
-        if (retReg == r0)
-            rlResult = dvmCompilerGetReturn(cUnit);
-        else
-            rlResult = dvmCompilerGetReturnAlt(cUnit);
-        storeValue(cUnit, rlDest, rlResult);
-    }*/
+//        RegLocation rlResult;
+//        dvmCompilerFlushAllRegs(cUnit);   
+//        loadValueDirectFixed(cUnit, rlSrc2, r1);
+//        LOAD_FUNC_ADDR(cUnit, r2, (int) callTgt);
+//        loadValueDirectFixed(cUnit, rlSrc1, r0);
+//        if (checkZero) {
+//            genNullCheck(cUnit, rlSrc2.sRegLow, r1, mir->offset, NULL);
+//        }
+//        opReg(cUnit, kOpBlx, r2);
+//        dvmCompilerClobberCallRegs(cUnit);
+//        if (retReg == r0)
+//            rlResult = dvmCompilerGetReturn(cUnit);
+//        else
+//            rlResult = dvmCompilerGetReturnAlt(cUnit);
+//        storeValue(cUnit, rlDest, rlResult);
+    }
     return false;	
 }
 
@@ -266,9 +264,8 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
 	RegLocation rlSrc;
 	RegLocation rlResult;
 
-#ifdef DEBUG 
-	printf(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);	
-#endif
+	LOG(">>>>>>>>>>>>>>>The function is %s<<<<<<<<<<<<<<<<<\n", __func__);	
+
     if ( (opCode >= OP_ADD_INT_2ADDR) && (opCode <= OP_REM_DOUBLE_2ADDR)) {
         return genArithOp( cUnit, mir );
     }
@@ -368,6 +365,383 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+static bool handleFmt21c_Fmt31c(CompilationUnit *cUnit, MIR *mir)
+{
+    RegLocation rlResult;
+    RegLocation rlDest;
+    RegLocation rlSrc;
+
+    switch (mir->dalvikInsn.opCode) {
+//        case OP_CONST_STRING_JUMBO:
+//        case OP_CONST_STRING: {
+//            void *strPtr = (void*)
+//              (cUnit->method->clazz->pDvmDex->pResStrings[mir->dalvikInsn.vB]);
+//
+//            if (strPtr == NULL) {
+//                LOGE("Unexpected null string");
+//                dvmAbort();
+//            }
+//
+//            rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+//            loadConstantNoClobber(cUnit, rlResult.lowReg, (int) strPtr );
+//            storeValue(cUnit, rlDest, rlResult);
+//            break;
+//        }
+//        case OP_CONST_CLASS: {
+//            void *classPtr = (void*)
+//              (cUnit->method->clazz->pDvmDex->pResClasses[mir->dalvikInsn.vB]);
+//
+//            if (classPtr == NULL) {
+//                LOGE("Unexpected null class");
+//                dvmAbort();
+//            }
+//
+//            rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+//            loadConstantNoClobber(cUnit, rlResult.lowReg, (int) classPtr );
+//            storeValue(cUnit, rlDest, rlResult);
+//            break;
+//        }
+//        case OP_SGET_VOLATILE:
+//        case OP_SGET_OBJECT_VOLATILE:
+//        case OP_SGET_OBJECT:
+//        case OP_SGET_BOOLEAN:
+//        case OP_SGET_CHAR:
+//        case OP_SGET_BYTE:
+//        case OP_SGET_SHORT:
+//        case OP_SGET: {
+//            int valOffset = offsetof(StaticField, value);
+//            int tReg = dvmCompilerAllocTemp(cUnit);
+//            bool isVolatile;
+//            const Method *method = (mir->OptimizationFlags & MIR_CALLEE) ?
+//                mir->meta.calleeMethod : cUnit->method;
+//            void *fieldPtr = (void*)
+//              (method->clazz->pDvmDex->pResFields[mir->dalvikInsn.vB]);
+//
+//            if (fieldPtr == NULL) {
+//                LOGE("Unexpected null static field");
+//                dvmAbort();
+//            }
+//
+//            isVolatile = (mir->dalvikInsn.opCode == OP_SGET_VOLATILE) ||
+//                         (mir->dalvikInsn.opCode == OP_SGET_OBJECT_VOLATILE) ||
+//                         dvmIsVolatileField(fieldPtr);
+//
+//            rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, true);
+//            loadConstant(cUnit, tReg,  (int) fieldPtr + valOffset);
+//
+//            if (isVolatile) {
+//                dvmCompilerGenMemBarrier(cUnit);
+//            }
+//            HEAP_ACCESS_SHADOW(true);
+//            loadWordDisp(cUnit, tReg, 0, rlResult.lowReg);
+//            HEAP_ACCESS_SHADOW(false);
+//
+//            storeValue(cUnit, rlDest, rlResult);
+//            break;
+//        }
+//        case OP_SGET_WIDE: {
+//            int valOffset = offsetof(StaticField, value);
+//            const Method *method = (mir->OptimizationFlags & MIR_CALLEE) ?
+//                mir->meta.calleeMethod : cUnit->method;
+//            void *fieldPtr = (void*)
+//              (method->clazz->pDvmDex->pResFields[mir->dalvikInsn.vB]);
+//
+//            if (fieldPtr == NULL) {
+//                LOGE("Unexpected null static field");
+//                dvmAbort();
+//            }
+//
+//            int tReg = dvmCompilerAllocTemp(cUnit);
+//            rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, true);
+//            loadConstant(cUnit, tReg,  (int) fieldPtr + valOffset);
+//
+//            HEAP_ACCESS_SHADOW(true);
+//            loadPair(cUnit, tReg, rlResult.lowReg, rlResult.highReg);
+//            HEAP_ACCESS_SHADOW(false);
+//
+//            storeValueWide(cUnit, rlDest, rlResult);
+//            break;
+//        }
+//        case OP_SPUT_OBJECT:
+//        case OP_SPUT_OBJECT_VOLATILE:
+//        case OP_SPUT_VOLATILE:
+//        case OP_SPUT_BOOLEAN:
+//        case OP_SPUT_CHAR:
+//        case OP_SPUT_BYTE:
+//        case OP_SPUT_SHORT:
+//        case OP_SPUT: {
+//            int valOffset = offsetof(StaticField, value);
+//            int tReg = dvmCompilerAllocTemp(cUnit);
+//            int objHead;
+//            bool isVolatile;
+//            bool isSputObject;
+//            const Method *method = (mir->OptimizationFlags & MIR_CALLEE) ?
+//                mir->meta.calleeMethod : cUnit->method;
+//            void *fieldPtr = (void*)
+//              (method->clazz->pDvmDex->pResFields[mir->dalvikInsn.vB]);
+//
+//            isVolatile = (mir->dalvikInsn.opCode == OP_SPUT_VOLATILE) ||
+//                         (mir->dalvikInsn.opCode == OP_SPUT_OBJECT_VOLATILE) ||
+//                         dvmIsVolatileField(fieldPtr);
+//
+//            isSputObject = (mir->dalvikInsn.opCode == OP_SPUT_OBJECT) ||
+//                           (mir->dalvikInsn.opCode == OP_SPUT_OBJECT_VOLATILE);
+//
+//            if (fieldPtr == NULL) {
+//                LOGE("Unexpected null static field");
+//                dvmAbort();
+//            }
+//
+//            rlSrc = dvmCompilerGetSrc(cUnit, mir, 0);
+//            rlSrc = loadValue(cUnit, rlSrc, kAnyReg);
+//            loadConstant(cUnit, tReg,  (int) fieldPtr);
+//            if (isSputObject) {
+//                objHead = dvmCompilerAllocTemp(cUnit);
+//                loadWordDisp(cUnit, tReg, offsetof(Field, clazz), objHead);
+//            }
+//            HEAP_ACCESS_SHADOW(true);
+//            storeWordDisp(cUnit, tReg, valOffset ,rlSrc.lowReg);
+//            dvmCompilerFreeTemp(cUnit, tReg);
+//            HEAP_ACCESS_SHADOW(false);
+//            if (isVolatile) {
+//                dvmCompilerGenMemBarrier(cUnit);
+//            }
+//            if (isSputObject) {
+//                /* NOTE: marking card based sfield->clazz */
+//                markCard(cUnit, rlSrc.lowReg, objHead);
+//                dvmCompilerFreeTemp(cUnit, objHead);
+//            }
+//
+//            break;
+//        }
+//        case OP_SPUT_WIDE: {
+//            int tReg = dvmCompilerAllocTemp(cUnit);
+//            int valOffset = offsetof(StaticField, value);
+//            const Method *method = (mir->OptimizationFlags & MIR_CALLEE) ?
+//                mir->meta.calleeMethod : cUnit->method;
+//            void *fieldPtr = (void*)
+//              (method->clazz->pDvmDex->pResFields[mir->dalvikInsn.vB]);
+//
+//            if (fieldPtr == NULL) {
+//                LOGE("Unexpected null static field");
+//                dvmAbort();
+//            }
+//
+//            rlSrc = dvmCompilerGetSrcWide(cUnit, mir, 0, 1);
+//            rlSrc = loadValueWide(cUnit, rlSrc, kAnyReg);
+//            loadConstant(cUnit, tReg,  (int) fieldPtr + valOffset);
+//
+//            HEAP_ACCESS_SHADOW(true);
+//            storePair(cUnit, tReg, rlSrc.lowReg, rlSrc.highReg);
+//            HEAP_ACCESS_SHADOW(false);
+//            break;
+//        }
+//        case OP_NEW_INSTANCE: {
+//            /*
+//             * Obey the calling convention and don't mess with the register
+//             * usage.
+//             */
+//            ClassObject *classPtr = (void*)
+//              (cUnit->method->clazz->pDvmDex->pResClasses[mir->dalvikInsn.vB]);
+//
+//            if (classPtr == NULL) {
+//                LOGE("Unexpected null class");
+//                dvmAbort();
+//            }
+//            /*
+//             * If it is going to throw, it should not make to the trace to begin
+//             * with.  However, Alloc might throw, so we need to genExportPC()
+//             */
+//            assert((classPtr->accessFlags & (ACC_INTERFACE|ACC_ABSTRACT)) == 0);
+//            dvmCompilerFlushAllRegs(cUnit);   /* Everything to home location */
+//            genExportPC(cUnit, mir);
+//            LOAD_FUNC_ADDR(cUnit, r2, (int)dvmAllocObject);
+//            loadConstant(cUnit, r0, (int) classPtr);
+//            loadConstant(cUnit, r1, ALLOC_DONT_TRACK);
+//            opReg(cUnit, kOpBlx, r2);
+//            dvmCompilerClobberCallRegs(cUnit);
+//            /* generate a branch over if allocation is successful */
+//            opRegImm(cUnit, kOpCmp, r0, 0); /* NULL? */
+//            ArmLIR *branchOver = opCondBranch(cUnit, kArmCondNe);
+//            /*
+//             * OOM exception needs to be thrown here and cannot re-execute
+//             */
+//            loadConstant(cUnit, r0,
+//                         (int) (cUnit->method->insns + mir->offset));
+//            genDispatchToHandler(cUnit, TEMPLATE_THROW_EXCEPTION_COMMON);
+//            /* noreturn */
+//
+//            ArmLIR *target = newLIR0(cUnit, kArmPseudoTargetLabel);
+//            target->defMask = ENCODE_ALL;
+//            branchOver->generic.target = (LIR *) target;
+//            rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+//            rlResult = dvmCompilerGetReturn(cUnit);
+//            storeValue(cUnit, rlDest, rlResult);
+//            break;
+//        }
+//        case OP_CHECK_CAST: {
+//            /*
+//             * Obey the calling convention and don't mess with the register
+//             * usage.
+//             */
+//            ClassObject *classPtr =
+//              (cUnit->method->clazz->pDvmDex->pResClasses[mir->dalvikInsn.vB]);
+//            /*
+//             * Note: It is possible that classPtr is NULL at this point,
+//             * even though this instruction has been successfully interpreted.
+//             * If the previous interpretation had a null source, the
+//             * interpreter would not have bothered to resolve the clazz.
+//             * Bail out to the interpreter in this case, and log it
+//             * so that we can tell if it happens frequently.
+//             */
+//            if (classPtr == NULL) {
+//                 LOGVV("null clazz in OP_CHECK_CAST, single-stepping");
+//                 genInterpSingleStep(cUnit, mir);
+//                 return false;
+//            }
+//            dvmCompilerFlushAllRegs(cUnit);   /* Everything to home location */
+//            loadConstant(cUnit, r1, (int) classPtr );
+//            rlSrc = dvmCompilerGetSrc(cUnit, mir, 0);
+//            rlSrc = loadValue(cUnit, rlSrc, kCoreReg);
+//            opRegImm(cUnit, kOpCmp, rlSrc.lowReg, 0);   /* Null? */
+//            ArmLIR *branch1 = opCondBranch(cUnit, kArmCondEq);
+//            /*
+//             *  rlSrc.lowReg now contains object->clazz.  Note that
+//             *  it could have been allocated r0, but we're okay so long
+//             *  as we don't do anything desctructive until r0 is loaded
+//             *  with clazz.
+//             */
+//            /* r0 now contains object->clazz */
+//            loadWordDisp(cUnit, rlSrc.lowReg, offsetof(Object, clazz), r0);
+//            LOAD_FUNC_ADDR(cUnit, r2, (int)dvmInstanceofNonTrivial);
+//            opRegReg(cUnit, kOpCmp, r0, r1);
+//            ArmLIR *branch2 = opCondBranch(cUnit, kArmCondEq);
+//            opReg(cUnit, kOpBlx, r2);
+//            dvmCompilerClobberCallRegs(cUnit);
+//            /*
+//             * If null, check cast failed - punt to the interpreter.  Because
+//             * interpreter will be the one throwing, we don't need to
+//             * genExportPC() here.
+//             */
+//            genZeroCheck(cUnit, r0, mir->offset, NULL);
+//            /* check cast passed - branch target here */
+//            ArmLIR *target = newLIR0(cUnit, kArmPseudoTargetLabel);
+//            target->defMask = ENCODE_ALL;
+//            branch1->generic.target = (LIR *)target;
+//            branch2->generic.target = (LIR *)target;
+//            break;
+//        }
+//        case OP_SGET_WIDE_VOLATILE:
+//        case OP_SPUT_WIDE_VOLATILE:
+//            genInterpSingleStep(cUnit, mir);
+//            break;
+        default:
+            return true;
+    }
+    return false;
+}
+
+static bool handleFmt21s(CompilationUnit *cUnit, MIR *mir)                                 
+{
+    OpCode dalvikOpCode = mir->dalvikInsn.opCode;
+    RegLocation rlDest;
+    RegLocation rlResult;
+    int BBBB = mir->dalvikInsn.vB;
+	
+		LOG("the function is %s, !!!!!!!!!!!!!!haha\n", __func__);
+    if (dalvikOpCode == OP_CONST_WIDE_16) {
+        rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+        rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+        loadConstantNoClobber(cUnit, rlResult.lowReg, BBBB);
+        //TUNING: do high separately to avoid load dependency
+        opRegRegImm(cUnit, kOpAsr, rlResult.highReg, rlResult.lowReg, 31);
+        storeValueWide(cUnit, rlDest, rlResult);
+    } else if (dalvikOpCode == OP_CONST_16) {
+        rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+        rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, true);
+        loadConstantNoClobber(cUnit, rlResult.lowReg, BBBB);
+        storeValue(cUnit, rlDest, rlResult);
+    } else
+        return true;
+    return false;
+}
+
+static bool isPowerOfTwo(int x)                                                           
+{   
+    return (x & (x - 1)) == 0;                                                               
+}            
+
+// Returns true if no more than two bits are set in 'x'.                                
+static bool isPopCountLE2(unsigned int x)                                                
+{   
+    x &= x - 1; 
+    return (x & (x - 1)) == 0;                                                             
+}                             
+
+// Returns the index of the lowest set bit in 'x'.                                       
+static int lowestSetBit(unsigned int x) {                                                
+	int bit_posn = 0;
+    while ((x & 0xf) == 0) {                                                             
+	    bit_posn += 4;                                                                   
+	    x >>= 4;                                                                          
+	}
+    while ((x & 1) == 0) {                                                              
+		bit_posn++;                                                                     
+ 	   	x >>= 1;                                                                             
+	}
+    return bit_posn;                                                                         
+}                     
+
+// Returns true if it added instructions to 'cUnit' to multiply 'rlSrc' by 'lit'
+// and store the result in 'rlDest'.
+static bool handleEasyMultiply(CompilationUnit *cUnit,
+                               RegLocation rlSrc, RegLocation rlDest, int lit)
+{
+    // Can we simplify this multiplication?
+    bool powerOfTwo = false;
+    bool popCountLE2 = false;
+    bool powerOfTwoMinusOne = false;
+
+    if (lit < 2) {
+        // Avoid special cases.
+        return false;
+    } else if (isPowerOfTwo(lit)) {
+        powerOfTwo = true;
+    } else if (isPopCountLE2(lit)) {
+        popCountLE2 = true;
+    } else if (isPowerOfTwo(lit + 1)) {
+        powerOfTwoMinusOne = true;
+    } else {
+        return false;
+    }
+    rlSrc = loadValue(cUnit, rlSrc, kCoreReg);
+    RegLocation rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+    if (powerOfTwo) {
+        // Shift.
+        opRegRegImm(cUnit, kOpLsl, rlResult.lowReg, rlSrc.lowReg,
+                    lowestSetBit(lit));
+    } else if (popCountLE2) {
+        // Shift and add and shift.
+        int firstBit = lowestSetBit(lit);
+        int secondBit = lowestSetBit(lit ^ (1 << firstBit));
+        genMultiplyByTwoBitMultiplier(cUnit, rlSrc, rlResult, lit,
+                                      firstBit, secondBit);
+    } else {
+        // Reverse subtract: (src << (shift + 1)) - src.
+        assert(powerOfTwoMinusOne);
+        // TODO: rsb dst, src, src lsl#lowestSetBit(lit + 1)
+        int tReg = dvmCompilerAllocTemp(cUnit);
+        opRegRegImm(cUnit, kOpLsl, tReg, rlSrc.lowReg, lowestSetBit(lit + 1));
+        opRegRegReg(cUnit, kOpSub, rlResult.lowReg, tReg, rlSrc.lowReg);
+    }
+    storeValue(cUnit, rlDest, rlResult);
+    return true;
+}                                                       
+
 static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
 {
     OpCode dalvikOpCode = mir->dalvikInsn.opCode;
@@ -399,14 +773,14 @@ static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
         case OP_ADD_INT_LIT16:
             op = kOpAdd;
             break;
-//        case OP_MUL_INT_LIT8:
-//        case OP_MUL_INT_LIT16: {
-//            if (handleEasyMultiply(cUnit, rlSrc, rlDest, lit)) {
-//                return false;
-//            }
-//            op = kOpMul;
-//            break;
-//        }
+        case OP_MUL_INT_LIT8:
+        case OP_MUL_INT_LIT16: {
+            if (handleEasyMultiply(cUnit, rlSrc, rlDest, lit)) {
+                return false;
+            }
+            op = kOpMul;
+            break;
+        }
 //        case OP_AND_INT_LIT8:
 //        case OP_AND_INT_LIT16:
 //            op = kOpAnd;
@@ -700,6 +1074,13 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
 							notHandled = handleFmt12x(cUnit, mir);	
 							break;
+	                    case kFmt21c:
+    	                case kFmt31c:
+        	                notHandled = handleFmt21c_Fmt31c(cUnit, mir);                
+ 			        	    break;
+                    	case kFmt21s:
+                        	notHandled = handleFmt21s(cUnit, mir);
+                        	break;             
 						case kFmt22b:
 							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
 							notHandled = handleFmt22b_Fmt22s(cUnit, mir);
@@ -731,11 +1112,13 @@ UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
 	return genRegCopy(cUnit, rDest, rSrc);
 }
 
-void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo, int destHi,
+/* Needed by the register allocator */ 
+void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo, int destHi,                 
                             int srcLo, int srcHi)
-{
+{           
     genRegCopyWide(cUnit, destLo, destHi, srcLo, srcHi);
-}
+}           
+
 
 //通过rBase和displacement找到虚拟寄存器，rSrc是物理寄存器号
 void dvmCompilerFlushRegImpl(CompilationUnit *cUnit, int rBase,

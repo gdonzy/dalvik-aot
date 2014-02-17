@@ -324,6 +324,33 @@ extern RegisterInfo *dvmCompilerIsTemp(CompilationUnit *cUnit, int reg)
     return NULL;
 }           
 
+/* Clobber all regs that might be used by an external C call */
+extern void dvmCompilerClobberCallRegs(CompilationUnit *cUnit)
+{
+    dvmCompilerClobber(cUnit, r0); 
+    dvmCompilerClobber(cUnit, r1); 
+    dvmCompilerClobber(cUnit, r2); 
+    dvmCompilerClobber(cUnit, r3); 
+    //chenglin change
+    dvmCompilerClobber(cUnit, r4); 
+    //dvmCompilerClobber(cUnit, r5_l);
+    //dvmCompilerClobber(cUnit, r6_l);
+    //dvmCompilerClobber(cUnit, r7_l);
+    //dvmCompilerClobber(cUnit, r8_l);
+    //dvmCompilerClobber(cUnit, r9_l);
+    //dvmCompilerClobber(cUnit, r10_l);
+    //dvmCompilerClobber(cUnit, r11_l);
+    //dvmCompilerClobber(cUnit, r12_l);
+    //dvmCompilerClobber(cUnit, r13_l);
+    //dvmCompilerClobber(cUnit, r14_l);
+    //dvmCompilerClobber(cUnit, r15_l);
+
+    dvmCompilerClobber(cUnit, r9); // Need to do this?, be conservative
+    dvmCompilerClobber(cUnit, r11);
+    dvmCompilerClobber(cUnit, r12);
+    dvmCompilerClobber(cUnit, rlr);
+}
+
 extern void dvmCompilerResetDef(CompilationUnit *cUnit, int reg)
 {                                                                                          
     RegisterInfo *p = getRegInfo(cUnit, reg);
@@ -361,6 +388,24 @@ extern void dvmCompilerMarkDef(CompilationUnit *cUnit, RegLocation rl,
     p->defEnd = finish;
 }
 
+/*
+ * Mark the beginning and end LIR of a def sequence.  Note that
+ * on entry start points to the LIR prior to the beginning of the
+ * sequence.
+ */
+extern void dvmCompilerMarkDefWide(CompilationUnit *cUnit, RegLocation rl,                
+                        LIR *start, LIR *finish)
+{
+    assert(rl.wide);
+    assert(start && start->next);
+    assert(finish);                      
+    RegisterInfo *p = getRegInfo(cUnit, rl.lowReg);
+    dvmCompilerResetDef(cUnit, rl.highReg);  // Only track low of pair
+    p->defStart = start->next;
+    p->defEnd = finish;
+}
+
+
 extern void dvmCompilerResetDefLoc(CompilationUnit *cUnit, RegLocation rl)
 {                                                                                           
     assert(!rl.wide);
@@ -374,15 +419,15 @@ extern void dvmCompilerResetDefLoc(CompilationUnit *cUnit, RegLocation rl)
     dvmCompilerResetDef(cUnit, rl.lowReg);
 }
 
-extern void dvmCompilerResetDefLocWide(CompilationUnit *cUnit, RegLocation rl)
+extern void dvmCompilerResetDefLocWide(CompilationUnit *cUnit, RegLocation rl)             
 {
     assert(rl.wide);
-//    if (!(gDvmJit.disableOpt & (1 << kSuppressLoads))) {
+    //if (!(gDvmJit.disableOpt & (1 << kSuppressLoads))) {
         RegisterInfo *p = getRegInfo(cUnit, rl.lowReg);
         assert(p->pair);
         nullifyRange(cUnit, p->defStart, p->defEnd,
                      p->sReg, rl.sRegLow);
-//    }
+  //  }
     dvmCompilerResetDef(cUnit, rl.lowReg);
     dvmCompilerResetDef(cUnit, rl.highReg);
 }
@@ -409,6 +454,31 @@ extern void dvmCompilerClobberAllRegs(CompilationUnit *cUnit)
 	}    
 }
 
+// Make sure nothing is live and dirty
+static void flushAllRegsBody(CompilationUnit *cUnit, RegisterInfo *info,                
+                             int numRegs)
+{
+    int i;
+    for (i=0; i < numRegs; i++) {
+        if (info[i].live && info[i].dirty) {
+            if (info[i].pair) {
+                flushRegWide(cUnit, info[i].reg, info[i].partner);
+            } else {
+                flushReg(cUnit, info[i].reg);
+            }    
+        }    
+    }    
+}
+
+extern void dvmCompilerFlushAllRegs(CompilationUnit *cUnit)
+{
+    flushAllRegsBody(cUnit, cUnit->regPool->coreTemps,
+                     cUnit->regPool->numCoreTemps);
+    flushAllRegsBody(cUnit, cUnit->regPool->FPTemps,
+                     cUnit->regPool->numFPTemps);
+    dvmCompilerClobberAllRegs(cUnit);
+}              
+
 static bool regClassMatches(int regClass, int reg)
 {
 	if (regClass == kAnyReg) {
@@ -434,7 +504,6 @@ extern void dvmCompilerMarkLive(CompilationUnit *cUnit, int reg, int sReg)
     }    
     info->sReg = sReg;
 }
-
 
 extern void dvmCompilerMarkPair(CompilationUnit *cUnit, int lowReg, int highReg)
 {
@@ -544,8 +613,7 @@ extern RegLocation dvmCompilerUpdateLocWide(CompilationUnit *cUnit,
     return loc;
 }
 
-
-static RegLocation evalLocWide(CompilationUnit *cUnit, RegLocation loc,
+static RegLocation evalLocWide(CompilationUnit *cUnit, RegLocation loc,                
                                int regClass, bool update)
 {
     assert(loc.wide);
@@ -558,7 +626,7 @@ static RegLocation evalLocWide(CompilationUnit *cUnit, RegLocation loc,
     /* If already in registers, we can assume proper form.  Right reg class? */
     if (loc.location == kLocPhysReg) {
         assert(FPREG(loc.lowReg) == FPREG(loc.highReg));
-        assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0));
+        assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0)); 
         if (!regClassMatches(regClass, loc.lowReg)) {
             /* Wrong register class.  Reallocate and copy */
             newRegs = dvmCompilerAllocTypedTempPair(cUnit, loc.fp, regClass);
@@ -573,10 +641,10 @@ static RegLocation evalLocWide(CompilationUnit *cUnit, RegLocation loc,
             loc.lowReg = lowReg;
             loc.highReg = highReg;
             dvmCompilerMarkPair(cUnit, loc.lowReg, loc.highReg);
-            assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0));
-        }
-        return loc;
-    }
+            assert(!FPREG(loc.lowReg) || ((loc.lowReg & 0x1) == 0)); 
+        }    
+        return loc; 
+    }    
 
     assert((loc.location != kLocRetval) || (loc.sRegLow == INVALID_SREG));
     assert((loc.location != kLocRetval) ||
@@ -586,7 +654,7 @@ static RegLocation evalLocWide(CompilationUnit *cUnit, RegLocation loc,
     loc.lowReg = newRegs & 0xff;
     loc.highReg = (newRegs >> 8) & 0xff;
 
-    dvmCompilerMarkPair(cUnit, loc.lowReg, loc.highReg);
+	dvmCompilerMarkPair(cUnit, loc.lowReg, loc.highReg);
     if (update) {
         loc.location = kLocPhysReg;
         dvmCompilerMarkLive(cUnit, loc.lowReg, loc.sRegLow);
@@ -690,3 +758,21 @@ extern RegLocation dvmCompilerGetSrcWide(CompilationUnit *cUnit, MIR *mir, int l
 {
 	return getLocWide(cUnit, mir, low, high, true);
 }
+
+extern RegLocation dvmCompilerGetReturn(CompilationUnit *cUnit)                            
+{
+    RegLocation res = LOC_C_RETURN;
+    dvmCompilerClobber(cUnit, r0); 
+    dvmCompilerMarkInUse(cUnit, r0); 
+    return res; 
+}
+
+extern RegLocation dvmCompilerGetReturnAlt(CompilationUnit *cUnit)
+{
+    RegLocation res = LOC_C_RETURN;
+    res.lowReg = r1;
+    dvmCompilerClobber(cUnit, r1); 
+    dvmCompilerMarkInUse(cUnit, r1); 
+    return res; 
+}
+
