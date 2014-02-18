@@ -2,6 +2,13 @@
 //#include "../../CompilerIR.h"
 //#include ",,/../Dataflow.h"
 //#include "UnicoreLIR.h"
+static inline RegisterClass dvmCompilerRegClassBySize(OpSize size)
+{
+    return (size == kUnsignedHalf ||
+            size == kSignedHalf ||
+            size == kUnsignedByte ||
+            size == kSignedByte ) ? kCoreReg : kAnyReg;
+}
 
 static inline int dvmCompilerS2VReg(CompilationUnit *cUnit, int sReg)
 {                              

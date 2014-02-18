@@ -34,6 +34,7 @@ typedef struct MIR {
     DecodedInstruction dalvikInsn;
 //    unsigned int width;
     unsigned int offset;
+    unsigned long offsetOfDex;
     struct MIR *prev;
     struct MIR *next;
     struct SSARepresentation *ssaRep;

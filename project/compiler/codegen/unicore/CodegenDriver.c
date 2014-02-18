@@ -192,28 +192,30 @@ static bool genArithOp(CompilationUnit *cUnit, MIR *mir)
     return true;
 }
 
-//static void genIGet(CompilationUnit *cUnit, MIR *mir, OpSize size,
-//                    int fieldOffset, bool isVolatile)
-//{
-//    RegLocation rlResult;
-//    RegisterClass regClass = dvmCompilerRegClassBySize(size);
-//    RegLocation rlObj = dvmCompilerGetSrc(cUnit, mir, 0);
-//    RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
-//    rlObj = loadValue(cUnit, rlObj, kCoreReg);
-//    rlResult = dvmCompilerEvalLoc(cUnit, rlDest, regClass, true);
+static void genIGet(CompilationUnit *cUnit, MIR *mir, OpSize size,
+                    int fieldOffset, bool isVolatile)
+{
+    RegLocation rlResult;
+    RegisterClass regClass = dvmCompilerRegClassBySize(size);
+    RegLocation rlObj = dvmCompilerGetSrc(cUnit, mir, 0);
+    RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+    rlObj = loadValue(cUnit, rlObj, kCoreReg);
+    rlResult = dvmCompilerEvalLoc(cUnit, rlDest, regClass, true);
 //    genNullCheck(cUnit, rlObj.sRegLow, rlObj.lowReg, mir->offset,
 //                 NULL);/* null object? */
-//
+
 //    HEAP_ACCESS_SHADOW(true);
-//    loadBaseDisp(cUnit, mir, rlObj.lowReg, fieldOffset, rlResult.lowReg,
-//                 size, rlObj.sRegLow);
+    loadBaseDisp(cUnit, mir, rlObj.lowReg, fieldOffset, rlResult.lowReg,
+                 size, rlObj.sRegLow);
 //    HEAP_ACCESS_SHADOW(false);
 //    if (isVolatile) {
 //        dvmCompilerGenMemBarrier(cUnit);
 //    }
-//
-//    storeValue(cUnit, rlDest, rlResult);
-//}
+
+    storeValue(cUnit, rlDest, rlResult);
+}
+
+
 /* 
  * The following are the first-level codegen routines that analyze the format
  * of each bytecode.
@@ -888,36 +890,39 @@ static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
-//static bool handleFmt22c(CompilationUnit *cUnit, MIR *mir)
-//{
-//    OpCode dalvikOpCode = mir->dalvikInsn.opCode;
-//    int fieldOffset = -1;
-//    bool isVolatile = false;
-//    switch (dalvikOpCode) {
-//        /*
-//         * Wide volatiles currently handled via single step.
-//         * Add them here if generating in-line code.
-//         *     case OP_IGET_WIDE_VOLATILE:
-//         *     case OP_IPUT_WIDE_VOLATILE:
-//         */
-//        case OP_IGET:
+	//donzy2fieldOffset
+int findFieldOffset(MIR *mir);
+
+static bool handleFmt22c(CompilationUnit *cUnit, MIR *mir)
+{
+    OpCode dalvikOpCode = mir->dalvikInsn.opCode;
+    int fieldOffset = -1;
+    bool isVolatile = false;
+    switch (dalvikOpCode) {
+        /*
+         * Wide volatiles currently handled via single step.
+         * Add them here if generating in-line code.
+         *     case OP_IGET_WIDE_VOLATILE:
+         *     case OP_IPUT_WIDE_VOLATILE:
+         */
+        case OP_IGET:
 //        case OP_IGET_VOLATILE:
-//        case OP_IGET_WIDE:
-//        case OP_IGET_OBJECT:
-//        case OP_IGET_OBJECT_VOLATILE:
-//        case OP_IGET_BOOLEAN:
-//        case OP_IGET_BYTE:
-//        case OP_IGET_CHAR:
-//        case OP_IGET_SHORT:
-//        case OP_IPUT:
+        case OP_IGET_WIDE:
+        case OP_IGET_OBJECT:
+        case OP_IGET_OBJECT_VOLATILE:
+        case OP_IGET_BOOLEAN:
+        case OP_IGET_BYTE:
+        case OP_IGET_CHAR:
+        case OP_IGET_SHORT:
+        case OP_IPUT:
 //        case OP_IPUT_VOLATILE:
-//        case OP_IPUT_WIDE:
-//        case OP_IPUT_OBJECT:
-//        case OP_IPUT_OBJECT_VOLATILE:
-//        case OP_IPUT_BOOLEAN:
-//        case OP_IPUT_BYTE:
-//        case OP_IPUT_CHAR:
-//        case OP_IPUT_SHORT: {
+        case OP_IPUT_WIDE:
+        case OP_IPUT_OBJECT:
+        case OP_IPUT_OBJECT_VOLATILE:
+        case OP_IPUT_BOOLEAN:
+        case OP_IPUT_BYTE:
+        case OP_IPUT_CHAR:
+        case OP_IPUT_SHORT: {
 //            const Method *method = (mir->OptimizationFlags & MIR_CALLEE) ?
 //                mir->meta.calleeMethod : cUnit->method;
 //            Field *fieldPtr =
@@ -929,13 +934,15 @@ static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
 //            }
 //            isVolatile = dvmIsVolatileField(fieldPtr);
 //            fieldOffset = ((InstField *)fieldPtr)->byteOffset;
-//            break;
-//        }
-//        default:
-//            break;
-//    }
-//
-//    switch (dalvikOpCode) {
+	//donzy2fieldOffset
+	fieldOffset = findFieldOffset(mir);
+            break;
+        }
+        default:
+            break;
+    }
+
+    switch (dalvikOpCode) {
 ////        case OP_NEW_ARRAY: {
 ////            // Generates a call - use explicit registers
 ////            RegLocation rlSrc = dvmCompilerGetSrc(cUnit, mir, 0);
@@ -1034,14 +1041,14 @@ static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
 ////        case OP_IGET_OBJECT_VOLATILE:
 ////            isVolatile = true;
 //            // NOTE: intentional fallthrough
-//        case OP_IGET:
-//        case OP_IGET_OBJECT:
-//        case OP_IGET_BOOLEAN:
-//        case OP_IGET_BYTE:
-//        case OP_IGET_CHAR:
-//        case OP_IGET_SHORT:
-//            genIGet(cUnit, mir, kWord, fieldOffset, isVolatile);
-//            break;
+        case OP_IGET:
+        case OP_IGET_OBJECT:
+        case OP_IGET_BOOLEAN:
+        case OP_IGET_BYTE:
+        case OP_IGET_CHAR:
+        case OP_IGET_SHORT:
+            genIGet(cUnit, mir, kWord, fieldOffset, isVolatile);
+            break;
 ////        case OP_IPUT_WIDE:
 ////            genIPutWide(cUnit, mir, fieldOffset);
 ////            break;
@@ -1063,11 +1070,11 @@ static bool handleFmt22b_Fmt22s(CompilationUnit *cUnit, MIR *mir)
 ////        case OP_IPUT_WIDE_VOLATILE:
 ////            genInterpSingleStep(cUnit, mir);
 ////            break;
-//        default:
-//            return true;
-//    }
-//    return false;
-//}
+        default:
+            return true;
+    }
+    return false;
+}
 
 void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 {
@@ -1120,7 +1127,7 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 							notHandled = handleFmt22b_Fmt22s(cUnit, mir);
 							break;
                     				case kFmt22c:
-                        			//	notHandled = handleFmt22c(cUnit, mir);
+                        				notHandled = handleFmt22c(cUnit, mir);
                         				break;
 						default:
 							notHandled = true;

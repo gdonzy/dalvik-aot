@@ -100,6 +100,7 @@ void insertInsns2BB(DexFile * pDexFile, CodeItem * pCodeItem ,int startIdx,int e
 		return ;
 	}
 	mir->offset = insnIdx;
+	mir->offsetOfDex =(unsigned long)( (u1*)(&insns[insnIdx]) - (u1*)(pDexFile->baseAddr) );
 	mir->prev = NULL;
 	mir->next = NULL;
 	mir->ssaRep = NULL;
@@ -111,7 +112,7 @@ void insertInsns2BB(DexFile * pDexFile, CodeItem * pCodeItem ,int startIdx,int e
 }
 		
 
-void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt)
+void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt,DexFile *pDexFile)
 {
 	int insnIdx = 0;
 	DecodedInstruction decInsn;
@@ -125,6 +126,7 @@ void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt)
 			return ;
 		}
 		mir->offset = insnIdx;
+		mir->offsetOfDex = (unsigned long)((u1*)(&insns[insnIdx]) - (u1*)(pDexFile->baseAddr));
 		mir->prev = NULL;
 		mir->next = NULL;
 		mir->ssaRep = NULL;

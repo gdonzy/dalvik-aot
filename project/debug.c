@@ -1,3 +1,23 @@
+//donzy2fieldOffset
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+int findFieldOffset(MIR *mir){
+	int res = 0;
+	unsigned long offsetOfDex = mir->offsetOfDex;
+	offsetOfDex += 2 ;
+	int fd = open("./tmp.odex",O_RDONLY);
+	printf("donzy2fieldOffset fd is %d\n",fd);
+	lseek(fd,offsetOfDex,SEEK_SET);
+	read(fd,&res,2);
+	printf("donzy2fieldOffset is %lx : %x\n",offsetOfDex-2,res);
+	close(fd);
+	
+	return res;		
+}
+//donzy2fieldOffset end
+
 void dumpDecodedInstruction(const DecodedInstruction *pDecInsn, int insnIdx);
 
 void outputMIRsOfBB(BasicBlock *bb){
@@ -5,12 +25,12 @@ void outputMIRsOfBB(BasicBlock *bb){
 
 	printf("[mirs of bb] =====startoffset is %lx  ======\n",bb->startOffset);
 	for(mir = bb->firstMIRInsn ; mir != NULL ; mir = mir->next){
-		printf("[mirs of bb] ");
+		printf("[mirs of bb]+++:%lx ",mir->offsetOfDex);
 		dumpDecodedInstruction(&mir->dalvikInsn,mir->offset);
 	}
 }
 
-void  debugInsertInsns2BB(BasicBlock *curBB , u2 * insns , int insnsCnt);
+void  debugInsertInsns2BB(BasicBlock *curBB , u2 * insns , int insnsCnt,DexFile *pDexFile);
 
 void outputCodeBuffer(BasicBlock *bb){
 	int codeEnd = (bb->sizeOfBuffer - 12)/4;
