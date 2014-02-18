@@ -537,7 +537,7 @@ debugBB	dexmain.c	/^BasicBlock debugBB;$/;"	v
 debugCodeOffset	dexmain.c	/^u8  debugCodeOffset = 0; $/;"	v
 debugDvmCompilerAssembleLIR	compiler/codegen/unicore/Assemble.c	/^void debugDvmCompilerAssembleLIR(BasicBlock *bb){$/;"	f
 debugInfoOff	DEX.h	/^    u4  debugInfoOff;       \/* file offset to debug info stream *\/$/;"	m	struct:DexCode
-debugInsertInsns2BB	processBB/processBB.c	/^void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt)$/;"	f
+debugInsertInsns2BB	processBB/processBB.c	/^void debugInsertInsns2BB(BasicBlock *curBB,u2 * insns,int insnsCnt,DexFile *pDexFile)$/;"	f
 debugNewLIR0	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR0(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode){$/;"	f
 debugNewLIR1	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR1(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest){$/;"	f
 debugNewLIR2	compiler/codegen/unicore/CodegenCommon.c	/^UnicoreLIR *  debugNewLIR2(CompilationUnit *pCUnit,BasicBlock *bb,UnicoreOpCode opCode,int dest,int src1){$/;"	f
@@ -615,6 +615,7 @@ dvmCompilerMarkPair	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompi
 dvmCompilerNew	compiler/Utility.c	/^void * dvmCompilerNew(int size, bool zero)$/;"	f
 dvmCompilerNonLoopAnalysis	compiler/Dataflow.c	/^void dvmCompilerNonLoopAnalysis(CompilationUnit *cUnit)                                  $/;"	f
 dvmCompilerRegAlloc	compiler/Ralloc.c	/^void dvmCompilerRegAlloc(CompilationUnit *cUnit)$/;"	f
+dvmCompilerRegClassBySize	compiler/codegen/unicore/Ralloc.h	/^static inline RegisterClass dvmCompilerRegClassBySize(OpSize size)$/;"	f
 dvmCompilerRegCopy	compiler/codegen/unicore/CodegenDriver.c	/^UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)$/;"	f
 dvmCompilerRegCopyWide	compiler/codegen/unicore/CodegenDriver.c	/^void dvmCompilerRegCopyWide(CompilationUnit *cUnit, int destLo, int destHi,                 $/;"	f
 dvmCompilerResetDef	compiler/codegen/unicore/RallocUtil.c	/^extern void dvmCompilerResetDef(CompilationUnit *cUnit, int reg)$/;"	f
@@ -644,6 +645,7 @@ fieldIdsSize	DEX.h	/^    u4  fieldIdsSize;$/;"	m	struct:DexHeader
 fieldIdx	DEX.h	/^    u4 fieldIdx;    \/* index to a field_id_item *\/$/;"	m	struct:DexField
 fieldLoc	compiler/codegen/unicore/UnicoreLIR.h	/^    } fieldLoc[4];$/;"	m	struct:UnicoreEncodingMap	typeref:struct:UnicoreEncodingMap::__anon1
 fileSize	DEX.h	/^    u4  fileSize;           \/* length of entire file *\/$/;"	m	struct:DexHeader
+findFieldOffset	debug.c	/^int findFieldOffset(MIR *mir){$/;"	f
 first	compiler/Ralloc.c	/^    int first;$/;"	m	struct:LiveRange	file:
 firstBB	compiler/CompilerIR.h	/^    BasicBlock *firstBB; \/\/donzy$/;"	m	struct:CompilationUnit
 firstLIRInsn	compiler/CompilerIR.h	/^    LIR *firstLIRInsn;\/\/donzy$/;"	m	struct:BasicBlock
@@ -997,6 +999,7 @@ numUsed	compiler/CompilerUtility.h	/^    u4 numUsed;$/;"	m	struct:GrowableList
 numUses	compiler/Dataflow.h	/^    int numUses;$/;"	m	struct:SSARepresentation
 offset	compiler/CompilerIR.h	/^    int offset;$/;"	m	struct:LIR
 offset	compiler/CompilerIR.h	/^    unsigned int offset;$/;"	m	struct:MIR
+offsetOfDex	compiler/CompilerIR.h	/^    unsigned long offsetOfDex;$/;"	m	struct:MIR
 opCode	DEX.h	/^    OpCode  opCode;$/;"	m	struct:DecodedInstruction
 opCode	compiler/codegen/unicore/UnicoreLIR.h	/^    UnicoreOpCode opCode;$/;"	m	struct:UnicoreEncodingMap
 opCode	compiler/codegen/unicore/UnicoreLIR.h	/^    UnicoreOpCode opCode;$/;"	m	struct:UnicoreLIR
