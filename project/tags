@@ -664,6 +664,8 @@ gOpNames	toOpt.h	/^static const char* gOpNames[256] = {$/;"	v
 genArithOp	compiler/codegen/unicore/CodegenDriver.c	/^static bool genArithOp(CompilationUnit *cUnit, MIR *mir)$/;"	f	file:
 genArithOpInt	compiler/codegen/unicore/CodegenDriver.c	/^static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,  $/;"	f	file:
 genIGet	compiler/codegen/unicore/CodegenDriver.c	/^static void genIGet(CompilationUnit *cUnit, MIR *mir, OpSize size,$/;"	f	file:
+genIGetWide	compiler/codegen/unicore/CodegenDriver.c	/^static void genIGetWide(CompilationUnit *cUnit, MIR *mir, int fieldOffset)$/;"	f	file:
+genIPut	compiler/codegen/unicore/CodegenDriver.c	/^static void genIPut(CompilationUnit *cUnit, MIR *mir, OpSize size,$/;"	f	file:
 genMultiplyByTwoBitMultiplier	compiler/codegen/unicore/unity-2/Gen-unicore.c	/^static void genMultiplyByTwoBitMultiplier(CompilationUnit *cUnit,$/;"	f	file:
 genRegCopy	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR* genRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)                    $/;"	f	file:
 genRegCopyNoInsert	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR* genRegCopyNoInsert(CompilationUnit *cUnit, int rDest, int rSrc)$/;"	f	file:
@@ -940,6 +942,7 @@ loadBaseDispWide	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR 
 loadConstant	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *loadConstant(CompilationUnit *cUnit, int rDest, int value)                                                                                             $/;"	f	file:
 loadConstantNoClobber	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,$/;"	f	file:
 loadConstantValueWide	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *loadConstantValueWide(CompilationUnit *cUnit, int rDestLo,$/;"	f	file:
+loadPair	compiler/codegen/unicore/unity-2/Factory.c	/^static void loadPair(CompilationUnit *cUnit, int base, int lowReg, int highReg)$/;"	f	file:
 loadValue	compiler/codegen/unicore/CodegenFactory.c	/^static RegLocation loadValue(CompilationUnit *cUnit, RegLocation rlSrc,$/;"	f	file:
 loadValueDirect	compiler/codegen/unicore/CodegenFactory.c	/^static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,$/;"	f	file:
 loadValueDirectFixed	compiler/codegen/unicore/CodegenFactory.c	/^static void loadValueDirectFixed(CompilationUnit *cUnit, RegLocation rlSrc,$/;"	f	file:
@@ -1104,6 +1107,7 @@ staticValuesOff	DEX.h	/^    u4  staticValuesOff;    \/* file offset to DexEncode
 storeBaseDisp	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *storeBaseDisp(CompilationUnit *cUnit, int rBase,     $/;"	f	file:
 storeBaseDispBody	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *storeBaseDispBody(CompilationUnit *cUnit, int rBase,$/;"	f	file:
 storeBaseDispWide	compiler/codegen/unicore/unity-2/Factory.c	/^static UnicoreLIR *storeBaseDispWide(CompilationUnit *cUnit, int rBase,$/;"	f	file:
+storePair	compiler/codegen/unicore/unity-2/Factory.c	/^static void storePair(CompilationUnit *cUnit, int base, int lowReg, int highReg)$/;"	f	file:
 storeValue	compiler/codegen/unicore/CodegenFactory.c	/^static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation rlSrc)$/;"	f	file:
 storeValueWide	compiler/codegen/unicore/CodegenFactory.c	/^static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,                    $/;"	f	file:
 stringDataOff	DEX.h	/^    u4  stringDataOff;      \/* file offset to string_data_item *\/$/;"	m	struct:DexStringId

@@ -2,4 +2,4 @@
 rm -f tmp.log *.bin
 ./togcc.sh
 ./dexmain classes.dex > tmp.log
-unicore32-linux-objdump -D -b binary -m unicore32 BB-fae.bin
+unicore32-linux-objdump -D -b binary -m unicore32 BB-27ce.bin

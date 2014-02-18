@@ -238,6 +238,28 @@ static void genIPut(CompilationUnit *cUnit, MIR *mir, OpSize size,
     }
 }
 
+static void genIGetWide(CompilationUnit *cUnit, MIR *mir, int fieldOffset)
+{
+    RegLocation rlObj = dvmCompilerGetSrc(cUnit, mir, 0);
+    RegLocation rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+    RegLocation rlResult;
+    rlObj = loadValue(cUnit, rlObj, kCoreReg);
+    int regPtr = dvmCompilerAllocTemp(cUnit);
+
+    assert(rlDest.wide);
+
+//    genNullCheck(cUnit, rlObj.sRegLow, rlObj.lowReg, mir->offset,
+//                 NULL);/* null object? */
+    opRegRegImm(cUnit, kOpAdd, regPtr, rlObj.lowReg, fieldOffset);
+    rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, true);
+
+//    HEAP_ACCESS_SHADOW(true);
+    loadPair(cUnit, regPtr, rlResult.lowReg, rlResult.highReg);
+//    HEAP_ACCESS_SHADOW(false);
+
+    dvmCompilerFreeTemp(cUnit, regPtr);
+    storeValueWide(cUnit, rlDest, rlResult);
+}
 /* 
  * The following are the first-level codegen routines that analyze the format
  * of each bytecode.
@@ -931,7 +953,7 @@ static bool handleFmt22c(CompilationUnit *cUnit, MIR *mir)
 //        case OP_IGET_VOLATILE:
         case OP_IGET_WIDE:
         case OP_IGET_OBJECT:
-        case OP_IGET_OBJECT_VOLATILE:
+//        case OP_IGET_OBJECT_VOLATILE:
         case OP_IGET_BOOLEAN:
         case OP_IGET_BYTE:
         case OP_IGET_CHAR:
@@ -1056,10 +1078,10 @@ static bool handleFmt22c(CompilationUnit *cUnit, MIR *mir)
 ////            branch2->generic.target = (LIR *)target;
 ////            break;
 ////        }
-////        case OP_IGET_WIDE:
-////            genIGetWide(cUnit, mir, fieldOffset);
-////            break;
-////        case OP_IGET_VOLATILE:
+        case OP_IGET_WIDE:
+            genIGetWide(cUnit, mir, fieldOffset);
+            break;
+//        case OP_IGET_VOLATILE:
 ////        case OP_IGET_OBJECT_VOLATILE:
 ////            isVolatile = true;
 //            // NOTE: intentional fallthrough

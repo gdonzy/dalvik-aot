@@ -764,6 +764,27 @@ static UnicoreLIR *storeBaseDispWide(CompilationUnit *cUnit, int rBase,
     return storeBaseDispBody(cUnit, rBase, displacement, rSrcLo, rSrcHi, kLong);
 }
 
+static void storePair(CompilationUnit *cUnit, int base, int lowReg, int highReg)
+{
+    if (lowReg < highReg) {
+//        storeMultiple(cUnit, base, (1 << lowReg) | (1 << highReg));
+    } else {
+//        storeWordDisp(cUnit, base, 0, lowReg);
+//        storeWordDisp(cUnit, base, 4, highReg);
+    }
+}
+
+static UnicoreLIR *loadWordDisp(CompilationUnit *cUnit,int rBase,int displacement,int rDest);
+
+static void loadPair(CompilationUnit *cUnit, int base, int lowReg, int highReg)
+{
+//    if (lowReg < highReg) {
+//        loadMultiple(cUnit, base, (1 << lowReg) | (1 << highReg));
+//    } else {
+        loadWordDisp(cUnit, base, 0 , lowReg);
+        loadWordDisp(cUnit, base, 4 , highReg);
+//    }
+}
 
 static UnicoreLIR* genRegCopyNoInsert(CompilationUnit *cUnit, int rDest, int rSrc)
 {
