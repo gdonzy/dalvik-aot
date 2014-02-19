@@ -1305,13 +1305,8 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
 							notHandled = handleFmt22b_Fmt22s(cUnit, mir);
 							break;
-<<<<<<< HEAD
-                    				case kFmt22c:
-                        				notHandled = handleFmt22c(cUnit, mir);
-                        				break;
-=======
                     	case kFmt22c:
-                        	//	notHandled = handleFmt22c(cUnit, mir);
+                        	notHandled = handleFmt22c(cUnit, mir);
                         	break;
 						case kFmt22x:
                     	case kFmt32x:
@@ -1320,7 +1315,6 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
                     	case kFmt23x:
                         	notHandled = handleFmt23x(cUnit, mir);                     
 							break;
->>>>>>> e12d7639130b4f5b40598f67e57c0a4a5830cc28
 						default:
 							notHandled = true;
 							break;			
