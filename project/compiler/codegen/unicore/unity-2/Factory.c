@@ -764,14 +764,16 @@ static UnicoreLIR *storeBaseDispWide(CompilationUnit *cUnit, int rBase,
     return storeBaseDispBody(cUnit, rBase, displacement, rSrcLo, rSrcHi, kLong);
 }
 
+static UnicoreLIR *storeWordDisp(CompilationUnit *cUnit, int rBase , int displacement , int rSrc);
+
 static void storePair(CompilationUnit *cUnit, int base, int lowReg, int highReg)
 {
-    if (lowReg < highReg) {
+//    if (lowReg < highReg) {
 //        storeMultiple(cUnit, base, (1 << lowReg) | (1 << highReg));
-    } else {
-//        storeWordDisp(cUnit, base, 0, lowReg);
-//        storeWordDisp(cUnit, base, 4, highReg);
-    }
+//    } else {
+        storeWordDisp(cUnit, base, 0, lowReg);
+        storeWordDisp(cUnit, base, 4, highReg);
+//    }
 }
 
 static UnicoreLIR *loadWordDisp(CompilationUnit *cUnit,int rBase,int displacement,int rDest);

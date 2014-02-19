@@ -260,6 +260,26 @@ static void genIGetWide(CompilationUnit *cUnit, MIR *mir, int fieldOffset)
     dvmCompilerFreeTemp(cUnit, regPtr);
     storeValueWide(cUnit, rlDest, rlResult);
 }
+
+static void genIPutWide(CompilationUnit *cUnit, MIR *mir, int fieldOffset)
+{
+    RegLocation rlSrc = dvmCompilerGetSrcWide(cUnit, mir, 0, 1);
+    RegLocation rlObj = dvmCompilerGetSrc(cUnit, mir, 2);
+    rlObj = loadValue(cUnit, rlObj, kCoreReg);
+    int regPtr;
+    rlSrc = loadValueWide(cUnit, rlSrc, kAnyReg);
+//    genNullCheck(cUnit, rlObj.sRegLow, rlObj.lowReg, mir->offset,
+//                 NULL);/* null object? */
+    regPtr = dvmCompilerAllocTemp(cUnit);
+    opRegRegImm(cUnit, kOpAdd, regPtr, rlObj.lowReg, fieldOffset);
+
+//    HEAP_ACCESS_SHADOW(true);
+    storePair(cUnit, regPtr, rlSrc.lowReg, rlSrc.highReg);
+//    HEAP_ACCESS_SHADOW(false);
+
+    dvmCompilerFreeTemp(cUnit, regPtr);
+}
+
 /* 
  * The following are the first-level codegen routines that analyze the format
  * of each bytecode.
@@ -1093,9 +1113,9 @@ static bool handleFmt22c(CompilationUnit *cUnit, MIR *mir)
         case OP_IGET_SHORT:
             genIGet(cUnit, mir, kWord, fieldOffset, isVolatile);
             break;
-////        case OP_IPUT_WIDE:
-////            genIPutWide(cUnit, mir, fieldOffset);
-////            break;
+        case OP_IPUT_WIDE:
+            genIPutWide(cUnit, mir, fieldOffset);
+            break;
         case OP_IPUT:
         case OP_IPUT_SHORT:
         case OP_IPUT_CHAR:

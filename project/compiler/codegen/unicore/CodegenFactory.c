@@ -12,6 +12,13 @@ static UnicoreLIR *loadWordDisp(CompilationUnit *cUnit, int rBase, int displacem
                         INVALID_SREG);
 }
 
+
+static UnicoreLIR *storeWordDisp(CompilationUnit *cUnit, int rBase,
+                             int displacement, int rSrc)
+{
+    return storeBaseDisp(cUnit, rBase, displacement, rSrc, kWord);
+}
+
 /*
  * Load a Dalvik register into a physical register.  Take care when
  * using this routine, as it doesn't perform any bookkeeping regarding
@@ -150,6 +157,27 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 
 		}
 	}
+}
+
+static RegLocation loadValueWide(CompilationUnit *cUnit, RegLocation rlSrc,
+                                 RegisterClass opKind)
+{
+    assert(rlSrc.wide);
+    rlSrc = dvmCompilerEvalLoc(cUnit, rlSrc, opKind, false);
+//    if (rlSrc.location == kLocDalvikFrame) {
+        loadValueDirectWide(cUnit, rlSrc, rlSrc.lowReg, rlSrc.highReg);
+        rlSrc.location = kLocPhysReg;
+        dvmCompilerMarkLive(cUnit, rlSrc.lowReg, rlSrc.sRegLow);
+        dvmCompilerMarkLive(cUnit, rlSrc.highReg,
+                            dvmCompilerSRegHi(rlSrc.sRegLow));
+//    } else if (rlSrc.location == kLocRetval) {
+//        loadBaseDispWide(cUnit, NULL, rGLUE, offsetof(InterpState, retval),
+//                         rlSrc.lowReg, rlSrc.highReg, INVALID_SREG);
+//        rlSrc.location = kLocPhysReg;
+//        dvmCompilerClobber(cUnit, rlSrc.lowReg);
+//        dvmCompilerClobber(cUnit, rlSrc.highReg);
+//    }
+    return rlSrc;
 }
 
 static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,                    
