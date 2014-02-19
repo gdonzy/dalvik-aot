@@ -172,10 +172,10 @@ static bool genArithOp(CompilationUnit *cUnit, MIR *mir)
     if ((opCode >= OP_ADD_INT_2ADDR) && (opCode <= OP_USHR_INT_2ADDR)) {
         return genArithOpInt(cUnit,mir, rlDest, rlSrc1, rlSrc2);
     }    
-/*
     if ((opCode >= OP_ADD_INT) && (opCode <= OP_USHR_INT)) {
         return genArithOpInt(cUnit,mir, rlDest, rlSrc1, rlSrc2);
     }                                                                               
+/*
     if ((opCode >= OP_ADD_FLOAT_2ADDR) && (opCode <= OP_REM_FLOAT_2ADDR)) {
         return genArithOpFloat(cUnit,mir, rlDest, rlSrc1, rlSrc2);
     }
@@ -749,7 +749,6 @@ static bool handleFmt21s(CompilationUnit *cUnit, MIR *mir)
     RegLocation rlResult;
     int BBBB = mir->dalvikInsn.vB;
 	
-		LOG("the function is %s, !!!!!!!!!!!!!!haha\n", __func__);
     if (dalvikOpCode == OP_CONST_WIDE_16) {
         rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
         rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
@@ -1140,6 +1139,122 @@ static bool handleFmt22c(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+static bool handleFmt22x_Fmt32x(CompilationUnit *cUnit, MIR *mir)
+{
+    OpCode opCode = mir->dalvikInsn.opCode;
+
+    switch (opCode) {
+        case OP_MOVE_16:
+        case OP_MOVE_OBJECT_16:
+        case OP_MOVE_FROM16:
+        case OP_MOVE_OBJECT_FROM16: {
+            storeValue(cUnit, dvmCompilerGetDest(cUnit, mir, 0),
+                       dvmCompilerGetSrc(cUnit, mir, 0));
+            break;
+        }
+        case OP_MOVE_WIDE_16:
+        case OP_MOVE_WIDE_FROM16: {
+            storeValueWide(cUnit, dvmCompilerGetDestWide(cUnit, mir, 0, 1),
+                           dvmCompilerGetSrcWide(cUnit, mir, 0, 1));
+            break;
+        }
+        default:
+            return true;
+    }
+    return false;
+}
+
+static bool handleFmt23x(CompilationUnit *cUnit, MIR *mir)
+{
+    OpCode opCode = mir->dalvikInsn.opCode;
+    RegLocation rlSrc1;
+    RegLocation rlSrc2;
+    RegLocation rlDest;
+
+    if ( (opCode >= OP_ADD_INT) && (opCode <= OP_REM_DOUBLE)) {
+        return genArithOp( cUnit, mir );
+    }
+
+//    /* APUTs have 3 sources and no targets */
+//    if (mir->ssaRep->numDefs == 0) {
+//        if (mir->ssaRep->numUses == 3) {
+//            rlDest = dvmCompilerGetSrc(cUnit, mir, 0);
+//            rlSrc1 = dvmCompilerGetSrc(cUnit, mir, 1);
+//            rlSrc2 = dvmCompilerGetSrc(cUnit, mir, 2);
+//        } else {
+//            assert(mir->ssaRep->numUses == 4);
+//            rlDest = dvmCompilerGetSrcWide(cUnit, mir, 0, 1);
+//            rlSrc1 = dvmCompilerGetSrc(cUnit, mir, 2);
+//            rlSrc2 = dvmCompilerGetSrc(cUnit, mir, 3);
+//        }
+//    } else {
+//        /* Two sources and 1 dest.  Deduce the operand sizes */
+//        if (mir->ssaRep->numUses == 4) {
+//            rlSrc1 = dvmCompilerGetSrcWide(cUnit, mir, 0, 1);
+//            rlSrc2 = dvmCompilerGetSrcWide(cUnit, mir, 2, 3);
+//        } else {
+//            assert(mir->ssaRep->numUses == 2);
+//            rlSrc1 = dvmCompilerGetSrc(cUnit, mir, 0);
+//            rlSrc2 = dvmCompilerGetSrc(cUnit, mir, 1);
+//        }
+//        if (mir->ssaRep->numDefs == 2) {
+//            rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+//        } else {
+//            assert(mir->ssaRep->numDefs == 1);
+//            rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+//        }
+//    switch (opCode) {
+//        case OP_CMPL_FLOAT:
+//        case OP_CMPG_FLOAT:
+//        case OP_CMPL_DOUBLE:
+//        case OP_CMPG_DOUBLE:
+//            return genCmpFP(cUnit, mir, rlDest, rlSrc1, rlSrc2);
+//        case OP_CMP_LONG:
+//            genCmpLong(cUnit, mir, rlDest, rlSrc1, rlSrc2);
+//            break;
+//        case OP_AGET_WIDE:
+//            genArrayGet(cUnit, mir, kLong, rlSrc1, rlSrc2, rlDest, 3);
+//            break;
+//        case OP_AGET:
+//        case OP_AGET_OBJECT:
+//            genArrayGet(cUnit, mir, kWord, rlSrc1, rlSrc2, rlDest, 2);
+//            break;
+//        case OP_AGET_BOOLEAN:
+//            genArrayGet(cUnit, mir, kUnsignedByte, rlSrc1, rlSrc2, rlDest, 0);
+//            break;
+//        case OP_AGET_BYTE:
+//            genArrayGet(cUnit, mir, kSignedByte, rlSrc1, rlSrc2, rlDest, 0);
+//            break;
+//        case OP_AGET_CHAR:
+//            genArrayGet(cUnit, mir, kUnsignedHalf, rlSrc1, rlSrc2, rlDest, 1);
+//            break;
+//        case OP_AGET_SHORT:
+//            genArrayGet(cUnit, mir, kSignedHalf, rlSrc1, rlSrc2, rlDest, 1);
+//            break;
+//        case OP_APUT_WIDE:
+//            genArrayPut(cUnit, mir, kLong, rlSrc1, rlSrc2, rlDest, 3);
+//            break;
+//        case OP_APUT:
+//            genArrayPut(cUnit, mir, kWord, rlSrc1, rlSrc2, rlDest, 2);
+//            break;
+//        case OP_APUT_OBJECT:
+//            genArrayObjectPut(cUnit, mir, rlSrc1, rlSrc2, rlDest, 2);
+//            break;
+//        case OP_APUT_SHORT:
+//        case OP_APUT_CHAR:
+//            genArrayPut(cUnit, mir, kUnsignedHalf, rlSrc1, rlSrc2, rlDest, 1);
+//            break;
+//        case OP_APUT_BYTE:
+//        case OP_APUT_BOOLEAN:
+//            genArrayPut(cUnit, mir, kUnsignedByte, rlSrc1, rlSrc2, rlDest, 0);
+//            break;
+//        default:
+//            return true;
+//    }
+    return false;
+}
+
+
 void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 {
 	BasicBlock *curBB;
@@ -1190,9 +1305,22 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
 							notHandled = handleFmt22b_Fmt22s(cUnit, mir);
 							break;
+<<<<<<< HEAD
                     				case kFmt22c:
                         				notHandled = handleFmt22c(cUnit, mir);
                         				break;
+=======
+                    	case kFmt22c:
+                        	//	notHandled = handleFmt22c(cUnit, mir);
+                        	break;
+						case kFmt22x:
+                    	case kFmt32x:
+                        	notHandled = handleFmt22x_Fmt32x(cUnit, mir);              
+							break;
+                    	case kFmt23x:
+                        	notHandled = handleFmt23x(cUnit, mir);                     
+							break;
+>>>>>>> e12d7639130b4f5b40598f67e57c0a4a5830cc28
 						default:
 							notHandled = true;
 							break;			
