@@ -1,5 +1,6 @@
 extern u8 bb_start;
 extern int flag4debug;
+extern int cnt;
 extern unsigned char *instrFormatTable;
 extern inline unsigned char dexGetInstrFormat(const unsigned char* fmts, OpCode opCode);
 extern char* dexGetOpcodeName(OpCode op);
@@ -1274,10 +1275,17 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 		//dvmCompilerResetNullCheck(cUnit); 
 		cUnit->debugBB = curBB; 
 
+		int i=0;
 		for(mir = curBB->firstMIRInsn; mir; mir = mir->next) {
+			
 			dvmCompilerResetRegPool(cUnit);	
 			dvmCompilerResetDefTracking(cUnit);
-		
+			
+			i++;
+			if( !flag4debug && i>cnt){
+				break;
+			}
+			
 			OpCode dalvikOpCode = mir->dalvikInsn.opCode;
 			InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
 //			if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1 || mir->dalvikInsn.opCode == 0xd8){

@@ -30,6 +30,7 @@ CompilationUnitList cUnitList;
 /********global debug var************/
 u8 cUnit_DexCode=0;
 u8 bb_start=0;
+int cnt=0;
 int flag4debug=0;
 
 int main(int argc , char * argv[]){
@@ -124,6 +125,7 @@ int main(int argc , char * argv[]){
 	cUnit_DexCode=0x24ec;
 	bb_start=0x24fc;
 	flag4debug=0;
+	cnt=100;
 	
 
 	/*********prepare SSAConversion***********/
