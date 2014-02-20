@@ -27,10 +27,10 @@ unsigned char * instrFormatTable = NULL;
 CodeList codeList;
 CompilationUnitList cUnitList;
 
-/********debug BB************/
-BasicBlock debugBB;
-CompilationUnit *pDebugCUnit;
-u8  debugCodeOffset = 0; 
+/********global debug var************/
+u8 cUnit_DexCode=0;
+u8 bb_start=0;
+int flag4debug=0;
 
 int main(int argc , char * argv[]){
 	int fd=-1;
@@ -120,22 +120,11 @@ int main(int argc , char * argv[]){
 		}	
 	}
 
-	/************process debugBB**************/
-
-	debugBB.startOffset = 0x183e; 
-	debugBB.firstMIRInsn = NULL;
-	debugBB.lastMIRInsn = NULL;
-	debugBB.firstLIRInsn = NULL;
-	debugBB.lastMIRInsn = NULL;
-	debugBB.codeBuffer = NULL;
-	debugBB.next = NULL;
-
-	debugCodeOffset = 0x1828;
-
-	//last argument is count of insns .
-	debugInsertInsns2BB(&debugBB,(u2 *)((u8)(pDexFile->baseAddr) + (debugBB.startOffset)), 1,pDexFile);
-
-//	LOG("Bytecode opcode in DebugBB is %d\nthe reg is v%d and v%d\n", debugBB.firstMIRInsn->dalvikInsn.opCode, debugBB.firstMIRInsn->dalvikInsn.vA, debugBB.firstMIRInsn->dalvikInsn.vB);
+	/************global debug var initialize**************/
+	cUnit_DexCode=0x24ec;
+	bb_start=0x24fc;
+	flag4debug=0;
+	
 
 	/*********prepare SSAConversion***********/
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
@@ -144,31 +133,20 @@ int main(int argc , char * argv[]){
 		dvmCompilerInitializeRegAlloc(cUnit);
 		dvmCompilerRegAlloc(cUnit);
 
-		/***********debug for pDebugCUnit*************/
-		if( debugCodeOffset ==(u4)( (u1*)(cUnit->pCodeItem->item)-(u1*)(pDexFile->baseAddr))){
-			dvmInitializeSSAConversion(cUnit);
-			pDebugCUnit = cUnit;
-			dvmCompilerDoSSAConversion(cUnit,&debugBB);
-			LOG("The register size is %d\n", cUnit->pCodeItem->item->registersSize);
-			LOG("I'm in debugBB\n");
-			LOG("The code item's first bytecode is %x\n", *(u2*)(pDexFile->baseAddr + debugCodeOffset + 16));
-			dvmCompilerInitializeRegAlloc(cUnit);
-			dvmCompilerRegAlloc(cUnit);
-		}
-		else{
-			dvmInitializeSSAConversion(cUnit);
-			dvmCompilerNonLoopAnalysis(cUnit);
-			dvmCompilerInitializeRegAlloc(cUnit);
-			dvmCompilerRegAlloc(cUnit);
-		}
 	}
 
 
-		LOG("!!!!!!!!!!!!!!haha\n");
-	pDebugCUnit->debugBB = &debugBB;	
-
-	dvmCompilerMIR2LIR(pDebugCUnit);
-	debugNewLIR2Assemble(pDebugCUnit);
+	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
+		if( flag4debug || (cUnit_DexCode == (u8)(cUnit->pCodeItem->item) - (u8)(pDexFile->baseAddr) )){
+			dvmCompilerMIR2LIR(cUnit);
+			for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next){
+			   if( flag4debug || bb_start == (u8)(curBB->startOffset) ){	
+				cUnit->debugBB = curBB;
+				debugNewLIR2Assemble(cUnit);
+			   }
+			}
+		}
+	}
 	
 	for(pCodeItem = codeList.header; pCodeItem != NULL; pCodeItem = pCodeItem->next){
 		//free more 子项 也要释放的

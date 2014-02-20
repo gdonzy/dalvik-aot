@@ -1,3 +1,5 @@
+extern u8 bb_start;
+extern int flag4debug;
 extern unsigned char *instrFormatTable;
 extern inline unsigned char dexGetInstrFormat(const unsigned char* fmts, OpCode opCode);
 extern char* dexGetOpcodeName(OpCode op);
@@ -1264,74 +1266,70 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 	dvmCompilerResetRegPool(cUnit); 
 	dvmCompilerClobberAllRegs(cUnit); 
 	
-	//for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
-//debug
-		curBB = cUnit->debugBB;
+	for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next) {
+	
+	  if(flag4debug || bb_start == (u8)(curBB->startOffset) ){
 		
 		//eric: 暂时没有用处
-		//dvmCompilerResetNullCheck(cUnit);  
+		//dvmCompilerResetNullCheck(cUnit); 
+		cUnit->debugBB = curBB; 
 
-	//	if(curBB->startOffset == 0x24fc) {	
-		/*LIR insn is designed to insert debugBB in newLIRxxx functions, so we need to initialize debugBB*/
-	//		cUnit->debugBB = curBB;
-			for(mir = curBB->firstMIRInsn; mir; mir = mir->next) {
-				dvmCompilerResetRegPool(cUnit);	
-				dvmCompilerResetDefTracking(cUnit);
-			
-				OpCode dalvikOpCode = mir->dalvikInsn.opCode;
-				InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
-	//			if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1 || mir->dalvikInsn.opCode == 0xd8){
-					switch(dalvikFormat) {
-						case kFmt11n:
-						case kFmt31i:
-							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);	
-							notHandled = handleFmt11n_Fmt31i(cUnit, mir);
-							break;
-						case kFmt12x:
-							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
-							notHandled = handleFmt12x(cUnit, mir);	
-							break;
-	                    case kFmt21c:
-    	                case kFmt31c:
-        	                notHandled = handleFmt21c_Fmt31c(cUnit, mir);                
- 			        	    break;
-						case kFmt21h:
-	                        notHandled = handleFmt21h(cUnit, mir);                 
-	                        break;
-                    	case kFmt21s:
-                        	notHandled = handleFmt21s(cUnit, mir);
-                        	break;             
-						case kFmt22b:
-							LOG("The function is %s: the MIR opcode is %d\n", __func__, mir->dalvikInsn.opCode);
-							notHandled = handleFmt22b_Fmt22s(cUnit, mir);
-							break;
-                    	case kFmt22c:
-                        	notHandled = handleFmt22c(cUnit, mir);
-                        	break;
-						case kFmt22x:
-                    	case kFmt32x:
-                        	notHandled = handleFmt22x_Fmt32x(cUnit, mir);              
-							break;
-                    	case kFmt23x:
-                        	notHandled = handleFmt23x(cUnit, mir);                     
-							break;
-						default:
-							notHandled = true;
-							break;			
-					}
-			
-					if(notHandled) {
-					printf("%#06x: Opcode 0x%x (%s) / Fmt %d not handled\n",
-						mir->offset,
-						dalvikOpCode, dexGetOpcodeName(dalvikOpCode),
-						dalvikFormat);
-					//exit(1);
-					break;
-					}
-	//			} else continue;
-			}
-	//	}
-	//}
+		for(mir = curBB->firstMIRInsn; mir; mir = mir->next) {
+			dvmCompilerResetRegPool(cUnit);	
+			dvmCompilerResetDefTracking(cUnit);
+		
+			OpCode dalvikOpCode = mir->dalvikInsn.opCode;
+			InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
+//			if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1 || mir->dalvikInsn.opCode == 0xd8){
+				switch(dalvikFormat) {
+					case kFmt11n:
+					case kFmt31i:
+						notHandled = handleFmt11n_Fmt31i(cUnit, mir);
+						break;
+					case kFmt12x:
+						notHandled = handleFmt12x(cUnit, mir);	
+						break;
+			                case kFmt21c:
+		    	                case kFmt31c:
+		        	                notHandled = handleFmt21c_Fmt31c(cUnit, mir);
+				        	break;
+					case kFmt21h:
+			                        notHandled = handleFmt21h(cUnit, mir);                 
+			                        break;
+		                    	case kFmt21s:
+		                        	notHandled = handleFmt21s(cUnit, mir);
+		                        	break;             
+					case kFmt22b:
+						notHandled = handleFmt22b_Fmt22s(cUnit, mir);
+						break;
+		                    	case kFmt22c:
+		                        	notHandled = handleFmt22c(cUnit, mir);
+		                        	break;
+					case kFmt22x:
+		                    	case kFmt32x:
+		                        	notHandled = handleFmt22x_Fmt32x(cUnit, mir);              
+						break;
+		                    	case kFmt23x:
+		                        	notHandled = handleFmt23x(cUnit, mir);                     
+						break;
+					default:
+						notHandled = true;
+						break;			
+				}
+		
+				if(notHandled) {
+				printf("%#06x: Opcode 0x%x (%s) / Fmt %d not handled\n",
+					mir->offset,
+					dalvikOpCode, dexGetOpcodeName(dalvikOpCode),
+					dalvikFormat);
+				//exit(1);
+				break;
+				}
+//			} else continue;
+		}
+	   }//if(0||...
+//	} 	
+	}
 }
 
 UnicoreLIR *dvmCompilerRegCopy(CompilationUnit *cUnit, int rDest, int rSrc)
