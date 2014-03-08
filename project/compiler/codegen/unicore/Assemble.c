@@ -382,6 +382,10 @@ static void assembleInstructions(BasicBlock * bb)
     UnicoreLIR *lir;
 
     for (lir = (UnicoreLIR *) bb->firstLIRInsn; lir; lir =(UnicoreLIR *) (lir->generic.next)) {
+
+	if(lir->isNop == true){
+		continue;
+	}
         
 	UnicoreEncodingMap *encoder = &EncodingMap[lir->opCode];
         u4 bits = encoder->skeleton;
