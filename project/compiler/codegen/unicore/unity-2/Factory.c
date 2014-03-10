@@ -1,5 +1,6 @@
 
-static int coreTemps[] = {r0, r1, r2, r3, r4, r4PC, r7};
+//static int coreTemps[] = {r0, r1, r2, r3, r4, r4PC, r7};
+static int coreTemps[] = {r0, r1, r2, r3, r4, r7, r22, r23};
 
 static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
                                      int value)

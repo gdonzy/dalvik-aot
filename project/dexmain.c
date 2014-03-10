@@ -122,10 +122,10 @@ int main(int argc , char * argv[]){
 	}
 
 	/************global debug var initialize**************/
-	//cUnit_DexCode=0x1e3c;
-	//bb_start=0x1e4c;
-	cUnit_DexCode=0x24ec;
-	bb_start=0x24fc;
+	cUnit_DexCode=0x1e3c;
+	bb_start=0x1e4c;
+	//cUnit_DexCode=0x24ec;
+	//bb_start=0x24fc;
 	flag4debug=0;
 	cnt=100;
 	
