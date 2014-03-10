@@ -379,6 +379,7 @@ static void assembleInstructions(BasicBlock * bb)
 {
 //    short *bufferAddr = (short *) cUnit->codeBuffer;
     u4 *bufferAddr = (u4 *) bb->codeBuffer;
+    bb->used_codeBuffer = 0;
     UnicoreLIR *lir;
 
     for (lir = (UnicoreLIR *) bb->firstLIRInsn; lir; lir =(UnicoreLIR *) (lir->generic.next)) {
@@ -486,6 +487,7 @@ static void assembleInstructions(BasicBlock * bb)
        //     *bufferAddr++ = (bits >> 16) & 0xffff;
        // }
         *bufferAddr++ = bits;
+	bb->used_codeBuffer += 4;
     }
 //    return kSuccess;
 }

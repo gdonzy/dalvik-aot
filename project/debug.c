@@ -33,7 +33,7 @@ void outputMIRsOfBB(BasicBlock *bb){
 void  debugInsertInsns2BB(BasicBlock *curBB , u2 * insns , int insnsCnt,DexFile *pDexFile);
 
 void outputCodeBuffer(BasicBlock *bb){
-	int codeEnd = (bb->sizeOfBuffer - 12)/4;
+	int codeEnd = (bb->used_codeBuffer)/4;
 	// donzy:12 is for the code return mterp
 	LOG("buffer size is %d\n", bb->sizeOfBuffer);
 	int i = 0;
@@ -58,7 +58,7 @@ void outputCodeBuffer(BasicBlock *bb){
 	buffer[i++] = ((u4)0x5f8d0160|maskWidth);
 	buffer[i++] = (u4)(0x20a700ff);
 	buffer[i] = (u4)(0x08afcc1c);
-	
+	bb->used_codeBuffer += 12;
 		
 	snprintf(filename,30,"BB-%lx.bin",bb->startOffset);
 	printf("[code buffer]:%s",filename);	
@@ -66,7 +66,7 @@ void outputCodeBuffer(BasicBlock *bb){
 		printf("error:can't create file!\n");
 	}
 	
-	fwrite(buffer,bb->sizeOfBuffer,1,fp);
+	fwrite(buffer,bb->used_codeBuffer,1,fp);
 	fclose(fp);
 	return ;
 }
