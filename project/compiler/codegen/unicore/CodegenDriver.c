@@ -1297,28 +1297,28 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 					case kFmt12x:
 						notHandled = handleFmt12x(cUnit, mir);	
 						break;
-			                case kFmt21c:
-		    	                case kFmt31c:
-		        	                notHandled = handleFmt21c_Fmt31c(cUnit, mir);
-				        	break;
+			        case kFmt21c:
+		            case kFmt31c:
+      	                notHandled = handleFmt21c_Fmt31c(cUnit, mir);
+			        	break;
 					case kFmt21h:
-			                        notHandled = handleFmt21h(cUnit, mir);                 
-			                        break;
-		                    	case kFmt21s:
-		                        	notHandled = handleFmt21s(cUnit, mir);
-		                        	break;             
+		                notHandled = handleFmt21h(cUnit, mir);                 
+	                    break;
+		            case kFmt21s:
+		            	notHandled = handleFmt21s(cUnit, mir);
+		               	break;             
 					case kFmt22b:
 						notHandled = handleFmt22b_Fmt22s(cUnit, mir);
 						break;
-		                    	case kFmt22c:
-		                        	notHandled = handleFmt22c(cUnit, mir);
-		                        	break;
+		            case kFmt22c:
+		               	notHandled = handleFmt22c(cUnit, mir);
+		               	break;
 					case kFmt22x:
-		                    	case kFmt32x:
-		                        	notHandled = handleFmt22x_Fmt32x(cUnit, mir);              
+		            case kFmt32x:
+		       	    	notHandled = handleFmt22x_Fmt32x(cUnit, mir);              
 						break;
-		                    	case kFmt23x:
-		                        	notHandled = handleFmt23x(cUnit, mir);                     
+		           	case kFmt23x:
+		               	notHandled = handleFmt23x(cUnit, mir);                     
 						break;
 					default:
 						notHandled = true;

@@ -23,7 +23,7 @@ void dumpDecodedInstruction(const DecodedInstruction *pDecInsn, int insnIdx);
 void outputMIRsOfBB(BasicBlock *bb){
 	MIR * mir;
 
-	printf("[mirs of bb] =====startoffset is %lx  ======\n",bb->startOffset);
+//	printf("[mirs of bb] =====startoffset is %lx  ======\n",bb->startOffset);
 	for(mir = bb->firstMIRInsn ; mir != NULL ; mir = mir->next){
 		printf("[mirs of bb]+++:%lx ",mir->offsetOfDex);
 		dumpDecodedInstruction(&mir->dalvikInsn,mir->offset);

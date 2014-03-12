@@ -117,13 +117,16 @@ int main(int argc , char * argv[]){
 	//outputMIRsOfBB
 	for(cUnit = cUnitList.header ; cUnit != NULL ; cUnit = cUnit->next){
 		for(curBB = cUnit->firstBB ; curBB != NULL ; curBB = curBB->next){
+			LOG("[mirs of bb] =====codeoffset is 0x%x  ======\n[mirs of bb] =====startoffset is %lx  ======\n", cUnit->pCodeItem->codeBaseAddr , curBB->startOffset);
 			outputMIRsOfBB(curBB);
 		}	
 	}
 
 	/************global debug var initialize**************/
-	cUnit_DexCode=0x1e3c;
-	bb_start=0x1e4c;
+	cUnit_DexCode = 0xf94;
+	bb_start = 0xfaa;
+	//cUnit_DexCode=0x1e3c;
+	//bb_start=0x1e4c;
 	//cUnit_DexCode=0x24ec;
 	//bb_start=0x24fc;
 	flag4debug=0;

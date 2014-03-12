@@ -1,0 +1,1068 @@
+9149:[mirs of bb] =====codeoffset is 0xf78  ======
+9150:[mirs of bb] =====startoffset is f88  ======
+9151:[mirs of bb]+++:f88 | const/16 v0, #int 1000 // #3e8
+9152:[mirs of bb]+++:f8c | sput v0,field@0004
+9153:[mirs of bb] =====codeoffset is 0xf94  ======
+9154:[mirs of bb] =====startoffset is faa  ======
+9155:[mirs of bb]+++:faa | const/16 v0, #int 1000 // #3e8
+9156:[mirs of bb]+++:fae | iput v0, v1,field@0002
+9157:[mirs of bb]+++:fb2 | iput-object v2, v1,field@0003
+9158:[mirs of bb] =====codeoffset is 0xf94  ======
+9159:[mirs of bb] =====startoffset is fbc  ======
+9160:[mirs of bb]+++:fbc | move-result v0
+9161:[mirs of bb]+++:fbe | iput v0, v1,field@0002
+9162:[mirs of bb] =====codeoffset is 0xfc4  ======
+9163:[mirs of bb] =====startoffset is fee  ======
+9164:[mirs of bb]+++:fee | mul-int/lit8 v2, v1, #int 100 // #64
+9165:[mirs of bb]+++:ff2 | mul-int/lit8 v3, v0, #int 3 // #03
+9166:[mirs of bb]+++:ff6 | div-int/2addr v2, v3
+9167:[mirs of bb]+++:ff8 | iput v2, v4,field@0002
+9168:[mirs of bb] =====codeoffset is 0xfc4  ======
+9169:[mirs of bb] =====startoffset is ffe  ======
+9170:[mirs of bb]+++:ffe | const/4 v2, #int 0 // #0
+9171:[mirs of bb]+++:1000 | iput v2, v4,field@0002
+9172:[mirs of bb] =====codeoffset is 0x1008  ======
+9173:[mirs of bb] =====startoffset is 1018  ======
+9174:[mirs of bb]+++:1018 | const/4 v3, #int 0 // #0
+9175:[mirs of bb]+++:101a | const/4 v0, #int 0 // #0
+9176:[mirs of bb]+++:101c | new-instance v1,class@001b
+9177:[mirs of bb] =====codeoffset is 0x1008  ======
+9178:[mirs of bb] =====startoffset is 1046  ======
+9179:[mirs of bb]+++:1046 | move-result-wide v2
+9180:[mirs of bb]+++:1048 | sget v4,field@0004
+9181:[mirs of bb]+++:104c | int-to-long v4, v4
+9182:[mirs of bb]+++:104e | cmp-long v2, v2, v4
+9183:[mirs of bb] =====codeoffset is 0x1008  ======
+9184:[mirs of bb] =====startoffset is 106a  ======
+9185:[mirs of bb]+++:106a | add-int/lit8 v0, v0, #int 1 // #01
+9186:[mirs of bb]+++:106e | iget-object v2, v6,field@0003
+9187:[mirs of bb] =====codeoffset is 0x1008  ======
+9188:[mirs of bb] =====startoffset is 1078  ======
+9189:[mirs of bb]+++:1078 | move-result v2
+9190:[mirs of bb]+++:107a | iput v2, v6,field@0000
+9191:[mirs of bb] =====codeoffset is 0x10b8  ======
+9192:[mirs of bb] =====startoffset is 10c8  ======
+9193:[mirs of bb]+++:10c8 | const/4 v4, #int 0 // #0
+9194:[mirs of bb]+++:10ca | const/4 v0, #int 0 // #0
+9195:[mirs of bb]+++:10cc | iget-object v3, v5,field@0003
+9196:[mirs of bb] =====codeoffset is 0x10b8  ======
+9197:[mirs of bb] =====startoffset is 10f0  ======
+9198:[mirs of bb]+++:10f0 | mul-int/lit8 v1, v6, #int 3 // #03
+9199:[mirs of bb]+++:10f4 | const/4 v0, #int 0 // #0
+9200:[mirs of bb] =====codeoffset is 0x10b8  ======
+9201:[mirs of bb] =====startoffset is 1116  ======
+9202:[mirs of bb]+++:1116 | add-int/lit8 v1, v1, #int -1 // #ff
+9203:[mirs of bb]+++:111a | add-int/lit8 v0, v0, #int 1 // #01
+9204:[mirs of bb]+++:111e | iget-object v3, v5,field@0003
+9205:[mirs of bb] =====codeoffset is 0x10b8  ======
+9206:[mirs of bb] =====startoffset is 1128  ======
+9207:[mirs of bb]+++:1128 | move-result v3
+9208:[mirs of bb]+++:112a | iput v3, v5,field@0000
+9209:[mirs of bb] =====codeoffset is 0x1150  ======
+9210:[mirs of bb] =====startoffset is 1180  ======
+9211:[mirs of bb]+++:1180 | iget v2, v4,field@0002
+9212:[mirs of bb]+++:1184 | mul-int/lit8 v3, v0, #int 3 // #03
+9213:[mirs of bb]+++:1188 | mul-int/2addr v2, v3
+9214:[mirs of bb]+++:118a | div-int v1, v2, v1
+9215:[mirs of bb] =====codeoffset is 0x1150  ======
+9216:[mirs of bb] =====startoffset is 118e  ======
+9217:[mirs of bb]+++:118e | iput v1, v4,field@0001
+9218:[mirs of bb]+++:1192 | move v2, v1
+9219:[mirs of bb] =====codeoffset is 0x11c4  ======
+9220:[mirs of bb] =====startoffset is 121a  ======
+9221:[mirs of bb]+++:121a | new-instance v3,class@0029
+9222:[mirs of bb]+++:121e | const-string v4, string@0002
+9223:[mirs of bb] =====codeoffset is 0x11c4  ======
+9224:[mirs of bb] =====startoffset is 1246  ======
+9225:[mirs of bb]+++:1246 | new-instance v3,class@0029
+9226:[mirs of bb]+++:124a | const-string v4, string@0001
+9227:[mirs of bb] =====codeoffset is 0x11c4  ======
+9228:[mirs of bb] =====startoffset is 1262  ======
+9229:[mirs of bb]+++:1262 | move-result-object v3
+9230:[mirs of bb]+++:1264 | const-string v4, string@0003
+9231:[mirs of bb] =====codeoffset is 0x11c4  ======
+9232:[mirs of bb] =====startoffset is 127e  ======
+9233:[mirs of bb]+++:127e | add-int/lit8 v1, v1, #int 1 // #01
+9234:[mirs of bb]+++:1282 | const/4 v3, #int 5 // #5
+9235:[mirs of bb] =====codeoffset is 0x11c4  ======
+9236:[mirs of bb] =====startoffset is 1288  ======
+9237:[mirs of bb]+++:1288 | new-instance v3,class@0029
+9238:[mirs of bb]+++:128c | const-string v4, string@0000
+9239:[mirs of bb] =====codeoffset is 0x12bc  ======
+9240:[mirs of bb] =====startoffset is 12d6  ======
+9241:[mirs of bb]+++:12d6 | sput-object v0,field@0011
+9242:[mirs of bb]+++:12da | new-instance v0,class@002e
+9243:[mirs of bb] =====codeoffset is 0x1304  ======
+9244:[mirs of bb] =====startoffset is 1314  ======
+9245:[mirs of bb]+++:1314 | const/4 v8, #int 0 // #0
+9246:[mirs of bb]+++:1316 | const-wide/16 v0, #int 0 // #0
+9247:[mirs of bb]+++:131a | const-wide/16 v2, #int 0 // #0
+9248:[mirs of bb]+++:131e | sget-boolean v6,field@000b
+9249:[mirs of bb] =====codeoffset is 0x1304  ======
+9250:[mirs of bb] =====startoffset is 1342  ======
+9251:[mirs of bb]+++:1342 | move-result-object v5
+9252:[mirs of bb]+++:1344 | check-cast v5,class@0024
+9253:[mirs of bb] =====codeoffset is 0x1304  ======
+9254:[mirs of bb] =====startoffset is 1354  ======
+9255:[mirs of bb]+++:1354 | const-wide/high16 v6, #long 4607182418800017408 // #3ff0
+9256:[mirs of bb]+++:1358 | add-double/2addr v2, v6
+9257:[mirs of bb] =====codeoffset is 0x1304  ======
+9258:[mirs of bb] =====startoffset is 136a  ======
+9259:[mirs of bb]+++:136a | move-result-wide v6
+9260:[mirs of bb]+++:136c | add-double/2addr v0, v6
+9261:[mirs of bb]+++:136e | add-int/lit8 v4, v4, #int 1 // #01
+9262:[mirs of bb]+++:1372 | const/4 v6, #int 5 // #5
+9263:[mirs of bb] =====codeoffset is 0x1304  ======
+9264:[mirs of bb] =====startoffset is 1378  ======
+9265:[mirs of bb]+++:1378 | const-wide/high16 v6, #long 4602678819172646912 // #3fe0
+9266:[mirs of bb]+++:137c | cmpl-double v6, v2, v6
+9267:[mirs of bb] =====codeoffset is 0x1304  ======
+9268:[mirs of bb] =====startoffset is 1384  ======
+9269:[mirs of bb]+++:1384 | div-double/2addr v0, v2
+9270:[mirs of bb]+++:1386 | new-instance v6,class@0023
+9271:[mirs of bb] =====codeoffset is 0x13b0  ======
+9272:[mirs of bb] =====startoffset is 13c0  ======
+9273:[mirs of bb]+++:13c0 | const/4 v3, #int 0 // #0
+9274:[mirs of bb]+++:13c2 | sput-boolean v3,field@000e
+9275:[mirs of bb]+++:13c6 | sput-boolean v3,field@000b
+9276:[mirs of bb] =====codeoffset is 0x13b0  ======
+9277:[mirs of bb] =====startoffset is 13d2  ======
+9278:[mirs of bb]+++:13d2 | sget-object v0,field@0011
+9279:[mirs of bb]+++:13d6 | new-instance v1,class@000b
+9280:[mirs of bb]+++:13da | new-instance v2,class@001a
+9281:[mirs of bb] =====codeoffset is 0x13b0  ======
+9282:[mirs of bb] =====startoffset is 13f0  ======
+9283:[mirs of bb]+++:13f0 | sget-object v0,field@0010
+9284:[mirs of bb]+++:13f4 | new-instance v1,class@0024
+9285:[mirs of bb] =====codeoffset is 0x13b0  ======
+9286:[mirs of bb] =====startoffset is 1406  ======
+9287:[mirs of bb]+++:1406 | sget-object v0,field@0011
+9288:[mirs of bb]+++:140a | new-instance v1,class@000b
+9289:[mirs of bb]+++:140e | new-instance v2,class@0013
+9290:[mirs of bb] =====codeoffset is 0x13b0  ======
+9291:[mirs of bb] =====startoffset is 1424  ======
+9292:[mirs of bb]+++:1424 | sget-object v0,field@0010
+9293:[mirs of bb]+++:1428 | new-instance v1,class@0024
+9294:[mirs of bb] =====codeoffset is 0x13b0  ======
+9295:[mirs of bb] =====startoffset is 143a  ======
+9296:[mirs of bb]+++:143a | sget-object v0,field@0011
+9297:[mirs of bb]+++:143e | new-instance v1,class@000b
+9298:[mirs of bb]+++:1442 | new-instance v2,class@0012
+9299:[mirs of bb] =====codeoffset is 0x13b0  ======
+9300:[mirs of bb] =====startoffset is 1458  ======
+9301:[mirs of bb]+++:1458 | sget-object v0,field@0010
+9302:[mirs of bb]+++:145c | new-instance v1,class@0024
+9303:[mirs of bb] =====codeoffset is 0x13b0  ======
+9304:[mirs of bb] =====startoffset is 146e  ======
+9305:[mirs of bb]+++:146e | sget-object v0,field@0011
+9306:[mirs of bb]+++:1472 | new-instance v1,class@000b
+9307:[mirs of bb]+++:1476 | new-instance v2,class@001c
+9308:[mirs of bb] =====codeoffset is 0x13b0  ======
+9309:[mirs of bb] =====startoffset is 148c  ======
+9310:[mirs of bb]+++:148c | sget-object v0,field@0010
+9311:[mirs of bb]+++:1490 | new-instance v1,class@0024
+9312:[mirs of bb] =====codeoffset is 0x13b0  ======
+9313:[mirs of bb] =====startoffset is 14a2  ======
+9314:[mirs of bb]+++:14a2 | sget-object v0,field@0011
+9315:[mirs of bb]+++:14a6 | new-instance v1,class@000b
+9316:[mirs of bb]+++:14aa | new-instance v2,class@0011
+9317:[mirs of bb] =====codeoffset is 0x13b0  ======
+9318:[mirs of bb] =====startoffset is 14c0  ======
+9319:[mirs of bb]+++:14c0 | sget-object v0,field@0010
+9320:[mirs of bb]+++:14c4 | new-instance v1,class@0024
+9321:[mirs of bb] =====codeoffset is 0x13b0  ======
+9322:[mirs of bb] =====startoffset is 14d8  ======
+9323:[mirs of bb]+++:14d8 | sget-object v0,field@0011
+9324:[mirs of bb]+++:14dc | new-instance v1,class@000b
+9325:[mirs of bb]+++:14e0 | new-instance v2,class@0014
+9326:[mirs of bb] =====codeoffset is 0x13b0  ======
+9327:[mirs of bb] =====startoffset is 14f6  ======
+9328:[mirs of bb]+++:14f6 | sget-object v0,field@0010
+9329:[mirs of bb]+++:14fa | new-instance v1,class@0024
+9330:[mirs of bb] =====codeoffset is 0x1530  ======
+9331:[mirs of bb] =====startoffset is 1540  ======
+9332:[mirs of bb]+++:1540 | const/4 v0, #int 0 // #0
+9333:[mirs of bb]+++:1542 | sput-boolean v0,field@000e
+9334:[mirs of bb]+++:1546 | sget-object v0,field@0011
+9335:[mirs of bb] =====codeoffset is 0x1598  ======
+9336:[mirs of bb] =====startoffset is 15c6  ======
+9337:[mirs of bb]+++:15c6 | move-result-object v0
+9338:[mirs of bb]+++:15c8 | check-cast v0,class@000b
+9339:[mirs of bb]+++:15cc | iget v1, v0,field@0000
+9340:[mirs of bb] =====codeoffset is 0x15d4  ======
+9341:[mirs of bb] =====startoffset is 1604  ======
+9342:[mirs of bb]+++:1604 | move-result-object v0
+9343:[mirs of bb]+++:1606 | check-cast v0,class@000b
+9344:[mirs of bb] =====codeoffset is 0x1614  ======
+9345:[mirs of bb] =====startoffset is 1642  ======
+9346:[mirs of bb]+++:1642 | move-result-object v0
+9347:[mirs of bb]+++:1644 | check-cast v0,class@0024
+9348:[mirs of bb] =====codeoffset is 0x1654  ======
+9349:[mirs of bb] =====startoffset is 1682  ======
+9350:[mirs of bb]+++:1682 | move-result-object v0
+9351:[mirs of bb]+++:1684 | check-cast v0,class@000b
+9352:[mirs of bb] =====codeoffset is 0x1694  ======
+9353:[mirs of bb] =====startoffset is 16c2  ======
+9354:[mirs of bb]+++:16c2 | move-result-object v0
+9355:[mirs of bb]+++:16c4 | check-cast v0,class@000b
+9356:[mirs of bb] =====codeoffset is 0x16d4  ======
+9357:[mirs of bb] =====startoffset is 16e4  ======
+9358:[mirs of bb]+++:16e4 | const/4 v0, #int 1 // #1
+9359:[mirs of bb]+++:16e6 | sput-boolean v0,field@000d
+9360:[mirs of bb] =====codeoffset is 0x16ec  ======
+9361:[mirs of bb] =====startoffset is 16fc  ======
+9362:[mirs of bb]+++:16fc | const/4 v1, #int 1 // #1
+9363:[mirs of bb]+++:16fe | sget-object v0,field@0011
+9364:[mirs of bb] =====codeoffset is 0x1748  ======
+9365:[mirs of bb] =====startoffset is 1772  ======
+9366:[mirs of bb]+++:1772 | sget-object v2,field@000f
+9367:[mirs of bb]+++:1776 | sget-object v3,field@0011
+9368:[mirs of bb] =====codeoffset is 0x1748  ======
+9369:[mirs of bb] =====startoffset is 1790  ======
+9370:[mirs of bb]+++:1790 | const/4 v2, #int 1 // #1
+9371:[mirs of bb]+++:1792 | sput-boolean v2,field@000b
+9372:[mirs of bb] =====codeoffset is 0x1748  ======
+9373:[mirs of bb] =====startoffset is 17a6  ======
+9374:[mirs of bb]+++:17a6 | sget-object v2,field@000f
+9375:[mirs of bb]+++:17aa | sget-object v3,field@0011
+9376:[mirs of bb] =====codeoffset is 0x1748  ======
+9377:[mirs of bb] =====startoffset is 17d2  ======
+9378:[mirs of bb]+++:17d2 | move-result-object v0
+9379:[mirs of bb]+++:17d4 | check-cast v0,class@000b
+9380:[mirs of bb]+++:17d8 | sget-boolean v2,field@000d
+9381:[mirs of bb] =====codeoffset is 0x1748  ======
+9382:[mirs of bb] =====startoffset is 17e6  ======
+9383:[mirs of bb]+++:17e6 | sget-object v2,field@0010
+9384:[mirs of bb]+++:17ea | new-instance v3,class@0024
+9385:[mirs of bb] =====codeoffset is 0x1844  ======
+9386:[mirs of bb] =====startoffset is 1866  ======
+9387:[mirs of bb]+++:1866 | move-result-wide v0
+9388:[mirs of bb]+++:1868 | check-cast v5,class@000e
+9389:[mirs of bb] =====codeoffset is 0x1844  ======
+9390:[mirs of bb] =====startoffset is 1872  ======
+9391:[mirs of bb]+++:1872 | move-result-wide v2
+9392:[mirs of bb]+++:1874 | cmp-long v0, v0, v2
+9393:[mirs of bb] =====codeoffset is 0x189c  ======
+9394:[mirs of bb] =====startoffset is 18b2  ======
+9395:[mirs of bb]+++:18b2 | move-result-wide v0
+9396:[mirs of bb]+++:18b4 | long-to-int v2, v0
+9397:[mirs of bb]+++:18b6 | const/16 v3, #int 32 // #20
+9398:[mirs of bb]+++:18ba | shr-long v3, v0, v3
+9399:[mirs of bb]+++:18be | long-to-int v3, v3
+9400:[mirs of bb]+++:18c0 | xor-int/2addr v2, v3
+9401:[mirs of bb] =====codeoffset is 0x18f4  ======
+9402:[mirs of bb] =====startoffset is 190e  ======
+9403:[mirs of bb]+++:190e | sget-object v3,field@0030
+9404:[mirs of bb]+++:1912 | const-string v4, string@000f
+9405:[mirs of bb] =====codeoffset is 0x18f4  ======
+9406:[mirs of bb] =====startoffset is 191e  ======
+9407:[mirs of bb]+++:191e | const v3, #float 0.000000 // #000f4240
+9408:[mirs of bb] =====codeoffset is 0x18f4  ======
+9409:[mirs of bb] =====startoffset is 1928  ======
+9410:[mirs of bb]+++:1928 | sget-object v3,field@0030
+9411:[mirs of bb]+++:192c | new-instance v4,class@0029
+9412:[mirs of bb]+++:1930 | const-string v5, string@0007
+9413:[mirs of bb] =====codeoffset is 0x18f4  ======
+9414:[mirs of bb] =====startoffset is 195a  ======
+9415:[mirs of bb]+++:195a | const v3, #float 0.000000 // #00989680
+9416:[mirs of bb] =====codeoffset is 0x18f4  ======
+9417:[mirs of bb] =====startoffset is 1964  ======
+9418:[mirs of bb]+++:1964 | sget-object v3,field@0030
+9419:[mirs of bb]+++:1968 | new-instance v4,class@0029
+9420:[mirs of bb]+++:196c | const-string v5, string@0006
+9421:[mirs of bb] =====codeoffset is 0x19bc  ======
+9422:[mirs of bb] =====startoffset is 19cc  ======
+9423:[mirs of bb]+++:19cc | sget-object v7,field@0030
+9424:[mirs of bb]+++:19d0 | const-string v8, string@006b
+9425:[mirs of bb] =====codeoffset is 0x19bc  ======
+9426:[mirs of bb] =====startoffset is 19e0  ======
+9427:[mirs of bb]+++:19e0 | move-result-wide v5
+9428:[mirs of bb]+++:19e2 | sget-object v7,field@0030
+9429:[mirs of bb]+++:19e6 | new-instance v8,class@0029
+9430:[mirs of bb]+++:19ea | const-string v9, string@00e6
+9431:[mirs of bb] =====codeoffset is 0x19bc  ======
+9432:[mirs of bb] =====startoffset is 1a0c  ======
+9433:[mirs of bb]+++:1a0c | const v7, #float 0.000000 // #000f4240
+9434:[mirs of bb] =====codeoffset is 0x19bc  ======
+9435:[mirs of bb] =====startoffset is 1a1c  ======
+9436:[mirs of bb]+++:1a1c | move-result-wide v2
+9437:[mirs of bb]+++:1a1e | sget-object v7,field@0030
+9438:[mirs of bb]+++:1a22 | new-instance v8,class@0029
+9439:[mirs of bb]+++:1a26 | const-string v9, string@0095
+9440:[mirs of bb] =====codeoffset is 0x19bc  ======
+9441:[mirs of bb] =====startoffset is 1a46  ======
+9442:[mirs of bb]+++:1a46 | sub-long v0, v2, v5
+9443:[mirs of bb]+++:1a4a | sget-object v7,field@0030
+9444:[mirs of bb]+++:1a4e | new-instance v8,class@0029
+9445:[mirs of bb]+++:1a52 | const-string v9, string@0017
+9446:[mirs of bb] =====codeoffset is 0x19bc  ======
+9447:[mirs of bb] =====startoffset is 1a72  ======
+9448:[mirs of bb]+++:1a72 | const-wide/16 v7, #int 0 // #0
+9449:[mirs of bb]+++:1a76 | cmp-long v7, v0, v7
+9450:[mirs of bb] =====codeoffset is 0x19bc  ======
+9451:[mirs of bb] =====startoffset is 1a7e  ======
+9452:[mirs of bb]+++:1a7e | sget-object v7,field@0030
+9453:[mirs of bb]+++:1a82 | const-string v8, string@0016
+9454:[mirs of bb] =====codeoffset is 0x19bc  ======
+9455:[mirs of bb] =====startoffset is 1a94  ======
+9456:[mirs of bb]+++:1a94 | sget-object v7,field@0030
+9457:[mirs of bb]+++:1a98 | const-string v8, string@0015
+9458:[mirs of bb] =====codeoffset is 0x1aa4  ======
+9459:[mirs of bb] =====startoffset is 1aba  ======
+9460:[mirs of bb]+++:1aba | const/16 v0, #int 20 // #14
+9461:[mirs of bb]+++:1abe | iput v0, v1,field@0014
+9462:[mirs of bb]+++:1ac2 | const/16 v0, #int 185 // #b9
+9463:[mirs of bb]+++:1ac6 | iput v0, v1,field@0017
+9464:[mirs of bb] =====codeoffset is 0x1af8  ======
+9465:[mirs of bb] =====startoffset is 1b0a  ======
+9466:[mirs of bb]+++:1b0a | move-object/from16 v0, v18
+9467:[mirs of bb]+++:1b0e | iget v0, v0,field@0017
+9468:[mirs of bb]+++:1b12 | move v11, v0
+9469:[mirs of bb] =====codeoffset is 0x1af8  ======
+9470:[mirs of bb] =====startoffset is 1b1a  ======
+9471:[mirs of bb]+++:1b1a | int-to-float v11, v8
+9472:[mirs of bb]+++:1b1c | float-to-double v11, v11
+9473:[mirs of bb]+++:1b1e | const-wide v13, #double 3.141593 // #400921fb54442d18
+9474:[mirs of bb]+++:1b28 | mul-double/2addr v11, v13
+9475:[mirs of bb]+++:1b2a | const-wide v13, #double 180.000000 // #4066800000000000
+9476:[mirs of bb]+++:1b34 | div-double v1, v11, v13
+9477:[mirs of bb] =====codeoffset is 0x1af8  ======
+9478:[mirs of bb] =====startoffset is 1b46  ======
+9479:[mirs of bb]+++:1b46 | move-result-wide v5
+9480:[mirs of bb]+++:1b48 | move-object/from16 v0, v18
+9481:[mirs of bb]+++:1b4c | iget-object v0, v0,field@0018
+9482:[mirs of bb]+++:1b50 | move-object v11, v0
+9483:[mirs of bb]+++:1b52 | const/4 v12, #int 0 // #0
+9484:[mirs of bb]+++:1b54 | aget-object v11, v11, v12
+9485:[mirs of bb]+++:1b58 | const/4 v12, #int 0 // #0
+9486:[mirs of bb]+++:1b5a | aput-wide v5, v11, v12
+9487:[mirs of bb]+++:1b5e | move-object/from16 v0, v18
+9488:[mirs of bb]+++:1b62 | iget-object v0, v0,field@0018
+9489:[mirs of bb]+++:1b66 | move-object v11, v0
+9490:[mirs of bb]+++:1b68 | const/4 v12, #int 1 // #1
+9491:[mirs of bb]+++:1b6a | aget-object v11, v11, v12
+9492:[mirs of bb]+++:1b6e | const/4 v12, #int 0 // #0
+9493:[mirs of bb]+++:1b70 | aput-wide v3, v11, v12
+9494:[mirs of bb]+++:1b74 | move-object/from16 v0, v18
+9495:[mirs of bb]+++:1b78 | iget-object v0, v0,field@0018
+9496:[mirs of bb]+++:1b7c | move-object v11, v0
+9497:[mirs of bb]+++:1b7e | const/4 v12, #int 2 // #2
+9498:[mirs of bb]+++:1b80 | aget-object v11, v11, v12
+9499:[mirs of bb]+++:1b84 | const/4 v12, #int 0 // #0
+9500:[mirs of bb]+++:1b86 | const-wide/16 v13, #int 0 // #0
+9501:[mirs of bb]+++:1b8a | aput-wide v13, v11, v12
+9502:[mirs of bb]+++:1b8e | move-object/from16 v0, v18
+9503:[mirs of bb]+++:1b92 | iget-object v0, v0,field@0018
+9504:[mirs of bb]+++:1b96 | move-object v11, v0
+9505:[mirs of bb]+++:1b98 | const/4 v12, #int 0 // #0
+9506:[mirs of bb]+++:1b9a | aget-object v11, v11, v12
+9507:[mirs of bb]+++:1b9e | const/4 v12, #int 1 // #1
+9508:[mirs of bb]+++:1ba0 | neg-double v13, v3
+9509:[mirs of bb]+++:1ba2 | aput-wide v13, v11, v12
+9510:[mirs of bb]+++:1ba6 | move-object/from16 v0, v18
+9511:[mirs of bb]+++:1baa | iget-object v0, v0,field@0018
+9512:[mirs of bb]+++:1bae | move-object v11, v0
+9513:[mirs of bb]+++:1bb0 | const/4 v12, #int 1 // #1
+9514:[mirs of bb]+++:1bb2 | aget-object v11, v11, v12
+9515:[mirs of bb]+++:1bb6 | const/4 v12, #int 1 // #1
+9516:[mirs of bb]+++:1bb8 | aput-wide v5, v11, v12
+9517:[mirs of bb]+++:1bbc | move-object/from16 v0, v18
+9518:[mirs of bb]+++:1bc0 | iget-object v0, v0,field@0018
+9519:[mirs of bb]+++:1bc4 | move-object v11, v0
+9520:[mirs of bb]+++:1bc6 | const/4 v12, #int 2 // #2
+9521:[mirs of bb]+++:1bc8 | aget-object v11, v11, v12
+9522:[mirs of bb]+++:1bcc | const/4 v12, #int 1 // #1
+9523:[mirs of bb]+++:1bce | const-wide/16 v13, #int 0 // #0
+9524:[mirs of bb]+++:1bd2 | aput-wide v13, v11, v12
+9525:[mirs of bb]+++:1bd6 | move-object/from16 v0, v18
+9526:[mirs of bb]+++:1bda | iget-object v0, v0,field@0018
+9527:[mirs of bb]+++:1bde | move-object v11, v0
+9528:[mirs of bb]+++:1be0 | const/4 v12, #int 0 // #0
+9529:[mirs of bb]+++:1be2 | aget-object v11, v11, v12
+9530:[mirs of bb]+++:1be6 | const/4 v12, #int 2 // #2
+9531:[mirs of bb]+++:1be8 | const-wide/16 v13, #int 0 // #0
+9532:[mirs of bb]+++:1bec | aput-wide v13, v11, v12
+9533:[mirs of bb]+++:1bf0 | move-object/from16 v0, v18
+9534:[mirs of bb]+++:1bf4 | iget-object v0, v0,field@0018
+9535:[mirs of bb]+++:1bf8 | move-object v11, v0
+9536:[mirs of bb]+++:1bfa | const/4 v12, #int 1 // #1
+9537:[mirs of bb]+++:1bfc | aget-object v11, v11, v12
+9538:[mirs of bb]+++:1c00 | const/4 v12, #int 2 // #2
+9539:[mirs of bb]+++:1c02 | const-wide/16 v13, #int 0 // #0
+9540:[mirs of bb]+++:1c06 | aput-wide v13, v11, v12
+9541:[mirs of bb]+++:1c0a | move-object/from16 v0, v18
+9542:[mirs of bb]+++:1c0e | iget-object v0, v0,field@0018
+9543:[mirs of bb]+++:1c12 | move-object v11, v0
+9544:[mirs of bb]+++:1c14 | const/4 v12, #int 2 // #2
+9545:[mirs of bb]+++:1c16 | aget-object v11, v11, v12
+9546:[mirs of bb]+++:1c1a | const/4 v12, #int 2 // #2
+9547:[mirs of bb]+++:1c1c | const-wide/high16 v13, #long 4607182418800017408 // #3ff0
+9548:[mirs of bb]+++:1c20 | aput-wide v13, v11, v12
+9549:[mirs of bb]+++:1c24 | const/4 v7, #int 0 // #0
+9550:[mirs of bb] =====codeoffset is 0x1af8  ======
+9551:[mirs of bb] =====startoffset is 1c26  ======
+9552:[mirs of bb]+++:1c26 | move-object/from16 v0, v18
+9553:[mirs of bb]+++:1c2a | iget-object v0, v0,field@0016
+9554:[mirs of bb]+++:1c2e | move-object v11, v0
+9555:[mirs of bb]+++:1c30 | const/4 v12, #int 0 // #0
+9556:[mirs of bb]+++:1c32 | aget-object v11, v11, v12
+9557:[mirs of bb]+++:1c36 | const-wide/16 v12, #int 0 // #0
+9558:[mirs of bb]+++:1c3a | aput-wide v12, v11, v7
+9559:[mirs of bb]+++:1c3e | move-object/from16 v0, v18
+9560:[mirs of bb]+++:1c42 | iget-object v0, v0,field@0016
+9561:[mirs of bb]+++:1c46 | move-object v11, v0
+9562:[mirs of bb]+++:1c48 | const/4 v12, #int 1 // #1
+9563:[mirs of bb]+++:1c4a | aget-object v11, v11, v12
+9564:[mirs of bb]+++:1c4e | const-wide/16 v12, #int 0 // #0
+9565:[mirs of bb]+++:1c52 | aput-wide v12, v11, v7
+9566:[mirs of bb]+++:1c56 | move-object/from16 v0, v18
+9567:[mirs of bb]+++:1c5a | iget-object v0, v0,field@0016
+9568:[mirs of bb]+++:1c5e | move-object v11, v0
+9569:[mirs of bb]+++:1c60 | const/4 v12, #int 2 // #2
+9570:[mirs of bb]+++:1c62 | aget-object v11, v11, v12
+9571:[mirs of bb]+++:1c66 | const-wide/16 v12, #int 0 // #0
+9572:[mirs of bb]+++:1c6a | aput-wide v12, v11, v7
+9573:[mirs of bb]+++:1c6e | const/4 v10, #int 0 // #0
+9574:[mirs of bb] =====codeoffset is 0x1af8  ======
+9575:[mirs of bb] =====startoffset is 1c72  ======
+9576:[mirs of bb]+++:1c72 | move-object/from16 v0, v18
+9577:[mirs of bb]+++:1c76 | iget-object v0, v0,field@0016
+9578:[mirs of bb]+++:1c7a | move-object v11, v0
+9579:[mirs of bb]+++:1c7c | aget-object v11, v11, v10
+9580:[mirs of bb]+++:1c80 | move-object/from16 v0, v18
+9581:[mirs of bb]+++:1c84 | iget-object v0, v0,field@0016
+9582:[mirs of bb]+++:1c88 | move-object v12, v0
+9583:[mirs of bb]+++:1c8a | aget-object v12, v12, v10
+9584:[mirs of bb]+++:1c8e | aget-wide v12, v12, v7
+9585:[mirs of bb]+++:1c92 | move-object/from16 v0, v18
+9586:[mirs of bb]+++:1c96 | iget-object v0, v0,field@0018
+9587:[mirs of bb]+++:1c9a | move-object v14, v0
+9588:[mirs of bb]+++:1c9c | aget-object v14, v14, v9
+9589:[mirs of bb]+++:1ca0 | aget-wide v14, v14, v10
+9590:[mirs of bb]+++:1ca4 | move-object/from16 v0, v18
+9591:[mirs of bb]+++:1ca8 | iget-object v0, v0,field@0016
+9592:[mirs of bb]+++:1cac | move-object/from16 v16, v0
+9593:[mirs of bb]+++:1cb0 | aget-object v16, v16, v10
+9594:[mirs of bb]+++:1cb4 | aget-wide v16, v16, v7
+9595:[mirs of bb]+++:1cb8 | mul-double v14, v14, v16
+9596:[mirs of bb]+++:1cbc | add-double/2addr v12, v14
+9597:[mirs of bb]+++:1cbe | aput-wide v12, v11, v7
+9598:[mirs of bb]+++:1cc2 | add-int/lit8 v9, v9, #int 1 // #01
+9599:[mirs of bb]+++:1cc6 | const/4 v11, #int 3 // #3
+9600:[mirs of bb] =====codeoffset is 0x1af8  ======
+9601:[mirs of bb] =====startoffset is 1ccc  ======
+9602:[mirs of bb]+++:1ccc | add-int/lit8 v10, v10, #int 1 // #01
+9603:[mirs of bb]+++:1cd0 | const/4 v11, #int 3 // #3
+9604:[mirs of bb] =====codeoffset is 0x1af8  ======
+9605:[mirs of bb] =====startoffset is 1cd6  ======
+9606:[mirs of bb]+++:1cd6 | add-int/lit8 v7, v7, #int 1 // #01
+9607:[mirs of bb]+++:1cda | const/16 v11, #int 20 // #14
+9608:[mirs of bb] =====codeoffset is 0x1cec  ======
+9609:[mirs of bb] =====startoffset is 1cfc  ======
+9610:[mirs of bb]+++:1cfc | const/4 v7, #int 1 // #1
+9611:[mirs of bb]+++:1cfe | const/16 v6, #int 20 // #14
+9612:[mirs of bb]+++:1d02 | const/4 v3, #int 3 // #3
+9613:[mirs of bb] =====codeoffset is 0x1cec  ======
+9614:[mirs of bb] =====startoffset is 1d0c  ======
+9615:[mirs of bb]+++:1d0c | filled-new-array {v3, v3}, class@0031
+9616:[mirs of bb]+++:1d12 | move-result-object v1
+9617:[mirs of bb]+++:1d14 | sget-object v2,field@002f
+9618:[mirs of bb] =====codeoffset is 0x1cec  ======
+9619:[mirs of bb] =====startoffset is 1d1e  ======
+9620:[mirs of bb]+++:1d1e | move-result-object v1
+9621:[mirs of bb]+++:1d20 | check-cast v1,class@0033
+9622:[mirs of bb]+++:1d24 | iput-object v1, v8,field@0018
+9623:[mirs of bb]+++:1d28 | filled-new-array {v3, v6}, class@0031
+9624:[mirs of bb]+++:1d2e | move-result-object v1
+9625:[mirs of bb]+++:1d30 | sget-object v2,field@002f
+9626:[mirs of bb] =====codeoffset is 0x1cec  ======
+9627:[mirs of bb] =====startoffset is 1d3a  ======
+9628:[mirs of bb]+++:1d3a | move-result-object v1
+9629:[mirs of bb]+++:1d3c | check-cast v1,class@0033
+9630:[mirs of bb]+++:1d40 | iput-object v1, v8,field@0015
+9631:[mirs of bb]+++:1d44 | filled-new-array {v3, v6}, class@0031
+9632:[mirs of bb]+++:1d4a | move-result-object v1
+9633:[mirs of bb]+++:1d4c | sget-object v2,field@002f
+9634:[mirs of bb] =====codeoffset is 0x1cec  ======
+9635:[mirs of bb] =====startoffset is 1d56  ======
+9636:[mirs of bb]+++:1d56 | move-result-object v1
+9637:[mirs of bb]+++:1d58 | check-cast v1,class@0033
+9638:[mirs of bb]+++:1d5c | iput-object v1, v8,field@0016
+9639:[mirs of bb]+++:1d60 | const/4 v0, #int 0 // #0
+9640:[mirs of bb] =====codeoffset is 0x1cec  ======
+9641:[mirs of bb] =====startoffset is 1d62  ======
+9642:[mirs of bb]+++:1d62 | iget-object v1, v8,field@0015
+9643:[mirs of bb]+++:1d66 | const/4 v2, #int 0 // #0
+9644:[mirs of bb]+++:1d68 | aget-object v1, v1, v2
+9645:[mirs of bb]+++:1d6c | int-to-double v2, v0
+9646:[mirs of bb]+++:1d6e | aput-wide v2, v1, v0
+9647:[mirs of bb]+++:1d72 | iget-object v1, v8,field@0015
+9648:[mirs of bb]+++:1d76 | aget-object v1, v1, v7
+9649:[mirs of bb]+++:1d7a | neg-int v2, v0
+9650:[mirs of bb]+++:1d7c | int-to-double v2, v2
+9651:[mirs of bb]+++:1d7e | aput-wide v2, v1, v0
+9652:[mirs of bb]+++:1d82 | iget-object v1, v8,field@0015
+9653:[mirs of bb]+++:1d86 | const/4 v2, #int 2 // #2
+9654:[mirs of bb]+++:1d88 | aget-object v1, v1, v2
+9655:[mirs of bb]+++:1d8c | int-to-double v2, v0
+9656:[mirs of bb]+++:1d8e | const-wide v4, #double 3.141593 // #400921fb54442d18
+9657:[mirs of bb]+++:1d98 | mul-double/2addr v2, v4
+9658:[mirs of bb]+++:1d9a | aput-wide v2, v1, v0
+9659:[mirs of bb]+++:1d9e | add-int/lit8 v0, v0, #int 1 // #01
+9660:[mirs of bb] =====codeoffset is 0x1dd0  ======
+9661:[mirs of bb] =====startoffset is 1de0  ======
+9662:[mirs of bb]+++:1de0 | new-instance v0,class@0027
+9663:[mirs of bb]+++:1de4 | const-string v1, string@001c
+9664:[mirs of bb] =====codeoffset is 0x1df0  ======
+9665:[mirs of bb] =====startoffset is 1e06  ======
+9666:[mirs of bb]+++:1e06 | const/16 v0, #int 1200 // #4b0
+9667:[mirs of bb]+++:1e0a | iput v0, v1,field@001a
+9668:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9669:[mirs of bb] =====startoffset is 1e4c  ======
+9670:[mirs of bb]+++:1e4c | const/4 v12, #int 1 // #1
+9671:[mirs of bb]+++:1e4e | const/4 v13, #int 1 // #1
+9672:[mirs of bb]+++:1e50 | const/4 v14, #int 1 // #1
+9673:[mirs of bb]+++:1e52 | const/4 v4, #int 1 // #1
+9674:[mirs of bb]+++:1e54 | const/4 v5, #int 1 // #1
+9675:[mirs of bb]+++:1e56 | const/4 v6, #int 1 // #1
+9676:[mirs of bb]+++:1e58 | const/4 v11, #int 1 // #1
+9677:[mirs of bb]+++:1e5a | const/4 v2, #int 1 // #1
+9678:[mirs of bb]+++:1e5c | const/4 v3, #int 1 // #1
+9679:[mirs of bb]+++:1e5e | const/4 v7, #int 1 // #1
+9680:[mirs of bb]+++:1e60 | const/4 v8, #int 1 // #1
+9681:[mirs of bb]+++:1e62 | const/4 v9, #int 1 // #1
+9682:[mirs of bb]+++:1e64 | const/4 v10, #int 1 // #1
+9683:[mirs of bb]+++:1e66 | const/4 v12, #int 1 // #1
+9684:[mirs of bb]+++:1e68 | const/4 v13, #int 1 // #1
+9685:[mirs of bb]+++:1e6a | const/4 v14, #int 1 // #1
+9686:[mirs of bb]+++:1e6c | const/4 v4, #int 1 // #1
+9687:[mirs of bb]+++:1e6e | const/4 v5, #int 1 // #1
+9688:[mirs of bb]+++:1e70 | const/4 v6, #int 1 // #1
+9689:[mirs of bb]+++:1e72 | const/4 v15, #int 0 // #0
+9690:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9691:[mirs of bb] =====startoffset is 1e74  ======
+9692:[mirs of bb]+++:1e74 | move-object/from16 v0, v18
+9693:[mirs of bb]+++:1e78 | iget v0, v0,field@001a
+9694:[mirs of bb]+++:1e7c | move/from16 v17, v0
+9695:[mirs of bb]+++:1e80 | move v0, v15
+9696:[mirs of bb]+++:1e82 | move/from16 v1, v17
+9697:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9698:[mirs of bb] =====startoffset is 1e8a  ======
+9699:[mirs of bb]+++:1e8a | const/4 v2, #int 1 // #1
+9700:[mirs of bb]+++:1e8c | const/4 v3, #int 0 // #0
+9701:[mirs of bb]+++:1e8e | const/4 v7, #int 1 // #1
+9702:[mirs of bb]+++:1e90 | const/4 v8, #int 0 // #0
+9703:[mirs of bb]+++:1e92 | const/4 v9, #int 1 // #1
+9704:[mirs of bb]+++:1e94 | const/4 v10, #int 0 // #0
+9705:[mirs of bb]+++:1e96 | const/16 v16, #int 0 // #0
+9706:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9707:[mirs of bb] =====startoffset is 1e9a  ======
+9708:[mirs of bb]+++:1e9a | move-object/from16 v0, v18
+9709:[mirs of bb]+++:1e9e | iget v0, v0,field@001a
+9710:[mirs of bb]+++:1ea2 | move/from16 v17, v0
+9711:[mirs of bb]+++:1ea6 | move/from16 v0, v16
+9712:[mirs of bb]+++:1eaa | move/from16 v1, v17
+9713:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9714:[mirs of bb] =====startoffset is 1edc  ======
+9715:[mirs of bb]+++:1edc | const/16 v17, #int 0 // #0
+9716:[mirs of bb]+++:1ee0 | move/from16 v12, v17
+9717:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9718:[mirs of bb] =====startoffset is 1ee8  ======
+9719:[mirs of bb]+++:1ee8 | const/16 v17, #int 0 // #0
+9720:[mirs of bb]+++:1eec | move/from16 v13, v17
+9721:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9722:[mirs of bb] =====startoffset is 1ef4  ======
+9723:[mirs of bb]+++:1ef4 | const/16 v17, #int 0 // #0
+9724:[mirs of bb]+++:1ef8 | move/from16 v14, v17
+9725:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9726:[mirs of bb] =====startoffset is 1f00  ======
+9727:[mirs of bb]+++:1f00 | const/16 v17, #int 0 // #0
+9728:[mirs of bb]+++:1f04 | move/from16 v4, v17
+9729:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9730:[mirs of bb] =====startoffset is 1f0c  ======
+9731:[mirs of bb]+++:1f0c | const/16 v17, #int 0 // #0
+9732:[mirs of bb]+++:1f10 | move/from16 v5, v17
+9733:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9734:[mirs of bb] =====startoffset is 1f18  ======
+9735:[mirs of bb]+++:1f18 | const/16 v17, #int 0 // #0
+9736:[mirs of bb]+++:1f1c | move/from16 v6, v17
+9737:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9738:[mirs of bb] =====startoffset is 1f24  ======
+9739:[mirs of bb]+++:1f24 | const/16 v17, #int 0 // #0
+9740:[mirs of bb]+++:1f28 | move/from16 v2, v17
+9741:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9742:[mirs of bb] =====startoffset is 1f30  ======
+9743:[mirs of bb]+++:1f30 | const/16 v17, #int 0 // #0
+9744:[mirs of bb]+++:1f34 | move/from16 v3, v17
+9745:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9746:[mirs of bb] =====startoffset is 1f3c  ======
+9747:[mirs of bb]+++:1f3c | const/16 v17, #int 0 // #0
+9748:[mirs of bb]+++:1f40 | move/from16 v7, v17
+9749:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9750:[mirs of bb] =====startoffset is 1f48  ======
+9751:[mirs of bb]+++:1f48 | const/16 v17, #int 0 // #0
+9752:[mirs of bb]+++:1f4c | move/from16 v8, v17
+9753:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9754:[mirs of bb] =====startoffset is 1f54  ======
+9755:[mirs of bb]+++:1f54 | const/16 v17, #int 0 // #0
+9756:[mirs of bb]+++:1f58 | move/from16 v9, v17
+9757:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9758:[mirs of bb] =====startoffset is 1f60  ======
+9759:[mirs of bb]+++:1f60 | const/16 v17, #int 0 // #0
+9760:[mirs of bb]+++:1f64 | move/from16 v10, v17
+9761:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9762:[mirs of bb] =====startoffset is 1f6c  ======
+9763:[mirs of bb]+++:1f6c | const/16 v17, #int 0 // #0
+9764:[mirs of bb]+++:1f70 | move/from16 v2, v17
+9765:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9766:[mirs of bb] =====startoffset is 1f78  ======
+9767:[mirs of bb]+++:1f78 | const/16 v17, #int 0 // #0
+9768:[mirs of bb]+++:1f7c | move/from16 v3, v17
+9769:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9770:[mirs of bb] =====startoffset is 1f84  ======
+9771:[mirs of bb]+++:1f84 | const/16 v17, #int 0 // #0
+9772:[mirs of bb]+++:1f88 | move/from16 v7, v17
+9773:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9774:[mirs of bb] =====startoffset is 1f90  ======
+9775:[mirs of bb]+++:1f90 | const/16 v17, #int 0 // #0
+9776:[mirs of bb]+++:1f94 | move/from16 v8, v17
+9777:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9778:[mirs of bb] =====startoffset is 1f9c  ======
+9779:[mirs of bb]+++:1f9c | const/16 v17, #int 0 // #0
+9780:[mirs of bb]+++:1fa0 | move/from16 v9, v17
+9781:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9782:[mirs of bb] =====startoffset is 1fa8  ======
+9783:[mirs of bb]+++:1fa8 | const/16 v17, #int 0 // #0
+9784:[mirs of bb]+++:1fac | move/from16 v10, v17
+9785:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9786:[mirs of bb] =====startoffset is 1fb8  ======
+9787:[mirs of bb]+++:1fb8 | const/16 v17, #int 1 // #1
+9788:[mirs of bb]+++:1fbc | move/from16 v12, v17
+9789:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9790:[mirs of bb] =====startoffset is 1fc2  ======
+9791:[mirs of bb]+++:1fc2 | const/16 v17, #int 1 // #1
+9792:[mirs of bb]+++:1fc6 | move/from16 v13, v17
+9793:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9794:[mirs of bb] =====startoffset is 1fcc  ======
+9795:[mirs of bb]+++:1fcc | const/16 v17, #int 1 // #1
+9796:[mirs of bb]+++:1fd0 | move/from16 v14, v17
+9797:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9798:[mirs of bb] =====startoffset is 1fd6  ======
+9799:[mirs of bb]+++:1fd6 | const/16 v17, #int 1 // #1
+9800:[mirs of bb]+++:1fda | move/from16 v4, v17
+9801:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9802:[mirs of bb] =====startoffset is 1fe0  ======
+9803:[mirs of bb]+++:1fe0 | const/16 v17, #int 1 // #1
+9804:[mirs of bb]+++:1fe4 | move/from16 v5, v17
+9805:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9806:[mirs of bb] =====startoffset is 1fea  ======
+9807:[mirs of bb]+++:1fea | const/16 v17, #int 1 // #1
+9808:[mirs of bb]+++:1fee | move/from16 v6, v17
+9809:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9810:[mirs of bb] =====startoffset is 1ff4  ======
+9811:[mirs of bb]+++:1ff4 | const/16 v17, #int 1 // #1
+9812:[mirs of bb]+++:1ff8 | move/from16 v2, v17
+9813:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9814:[mirs of bb] =====startoffset is 1ffe  ======
+9815:[mirs of bb]+++:1ffe | const/16 v17, #int 1 // #1
+9816:[mirs of bb]+++:2002 | move/from16 v3, v17
+9817:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9818:[mirs of bb] =====startoffset is 2008  ======
+9819:[mirs of bb]+++:2008 | const/16 v17, #int 1 // #1
+9820:[mirs of bb]+++:200c | move/from16 v7, v17
+9821:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9822:[mirs of bb] =====startoffset is 2012  ======
+9823:[mirs of bb]+++:2012 | const/16 v17, #int 1 // #1
+9824:[mirs of bb]+++:2016 | move/from16 v8, v17
+9825:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9826:[mirs of bb] =====startoffset is 201c  ======
+9827:[mirs of bb]+++:201c | const/16 v17, #int 1 // #1
+9828:[mirs of bb]+++:2020 | move/from16 v9, v17
+9829:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9830:[mirs of bb] =====startoffset is 2026  ======
+9831:[mirs of bb]+++:2026 | const/16 v17, #int 1 // #1
+9832:[mirs of bb]+++:202a | move/from16 v10, v17
+9833:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9834:[mirs of bb] =====startoffset is 2030  ======
+9835:[mirs of bb]+++:2030 | const/16 v17, #int 1 // #1
+9836:[mirs of bb]+++:2034 | move/from16 v2, v17
+9837:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9838:[mirs of bb] =====startoffset is 203a  ======
+9839:[mirs of bb]+++:203a | const/16 v17, #int 1 // #1
+9840:[mirs of bb]+++:203e | move/from16 v3, v17
+9841:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9842:[mirs of bb] =====startoffset is 2044  ======
+9843:[mirs of bb]+++:2044 | const/16 v17, #int 1 // #1
+9844:[mirs of bb]+++:2048 | move/from16 v7, v17
+9845:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9846:[mirs of bb] =====startoffset is 204e  ======
+9847:[mirs of bb]+++:204e | const/16 v17, #int 1 // #1
+9848:[mirs of bb]+++:2052 | move/from16 v8, v17
+9849:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9850:[mirs of bb] =====startoffset is 2058  ======
+9851:[mirs of bb]+++:2058 | const/16 v17, #int 1 // #1
+9852:[mirs of bb]+++:205c | move/from16 v9, v17
+9853:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9854:[mirs of bb] =====startoffset is 2062  ======
+9855:[mirs of bb]+++:2062 | const/16 v17, #int 1 // #1
+9856:[mirs of bb]+++:2066 | move/from16 v10, v17
+9857:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9858:[mirs of bb] =====startoffset is 208c  ======
+9859:[mirs of bb]+++:208c | const/16 v17, #int 0 // #0
+9860:[mirs of bb]+++:2090 | move/from16 v2, v17
+9861:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9862:[mirs of bb] =====startoffset is 2098  ======
+9863:[mirs of bb]+++:2098 | const/16 v17, #int 0 // #0
+9864:[mirs of bb]+++:209c | move/from16 v3, v17
+9865:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9866:[mirs of bb] =====startoffset is 20a4  ======
+9867:[mirs of bb]+++:20a4 | const/16 v17, #int 0 // #0
+9868:[mirs of bb]+++:20a8 | move/from16 v7, v17
+9869:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9870:[mirs of bb] =====startoffset is 20b0  ======
+9871:[mirs of bb]+++:20b0 | const/16 v17, #int 0 // #0
+9872:[mirs of bb]+++:20b4 | move/from16 v8, v17
+9873:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9874:[mirs of bb] =====startoffset is 20bc  ======
+9875:[mirs of bb]+++:20bc | const/16 v17, #int 0 // #0
+9876:[mirs of bb]+++:20c0 | move/from16 v9, v17
+9877:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9878:[mirs of bb] =====startoffset is 20c8  ======
+9879:[mirs of bb]+++:20c8 | const/16 v17, #int 0 // #0
+9880:[mirs of bb]+++:20cc | move/from16 v10, v17
+9881:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9882:[mirs of bb] =====startoffset is 20d4  ======
+9883:[mirs of bb]+++:20d4 | const/16 v17, #int 0 // #0
+9884:[mirs of bb]+++:20d8 | move/from16 v12, v17
+9885:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9886:[mirs of bb] =====startoffset is 20e0  ======
+9887:[mirs of bb]+++:20e0 | const/16 v17, #int 0 // #0
+9888:[mirs of bb]+++:20e4 | move/from16 v13, v17
+9889:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9890:[mirs of bb] =====startoffset is 20ec  ======
+9891:[mirs of bb]+++:20ec | const/16 v17, #int 0 // #0
+9892:[mirs of bb]+++:20f0 | move/from16 v14, v17
+9893:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9894:[mirs of bb] =====startoffset is 20f8  ======
+9895:[mirs of bb]+++:20f8 | const/16 v17, #int 0 // #0
+9896:[mirs of bb]+++:20fc | move/from16 v4, v17
+9897:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9898:[mirs of bb] =====startoffset is 2104  ======
+9899:[mirs of bb]+++:2104 | const/16 v17, #int 0 // #0
+9900:[mirs of bb]+++:2108 | move/from16 v5, v17
+9901:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9902:[mirs of bb] =====startoffset is 2110  ======
+9903:[mirs of bb]+++:2110 | const/16 v17, #int 0 // #0
+9904:[mirs of bb]+++:2114 | move/from16 v6, v17
+9905:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9906:[mirs of bb] =====startoffset is 211c  ======
+9907:[mirs of bb]+++:211c | const/16 v17, #int 0 // #0
+9908:[mirs of bb]+++:2120 | move/from16 v12, v17
+9909:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9910:[mirs of bb] =====startoffset is 2128  ======
+9911:[mirs of bb]+++:2128 | const/16 v17, #int 0 // #0
+9912:[mirs of bb]+++:212c | move/from16 v13, v17
+9913:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9914:[mirs of bb] =====startoffset is 2134  ======
+9915:[mirs of bb]+++:2134 | const/16 v17, #int 0 // #0
+9916:[mirs of bb]+++:2138 | move/from16 v14, v17
+9917:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9918:[mirs of bb] =====startoffset is 2140  ======
+9919:[mirs of bb]+++:2140 | const/16 v17, #int 0 // #0
+9920:[mirs of bb]+++:2144 | move/from16 v4, v17
+9921:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9922:[mirs of bb] =====startoffset is 214c  ======
+9923:[mirs of bb]+++:214c | const/16 v17, #int 0 // #0
+9924:[mirs of bb]+++:2150 | move/from16 v5, v17
+9925:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9926:[mirs of bb] =====startoffset is 2158  ======
+9927:[mirs of bb]+++:2158 | const/16 v17, #int 0 // #0
+9928:[mirs of bb]+++:215c | move/from16 v6, v17
+9929:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9930:[mirs of bb] =====startoffset is 2168  ======
+9931:[mirs of bb]+++:2168 | const/16 v17, #int 1 // #1
+9932:[mirs of bb]+++:216c | move/from16 v2, v17
+9933:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9934:[mirs of bb] =====startoffset is 2172  ======
+9935:[mirs of bb]+++:2172 | const/16 v17, #int 1 // #1
+9936:[mirs of bb]+++:2176 | move/from16 v3, v17
+9937:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9938:[mirs of bb] =====startoffset is 217c  ======
+9939:[mirs of bb]+++:217c | const/16 v17, #int 1 // #1
+9940:[mirs of bb]+++:2180 | move/from16 v7, v17
+9941:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9942:[mirs of bb] =====startoffset is 2186  ======
+9943:[mirs of bb]+++:2186 | const/16 v17, #int 1 // #1
+9944:[mirs of bb]+++:218a | move/from16 v8, v17
+9945:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9946:[mirs of bb] =====startoffset is 2190  ======
+9947:[mirs of bb]+++:2190 | const/16 v17, #int 1 // #1
+9948:[mirs of bb]+++:2194 | move/from16 v9, v17
+9949:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9950:[mirs of bb] =====startoffset is 219a  ======
+9951:[mirs of bb]+++:219a | const/16 v17, #int 1 // #1
+9952:[mirs of bb]+++:219e | move/from16 v10, v17
+9953:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9954:[mirs of bb] =====startoffset is 21a4  ======
+9955:[mirs of bb]+++:21a4 | const/16 v17, #int 1 // #1
+9956:[mirs of bb]+++:21a8 | move/from16 v12, v17
+9957:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9958:[mirs of bb] =====startoffset is 21ae  ======
+9959:[mirs of bb]+++:21ae | const/16 v17, #int 1 // #1
+9960:[mirs of bb]+++:21b2 | move/from16 v13, v17
+9961:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9962:[mirs of bb] =====startoffset is 21b8  ======
+9963:[mirs of bb]+++:21b8 | const/16 v17, #int 1 // #1
+9964:[mirs of bb]+++:21bc | move/from16 v14, v17
+9965:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9966:[mirs of bb] =====startoffset is 21c2  ======
+9967:[mirs of bb]+++:21c2 | const/16 v17, #int 1 // #1
+9968:[mirs of bb]+++:21c6 | move/from16 v4, v17
+9969:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9970:[mirs of bb] =====startoffset is 21cc  ======
+9971:[mirs of bb]+++:21cc | const/16 v17, #int 1 // #1
+9972:[mirs of bb]+++:21d0 | move/from16 v5, v17
+9973:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9974:[mirs of bb] =====startoffset is 21d6  ======
+9975:[mirs of bb]+++:21d6 | const/16 v17, #int 1 // #1
+9976:[mirs of bb]+++:21da | move/from16 v6, v17
+9977:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9978:[mirs of bb] =====startoffset is 21e0  ======
+9979:[mirs of bb]+++:21e0 | const/16 v17, #int 1 // #1
+9980:[mirs of bb]+++:21e4 | move/from16 v12, v17
+9981:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9982:[mirs of bb] =====startoffset is 21ea  ======
+9983:[mirs of bb]+++:21ea | const/16 v17, #int 1 // #1
+9984:[mirs of bb]+++:21ee | move/from16 v13, v17
+9985:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9986:[mirs of bb] =====startoffset is 21f4  ======
+9987:[mirs of bb]+++:21f4 | const/16 v17, #int 1 // #1
+9988:[mirs of bb]+++:21f8 | move/from16 v14, v17
+9989:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9990:[mirs of bb] =====startoffset is 21fe  ======
+9991:[mirs of bb]+++:21fe | const/16 v17, #int 1 // #1
+9992:[mirs of bb]+++:2202 | move/from16 v4, v17
+9993:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9994:[mirs of bb] =====startoffset is 2208  ======
+9995:[mirs of bb]+++:2208 | const/16 v17, #int 1 // #1
+9996:[mirs of bb]+++:220c | move/from16 v5, v17
+9997:[mirs of bb] =====codeoffset is 0x1e3c  ======
+9998:[mirs of bb] =====startoffset is 2212  ======
+9999:[mirs of bb]+++:2212 | const/16 v17, #int 1 // #1
+10000:[mirs of bb]+++:2216 | move/from16 v6, v17
+10001:[mirs of bb] =====codeoffset is 0x2268  ======
+10002:[mirs of bb] =====startoffset is 2278  ======
+10003:[mirs of bb]+++:2278 | new-instance v0,class@0027
+10004:[mirs of bb]+++:227c | const-string v1, string@0054
+10005:[mirs of bb] =====codeoffset is 0x2288  ======
+10006:[mirs of bb] =====startoffset is 229e  ======
+10007:[mirs of bb]+++:229e | const/16 v0, #int 12 // #c
+10008:[mirs of bb]+++:22a2 | iput v0, v1,field@001c
+10009:[mirs of bb]+++:22a6 | const/16 v0, #int 64 // #40
+10010:[mirs of bb]+++:22aa | iput v0, v1,field@001b
+10011:[mirs of bb] =====codeoffset is 0x22dc  ======
+10012:[mirs of bb] =====startoffset is 22ec  ======
+10013:[mirs of bb]+++:22ec | const/4 v11, #int 0 // #0
+10014:[mirs of bb]+++:22ee | const/4 v10, #int 1 // #1
+10015:[mirs of bb]+++:22f0 | iget-object v7, v12,field@001d
+10016:[mirs of bb]+++:22f4 | aput v10, v7, v11
+10017:[mirs of bb]+++:22f8 | const/4 v0, #int 1 // #1
+10018:[mirs of bb] =====codeoffset is 0x22dc  ======
+10019:[mirs of bb] =====startoffset is 2302  ======
+10020:[mirs of bb]+++:2302 | const/4 v3, #int 0 // #0
+10021:[mirs of bb]+++:2304 | const/4 v5, #int 0 // #0
+10022:[mirs of bb]+++:2306 | const/4 v2, #int 0 // #0
+10023:[mirs of bb] =====codeoffset is 0x22dc  ======
+10024:[mirs of bb] =====startoffset is 2310  ======
+10025:[mirs of bb]+++:2310 | iput v3, v12,field@001e
+10026:[mirs of bb]+++:2314 | iput v5, v12,field@001f
+10027:[mirs of bb]+++:2318 | iget-object v7, v12,field@001d
+10028:[mirs of bb]+++:231c | aget v7, v7, v11
+10029:[mirs of bb] =====codeoffset is 0x22dc  ======
+10030:[mirs of bb] =====startoffset is 2322  ======
+10031:[mirs of bb]+++:2322 | iget-object v7, v12,field@001d
+10032:[mirs of bb]+++:2326 | iget-object v8, v12,field@001d
+10033:[mirs of bb]+++:232a | sub-int v9, v0, v10
+10034:[mirs of bb]+++:232e | aget v8, v8, v9
+10035:[mirs of bb]+++:2332 | add-int/2addr v8, v0
+10036:[mirs of bb]+++:2334 | aput v8, v7, v0
+10037:[mirs of bb]+++:2338 | add-int/lit8 v0, v0, #int 1 // #01
+10038:[mirs of bb] =====codeoffset is 0x22dc  ======
+10039:[mirs of bb] =====startoffset is 234e  ======
+10040:[mirs of bb]+++:234e | iget v7, v12,field@001b
+10041:[mirs of bb]+++:2352 | iget v8, v12,field@001c
+10042:[mirs of bb]+++:2356 | add-int v6, v7, v8
+10043:[mirs of bb]+++:235a | add-int/2addr v3, v6
+10044:[mirs of bb]+++:235c | add-int/lit8 v5, v5, #int 2 // #02
+10045:[mirs of bb]+++:2360 | iget-object v7, v12,field@001d
+10046:[mirs of bb]+++:2364 | sub-int v8, v4, v10
+10047:[mirs of bb]+++:2368 | aget v7, v7, v8
+10048:[mirs of bb]+++:236c | iget-object v8, v12,field@001d
+10049:[mirs of bb]+++:2370 | aget v8, v8, v4
+10050:[mirs of bb] =====codeoffset is 0x22dc  ======
+10051:[mirs of bb] =====startoffset is 2378  ======
+10052:[mirs of bb]+++:2378 | iget-object v7, v12,field@001d
+10053:[mirs of bb]+++:237c | sub-int v8, v4, v10
+10054:[mirs of bb]+++:2380 | aget v1, v7, v8
+10055:[mirs of bb]+++:2384 | iget-object v7, v12,field@001d
+10056:[mirs of bb]+++:2388 | sub-int v8, v4, v10
+10057:[mirs of bb]+++:238c | iget-object v9, v12,field@001d
+10058:[mirs of bb]+++:2390 | aget v9, v9, v4
+10059:[mirs of bb]+++:2394 | aput v9, v7, v8
+10060:[mirs of bb]+++:2398 | iget-object v7, v12,field@001d
+10061:[mirs of bb]+++:239c | aput v1, v7, v4
+10062:[mirs of bb] =====codeoffset is 0x23a8  ======
+10063:[mirs of bb] =====startoffset is 23c0  ======
+10064:[mirs of bb]+++:23c0 | iget v0, v1,field@001b
+10065:[mirs of bb]+++:23c4 | new-array v0, v0, class@0031
+10066:[mirs of bb]+++:23c8 | iput-object v0, v1,field@001d
+10067:[mirs of bb]+++:23cc | const/4 v0, #int 1 // #1
+10068:[mirs of bb] =====codeoffset is 0x23f8  ======
+10069:[mirs of bb] =====startoffset is 2408  ======
+10070:[mirs of bb]+++:2408 | new-instance v0,class@0027
+10071:[mirs of bb]+++:240c | const-string v1, string@0057
+10072:[mirs of bb] =====codeoffset is 0x2418  ======
+10073:[mirs of bb] =====startoffset is 242e  ======
+10074:[mirs of bb]+++:242e | const/16 v0, #int 100 // #64
+10075:[mirs of bb]+++:2432 | iput v0, v1,field@0021
+10076:[mirs of bb] =====codeoffset is 0x2438  ======
+10077:[mirs of bb] =====startoffset is 2450  ======
+10078:[mirs of bb]+++:2450 | const/4 v0, #int 1 // #1
+10079:[mirs of bb]+++:2452 | sub-int v0, v2, v0
+10080:[mirs of bb] =====codeoffset is 0x24ec  ======
+10081:[mirs of bb] =====startoffset is 24fc  ======
+10082:[mirs of bb]+++:24fc | const/4 v3, #int 1 // #1
+10083:[mirs of bb]+++:24fe | move v0, v5
+10084:[mirs of bb]+++:2500 | iget v2, v4,field@0020
+10085:[mirs of bb]+++:2504 | add-int/lit8 v2, v2, #int 1 // #01
+10086:[mirs of bb]+++:2508 | iput v2, v4,field@0020
+10087:[mirs of bb] =====codeoffset is 0x24ec  ======
+10088:[mirs of bb] =====startoffset is 2538  ======
+10089:[mirs of bb]+++:2538 | move-result v2
+10090:[mirs of bb]+++:253a | add-int/lit8 v2, v2, #int 1 // #01
+10091:[mirs of bb]+++:253e | add-int/2addr v0, v2
+10092:[mirs of bb] =====codeoffset is 0x256c  ======
+10093:[mirs of bb] =====startoffset is 257c  ======
+10094:[mirs of bb]+++:257c | new-instance v0,class@0027
+10095:[mirs of bb]+++:2580 | const-string v1, string@005a
+10096:[mirs of bb] =====codeoffset is 0x2604  ======
+10097:[mirs of bb] =====startoffset is 261a  ======
+10098:[mirs of bb]+++:261a | const/16 v0, #int 512 // #200
+10099:[mirs of bb]+++:261e | iput v0, v1,field@0026
+10100:[mirs of bb] =====codeoffset is 0x2650  ======
+10101:[mirs of bb] =====startoffset is 2660  ======
+10102:[mirs of bb]+++:2660 | const/4 v7, #int 1 // #1
+10103:[mirs of bb]+++:2662 | const/4 v3, #int 1 // #1
+10104:[mirs of bb]+++:2664 | const/4 v1, #int 0 // #0
+10105:[mirs of bb]+++:2666 | iget-object v5, v8,field@0027
+10106:[mirs of bb]+++:266a | const/4 v6, #int 0 // #0
+10107:[mirs of bb]+++:266c | aput v7, v5, v6
+10108:[mirs of bb]+++:2670 | iget-object v5, v8,field@0027
+10109:[mirs of bb]+++:2674 | const/4 v6, #int 2 // #2
+10110:[mirs of bb]+++:2676 | aput v6, v5, v7
+10111:[mirs of bb]+++:267a | const/4 v3, #int 2 // #2
+10112:[mirs of bb]+++:267c | const/4 v2, #int 3 // #3
+10113:[mirs of bb] =====codeoffset is 0x2650  ======
+10114:[mirs of bb] =====startoffset is 2698  ======
+10115:[mirs of bb]+++:2698 | add-int/lit8 v3, v3, #int 1 // #01
+10116:[mirs of bb]+++:269c | iget-object v5, v8,field@0027
+10117:[mirs of bb]+++:26a0 | sub-int v6, v3, v7
+10118:[mirs of bb]+++:26a4 | aput v2, v5, v6
+10119:[mirs of bb] =====codeoffset is 0x2650  ======
+10120:[mirs of bb] =====startoffset is 26ae  ======
+10121:[mirs of bb]+++:26ae | iget-object v5, v8,field@0027
+10122:[mirs of bb]+++:26b2 | aget v5, v5, v4
+10123:[mirs of bb] =====codeoffset is 0x2650  ======
+10124:[mirs of bb] =====startoffset is 26ba  ======
+10125:[mirs of bb]+++:26ba | iget-object v5, v8,field@0027
+10126:[mirs of bb]+++:26be | aget v5, v5, v4
+10127:[mirs of bb]+++:26c2 | div-int/lit8 v6, v2, #int 2 // #02
+10128:[mirs of bb] =====codeoffset is 0x2650  ======
+10129:[mirs of bb] =====startoffset is 26ca  ======
+10130:[mirs of bb]+++:26ca | iget-object v5, v8,field@0027
+10131:[mirs of bb]+++:26ce | aget v5, v5, v4
+10132:[mirs of bb]+++:26d2 | rem-int v5, v2, v5
+10133:[mirs of bb] =====codeoffset is 0x26e4  ======
+10134:[mirs of bb] =====startoffset is 26fc  ======
+10135:[mirs of bb]+++:26fc | iget v0, v1,field@0026
+10136:[mirs of bb]+++:2700 | new-array v0, v0, class@0031
+10137:[mirs of bb]+++:2704 | iput-object v0, v1,field@0027
+10138:[mirs of bb]+++:2708 | const/4 v0, #int 1 // #1
+10139:[mirs of bb] =====codeoffset is 0x2734  ======
+10140:[mirs of bb] =====startoffset is 2744  ======
+10141:[mirs of bb]+++:2744 | new-instance v0,class@0027
+10142:[mirs of bb]+++:2748 | const-string v1, string@0060
+10143:[mirs of bb] =====codeoffset is 0x2754  ======
+10144:[mirs of bb] =====startoffset is 276e  ======
+10145:[mirs of bb]+++:276e | iput-wide v0, v2,field@0029
+10146:[mirs of bb]+++:2772 | iput-wide v0, v2,field@002a
+10147:[mirs of bb]+++:2776 | const/4 v0, #int 0 // #0
+10148:[mirs of bb]+++:2778 | iput-boolean v0, v2,field@0028
+10149:[mirs of bb] =====codeoffset is 0x2780  ======
+10150:[mirs of bb] =====startoffset is 2796  ======
+10151:[mirs of bb]+++:2796 | iget-wide v0, v2,field@002a
+10152:[mirs of bb]+++:279a | iput-wide v0, v2,field@0029
+10153:[mirs of bb] =====codeoffset is 0x27a0  ======
+10154:[mirs of bb] =====startoffset is 27c8  ======
+10155:[mirs of bb]+++:27c8 | move-result-wide v1
+10156:[mirs of bb]+++:27ca | iput-wide v1, v5,field@002a
+10157:[mirs of bb] =====codeoffset is 0x27a0  ======
+10158:[mirs of bb] =====startoffset is 27ce  ======
+10159:[mirs of bb]+++:27ce | iget-wide v1, v5,field@002a
+10160:[mirs of bb]+++:27d2 | iget-wide v3, v5,field@0029
+10161:[mirs of bb]+++:27d6 | sub-long/2addr v1, v3
+10162:[mirs of bb] =====codeoffset is 0x27dc  ======
+10163:[mirs of bb] =====startoffset is 27f4  ======
+10164:[mirs of bb]+++:27f4 | const/4 v1, #int 1 // #1
+10165:[mirs of bb]+++:27f6 | iput-boolean v1, v3,field@0028
+10166:[mirs of bb]+++:27fa | new-instance v0,class@002d
+10167:[mirs of bb] =====codeoffset is 0x27dc  ======
+10168:[mirs of bb] =====startoffset is 280a  ======
+10169:[mirs of bb]+++:280a | move-result-wide v1
+10170:[mirs of bb]+++:280c | iput-wide v1, v3,field@0029
+10171:[mirs of bb]+++:2810 | iget-wide v1, v3,field@0029
+10172:[mirs of bb]+++:2814 | iput-wide v1, v3,field@002a
+10173:[mirs of bb] =====codeoffset is 0x281c  ======
+10174:[mirs of bb] =====startoffset is 2834  ======
+10175:[mirs of bb]+++:2834 | const/4 v1, #int 0 // #0
+10176:[mirs of bb]+++:2836 | iput-boolean v1, v3,field@0028
+10177:[mirs of bb]+++:283a | new-instance v0,class@002d
+10178:[mirs of bb] =====codeoffset is 0x281c  ======
+10179:[mirs of bb] =====startoffset is 284a  ======
+10180:[mirs of bb]+++:284a | move-result-wide v1
+10181:[mirs of bb]+++:284c | iput-wide v1, v3,field@002a
+10182:[mirs of bb] =====codeoffset is 0x2854  ======
+10183:[mirs of bb] =====startoffset is 286a  ======
+10184:[mirs of bb]+++:286a | const/16 v0, #int 50 // #32
+10185:[mirs of bb]+++:286e | iput v0, v1,field@002e
+10186:[mirs of bb] =====codeoffset is 0x28a0  ======
+10187:[mirs of bb] =====startoffset is 28b0  ======
+10188:[mirs of bb]+++:28b0 | const-string v5, string@00a8
+10189:[mirs of bb]+++:28b4 | new-instance v2,class@0028
+10190:[mirs of bb]+++:28b8 | const-string v3, string@006a
+10191:[mirs of bb] =====codeoffset is 0x28a0  ======
+10192:[mirs of bb] =====startoffset is 28f4  ======
+10193:[mirs of bb]+++:28f4 | move-result-object v3
+10194:[mirs of bb]+++:28f6 | iget-object v4, v6,field@002c
+10195:[mirs of bb] =====codeoffset is 0x28a0  ======
+10196:[mirs of bb] =====startoffset is 2900  ======
+10197:[mirs of bb]+++:2900 | move-result-object v3
+10198:[mirs of bb]+++:2902 | iget-object v4, v6,field@002d
+10199:[mirs of bb] =====codeoffset is 0x28a0  ======
+10200:[mirs of bb] =====startoffset is 2918  ======
+10201:[mirs of bb]+++:2918 | move-result-object v3
+10202:[mirs of bb]+++:291a | const-string v4, string@00a8
+10203:[mirs of bb]+++:291e | mul-int/lit8 v4, v1, #int 65 // #41
+10204:[mirs of bb] =====codeoffset is 0x2930  ======
+10205:[mirs of bb] =====startoffset is 2948  ======
+10206:[mirs of bb]+++:2948 | const-string v0, string@00d1
+10207:[mirs of bb]+++:294c | iput-object v0, v1,field@002b
+10208:[mirs of bb]+++:2950 | const-string v0, string@00f7
+10209:[mirs of bb]+++:2954 | iput-object v0, v1,field@002c
+10210:[mirs of bb]+++:2958 | const-string v0, string@00f3
+10211:[mirs of bb]+++:295c | iput-object v0, v1,field@002d
+10212:[mirs of bb]+++:2960 | const/4 v0, #int 1 // #1
+10213:[mirs of bb] =====codeoffset is 0x298c  ======
+10214:[mirs of bb] =====startoffset is 299c  ======
+10215:[mirs of bb]+++:299c | new-instance v0,class@0027
+10216:[mirs of bb]+++:29a0 | const-string v1, string@0066
