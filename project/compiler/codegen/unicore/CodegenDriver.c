@@ -5,6 +5,106 @@ extern unsigned char *instrFormatTable;
 extern inline unsigned char dexGetInstrFormat(const unsigned char* fmts, OpCode opCode);
 extern char* dexGetOpcodeName(OpCode op);
 
+static bool genArithOpLong(CompilationUnit *cUnit, MIR *mir,
+                           RegLocation rlDest, RegLocation rlSrc1,
+                           RegLocation rlSrc2)
+{
+    RegLocation rlResult;
+    OpKind firstOp = kOpBkpt;
+    OpKind secondOp = kOpBkpt;
+    bool callOut = false;
+    void *callTgt;
+    int retReg = r0;
+
+    switch (mir->dalvikInsn.opCode) {
+        case OP_NOT_LONG:                                                                                                                                                            
+            rlSrc2 = loadValueWide(cUnit, rlSrc2, kCoreReg);
+            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+            opRegReg(cUnit, kOpMvn, rlResult.lowReg, rlSrc2.lowReg);
+            opRegReg(cUnit, kOpMvn, rlResult.highReg, rlSrc2.highReg);
+            storeValueWide(cUnit, rlDest, rlResult);
+            return false;
+            break;
+        case OP_ADD_LONG:
+        case OP_ADD_LONG_2ADDR:
+            firstOp = kOpAdd;
+            secondOp = kOpAdc;
+            break;
+        case OP_SUB_LONG:
+        case OP_SUB_LONG_2ADDR:
+            firstOp = kOpSub;
+            secondOp = kOpSbc;
+            break;
+        case OP_MUL_LONG:
+        case OP_MUL_LONG_2ADDR:
+            genMulLong(cUnit, rlDest, rlSrc1, rlSrc2);
+            return false;
+        case OP_DIV_LONG:
+        case OP_DIV_LONG_2ADDR:
+            callOut = true;
+            retReg = r0;
+            //callTgt = (void*)__aeabi_ldivmod;
+            callTgt = (void*)__divdi3;
+            break;
+        /* NOTE - result is in r2/r3 instead of r0/r1 */
+        case OP_REM_LONG:
+        case OP_REM_LONG_2ADDR:                                                                                                                                       
+            callOut = true;
+           //callTgt = (void*)__aeabi_ldivmod;                                                                                                                        
+            callTgt = (void*)__moddi3;                                                                                                                                
+            retReg = r2;                                                                                                                                              
+            break;
+        case OP_AND_LONG_2ADDR:                                                                                                                                       
+        case OP_AND_LONG:
+            firstOp = kOpAnd;
+            secondOp = kOpAnd;                                                                                                                                        
+            break;
+        case OP_OR_LONG:
+        case OP_OR_LONG_2ADDR:                                                                                                                                        
+            firstOp = kOpOr;
+            secondOp = kOpOr;                                                                                                                                         
+            break;
+        case OP_XOR_LONG:
+        case OP_XOR_LONG_2ADDR:                                                                                                                                       
+            firstOp = kOpXor;
+            secondOp = kOpXor;                                                                                                                                        
+            break;
+        case OP_NEG_LONG: {
+            //TUNING: can improve this using Thumb2 code                                                                                                              
+            int tReg = dvmCompilerAllocTemp(cUnit);
+            rlSrc2 = loadValueWide(cUnit, rlSrc2, kCoreReg);
+            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+            loadConstantNoClobber(cUnit, tReg, 0);
+            opRegRegReg(cUnit, kOpSub, rlResult.lowReg,
+                        tReg, rlSrc2.lowReg);
+            opRegReg(cUnit, kOpSbc, tReg, rlSrc2.highReg);
+            genRegCopy(cUnit, rlResult.highReg, tReg);
+            storeValueWide(cUnit, rlDest, rlResult);
+            return false;
+        }
+        default:
+            LOGE("Invalid long arith op");
+            dvmCompilerAbort(cUnit);
+    }
+    if (!callOut) {
+        genLong3Addr(cUnit, mir, firstOp, secondOp, rlDest, rlSrc1, rlSrc2);
+    } else {
+        // Adjust return regs in to handle case of rem returning r2/r3
+        dvmCompilerFlushAllRegs(cUnit);   /* Send everything to home location */
+        loadValueDirectWideFixed(cUnit, rlSrc1, r0, r1);
+        LOAD_FUNC_ADDR(cUnit, rlr, (int) callTgt);
+        loadValueDirectWideFixed(cUnit, rlSrc2, r2, r3);
+        opReg(cUnit, kOpBlx, rlr);
+        dvmCompilerClobberCallRegs(cUnit);
+        if (retReg == r0)
+            rlResult = dvmCompilerGetReturnWide(cUnit);
+        else
+            rlResult = dvmCompilerGetReturnWideAlt(cUnit);
+        storeValueWide(cUnit, rlDest, rlResult);
+    }
+    return false;
+}
+
 static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,  
 						  RegLocation rlDest, RegLocation rlSrc1, 
 						  RegLocation rlSrc2)
@@ -39,8 +139,8 @@ static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,
         case OP_MUL_INT_2ADDR:
             op = kOpMul;
             break;
-        case OP_DIV_INT:
-        //eric
+    //eric
+	//    case OP_DIV_INT:
 	//	case OP_DIV_INT_2ADDR:
     //        callOut = true;
     //        checkZero = true;
@@ -49,8 +149,6 @@ static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,
     //        break;
         /* NOTE: returns in r1 */
 /*        case OP_REM_INT:
-
-
         case OP_REM_INT_2ADDR:
             callOut = true;
             checkZero = true;
