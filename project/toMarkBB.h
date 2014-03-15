@@ -246,6 +246,13 @@ int markBB_throw(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstructi
 //
 
 
+//donzy:BBfilter
+int markBB_filter(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask){
+	int targetPos = 0;
+	
+	targetPos = (insnIdx + insnWidth)*2;
+	setBBMaskIfNecessary(targetPos,BBMask);
+}
 
 
 

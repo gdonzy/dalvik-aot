@@ -30,7 +30,8 @@ int markBB_throw(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstructi
 //int markBB_aput(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask);
 //
 
-
+//donzy:BBfilter
+int markBB_filter(DexCode* pDexCode, int insnIdx, int insnWidth, DecodedInstruction* pDecInsn, u4* BBMask);
 
 
 
