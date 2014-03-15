@@ -32,7 +32,7 @@ static void loadValueDirect(CompilationUnit *cUnit, RegLocation rlSrc,
         genRegCopy(cUnit, reg1, rlSrc.lowReg);
     } else  if (rlSrc.location == kLocRetval) {
         //eric
-		//loadWordDisp(cUnit, rGLUE, offsetof(InterpState, retval), reg1);
+		loadWordDisp(cUnit, rGLUE, 8, reg1);
     } else {
         assert(rlSrc.location == kLocDalvikFrame);
         loadWordDisp(cUnit, rFP, dvmCompilerS2VReg(cUnit, rlSrc.sRegLow) << 2,
@@ -138,8 +138,9 @@ static void storeValue(CompilationUnit *cUnit, RegLocation rlDest, RegLocation r
 
 	if (rlDest.location == kLocRetval) { 
 		//eric
-		//	storeBaseDisp(cUnit, rGLUE, offsetof(InterpState, retval), rlDest.lowReg, kWord);
-		//dvmCompilerClobber(cUnit, rlDest.lowReg); 
+		//storeBaseDisp(cUnit, rGLUE, offsetof(InterpState, retval), rlDest.lowReg, kWord);
+		storeBaseDisp(cUnit, rGLUE, 8, rlDest.lowReg, kWord);
+		dvmCompilerClobber(cUnit, rlDest.lowReg); 
 	} else {
 		dvmCompilerResetDefLoc(cUnit, rlDest); 
 		//if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow)) { 
@@ -220,10 +221,12 @@ static void storeValueWide(CompilationUnit *cUnit, RegLocation rlDest,
     dvmCompilerMarkPair(cUnit, rlDest.lowReg, rlDest.highReg);
 
     if (rlDest.location == kLocRetval) {
-       // storeBaseDispWide(cUnit, rGLUE, offsetof(InterpState, retval),
-       //                   rlDest.lowReg, rlDest.highReg);
-       // dvmCompilerClobber(cUnit, rlDest.lowReg);
-       // dvmCompilerClobber(cUnit, rlDest.highReg);
+        //storeBaseDispWide(cUnit, rGLUE, offsetof(InterpState, retval),
+        //                  rlDest.lowReg, rlDest.highReg);
+        storeBaseDispWide(cUnit, rGLUE, 8,
+                          rlDest.lowReg, rlDest.highReg);
+        dvmCompilerClobber(cUnit, rlDest.lowReg);
+        dvmCompilerClobber(cUnit, rlDest.highReg);
     } else {
         dvmCompilerResetDefLocWide(cUnit, rlDest);
         if (dvmCompilerLiveOut(cUnit, rlDest.sRegLow) ||

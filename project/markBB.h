@@ -107,7 +107,7 @@ array[    OP_MOVE_OBJECT                  ]=markBB_filter;
 array[    OP_MOVE_OBJECT_FROM16           ]=markBB_filter; 
 array[    OP_MOVE_OBJECT_16               ]=markBB_filter; 
 
-array[    OP_MOVE_RESULT                  ]=markBB_filter; 
+//array[    OP_MOVE_RESULT                  ]=markBB_filter; 
 array[    OP_MOVE_RESULT_WIDE             ]=markBB_filter; 
 array[    OP_MOVE_RESULT_OBJECT           ]=markBB_filter; 
 array[    OP_MOVE_EXCEPTION               ]=markBB_filter; 

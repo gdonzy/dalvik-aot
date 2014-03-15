@@ -454,6 +454,81 @@ static bool handleFmt21h(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+static bool handleFmt11x(CompilationUnit *cUnit, MIR *mir)
+{   
+    OpCode dalvikOpCode = mir->dalvikInsn.opCode;
+    RegLocation rlResult;
+    switch (dalvikOpCode) {
+//        case OP_MOVE_EXCEPTION: {
+//            int offset = offsetof(InterpState, self);
+//            int exOffset = offsetof(Thread, exception);
+//            int selfReg = dvmCompilerAllocTemp(cUnit);
+//            int resetReg = dvmCompilerAllocTemp(cUnit);
+//            RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+//            loadWordDisp(cUnit, rGLUE, offset, selfReg);
+//            loadConstant(cUnit, resetReg, 0);
+//            loadWordDisp(cUnit, selfReg, exOffset, rlResult.lowReg);
+//            storeWordDisp(cUnit, selfReg, exOffset, resetReg);
+//            storeValue(cUnit, rlDest, rlResult);
+//           break;
+//        }
+        case OP_MOVE_RESULT:
+        case OP_MOVE_RESULT_OBJECT: {
+            /* An inlined move result is effectively no-op */
+//            if (mir->OptimizationFlags & MIR_INLINED)
+//                break;
+            RegLocation rlDest = dvmCompilerGetDest(cUnit, mir, 0);
+            RegLocation rlSrc = LOC_DALVIK_RETURN_VAL;
+            rlSrc.fp = rlDest.fp;
+            storeValue(cUnit, rlDest, rlSrc);
+            break;
+        }
+        case OP_MOVE_RESULT_WIDE: {
+            /* An inlined move result is effectively no-op */
+//            if (mir->OptimizationFlags & MIR_INLINED)
+//                break;
+            RegLocation rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+            RegLocation rlSrc = LOC_DALVIK_RETURN_VAL_WIDE;
+            rlSrc.fp = rlDest.fp;
+            storeValueWide(cUnit, rlDest, rlSrc);
+            break;
+        }
+//        case OP_RETURN_WIDE: {
+//            RegLocation rlSrc = dvmCompilerGetSrcWide(cUnit, mir, 0, 1);
+//            RegLocation rlDest = LOC_DALVIK_RETURN_VAL_WIDE;
+//            rlDest.fp = rlSrc.fp;
+//            storeValueWide(cUnit, rlDest, rlSrc);
+//            genReturnCommon(cUnit,mir);
+//            break;
+//        }
+//        case OP_RETURN:
+//        case OP_RETURN_OBJECT: {
+//            RegLocation rlSrc = dvmCompilerGetSrc(cUnit, mir, 0);
+//            RegLocation rlDest = LOC_DALVIK_RETURN_VAL;
+//            rlDest.fp = rlSrc.fp;
+//            storeValue(cUnit, rlDest, rlSrc);
+//            genReturnCommon(cUnit,mir);
+//            break;
+//        }
+//        case OP_MONITOR_EXIT:
+//        case OP_MONITOR_ENTER:
+//#if defined(WITH_DEADLOCK_PREDICTION) || defined(WITH_MONITOR_TRACKING)
+//            genMonitorPortable(cUnit, mir);
+//#else
+//            genMonitor(cUnit, mir);
+//#endif
+//            break;
+//        case OP_THROW: {
+//            genInterpSingleStep(cUnit, mir);
+//            break;
+//        }
+        default:
+            return true;
+    }
+    return false;
+}                                                   
+
 static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
 {
 	OpCode opCode = mir->dalvikInsn.opCode;
@@ -1386,11 +1461,13 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 			
 			OpCode dalvikOpCode = mir->dalvikInsn.opCode;
 			InstructionFormat dalvikFormat = dexGetInstrFormat(instrFormatTable, dalvikOpCode);
-//			if(mir->dalvikInsn.opCode == 18 || mir->dalvikInsn.opCode == 1 || mir->dalvikInsn.opCode == 0xd8){
 				switch(dalvikFormat) {
 					case kFmt11n:
 					case kFmt31i:
 						notHandled = handleFmt11n_Fmt31i(cUnit, mir);
+						break;
+					case kFmt11x:
+						notHandled = handleFmt11x(cUnit, mir);
 						break;
 					case kFmt12x:
 						notHandled = handleFmt12x(cUnit, mir);	
