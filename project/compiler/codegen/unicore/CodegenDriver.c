@@ -5,36 +5,36 @@ extern unsigned char *instrFormatTable;
 extern inline unsigned char dexGetInstrFormat(const unsigned char* fmts, OpCode opCode);
 extern char* dexGetOpcodeName(OpCode op);
 
-//static bool genArithOpLong(CompilationUnit *cUnit, MIR *mir,
-//                           RegLocation rlDest, RegLocation rlSrc1,
-//                           RegLocation rlSrc2)
-//{
-//    RegLocation rlResult;
-//    OpKind firstOp = kOpBkpt;
-//    OpKind secondOp = kOpBkpt;
-//    bool callOut = false;
-//    void *callTgt;
-//    int retReg = r0;
-//
-//    switch (mir->dalvikInsn.opCode) {
-//        case OP_NOT_LONG:                                                                                                                                                            
-//            rlSrc2 = loadValueWide(cUnit, rlSrc2, kCoreReg);
-//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
-//            opRegReg(cUnit, kOpMvn, rlResult.lowReg, rlSrc2.lowReg);
-//            opRegReg(cUnit, kOpMvn, rlResult.highReg, rlSrc2.highReg);
-//            storeValueWide(cUnit, rlDest, rlResult);
-//            return false;
-//            break;
-//        case OP_ADD_LONG:
-//        case OP_ADD_LONG_2ADDR:
-//            firstOp = kOpAdd;
-//            secondOp = kOpAdc;
-//            break;
-//        case OP_SUB_LONG:
-//        case OP_SUB_LONG_2ADDR:
-//            firstOp = kOpSub;
-//            secondOp = kOpSbc;
-//            break;
+static bool genArithOpLong(CompilationUnit *cUnit, MIR *mir,
+                           RegLocation rlDest, RegLocation rlSrc1,
+                           RegLocation rlSrc2)
+{
+    RegLocation rlResult;
+    OpKind firstOp = kOpBkpt;
+    OpKind secondOp = kOpBkpt;
+    bool callOut = false;
+    void *callTgt;
+    int retReg = r0;
+
+    switch (mir->dalvikInsn.opCode) {
+        case OP_NOT_LONG:                                                                 
+            rlSrc2 = loadValueWide(cUnit, rlSrc2, kCoreReg);
+            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+            opRegReg(cUnit, kOpMvn, rlResult.lowReg, rlSrc2.lowReg);
+            opRegReg(cUnit, kOpMvn, rlResult.highReg, rlSrc2.highReg);
+            storeValueWide(cUnit, rlDest, rlResult);
+            return false;
+            break;
+        case OP_ADD_LONG:
+        case OP_ADD_LONG_2ADDR:
+            firstOp = kOpAdd;
+            secondOp = kOpAdc;
+            break;
+        case OP_SUB_LONG:
+        case OP_SUB_LONG_2ADDR:
+            firstOp = kOpSub;
+            secondOp = kOpSbc;
+            break;
 //        case OP_MUL_LONG:
 //        case OP_MUL_LONG_2ADDR:
 //            genMulLong(cUnit, rlDest, rlSrc1, rlSrc2);
@@ -54,40 +54,40 @@ extern char* dexGetOpcodeName(OpCode op);
 //            callTgt = (void*)__moddi3;                                                                                                                                
 //            retReg = r2;                                                                                                                                              
 //            break;
-//        case OP_AND_LONG_2ADDR:                                                                                                                                       
-//        case OP_AND_LONG:
-//            firstOp = kOpAnd;
-//            secondOp = kOpAnd;                                                                                                                                        
-//            break;
-//        case OP_OR_LONG:
-//        case OP_OR_LONG_2ADDR:                                                                                                                                        
-//            firstOp = kOpOr;
-//            secondOp = kOpOr;                                                                                                                                         
-//            break;
-//        case OP_XOR_LONG:
-//        case OP_XOR_LONG_2ADDR:                                                                                                                                       
-//            firstOp = kOpXor;
-//            secondOp = kOpXor;                                                                                                                                        
-//            break;
-//        case OP_NEG_LONG: {
-//            //TUNING: can improve this using Thumb2 code                                                                                                              
-//            int tReg = dvmCompilerAllocTemp(cUnit);
-//            rlSrc2 = loadValueWide(cUnit, rlSrc2, kCoreReg);
-//            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
-//            loadConstantNoClobber(cUnit, tReg, 0);
-//            opRegRegReg(cUnit, kOpSub, rlResult.lowReg,
-//                        tReg, rlSrc2.lowReg);
-//            opRegReg(cUnit, kOpSbc, tReg, rlSrc2.highReg);
-//            genRegCopy(cUnit, rlResult.highReg, tReg);
-//            storeValueWide(cUnit, rlDest, rlResult);
-//            return false;
-//        }
-//        default:
-//            LOGE("Invalid long arith op");
-//            dvmCompilerAbort(cUnit);
-//    }
-//    if (!callOut) {
-//        genLong3Addr(cUnit, mir, firstOp, secondOp, rlDest, rlSrc1, rlSrc2);
+        case OP_AND_LONG_2ADDR:                                                            
+        case OP_AND_LONG:
+            firstOp = kOpAnd;
+            secondOp = kOpAnd;                                                               
+            break;
+        case OP_OR_LONG:
+        case OP_OR_LONG_2ADDR:                                                                                                                                        
+            firstOp = kOpOr;
+            secondOp = kOpOr;                                                                                                                                         
+            break;
+        case OP_XOR_LONG:
+        case OP_XOR_LONG_2ADDR:                                                                                                                                       
+            firstOp = kOpXor;
+            secondOp = kOpXor;                                                                                                                                        
+            break;
+        case OP_NEG_LONG: {
+            //TUNING: can improve this using Thumb2 code                                                                                                              
+            int tReg = dvmCompilerAllocTemp(cUnit);
+            rlSrc2 = loadValueWide(cUnit, rlSrc2, kCoreReg);
+            rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+            loadConstantNoClobber(cUnit, tReg, 0);
+            opRegRegReg(cUnit, kOpSub, rlResult.lowReg,
+                        tReg, rlSrc2.lowReg);
+            opRegReg(cUnit, kOpSbc, tReg, rlSrc2.highReg);
+            genRegCopy(cUnit, rlResult.highReg, tReg);
+            storeValueWide(cUnit, rlDest, rlResult);
+            return false;
+        }
+        default:
+            LOG("Invalid long arith op");
+           // dvmCompilerAbort(cUnit);
+    }
+    if (!callOut) {
+        genLong3Addr(cUnit, mir, firstOp, secondOp, rlDest, rlSrc1, rlSrc2);
 //    } else {
 //        // Adjust return regs in to handle case of rem returning r2/r3
 //        dvmCompilerFlushAllRegs(cUnit);   /* Send everything to home location */
@@ -101,9 +101,9 @@ extern char* dexGetOpcodeName(OpCode op);
 //        else
 //            rlResult = dvmCompilerGetReturnWideAlt(cUnit);
 //        storeValueWide(cUnit, rlDest, rlResult);
-//    }
-//    return false;
-//}
+    }
+    return false;
+}
 
 static bool genArithOpInt(CompilationUnit *cUnit, MIR *mir,  
 						  RegLocation rlDest, RegLocation rlSrc1, 
@@ -257,19 +257,18 @@ static bool genArithOp(CompilationUnit *cUnit, MIR *mir)
         assert(mir->ssaRep->numDefs == 2);
         rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
     }    
-/*
-    if ((opCode >= OP_ADD_LONG_2ADDR) && (opCode <= OP_XOR_LONG_2ADDR)) {
-        return genArithOpLong(cUnit,mir, rlDest, rlSrc1, rlSrc2);
-    }    
+//    if ((opCode >= OP_ADD_LONG_2ADDR) && (opCode <= OP_XOR_LONG_2ADDR)) {
+//        return genArithOpLong(cUnit,mir, rlDest, rlSrc1, rlSrc2);
+//    }    
     if ((opCode >= OP_ADD_LONG) && (opCode <= OP_XOR_LONG)) {
         return genArithOpLong(cUnit,mir, rlDest, rlSrc1, rlSrc2);
     }    
-    if ((opCode >= OP_SHL_LONG_2ADDR) && (opCode <= OP_USHR_LONG_2ADDR)) {
-        return genShiftOpLong(cUnit,mir, rlDest, rlSrc1, rlSrc2);
-    }    
-    if ((opCode >= OP_SHL_LONG) && (opCode <= OP_USHR_LONG)) {
-        return genShiftOpLong(cUnit,mir, rlDest, rlSrc1, rlSrc2);
-    }    */
+//    if ((opCode >= OP_SHL_LONG_2ADDR) && (opCode <= OP_USHR_LONG_2ADDR)) {
+//        return genShiftOpLong(cUnit,mir, rlDest, rlSrc1, rlSrc2);
+//    }    
+//    if ((opCode >= OP_SHL_LONG) && (opCode <= OP_USHR_LONG)) {
+//        return genShiftOpLong(cUnit,mir, rlDest, rlSrc1, rlSrc2);
+//    }    
     if ((opCode >= OP_ADD_INT_2ADDR) && (opCode <= OP_USHR_INT_2ADDR)) {
         return genArithOpInt(cUnit,mir, rlDest, rlSrc1, rlSrc2);
     }    
@@ -405,7 +404,6 @@ static bool handleFmt11n_Fmt31i(CompilationUnit *cUnit, MIR *mir)
             storeValue(cUnit, rlDest, rlResult);
             break;
         }
-/*
         case OP_CONST_WIDE_32: {
             //TUNING: single routine to load constant pair for support doubles
             //TUNING: load 0/-1 separately to avoid load dependency
@@ -416,7 +414,6 @@ static bool handleFmt11n_Fmt31i(CompilationUnit *cUnit, MIR *mir)
             storeValueWide(cUnit, rlDest, rlResult);
             break;
         }
-*/
         default:
             return true;
     }
@@ -1431,6 +1428,18 @@ static bool handleFmt23x(CompilationUnit *cUnit, MIR *mir)
     return false;
 }
 
+static bool handleFmt51l(CompilationUnit *cUnit, MIR *mir)                             
+{
+    //TUNING: We're using core regs here - not optimal when target is a double
+    RegLocation rlDest = dvmCompilerGetDestWide(cUnit, mir, 0, 1);
+    RegLocation rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);
+    loadConstantNoClobber(cUnit, rlResult.lowReg,
+                          mir->dalvikInsn.vB_wide & 0xFFFFFFFFUL);
+    loadConstantNoClobber(cUnit, rlResult.highReg,
+                          (mir->dalvikInsn.vB_wide>>32) & 0xFFFFFFFFUL);
+    storeValueWide(cUnit, rlDest, rlResult);
+    return false;
+}
 
 void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 {
@@ -1496,6 +1505,9 @@ void dvmCompilerMIR2LIR(CompilationUnit *cUnit)
 		           	case kFmt23x:
 		               	notHandled = handleFmt23x(cUnit, mir);                     
 						break;
+                    case kFmt51l:                                                     
+                        notHandled = handleFmt51l(cUnit, mir);
+                        break;
 					default:
 						notHandled = true;
 						break;			
