@@ -59,7 +59,17 @@ void outputCodeBuffer(BasicBlock *bb){
 	buffer[i++] = (u4)(0x20a700ff);
 	buffer[i] = (u4)(0x08afcc1c);
 	bb->used_codeBuffer += 12;
-		
+	
+	int size = 0;	
+	int *dataPtr = (int *) ((char *)bb->codeBuffer + bb->dataOffset); 
+	UnicoreLIR *dataLIR = (UnicoreLIR *) bb->wordList; 
+	while (dataLIR) {
+        *dataPtr++ = dataLIR->operands[0];
+        dataLIR = dataLIR->generic.next;
+		size += 4;
+    }
+	bb->used_codeBuffer += size;
+	
 	snprintf(filename,30,"BB-%lx.bin",bb->startOffset);
 	printf("[code buffer]:%s",filename);	
 	if( NULL == (fp = fopen(filename,"w"))){

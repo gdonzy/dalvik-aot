@@ -52,6 +52,8 @@ typedef struct BasicBlock {
 //    int id;
     int visited;
     u8 startOffset;
+	LIR *wordList;
+	u4 dataOffset;
 //    const Method *containingMethod;     // For blocks from the callee
 //    BBType blockType;
 //    bool needFallThroughBranch;         // For blocks ended due to length limit
@@ -85,7 +87,7 @@ typedef struct CompilationUnit {
 //    const JitTraceDescription *traceDesc;
 //    LIR *firstLIRInsn;
 //    LIR *lastLIRInsn;
-    LIR *wordList;     //eric
+//    LIR *wordList;     //eric
 //    LIR *chainCellOffsetLIR;
 //    GrowableList pcReconstructionList;
 //    int headerSize;                     // bytes before the first code ptr

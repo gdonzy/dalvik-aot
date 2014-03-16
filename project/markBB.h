@@ -119,12 +119,12 @@ array[    OP_RETURN_OBJECT                ]=markBB_filter;
 
 //array[    OP_CONST_4                      ]=markBB_filter; 
 //array[    OP_CONST_16                     ]=markBB_filter; 
-array[    OP_CONST                        ]=markBB_filter; 
-array[    OP_CONST_HIGH16                 ]=markBB_filter; 
+//array[    OP_CONST                        ]=markBB_filter; 
+//array[    OP_CONST_HIGH16                 ]=markBB_filter; 
 //array[    OP_CONST_WIDE_16                ]=markBB_filter; 
 array[    OP_CONST_WIDE_32                ]=markBB_filter; 
 array[    OP_CONST_WIDE                   ]=markBB_filter; 
-array[    OP_CONST_WIDE_HIGH16            ]=markBB_filter; 
+//array[    OP_CONST_WIDE_HIGH16            ]=markBB_filter; 
 array[    OP_CONST_STRING                 ]=markBB_filter; 
 array[    OP_CONST_STRING_JUMBO           ]=markBB_filter; 
 array[    OP_CONST_CLASS                  ]=markBB_filter; 

@@ -932,9 +932,11 @@ static bool handleFmt21s(CompilationUnit *cUnit, MIR *mir)
         opRegRegImm(cUnit, kOpAsr, rlResult.highReg, rlResult.lowReg, 31);
         storeValueWide(cUnit, rlDest, rlResult);
     } else if (dalvikOpCode == OP_CONST_16) {
+		LOG("DALVIK OPCODE IS %x\n", dalvikOpCode);
         rlDest = dvmCompilerGetDest(cUnit, mir, 0);
         rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kAnyReg, true);
         loadConstantNoClobber(cUnit, rlResult.lowReg, BBBB);
+		LOG("!!!!!!!!!!!!!!!!!!!!!!!the const value is %x\n", BBBB);
         storeValue(cUnit, rlDest, rlResult);
     } else
         return true;

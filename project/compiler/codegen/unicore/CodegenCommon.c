@@ -239,7 +239,7 @@ static UnicoreLIR *newLIR4(CompilationUnit *cUnit,BasicBlock *bb, UnicoreOpCode 
  */
 static UnicoreLIR *scanLiteralPool(CompilationUnit *cUnit, int value, unsigned int delta)
 {
-    LIR *dataTarget = cUnit->wordList;
+    LIR *dataTarget = cUnit->debugBB->wordList;
     while (dataTarget) {
         if (((unsigned) (value - ((UnicoreLIR *) dataTarget)->operands[0])) <= delta)
 			return (UnicoreLIR *) dataTarget; 
@@ -260,8 +260,8 @@ static UnicoreLIR *addWordData(CompilationUnit *cUnit, int value, bool inPlace)
     if (!inPlace) {  
         UnicoreLIR *newValue = dvmCompilerNew(sizeof(UnicoreLIR), true);
         newValue->operands[0] = value;
-        newValue->generic.next = cUnit->wordList; 
-        cUnit->wordList = (LIR *) newValue; 
+        newValue->generic.next = cUnit->debugBB->wordList; 
+        cUnit->debugBB->wordList = (LIR *) newValue; 
         return newValue;
     } else {
            /* Add the constant in the middle of code stream */ 

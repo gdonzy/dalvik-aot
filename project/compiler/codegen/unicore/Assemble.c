@@ -352,11 +352,17 @@ UnicoreEncodingMap EncodingMap[kUnicoreLast] = {
 void memAlloc4Assemble(BasicBlock *bb) {
 	int size = 0;
 	UnicoreLIR * curLIR = NULL;
+	LIR *lir;
+
 	for(curLIR = (UnicoreLIR*)(bb->firstLIRInsn) ; curLIR != NULL ; curLIR =(UnicoreLIR *)(curLIR->generic.next)){
 		//size += EncodingMap[curLIR->opCode].size*2;		
 		size += 4;		
 		LOG(" The unicore opcode is %x\n", curLIR->opCode);
 	}
+
+	for(lir = bb->wordList; lir; lir = lir->next){
+		size += 4;
+	}	
 
 	printf("!!!!!The current function is %s: malloc buffer size = %d\n", __func__, size);
 	
@@ -381,11 +387,46 @@ static void assembleInstructions(BasicBlock * bb)
     u4 *bufferAddr = (u4 *) bb->codeBuffer;
     bb->used_codeBuffer = 0;
     UnicoreLIR *lir;
+	LIR* LIR;
+
+	u4 offset = 0;
+    for (lir = (UnicoreLIR *) bb->firstLIRInsn; lir; lir =(UnicoreLIR *) (lir->generic.next)) {
+		lir->generic.offset = offset;
+		if (lir->opCode >= 0 && !lir->isNop)  	
+			offset += 4;
+	}
+	
+	bb->dataOffset = offset + 12;
+	offset = bb->dataOffset;
+
+	for(LIR = bb->wordList; LIR; LIR = LIR->next){
+		LIR->offset = offset;
+		offset += 4;	
+	}
 
     for (lir = (UnicoreLIR *) bb->firstLIRInsn; lir; lir =(UnicoreLIR *) (lir->generic.next)) {
 
 	if(lir->isNop == true){
 		continue;
+	}
+
+    if(lir->opCode == kUnicoreLdwPcRel||
+       lir->opCode == kUnicoreAddPcRel){
+        UnicoreLIR *lirTarget = (UnicoreLIR *) lir->generic.target;
+        int pc = (lir->generic.offset + 4) & ~3;
+        int target = lirTarget->generic.offset;
+        int delta = target - pc;
+        if (delta & 0x3) {
+            LOG("PC-rel distance is not multiples of 4: %d\n", delta);
+            //dvmCompilerAbort(cUnit);
+        }else if (lir->opCode == kUnicoreLdwPcRel && delta > 16380) {
+        //    return kRetryHalve;
+            LOG("delta > 16380\n", delta);
+        }else if (lir->opCode == kUnicoreAddPcRel && delta >508){
+        //    return kRetryHalve;
+            LOG("delta > 508\n", delta);
+        }    
+        lir->operands[1] = delta;
 	}
         
 	UnicoreEncodingMap *encoder = &EncodingMap[lir->opCode];
@@ -490,6 +531,7 @@ static void assembleInstructions(BasicBlock * bb)
 	bb->used_codeBuffer += 4;
     }
 //    return kSuccess;
+
 }
 
 //void dvmCompilerAssembleLIR(CompilationUnit *cUnit){
