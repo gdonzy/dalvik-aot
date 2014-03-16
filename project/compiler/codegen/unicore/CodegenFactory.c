@@ -54,8 +54,8 @@ static void loadValueDirectWide(CompilationUnit *cUnit, RegLocation rlSrc,
     if (rlSrc.location == kLocPhysReg) {
         genRegCopyWide(cUnit, regLo, regHi, rlSrc.lowReg, rlSrc.highReg);
     } else if (rlSrc.location == kLocRetval) {
-    //    loadBaseDispWide(cUnit, NULL, rGLUE, offsetof(InterpState, retval),
-     //                    regLo, regHi, INVALID_SREG);
+        loadBaseDispWide(cUnit, NULL, rGLUE, 8,
+                         regLo, regHi, INVALID_SREG);
     } else {
         assert(rlSrc.location == kLocDalvikFrame);
             loadBaseDispWide(cUnit, NULL, rFP,

@@ -33,7 +33,7 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
     //chenglin change
     //ArmLIR *dataTarget = scanLiteralPool(cUnit, value, 255);
 	
-	printf("1\n", value);
+//	printf("1\n", value);
     UnicoreLIR *dataTarget = scanLiteralPool(cUnit, value, 511);
     if (dataTarget == NULL) {
         dataTarget = addWordData(cUnit, value, false);
@@ -66,7 +66,7 @@ static UnicoreLIR *loadConstantNoClobber(CompilationUnit *cUnit, int rDest,
      */
     //chenglin change
     if (dataTarget->operands[0] != value) {
-	printf("2\n", value);
+//	printf("2\n", value);
         //newLIR2(cUnit, kThumbAddRI8, tDest, value - dataTarget->operands[0]);
         newLIR3(cUnit, cUnit->debugBB,  kUnicoreAddRRI9, tDest,tDest, value - dataTarget->operands[0]);
     }

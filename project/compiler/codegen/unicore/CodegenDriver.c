@@ -553,31 +553,30 @@ static bool handleFmt12x(CompilationUnit *cUnit, MIR *mir)
         rlDest = dvmCompilerGetDest(cUnit, mir, 0);
 
     switch (opCode) {
-/*
-        case OP_DOUBLE_TO_INT:
-        case OP_INT_TO_FLOAT:
-        case OP_FLOAT_TO_INT:
-        case OP_DOUBLE_TO_FLOAT:
-        case OP_FLOAT_TO_DOUBLE:
-        case OP_INT_TO_DOUBLE:
-        case OP_FLOAT_TO_LONG:
-        case OP_LONG_TO_FLOAT:
-        case OP_DOUBLE_TO_LONG:
-        case OP_LONG_TO_DOUBLE:
-            return genConversion(cUnit, mir);
-        case OP_NEG_INT:
-        case OP_NOT_INT:
-            return genArithOpInt(cUnit, mir, rlDest, rlSrc, rlSrc);
-        case OP_NEG_LONG:
-        case OP_NOT_LONG:
-            return genArithOpLong(cUnit, mir, rlDest, rlSrc, rlSrc);
-        case OP_NEG_FLOAT:
-            return genArithOpFloat(cUnit, mir, rlDest, rlSrc, rlSrc);
-        case OP_NEG_DOUBLE:
-            return genArithOpDouble(cUnit, mir, rlDest, rlSrc, rlSrc);
+//        case OP_DOUBLE_TO_INT:
+//        case OP_INT_TO_FLOAT:
+//        case OP_FLOAT_TO_INT:
+//        case OP_DOUBLE_TO_FLOAT:
+//        case OP_FLOAT_TO_DOUBLE:
+//        case OP_INT_TO_DOUBLE:
+//        case OP_FLOAT_TO_LONG:
+//        case OP_LONG_TO_FLOAT:
+//        case OP_DOUBLE_TO_LONG:
+//        case OP_LONG_TO_DOUBLE:
+//            return genConversion(cUnit, mir);
+//        case OP_NEG_INT:
+//        case OP_NOT_INT:
+//            return genArithOpInt(cUnit, mir, rlDest, rlSrc, rlSrc);
+//        case OP_NEG_LONG:
+//        case OP_NOT_LONG:
+//            return genArithOpLong(cUnit, mir, rlDest, rlSrc, rlSrc);
+//        case OP_NEG_FLOAT:
+//            return genArithOpFloat(cUnit, mir, rlDest, rlSrc, rlSrc);
+//        case OP_NEG_DOUBLE:
+//            return genArithOpDouble(cUnit, mir, rlDest, rlSrc, rlSrc);
         case OP_MOVE_WIDE:
             storeValueWide(cUnit, rlDest, rlSrc);
-            break; */
+            break; 
         case OP_INT_TO_LONG:
             rlSrc = dvmCompilerUpdateLoc(cUnit, rlSrc);
             rlResult = dvmCompilerEvalLoc(cUnit, rlDest, kCoreReg, true);

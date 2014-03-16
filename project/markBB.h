@@ -99,17 +99,17 @@ array[OP_THROW] = markBB_throw;
 //donzy:BBfilter
 //array[    OP_MOVE                         ]=markBB_filter;    
 //array[    OP_MOVE_FROM16                  ]=markBB_filter; 
-array[    OP_MOVE_16                      ]=markBB_filter; 
-array[    OP_MOVE_WIDE                    ]=markBB_filter; 
-array[    OP_MOVE_WIDE_FROM16             ]=markBB_filter; 
-array[    OP_MOVE_WIDE_16                 ]=markBB_filter; 
-array[    OP_MOVE_OBJECT                  ]=markBB_filter; 
-array[    OP_MOVE_OBJECT_FROM16           ]=markBB_filter; 
-array[    OP_MOVE_OBJECT_16               ]=markBB_filter; 
+//array[    OP_MOVE_16                      ]=markBB_filter; 
+//array[    OP_MOVE_WIDE                    ]=markBB_filter; 
+//array[    OP_MOVE_WIDE_FROM16             ]=markBB_filter; 
+//array[    OP_MOVE_WIDE_16                 ]=markBB_filter; 
+//array[    OP_MOVE_OBJECT                  ]=markBB_filter; 
+//array[    OP_MOVE_OBJECT_FROM16           ]=markBB_filter; 
+//array[    OP_MOVE_OBJECT_16               ]=markBB_filter; 
 
 //array[    OP_MOVE_RESULT                  ]=markBB_filter; 
-array[    OP_MOVE_RESULT_WIDE             ]=markBB_filter; 
-array[    OP_MOVE_RESULT_OBJECT           ]=markBB_filter; 
+//array[    OP_MOVE_RESULT_WIDE             ]=markBB_filter; 
+//array[    OP_MOVE_RESULT_OBJECT           ]=markBB_filter; 
 array[    OP_MOVE_EXCEPTION               ]=markBB_filter; 
 
 array[    OP_RETURN_VOID                  ]=markBB_filter; 
@@ -118,7 +118,7 @@ array[    OP_RETURN_WIDE                  ]=markBB_filter;
 array[    OP_RETURN_OBJECT                ]=markBB_filter; 
 
 //array[    OP_CONST_4                      ]=markBB_filter; 
-array[    OP_CONST_16                     ]=markBB_filter; 
+//array[    OP_CONST_16                     ]=markBB_filter; 
 array[    OP_CONST                        ]=markBB_filter; 
 array[    OP_CONST_HIGH16                 ]=markBB_filter; 
 //array[    OP_CONST_WIDE_16                ]=markBB_filter; 
